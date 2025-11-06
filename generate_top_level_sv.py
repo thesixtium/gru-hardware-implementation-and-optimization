@@ -1,4 +1,5 @@
-
+def generate_top_level_sv(INT_WIDTH=8, FRAC_WIDTH=8):
+    return f"""
         `timescale 1ns / 1ps
 // d = 2
 // h = 2
@@ -9,8 +10,8 @@ module top_level(
 );
 
     // Parameters must match the generated GRU module parameters
-    localparam int INT_WIDTH  = 50;
-    localparam int FRAC_WIDTH = 50;
+    localparam int INT_WIDTH  = {INT_WIDTH};
+    localparam int FRAC_WIDTH = {FRAC_WIDTH};
     localparam int WIDTH      = INT_WIDTH + FRAC_WIDTH + 1;
 
     // --- Input signals ---
@@ -144,4 +145,4 @@ module top_level(
 
 endmodule
 
-        
+        """
