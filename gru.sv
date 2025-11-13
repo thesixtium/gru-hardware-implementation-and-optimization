@@ -4,8 +4,8 @@
         // WIDTH = INT_WIDTH + FRAC_WIDTH + 1 (sign)
         
         module gru #(
-            parameter int INT_WIDTH  = 50,
-            parameter int FRAC_WIDTH = 50,
+            parameter int INT_WIDTH  = 8,
+            parameter int FRAC_WIDTH = 8,
             parameter int WIDTH      = INT_WIDTH + FRAC_WIDTH + 1
         )(
         

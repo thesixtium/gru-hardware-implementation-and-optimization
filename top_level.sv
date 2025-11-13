@@ -9,8 +9,8 @@ module top_level(
 );
 
     // Parameters must match the generated GRU module parameters
-    localparam int INT_WIDTH  = 50;
-    localparam int FRAC_WIDTH = 50;
+    localparam int INT_WIDTH  = 8;
+    localparam int FRAC_WIDTH = 8;
     localparam int WIDTH      = INT_WIDTH + FRAC_WIDTH + 1;
 
     // --- Input signals ---
