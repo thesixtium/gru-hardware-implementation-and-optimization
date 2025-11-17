@@ -17,10 +17,10 @@ def run_vivado():
 def main():
     data = []
 
-    for attempt in range(1):
-        for int_bits in [3, 4, 6, 8, 16]:
-            for frac_bits in [3, 4, 6, 8, 16]:
-                for d in [4, 8, 16, 32, 64]:
+    for attempt in range( 1 ):
+        for int_bits in [4]:
+            for frac_bits in [8, 9, 10]: #range( 1, 35 - 4 ):
+                for d in [4]:
                     for h in [4]:
                         try:
                             # Generate SV code

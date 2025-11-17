@@ -1,7 +1,8 @@
 set proj_name gru_proj
 set proj_dir ./vivado_proj
-set part_name xc7a100tcsg324-1   
+set part_name xc7a100tcsg324-1
 set top_module top_level
+set tb_module gru_tb
 
 # Clean and create project
 if { [file exists $proj_dir] } {
@@ -14,6 +15,7 @@ add_files C:/Users/ajrbe/Documents/School/Thesis/BCI/Code/top_level.sv
 add_files C:/Users/ajrbe/Documents/School/Thesis/BCI/Code/gru.sv
 add_files C:/Users/ajrbe/Documents/School/Thesis/BCI/Code/tanh.sv
 add_files C:/Users/ajrbe/Documents/School/Thesis/BCI/Code/sigmoid.sv
+add_files -fileset sim_1 C:/Users/ajrbe/Documents/School/Thesis/BCI/Code/gru_tb.sv
 read_xdc C:/Users/ajrbe/Documents/School/Thesis/BCI/Code/constraints.xdc
 
 # Set all .sv files as SystemVerilog
@@ -27,9 +29,40 @@ foreach sv_file [glob -nocomplain C:/Users/ajrbe/Documents/School/Thesis/BCI/Cod
 set_property top $top_module [current_fileset]
 update_compile_order -fileset sources_1
 
+# Set top module for simulation
+set_property top $tb_module [get_filesets sim_1]
+update_compile_order -fileset sim_1
+
 puts "====================================="
-puts "📋 Top module set to: $top_module"
+puts "📋 Synthesis top module: $top_module"
+puts "📋 Simulation top module: $tb_module"
 puts "====================================="
+
+# ==========================================
+# RUN TESTBENCH SIMULATION
+# ==========================================
+puts "====================================="
+puts "🧪 Running testbench simulation..."
+puts "====================================="
+
+# Set simulation runtime (adjust as needed)
+set_property -name {xsim.simulate.runtime} -value {1000ns} -objects [get_filesets sim_1]
+
+# Launch simulation
+launch_simulation -mode behavioral
+
+# Run simulation for specified time (or use run all)
+run 500ns
+
+puts "====================================="
+puts "✅ Simulation complete!"
+puts "====================================="
+
+# Close simulation
+close_sim -force
+
+# Small delay to ensure clean close
+after 500
 
 # Run synthesis
 puts "Running synthesis..."

@@ -1,213 +1,354 @@
 
-        `timescale 1ns / 1ps
-        // GRU Cell Implementation (Fixed-Point Qm.f) - CORRECTED
-        // WIDTH = INT_WIDTH + FRAC_WIDTH + 1 (sign)
-        
-        module gru #(
-            parameter int INT_WIDTH  = 8,
-            parameter int FRAC_WIDTH = 8,
-            parameter int WIDTH      = INT_WIDTH + FRAC_WIDTH + 1
-        )(
-        
-            input  logic                     clk,
-            input  logic                     reset,
-        
-            // Inputs
-            input  logic signed [WIDTH-1:0]  x_0_0,
-            input  logic signed [WIDTH-1:0]  x_0_1,
-            input  logic signed [WIDTH-1:0]  h_0_0,
-            input  logic signed [WIDTH-1:0]  h_0_1,
-        
-            // Weights (input)
-            input  logic signed [WIDTH-1:0]  w_ir_0_0, w_ir_0_1, w_ir_1_0, w_ir_1_1,
-            input  logic signed [WIDTH-1:0]  w_iz_0_0, w_iz_0_1, w_iz_1_0, w_iz_1_1,
-            input  logic signed [WIDTH-1:0]  w_in_0_0, w_in_0_1, w_in_1_0, w_in_1_1,
-        
-            // Weights (recurrent)
-            input  logic signed [WIDTH-1:0]  w_hr_0_0, w_hr_0_1, w_hr_1_0, w_hr_1_1,
-            input  logic signed [WIDTH-1:0]  w_hz_0_0, w_hz_0_1, w_hz_1_0, w_hz_1_1,
-            input  logic signed [WIDTH-1:0]  w_hn_0_0, w_hn_0_1, w_hn_1_0, w_hn_1_1,
-        
-            // Biases (matching testbench naming)
-            input  logic signed [WIDTH-1:0]  b_ir_0_0, b_ir_0_1,
-            input  logic signed [WIDTH-1:0]  b_iz_0_0, b_iz_0_1,
-            input  logic signed [WIDTH-1:0]  b_in_0_0, b_in_0_1,
-            input  logic signed [WIDTH-1:0]  b_hr_0_0, b_hr_0_1,
-            input  logic signed [WIDTH-1:0]  b_hz_0_0, b_hz_0_1,
-            input  logic signed [WIDTH-1:0]  b_hn_0_0, b_hn_0_1,
-        
-            // Outputs
-            output logic signed [WIDTH-1:0]  y_0_0,
-            output logic signed [WIDTH-1:0]  y_0_1
-        );
-        
-            // ---------- Helpers ----------
-            // Saturating addition
-            function automatic logic signed [WIDTH-1:0] sat_add(
-                input logic signed [WIDTH-1:0] a,
-                input logic signed [WIDTH-1:0] b
-            );
-                logic signed [WIDTH:0] sum_ext;
-                sum_ext = {a[WIDTH-1], a} + {b[WIDTH-1], b};
-                
-                // Check for overflow
-                if (sum_ext[WIDTH] != sum_ext[WIDTH-1]) begin
-                    // Overflow occurred
-                    sat_add = sum_ext[WIDTH] ? {1'b1, {(WIDTH-1){1'b0}}} : {1'b0, {(WIDTH-1){1'b1}}};
-                end else begin
-                    sat_add = sum_ext[WIDTH-1:0];
-                end
-            endfunction
-        
-            // Rounded fixed-point multiply with saturation
-            function automatic logic signed [WIDTH-1:0] fx_mult_round(
-                input logic signed [WIDTH-1:0] a,
-                input logic signed [WIDTH-1:0] b
-            );
-                logic signed [(2*WIDTH)-1:0] product;
-                logic signed [WIDTH:0] rounded;
-                
-                product = a * b;
-                rounded = (product[(2*WIDTH)-1:FRAC_WIDTH] + product[FRAC_WIDTH-1]);
-                
-                // Saturation check
-                if (rounded[WIDTH] != rounded[WIDTH-1]) begin
-                    fx_mult_round = rounded[WIDTH] ? {1'b1, {(WIDTH-1){1'b0}}} : {1'b0, {(WIDTH-1){1'b1}}};
-                end else begin
-                    fx_mult_round = rounded[WIDTH-1:0];
-                end
-            endfunction
-        
-            localparam logic signed [WIDTH-1:0] ONE = (1 <<< FRAC_WIDTH); // fixed-point 1.0
-        
-            // =========================
-            // r_t = sigmoid(W_ir*x + b_ir + W_hr*h + b_hr)
-            // =========================
-            logic signed [WIDTH-1:0] r_sum0, r_sum1;
-            logic signed [WIDTH-1:0] r_act0, r_act1;
-            logic signed [WIDTH-1:0] r_temp0_a, r_temp0_b, r_temp1_a, r_temp1_b;
-        
-            always_comb begin
-                // Compute r_sum0 with saturation
-                r_temp0_a = sat_add(fx_mult_round(w_ir_0_0, x_0_0), fx_mult_round(w_ir_0_1, x_0_1));
-                r_temp0_a = sat_add(r_temp0_a, b_ir_0_0);
-                r_temp0_b = sat_add(fx_mult_round(w_hr_0_0, h_0_0), fx_mult_round(w_hr_0_1, h_0_1));
-                r_temp0_b = sat_add(r_temp0_b, b_hr_0_0);
-                r_sum0 = sat_add(r_temp0_a, r_temp0_b);
-        
-                // Compute r_sum1 with saturation
-                r_temp1_a = sat_add(fx_mult_round(w_ir_1_0, x_0_0), fx_mult_round(w_ir_1_1, x_0_1));
-                r_temp1_a = sat_add(r_temp1_a, b_ir_0_1);
-                r_temp1_b = sat_add(fx_mult_round(w_hr_1_0, h_0_0), fx_mult_round(w_hr_1_1, h_0_1));
-                r_temp1_b = sat_add(r_temp1_b, b_hr_0_1);
-                r_sum1 = sat_add(r_temp1_a, r_temp1_b);
-            end
-        
-            sigmoid #( .INT_WIDTH(INT_WIDTH), .FRAC_WIDTH(FRAC_WIDTH) ) sig_r0 (
-                .clk(clk), .reset(reset), .x(r_sum0), .y(r_act0)
-            );
-            sigmoid #( .INT_WIDTH(INT_WIDTH), .FRAC_WIDTH(FRAC_WIDTH) ) sig_r1 (
-                .clk(clk), .reset(reset), .x(r_sum1), .y(r_act1)
-            );
-        
-            // =========================
-            // z_t = sigmoid(W_iz*x + b_iz + W_hz*h + b_hz)
-            // =========================
-            logic signed [WIDTH-1:0] z_sum0, z_sum1;
-            logic signed [WIDTH-1:0] z_act0, z_act1;
-            logic signed [WIDTH-1:0] z_temp0_a, z_temp0_b, z_temp1_a, z_temp1_b;
-        
-            always_comb begin
-                // Compute z_sum0 with saturation
-                z_temp0_a = sat_add(fx_mult_round(w_iz_0_0, x_0_0), fx_mult_round(w_iz_0_1, x_0_1));
-                z_temp0_a = sat_add(z_temp0_a, b_iz_0_0);
-                z_temp0_b = sat_add(fx_mult_round(w_hz_0_0, h_0_0), fx_mult_round(w_hz_0_1, h_0_1));
-                z_temp0_b = sat_add(z_temp0_b, b_hz_0_0);
-                z_sum0 = sat_add(z_temp0_a, z_temp0_b);
-        
-                // Compute z_sum1 with saturation
-                z_temp1_a = sat_add(fx_mult_round(w_iz_1_0, x_0_0), fx_mult_round(w_iz_1_1, x_0_1));
-                z_temp1_a = sat_add(z_temp1_a, b_iz_0_1);
-                z_temp1_b = sat_add(fx_mult_round(w_hz_1_0, h_0_0), fx_mult_round(w_hz_1_1, h_0_1));
-                z_temp1_b = sat_add(z_temp1_b, b_hz_0_1);
-                z_sum1 = sat_add(z_temp1_a, z_temp1_b);
-            end
-        
-            sigmoid #( .INT_WIDTH(INT_WIDTH), .FRAC_WIDTH(FRAC_WIDTH) ) sig_z0 (
-                .clk(clk), .reset(reset), .x(z_sum0), .y(z_act0)
-            );
-            sigmoid #( .INT_WIDTH(INT_WIDTH), .FRAC_WIDTH(FRAC_WIDTH) ) sig_z1 (
-                .clk(clk), .reset(reset), .x(z_sum1), .y(z_act1)
-            );
-        
-            // =========================
-            // n_t = tanh(W_in*x + b_in + r_t ⊙ (W_hn*h + b_hn))
-            // =========================
-            logic signed [WIDTH-1:0] wn_h0, wn_h1;
-            logic signed [WIDTH-1:0] gated_h0, gated_h1;
-            logic signed [WIDTH-1:0] n_sum0, n_sum1;
-            logic signed [WIDTH-1:0] n_act0, n_act1;
-            logic signed [WIDTH-1:0] n_temp0, n_temp1;
-        
-            always_comb begin
-                // Compute W_hn*h + b_hn
-                wn_h0 = sat_add(fx_mult_round(w_hn_0_0, h_0_0), fx_mult_round(w_hn_0_1, h_0_1));
-                wn_h0 = sat_add(wn_h0, b_hn_0_0);
-                
-                wn_h1 = sat_add(fx_mult_round(w_hn_1_0, h_0_0), fx_mult_round(w_hn_1_1, h_0_1));
-                wn_h1 = sat_add(wn_h1, b_hn_0_1);
-        
-                // Gate with r_t
-                gated_h0 = fx_mult_round(r_act0, wn_h0);
-                gated_h1 = fx_mult_round(r_act1, wn_h1);
-        
-                // Compute W_in*x + b_in + gated_h
-                n_temp0 = sat_add(fx_mult_round(w_in_0_0, x_0_0), fx_mult_round(w_in_0_1, x_0_1));
-                n_temp0 = sat_add(n_temp0, b_in_0_0);
-                n_sum0 = sat_add(n_temp0, gated_h0);
-                
-                n_temp1 = sat_add(fx_mult_round(w_in_1_0, x_0_0), fx_mult_round(w_in_1_1, x_0_1));
-                n_temp1 = sat_add(n_temp1, b_in_0_1);
-                n_sum1 = sat_add(n_temp1, gated_h1);
-            end
-        
-            tanh #( .INT_WIDTH(INT_WIDTH), .FRAC_WIDTH(FRAC_WIDTH) ) tanh0 (
-                .clk(clk), .reset(reset), .x(n_sum0), .y(n_act0)
-            );
-            tanh #( .INT_WIDTH(INT_WIDTH), .FRAC_WIDTH(FRAC_WIDTH) ) tanh1 (
-                .clk(clk), .reset(reset), .x(n_sum1), .y(n_act1)
-            );
-        
-            // =========================
-            // h_t = (1 - z_t) ⊙ n_t + z_t ⊙ h_{t-1}
-            // =========================
-            logic signed [WIDTH-1:0] one_minus_z0, one_minus_z1;
-            logic signed [WIDTH-1:0] part1_0, part1_1, part2_0, part2_1;
-            logic signed [WIDTH-1:0] h_new0, h_new1;
-        
-            always_comb begin
-                one_minus_z0 = sat_add(ONE, -z_act0);
-                one_minus_z1 = sat_add(ONE, -z_act1);
-        
-                part1_0 = fx_mult_round(one_minus_z0, n_act0);
-                part1_1 = fx_mult_round(one_minus_z1, n_act1);
-                part2_0 = fx_mult_round(z_act0, h_0_0);
-                part2_1 = fx_mult_round(z_act1, h_0_1);
-        
-                h_new0 = sat_add(part1_0, part2_0);
-                h_new1 = sat_add(part1_1, part2_1);
-            end
-        
-            // Register outputs for stable timing
-            always_ff @(posedge clk or posedge reset) begin
-                if (reset) begin
-                    y_0_0 <= '0;
-                    y_0_1 <= '0;
-                end else begin
-                    y_0_0 <= h_new0;
-                    y_0_1 <= h_new1;
-                end
-            end
-        
-        endmodule
-        
+`timescale 1ns / 1ps
+// GRU Cell Implementation (Fixed-Point Qm.f)
+// d = 4 (input features), h = 4 (hidden units)
+// WIDTH = INT_WIDTH + FRAC_WIDTH + 1 (sign)
+
+module gru #(
+    parameter int INT_WIDTH  = 4,
+    parameter int FRAC_WIDTH = 10,
+    parameter int WIDTH      = INT_WIDTH + FRAC_WIDTH + 1
+)(
+    input  logic                     clk,
+    input  logic                     reset,
+
+    // Inputs (d=4)
+        input  logic signed [WIDTH-1:0]  x_0,
+    input  logic signed [WIDTH-1:0]  x_1,
+    input  logic signed [WIDTH-1:0]  x_2,
+    input  logic signed [WIDTH-1:0]  x_3,
+
+    // Previous hidden state (h=4)
+        input  logic signed [WIDTH-1:0]  h_0,
+    input  logic signed [WIDTH-1:0]  h_1,
+    input  logic signed [WIDTH-1:0]  h_2,
+    input  logic signed [WIDTH-1:0]  h_3,
+
+    // Input weights (h×d for each gate)
+    input  logic signed [WIDTH-1:0]  w_ir_0_0, w_ir_0_1, w_ir_0_2, w_ir_0_3, w_ir_1_0, w_ir_1_1, w_ir_1_2, w_ir_1_3, w_ir_2_0, w_ir_2_1, w_ir_2_2, w_ir_2_3, w_ir_3_0, w_ir_3_1, w_ir_3_2, w_ir_3_3,
+    input  logic signed [WIDTH-1:0]  w_iz_0_0, w_iz_0_1, w_iz_0_2, w_iz_0_3, w_iz_1_0, w_iz_1_1, w_iz_1_2, w_iz_1_3, w_iz_2_0, w_iz_2_1, w_iz_2_2, w_iz_2_3, w_iz_3_0, w_iz_3_1, w_iz_3_2, w_iz_3_3,
+    input  logic signed [WIDTH-1:0]  w_in_0_0, w_in_0_1, w_in_0_2, w_in_0_3, w_in_1_0, w_in_1_1, w_in_1_2, w_in_1_3, w_in_2_0, w_in_2_1, w_in_2_2, w_in_2_3, w_in_3_0, w_in_3_1, w_in_3_2, w_in_3_3,
+
+    // Recurrent weights (h×h for each gate)
+    input  logic signed [WIDTH-1:0]  w_hr_0_0, w_hr_0_1, w_hr_0_2, w_hr_0_3, w_hr_1_0, w_hr_1_1, w_hr_1_2, w_hr_1_3, w_hr_2_0, w_hr_2_1, w_hr_2_2, w_hr_2_3, w_hr_3_0, w_hr_3_1, w_hr_3_2, w_hr_3_3,
+    input  logic signed [WIDTH-1:0]  w_hz_0_0, w_hz_0_1, w_hz_0_2, w_hz_0_3, w_hz_1_0, w_hz_1_1, w_hz_1_2, w_hz_1_3, w_hz_2_0, w_hz_2_1, w_hz_2_2, w_hz_2_3, w_hz_3_0, w_hz_3_1, w_hz_3_2, w_hz_3_3,
+    input  logic signed [WIDTH-1:0]  w_hn_0_0, w_hn_0_1, w_hn_0_2, w_hn_0_3, w_hn_1_0, w_hn_1_1, w_hn_1_2, w_hn_1_3, w_hn_2_0, w_hn_2_1, w_hn_2_2, w_hn_2_3, w_hn_3_0, w_hn_3_1, w_hn_3_2, w_hn_3_3,
+
+    // Biases (h for each gate type)
+    input  logic signed [WIDTH-1:0]  b_ir_0, b_ir_1, b_ir_2, b_ir_3, b_iz_0, b_iz_1, b_iz_2, b_iz_3, b_in_0, b_in_1, b_in_2, b_in_3, b_hr_0, b_hr_1, b_hr_2, b_hr_3, b_hz_0, b_hz_1, b_hz_2, b_hz_3, b_hn_0, b_hn_1, b_hn_2, b_hn_3,
+
+    // Outputs (h=4)
+        output logic signed [WIDTH-1:0]  y_0,
+    output logic signed [WIDTH-1:0]  y_1,
+    output logic signed [WIDTH-1:0]  y_2,
+    output logic signed [WIDTH-1:0]  y_3
+);
+
+    // Helper functions
+    function automatic logic signed [WIDTH-1:0] sat_add(
+        input logic signed [WIDTH-1:0] a,
+        input logic signed [WIDTH-1:0] b
+    );
+        logic signed [WIDTH:0] sum_ext;
+        sum_ext = {a[WIDTH-1], a} + {b[WIDTH-1], b};
+
+        if (sum_ext[WIDTH] != sum_ext[WIDTH-1]) begin
+            sat_add = sum_ext[WIDTH] ? {1'b1, {(WIDTH-1){1'b0}}} : {1'b0, {(WIDTH-1){1'b1}}};
+        end else begin
+            sat_add = sum_ext[WIDTH-1:0];
+        end
+    endfunction
+
+    function automatic logic signed [WIDTH-1:0] fx_mult_round(
+        input logic signed [WIDTH-1:0] a,
+        input logic signed [WIDTH-1:0] b
+    );
+        logic signed [(2*WIDTH)-1:0] product;
+        logic signed [WIDTH:0] rounded;
+
+        product = a * b;
+        rounded = (product[(2*WIDTH)-1:FRAC_WIDTH] + product[FRAC_WIDTH-1]);
+
+        if (rounded[WIDTH] != rounded[WIDTH-1]) begin
+            fx_mult_round = rounded[WIDTH] ? {1'b1, {(WIDTH-1){1'b0}}} : {1'b0, {(WIDTH-1){1'b1}}};
+        end else begin
+            fx_mult_round = rounded[WIDTH-1:0];
+        end
+    endfunction
+
+    localparam logic signed [WIDTH-1:0] ONE = (1 <<< FRAC_WIDTH);
+
+    // Reset gate: r_t = σ(W_ir*x + b_ir + W_hr*h + b_hr)
+    // r gate computation
+    logic signed [WIDTH-1:0] r_sum[4];
+    logic signed [WIDTH-1:0] r_act[4];
+
+    always_comb begin
+        // r_sum[0]
+        r_sum[0] = b_ir_0;
+        r_sum[0] = sat_add(r_sum[0], fx_mult_round(w_ir_0_0, x_0));
+        r_sum[0] = sat_add(r_sum[0], fx_mult_round(w_ir_0_1, x_1));
+        r_sum[0] = sat_add(r_sum[0], fx_mult_round(w_ir_0_2, x_2));
+        r_sum[0] = sat_add(r_sum[0], fx_mult_round(w_ir_0_3, x_3));
+        r_sum[0] = sat_add(r_sum[0], b_hr_0);
+        r_sum[0] = sat_add(r_sum[0], fx_mult_round(w_hr_0_0, h_0));
+        r_sum[0] = sat_add(r_sum[0], fx_mult_round(w_hr_0_1, h_1));
+        r_sum[0] = sat_add(r_sum[0], fx_mult_round(w_hr_0_2, h_2));
+        r_sum[0] = sat_add(r_sum[0], fx_mult_round(w_hr_0_3, h_3));
+
+        // r_sum[1]
+        r_sum[1] = b_ir_1;
+        r_sum[1] = sat_add(r_sum[1], fx_mult_round(w_ir_1_0, x_0));
+        r_sum[1] = sat_add(r_sum[1], fx_mult_round(w_ir_1_1, x_1));
+        r_sum[1] = sat_add(r_sum[1], fx_mult_round(w_ir_1_2, x_2));
+        r_sum[1] = sat_add(r_sum[1], fx_mult_round(w_ir_1_3, x_3));
+        r_sum[1] = sat_add(r_sum[1], b_hr_1);
+        r_sum[1] = sat_add(r_sum[1], fx_mult_round(w_hr_1_0, h_0));
+        r_sum[1] = sat_add(r_sum[1], fx_mult_round(w_hr_1_1, h_1));
+        r_sum[1] = sat_add(r_sum[1], fx_mult_round(w_hr_1_2, h_2));
+        r_sum[1] = sat_add(r_sum[1], fx_mult_round(w_hr_1_3, h_3));
+
+        // r_sum[2]
+        r_sum[2] = b_ir_2;
+        r_sum[2] = sat_add(r_sum[2], fx_mult_round(w_ir_2_0, x_0));
+        r_sum[2] = sat_add(r_sum[2], fx_mult_round(w_ir_2_1, x_1));
+        r_sum[2] = sat_add(r_sum[2], fx_mult_round(w_ir_2_2, x_2));
+        r_sum[2] = sat_add(r_sum[2], fx_mult_round(w_ir_2_3, x_3));
+        r_sum[2] = sat_add(r_sum[2], b_hr_2);
+        r_sum[2] = sat_add(r_sum[2], fx_mult_round(w_hr_2_0, h_0));
+        r_sum[2] = sat_add(r_sum[2], fx_mult_round(w_hr_2_1, h_1));
+        r_sum[2] = sat_add(r_sum[2], fx_mult_round(w_hr_2_2, h_2));
+        r_sum[2] = sat_add(r_sum[2], fx_mult_round(w_hr_2_3, h_3));
+
+        // r_sum[3]
+        r_sum[3] = b_ir_3;
+        r_sum[3] = sat_add(r_sum[3], fx_mult_round(w_ir_3_0, x_0));
+        r_sum[3] = sat_add(r_sum[3], fx_mult_round(w_ir_3_1, x_1));
+        r_sum[3] = sat_add(r_sum[3], fx_mult_round(w_ir_3_2, x_2));
+        r_sum[3] = sat_add(r_sum[3], fx_mult_round(w_ir_3_3, x_3));
+        r_sum[3] = sat_add(r_sum[3], b_hr_3);
+        r_sum[3] = sat_add(r_sum[3], fx_mult_round(w_hr_3_0, h_0));
+        r_sum[3] = sat_add(r_sum[3], fx_mult_round(w_hr_3_1, h_1));
+        r_sum[3] = sat_add(r_sum[3], fx_mult_round(w_hr_3_2, h_2));
+        r_sum[3] = sat_add(r_sum[3], fx_mult_round(w_hr_3_3, h_3));
+
+    end
+
+    sigmoid #(.INT_WIDTH(INT_WIDTH), .FRAC_WIDTH(FRAC_WIDTH)) sigmoid_r0 (
+        .clk(clk), .reset(reset), .x(r_sum[0]), .y(r_act[0])
+    );
+    sigmoid #(.INT_WIDTH(INT_WIDTH), .FRAC_WIDTH(FRAC_WIDTH)) sigmoid_r1 (
+        .clk(clk), .reset(reset), .x(r_sum[1]), .y(r_act[1])
+    );
+    sigmoid #(.INT_WIDTH(INT_WIDTH), .FRAC_WIDTH(FRAC_WIDTH)) sigmoid_r2 (
+        .clk(clk), .reset(reset), .x(r_sum[2]), .y(r_act[2])
+    );
+    sigmoid #(.INT_WIDTH(INT_WIDTH), .FRAC_WIDTH(FRAC_WIDTH)) sigmoid_r3 (
+        .clk(clk), .reset(reset), .x(r_sum[3]), .y(r_act[3])
+    );
+
+    // Update gate: z_t = σ(W_iz*x + b_iz + W_hz*h + b_hz)
+    // z gate computation
+    logic signed [WIDTH-1:0] z_sum[4];
+    logic signed [WIDTH-1:0] z_act[4];
+
+    always_comb begin
+        // z_sum[0]
+        z_sum[0] = b_iz_0;
+        z_sum[0] = sat_add(z_sum[0], fx_mult_round(w_iz_0_0, x_0));
+        z_sum[0] = sat_add(z_sum[0], fx_mult_round(w_iz_0_1, x_1));
+        z_sum[0] = sat_add(z_sum[0], fx_mult_round(w_iz_0_2, x_2));
+        z_sum[0] = sat_add(z_sum[0], fx_mult_round(w_iz_0_3, x_3));
+        z_sum[0] = sat_add(z_sum[0], b_hz_0);
+        z_sum[0] = sat_add(z_sum[0], fx_mult_round(w_hz_0_0, h_0));
+        z_sum[0] = sat_add(z_sum[0], fx_mult_round(w_hz_0_1, h_1));
+        z_sum[0] = sat_add(z_sum[0], fx_mult_round(w_hz_0_2, h_2));
+        z_sum[0] = sat_add(z_sum[0], fx_mult_round(w_hz_0_3, h_3));
+
+        // z_sum[1]
+        z_sum[1] = b_iz_1;
+        z_sum[1] = sat_add(z_sum[1], fx_mult_round(w_iz_1_0, x_0));
+        z_sum[1] = sat_add(z_sum[1], fx_mult_round(w_iz_1_1, x_1));
+        z_sum[1] = sat_add(z_sum[1], fx_mult_round(w_iz_1_2, x_2));
+        z_sum[1] = sat_add(z_sum[1], fx_mult_round(w_iz_1_3, x_3));
+        z_sum[1] = sat_add(z_sum[1], b_hz_1);
+        z_sum[1] = sat_add(z_sum[1], fx_mult_round(w_hz_1_0, h_0));
+        z_sum[1] = sat_add(z_sum[1], fx_mult_round(w_hz_1_1, h_1));
+        z_sum[1] = sat_add(z_sum[1], fx_mult_round(w_hz_1_2, h_2));
+        z_sum[1] = sat_add(z_sum[1], fx_mult_round(w_hz_1_3, h_3));
+
+        // z_sum[2]
+        z_sum[2] = b_iz_2;
+        z_sum[2] = sat_add(z_sum[2], fx_mult_round(w_iz_2_0, x_0));
+        z_sum[2] = sat_add(z_sum[2], fx_mult_round(w_iz_2_1, x_1));
+        z_sum[2] = sat_add(z_sum[2], fx_mult_round(w_iz_2_2, x_2));
+        z_sum[2] = sat_add(z_sum[2], fx_mult_round(w_iz_2_3, x_3));
+        z_sum[2] = sat_add(z_sum[2], b_hz_2);
+        z_sum[2] = sat_add(z_sum[2], fx_mult_round(w_hz_2_0, h_0));
+        z_sum[2] = sat_add(z_sum[2], fx_mult_round(w_hz_2_1, h_1));
+        z_sum[2] = sat_add(z_sum[2], fx_mult_round(w_hz_2_2, h_2));
+        z_sum[2] = sat_add(z_sum[2], fx_mult_round(w_hz_2_3, h_3));
+
+        // z_sum[3]
+        z_sum[3] = b_iz_3;
+        z_sum[3] = sat_add(z_sum[3], fx_mult_round(w_iz_3_0, x_0));
+        z_sum[3] = sat_add(z_sum[3], fx_mult_round(w_iz_3_1, x_1));
+        z_sum[3] = sat_add(z_sum[3], fx_mult_round(w_iz_3_2, x_2));
+        z_sum[3] = sat_add(z_sum[3], fx_mult_round(w_iz_3_3, x_3));
+        z_sum[3] = sat_add(z_sum[3], b_hz_3);
+        z_sum[3] = sat_add(z_sum[3], fx_mult_round(w_hz_3_0, h_0));
+        z_sum[3] = sat_add(z_sum[3], fx_mult_round(w_hz_3_1, h_1));
+        z_sum[3] = sat_add(z_sum[3], fx_mult_round(w_hz_3_2, h_2));
+        z_sum[3] = sat_add(z_sum[3], fx_mult_round(w_hz_3_3, h_3));
+
+    end
+
+    sigmoid #(.INT_WIDTH(INT_WIDTH), .FRAC_WIDTH(FRAC_WIDTH)) sigmoid_z0 (
+        .clk(clk), .reset(reset), .x(z_sum[0]), .y(z_act[0])
+    );
+    sigmoid #(.INT_WIDTH(INT_WIDTH), .FRAC_WIDTH(FRAC_WIDTH)) sigmoid_z1 (
+        .clk(clk), .reset(reset), .x(z_sum[1]), .y(z_act[1])
+    );
+    sigmoid #(.INT_WIDTH(INT_WIDTH), .FRAC_WIDTH(FRAC_WIDTH)) sigmoid_z2 (
+        .clk(clk), .reset(reset), .x(z_sum[2]), .y(z_act[2])
+    );
+    sigmoid #(.INT_WIDTH(INT_WIDTH), .FRAC_WIDTH(FRAC_WIDTH)) sigmoid_z3 (
+        .clk(clk), .reset(reset), .x(z_sum[3]), .y(z_act[3])
+    );
+
+    // Candidate hidden state: n_t = tanh(W_in*x + b_in + r_t ⊙ (W_hn*h + b_hn))
+    // Candidate hidden state computation
+    logic signed [WIDTH-1:0] wn_h[4];
+    logic signed [WIDTH-1:0] gated_h[4];
+    logic signed [WIDTH-1:0] n_sum[4];
+    logic signed [WIDTH-1:0] n_act[4];
+
+    always_comb begin
+        // wn_h[0] = W_hn*h + b_hn
+        wn_h[0] = b_hn_0;
+        wn_h[0] = sat_add(wn_h[0], fx_mult_round(w_hn_0_0, h_0));
+        wn_h[0] = sat_add(wn_h[0], fx_mult_round(w_hn_0_1, h_1));
+        wn_h[0] = sat_add(wn_h[0], fx_mult_round(w_hn_0_2, h_2));
+        wn_h[0] = sat_add(wn_h[0], fx_mult_round(w_hn_0_3, h_3));
+
+        // gated_h[0] = r_t ⊙ wn_h
+        gated_h[0] = fx_mult_round(r_act[0], wn_h[0]);
+
+        // n_sum[0] = W_in*x + b_in + gated_h
+        n_sum[0] = b_in_0;
+        n_sum[0] = sat_add(n_sum[0], fx_mult_round(w_in_0_0, x_0));
+        n_sum[0] = sat_add(n_sum[0], fx_mult_round(w_in_0_1, x_1));
+        n_sum[0] = sat_add(n_sum[0], fx_mult_round(w_in_0_2, x_2));
+        n_sum[0] = sat_add(n_sum[0], fx_mult_round(w_in_0_3, x_3));
+        n_sum[0] = sat_add(n_sum[0], gated_h[0]);
+
+        // wn_h[1] = W_hn*h + b_hn
+        wn_h[1] = b_hn_1;
+        wn_h[1] = sat_add(wn_h[1], fx_mult_round(w_hn_1_0, h_0));
+        wn_h[1] = sat_add(wn_h[1], fx_mult_round(w_hn_1_1, h_1));
+        wn_h[1] = sat_add(wn_h[1], fx_mult_round(w_hn_1_2, h_2));
+        wn_h[1] = sat_add(wn_h[1], fx_mult_round(w_hn_1_3, h_3));
+
+        // gated_h[1] = r_t ⊙ wn_h
+        gated_h[1] = fx_mult_round(r_act[1], wn_h[1]);
+
+        // n_sum[1] = W_in*x + b_in + gated_h
+        n_sum[1] = b_in_1;
+        n_sum[1] = sat_add(n_sum[1], fx_mult_round(w_in_1_0, x_0));
+        n_sum[1] = sat_add(n_sum[1], fx_mult_round(w_in_1_1, x_1));
+        n_sum[1] = sat_add(n_sum[1], fx_mult_round(w_in_1_2, x_2));
+        n_sum[1] = sat_add(n_sum[1], fx_mult_round(w_in_1_3, x_3));
+        n_sum[1] = sat_add(n_sum[1], gated_h[1]);
+
+        // wn_h[2] = W_hn*h + b_hn
+        wn_h[2] = b_hn_2;
+        wn_h[2] = sat_add(wn_h[2], fx_mult_round(w_hn_2_0, h_0));
+        wn_h[2] = sat_add(wn_h[2], fx_mult_round(w_hn_2_1, h_1));
+        wn_h[2] = sat_add(wn_h[2], fx_mult_round(w_hn_2_2, h_2));
+        wn_h[2] = sat_add(wn_h[2], fx_mult_round(w_hn_2_3, h_3));
+
+        // gated_h[2] = r_t ⊙ wn_h
+        gated_h[2] = fx_mult_round(r_act[2], wn_h[2]);
+
+        // n_sum[2] = W_in*x + b_in + gated_h
+        n_sum[2] = b_in_2;
+        n_sum[2] = sat_add(n_sum[2], fx_mult_round(w_in_2_0, x_0));
+        n_sum[2] = sat_add(n_sum[2], fx_mult_round(w_in_2_1, x_1));
+        n_sum[2] = sat_add(n_sum[2], fx_mult_round(w_in_2_2, x_2));
+        n_sum[2] = sat_add(n_sum[2], fx_mult_round(w_in_2_3, x_3));
+        n_sum[2] = sat_add(n_sum[2], gated_h[2]);
+
+        // wn_h[3] = W_hn*h + b_hn
+        wn_h[3] = b_hn_3;
+        wn_h[3] = sat_add(wn_h[3], fx_mult_round(w_hn_3_0, h_0));
+        wn_h[3] = sat_add(wn_h[3], fx_mult_round(w_hn_3_1, h_1));
+        wn_h[3] = sat_add(wn_h[3], fx_mult_round(w_hn_3_2, h_2));
+        wn_h[3] = sat_add(wn_h[3], fx_mult_round(w_hn_3_3, h_3));
+
+        // gated_h[3] = r_t ⊙ wn_h
+        gated_h[3] = fx_mult_round(r_act[3], wn_h[3]);
+
+        // n_sum[3] = W_in*x + b_in + gated_h
+        n_sum[3] = b_in_3;
+        n_sum[3] = sat_add(n_sum[3], fx_mult_round(w_in_3_0, x_0));
+        n_sum[3] = sat_add(n_sum[3], fx_mult_round(w_in_3_1, x_1));
+        n_sum[3] = sat_add(n_sum[3], fx_mult_round(w_in_3_2, x_2));
+        n_sum[3] = sat_add(n_sum[3], fx_mult_round(w_in_3_3, x_3));
+        n_sum[3] = sat_add(n_sum[3], gated_h[3]);
+
+    end
+
+    tanh #(.INT_WIDTH(INT_WIDTH), .FRAC_WIDTH(FRAC_WIDTH)) tanh_n0 (
+        .clk(clk), .reset(reset), .x(n_sum[0]), .y(n_act[0])
+    );
+    tanh #(.INT_WIDTH(INT_WIDTH), .FRAC_WIDTH(FRAC_WIDTH)) tanh_n1 (
+        .clk(clk), .reset(reset), .x(n_sum[1]), .y(n_act[1])
+    );
+    tanh #(.INT_WIDTH(INT_WIDTH), .FRAC_WIDTH(FRAC_WIDTH)) tanh_n2 (
+        .clk(clk), .reset(reset), .x(n_sum[2]), .y(n_act[2])
+    );
+    tanh #(.INT_WIDTH(INT_WIDTH), .FRAC_WIDTH(FRAC_WIDTH)) tanh_n3 (
+        .clk(clk), .reset(reset), .x(n_sum[3]), .y(n_act[3])
+    );
+
+    // Final hidden state update
+    // Hidden state update: h_t = (1 - z_t) ⊙ n_t + z_t ⊙ h_{t-1}
+    logic signed [WIDTH-1:0] one_minus_z[4];
+    logic signed [WIDTH-1:0] part1[4], part2[4];
+    logic signed [WIDTH-1:0] h_new[4];
+
+    always_comb begin
+        one_minus_z[0] = sat_add(ONE, -z_act[0]);
+        part1[0] = fx_mult_round(one_minus_z[0], n_act[0]);
+        part2[0] = fx_mult_round(z_act[0], h_0);
+        h_new[0] = sat_add(part1[0], part2[0]);
+        one_minus_z[1] = sat_add(ONE, -z_act[1]);
+        part1[1] = fx_mult_round(one_minus_z[1], n_act[1]);
+        part2[1] = fx_mult_round(z_act[1], h_1);
+        h_new[1] = sat_add(part1[1], part2[1]);
+        one_minus_z[2] = sat_add(ONE, -z_act[2]);
+        part1[2] = fx_mult_round(one_minus_z[2], n_act[2]);
+        part2[2] = fx_mult_round(z_act[2], h_2);
+        h_new[2] = sat_add(part1[2], part2[2]);
+        one_minus_z[3] = sat_add(ONE, -z_act[3]);
+        part1[3] = fx_mult_round(one_minus_z[3], n_act[3]);
+        part2[3] = fx_mult_round(z_act[3], h_3);
+        h_new[3] = sat_add(part1[3], part2[3]);
+    end
+
+    // Register outputs
+    always_ff @(posedge clk or posedge reset) begin
+        if (reset) begin
+            y_0 <= '0;
+            y_1 <= '0;
+            y_2 <= '0;
+            y_3 <= '0;
+        end else begin
+            y_0 <= h_new[0];
+            y_1 <= h_new[1];
+            y_2 <= h_new[2];
+            y_3 <= h_new[3];
+        end
+    end
+
+endmodule
