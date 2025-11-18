@@ -117,8 +117,8 @@ def main():
     collected_outputs = {}
 
     for attempt in range(1):
-        for int_bits in [6]:
-            for frac_bits in range(1, 35 - 4):
+        for int_bits in range(4, 35 - 4):
+            for frac_bits in range(4, 35 - 4):
                 for d in range(4, 65):
                     for h in [4]:
                         metrics = {}
@@ -236,7 +236,7 @@ def main():
         # Add MAE to the corresponding row
         mae_results = calculate_mae_metrics(d, h, int_bits, collected_outputs)
         mae_value = mae_results.get(frac_bits)
-        data[idx]["MAE"] = mae_value if mae_value is not None else "ground_truth"
+        data[idx]["MAE"] = mae_value if mae_value is not None else 0
 
     # Save to CSV
     df = pd.DataFrame(data)
