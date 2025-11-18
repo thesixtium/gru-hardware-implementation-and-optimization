@@ -1,6 +1,6 @@
 
 `timescale 1ns / 1ps
-// d = 4 (input features)
+// d = 5 (input features)
 // h = 4 (hidden units)
 // auto-generated top-level wrapper for GRU
 module top_level(
@@ -9,15 +9,16 @@ module top_level(
 );
 
     // Parameters must match the generated GRU module parameters
-    localparam int INT_WIDTH  = 4;
-    localparam int FRAC_WIDTH = 10;
+    localparam int INT_WIDTH  = 5;
+    localparam int FRAC_WIDTH = 5;
     localparam int WIDTH      = INT_WIDTH + FRAC_WIDTH + 1;
 
-    // --- Input signals (d=4) ---
+    // --- Input signals (d=5) ---
     (* keep = "true", dont_touch = "true" *) logic signed [WIDTH-1:0] x_0 = '0;
     (* keep = "true", dont_touch = "true" *) logic signed [WIDTH-1:0] x_1 = '0;
     (* keep = "true", dont_touch = "true" *) logic signed [WIDTH-1:0] x_2 = '0;
     (* keep = "true", dont_touch = "true" *) logic signed [WIDTH-1:0] x_3 = '0;
+    (* keep = "true", dont_touch = "true" *) logic signed [WIDTH-1:0] x_4 = '0;
 
     // --- Previous hidden state (h=4) ---
     (* keep = "true", dont_touch = "true" *) logic signed [WIDTH-1:0] h_0 = '0;
@@ -37,54 +38,66 @@ module top_level(
     (* keep = "true", dont_touch = "true" *) logic signed [WIDTH-1:0] w_ir_0_1 = 16'sd1;
     (* keep = "true", dont_touch = "true" *) logic signed [WIDTH-1:0] w_ir_0_2 = 16'sd1;
     (* keep = "true", dont_touch = "true" *) logic signed [WIDTH-1:0] w_ir_0_3 = 16'sd1;
+    (* keep = "true", dont_touch = "true" *) logic signed [WIDTH-1:0] w_ir_0_4 = 16'sd1;
     (* keep = "true", dont_touch = "true" *) logic signed [WIDTH-1:0] w_ir_1_0 = 16'sd1;
     (* keep = "true", dont_touch = "true" *) logic signed [WIDTH-1:0] w_ir_1_1 = 16'sd1;
     (* keep = "true", dont_touch = "true" *) logic signed [WIDTH-1:0] w_ir_1_2 = 16'sd1;
     (* keep = "true", dont_touch = "true" *) logic signed [WIDTH-1:0] w_ir_1_3 = 16'sd1;
+    (* keep = "true", dont_touch = "true" *) logic signed [WIDTH-1:0] w_ir_1_4 = 16'sd1;
     (* keep = "true", dont_touch = "true" *) logic signed [WIDTH-1:0] w_ir_2_0 = 16'sd1;
     (* keep = "true", dont_touch = "true" *) logic signed [WIDTH-1:0] w_ir_2_1 = 16'sd1;
     (* keep = "true", dont_touch = "true" *) logic signed [WIDTH-1:0] w_ir_2_2 = 16'sd1;
     (* keep = "true", dont_touch = "true" *) logic signed [WIDTH-1:0] w_ir_2_3 = 16'sd1;
+    (* keep = "true", dont_touch = "true" *) logic signed [WIDTH-1:0] w_ir_2_4 = 16'sd1;
     (* keep = "true", dont_touch = "true" *) logic signed [WIDTH-1:0] w_ir_3_0 = 16'sd1;
     (* keep = "true", dont_touch = "true" *) logic signed [WIDTH-1:0] w_ir_3_1 = 16'sd1;
     (* keep = "true", dont_touch = "true" *) logic signed [WIDTH-1:0] w_ir_3_2 = 16'sd1;
     (* keep = "true", dont_touch = "true" *) logic signed [WIDTH-1:0] w_ir_3_3 = 16'sd1;
+    (* keep = "true", dont_touch = "true" *) logic signed [WIDTH-1:0] w_ir_3_4 = 16'sd1;
 
     // w_iz: update gate input weights
     (* keep = "true", dont_touch = "true" *) logic signed [WIDTH-1:0] w_iz_0_0 = 16'sd1;
     (* keep = "true", dont_touch = "true" *) logic signed [WIDTH-1:0] w_iz_0_1 = 16'sd1;
     (* keep = "true", dont_touch = "true" *) logic signed [WIDTH-1:0] w_iz_0_2 = 16'sd1;
     (* keep = "true", dont_touch = "true" *) logic signed [WIDTH-1:0] w_iz_0_3 = 16'sd1;
+    (* keep = "true", dont_touch = "true" *) logic signed [WIDTH-1:0] w_iz_0_4 = 16'sd1;
     (* keep = "true", dont_touch = "true" *) logic signed [WIDTH-1:0] w_iz_1_0 = 16'sd1;
     (* keep = "true", dont_touch = "true" *) logic signed [WIDTH-1:0] w_iz_1_1 = 16'sd1;
     (* keep = "true", dont_touch = "true" *) logic signed [WIDTH-1:0] w_iz_1_2 = 16'sd1;
     (* keep = "true", dont_touch = "true" *) logic signed [WIDTH-1:0] w_iz_1_3 = 16'sd1;
+    (* keep = "true", dont_touch = "true" *) logic signed [WIDTH-1:0] w_iz_1_4 = 16'sd1;
     (* keep = "true", dont_touch = "true" *) logic signed [WIDTH-1:0] w_iz_2_0 = 16'sd1;
     (* keep = "true", dont_touch = "true" *) logic signed [WIDTH-1:0] w_iz_2_1 = 16'sd1;
     (* keep = "true", dont_touch = "true" *) logic signed [WIDTH-1:0] w_iz_2_2 = 16'sd1;
     (* keep = "true", dont_touch = "true" *) logic signed [WIDTH-1:0] w_iz_2_3 = 16'sd1;
+    (* keep = "true", dont_touch = "true" *) logic signed [WIDTH-1:0] w_iz_2_4 = 16'sd1;
     (* keep = "true", dont_touch = "true" *) logic signed [WIDTH-1:0] w_iz_3_0 = 16'sd1;
     (* keep = "true", dont_touch = "true" *) logic signed [WIDTH-1:0] w_iz_3_1 = 16'sd1;
     (* keep = "true", dont_touch = "true" *) logic signed [WIDTH-1:0] w_iz_3_2 = 16'sd1;
     (* keep = "true", dont_touch = "true" *) logic signed [WIDTH-1:0] w_iz_3_3 = 16'sd1;
+    (* keep = "true", dont_touch = "true" *) logic signed [WIDTH-1:0] w_iz_3_4 = 16'sd1;
 
     // w_in: new gate input weights
     (* keep = "true", dont_touch = "true" *) logic signed [WIDTH-1:0] w_in_0_0 = 16'sd1;
     (* keep = "true", dont_touch = "true" *) logic signed [WIDTH-1:0] w_in_0_1 = 16'sd1;
     (* keep = "true", dont_touch = "true" *) logic signed [WIDTH-1:0] w_in_0_2 = 16'sd1;
     (* keep = "true", dont_touch = "true" *) logic signed [WIDTH-1:0] w_in_0_3 = 16'sd1;
+    (* keep = "true", dont_touch = "true" *) logic signed [WIDTH-1:0] w_in_0_4 = 16'sd1;
     (* keep = "true", dont_touch = "true" *) logic signed [WIDTH-1:0] w_in_1_0 = 16'sd1;
     (* keep = "true", dont_touch = "true" *) logic signed [WIDTH-1:0] w_in_1_1 = 16'sd1;
     (* keep = "true", dont_touch = "true" *) logic signed [WIDTH-1:0] w_in_1_2 = 16'sd1;
     (* keep = "true", dont_touch = "true" *) logic signed [WIDTH-1:0] w_in_1_3 = 16'sd1;
+    (* keep = "true", dont_touch = "true" *) logic signed [WIDTH-1:0] w_in_1_4 = 16'sd1;
     (* keep = "true", dont_touch = "true" *) logic signed [WIDTH-1:0] w_in_2_0 = 16'sd1;
     (* keep = "true", dont_touch = "true" *) logic signed [WIDTH-1:0] w_in_2_1 = 16'sd1;
     (* keep = "true", dont_touch = "true" *) logic signed [WIDTH-1:0] w_in_2_2 = 16'sd1;
     (* keep = "true", dont_touch = "true" *) logic signed [WIDTH-1:0] w_in_2_3 = 16'sd1;
+    (* keep = "true", dont_touch = "true" *) logic signed [WIDTH-1:0] w_in_2_4 = 16'sd1;
     (* keep = "true", dont_touch = "true" *) logic signed [WIDTH-1:0] w_in_3_0 = 16'sd1;
     (* keep = "true", dont_touch = "true" *) logic signed [WIDTH-1:0] w_in_3_1 = 16'sd1;
     (* keep = "true", dont_touch = "true" *) logic signed [WIDTH-1:0] w_in_3_2 = 16'sd1;
     (* keep = "true", dont_touch = "true" *) logic signed [WIDTH-1:0] w_in_3_3 = 16'sd1;
+    (* keep = "true", dont_touch = "true" *) logic signed [WIDTH-1:0] w_in_3_4 = 16'sd1;
 
     // --- Recurrent weights (h×h for each gate) ---
     // w_hr: reset gate recurrent weights
@@ -183,12 +196,13 @@ module top_level(
     ) gru_inst (
         .clk(clk),
         .reset(reset),
-        // Input features (d=4)
+        // Input features (d=5)
 
         .x_0(x_0),
         .x_1(x_1),
         .x_2(x_2),
         .x_3(x_3),
+        .x_4(x_4),
         // Hidden states (h=4)
 
         .h_0(h_0),
@@ -201,54 +215,66 @@ module top_level(
         .w_ir_0_1(w_ir_0_1),
         .w_ir_0_2(w_ir_0_2),
         .w_ir_0_3(w_ir_0_3),
+        .w_ir_0_4(w_ir_0_4),
         .w_ir_1_0(w_ir_1_0),
         .w_ir_1_1(w_ir_1_1),
         .w_ir_1_2(w_ir_1_2),
         .w_ir_1_3(w_ir_1_3),
+        .w_ir_1_4(w_ir_1_4),
         .w_ir_2_0(w_ir_2_0),
         .w_ir_2_1(w_ir_2_1),
         .w_ir_2_2(w_ir_2_2),
         .w_ir_2_3(w_ir_2_3),
+        .w_ir_2_4(w_ir_2_4),
         .w_ir_3_0(w_ir_3_0),
         .w_ir_3_1(w_ir_3_1),
         .w_ir_3_2(w_ir_3_2),
         .w_ir_3_3(w_ir_3_3),
+        .w_ir_3_4(w_ir_3_4),
         // Input weights for update gate
 
         .w_iz_0_0(w_iz_0_0),
         .w_iz_0_1(w_iz_0_1),
         .w_iz_0_2(w_iz_0_2),
         .w_iz_0_3(w_iz_0_3),
+        .w_iz_0_4(w_iz_0_4),
         .w_iz_1_0(w_iz_1_0),
         .w_iz_1_1(w_iz_1_1),
         .w_iz_1_2(w_iz_1_2),
         .w_iz_1_3(w_iz_1_3),
+        .w_iz_1_4(w_iz_1_4),
         .w_iz_2_0(w_iz_2_0),
         .w_iz_2_1(w_iz_2_1),
         .w_iz_2_2(w_iz_2_2),
         .w_iz_2_3(w_iz_2_3),
+        .w_iz_2_4(w_iz_2_4),
         .w_iz_3_0(w_iz_3_0),
         .w_iz_3_1(w_iz_3_1),
         .w_iz_3_2(w_iz_3_2),
         .w_iz_3_3(w_iz_3_3),
+        .w_iz_3_4(w_iz_3_4),
         // Input weights for new gate
 
         .w_in_0_0(w_in_0_0),
         .w_in_0_1(w_in_0_1),
         .w_in_0_2(w_in_0_2),
         .w_in_0_3(w_in_0_3),
+        .w_in_0_4(w_in_0_4),
         .w_in_1_0(w_in_1_0),
         .w_in_1_1(w_in_1_1),
         .w_in_1_2(w_in_1_2),
         .w_in_1_3(w_in_1_3),
+        .w_in_1_4(w_in_1_4),
         .w_in_2_0(w_in_2_0),
         .w_in_2_1(w_in_2_1),
         .w_in_2_2(w_in_2_2),
         .w_in_2_3(w_in_2_3),
+        .w_in_2_4(w_in_2_4),
         .w_in_3_0(w_in_3_0),
         .w_in_3_1(w_in_3_1),
         .w_in_3_2(w_in_3_2),
         .w_in_3_3(w_in_3_3),
+        .w_in_3_4(w_in_3_4),
         // Recurrent weights for reset gate
 
         .w_hr_0_0(w_hr_0_0),

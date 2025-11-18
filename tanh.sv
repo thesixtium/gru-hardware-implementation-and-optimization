@@ -3,7 +3,6 @@ module tanh #(
     parameter int FRAC_WIDTH = 8,
     parameter int WIDTH      = INT_WIDTH + FRAC_WIDTH + 1
 )(
-    input  logic                     clk,
     input  logic                     reset,
     input  logic signed [WIDTH-1:0]  x,
     output logic signed [WIDTH-1:0]  y
@@ -60,7 +59,7 @@ module tanh #(
     assign x_times_2 = fx_mult(TWO, x);
 
     sigmoid #(.INT_WIDTH(INT_WIDTH), .FRAC_WIDTH(FRAC_WIDTH)) sig_inst (
-        .clk(clk), .reset(reset), .x(x_times_2), .y(sigmoid_out)
+        .reset(reset), .x(x_times_2), .y(sigmoid_out)
     );
 
     // tanh(x) = 2*sigmoid(2x) - 1

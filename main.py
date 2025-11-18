@@ -116,12 +116,27 @@ def main():
     # Key: (d, h, int_bits, frac_bits), Value: numpy array of outputs
     collected_outputs = {}
 
+    filename = "status.txt"
+
+    # Clear the file at the start
+    with open(filename, "w+") as f:
+        f.write("")
+
+    #for attempt in range(1):
+     #   for int_bits in range(4, 35 - 4):
+      #      for frac_bits in range(4, 35 - 4):
+       #         for d in range(4, 65):
+
     for attempt in range(1):
-        for int_bits in range(4, 35 - 4):
-            for frac_bits in range(4, 35 - 4):
-                for d in range(4, 65):
+        for int_bits in range(4, 6):
+            for frac_bits in range(4, 6):
+                for d in range(4, 6):
                     for h in [4]:
                         metrics = {}
+
+                        with open(filename, "a") as f:
+                            f.write(f"attempt = {attempt}\tint_bits = {int_bits}\tfrac_bits = {frac_bits}\td = {d}\th = {h}")
+
                         try:
                             # Generate SV code
                             top_code = generate_top_level_sv(INT_WIDTH=int_bits, FRAC_WIDTH=frac_bits, d=d, h=h)

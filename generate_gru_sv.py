@@ -83,7 +83,7 @@ def generate_gru_sv(INT_WIDTH=8, FRAC_WIDTH=8, d=64, h=4):
         for i in range(h):
             lines.append(
                 f"    {activation} #(.INT_WIDTH(INT_WIDTH), .FRAC_WIDTH(FRAC_WIDTH)) {activation}_{gate_name}{i} (")
-            lines.append(f"        .clk(clk), .reset(reset), .x({gate_name}_sum[{i}]), .y({gate_name}_act[{i}])")
+            lines.append(f"        .reset(reset), .x({gate_name}_sum[{i}]), .y({gate_name}_act[{i}])")
             lines.append("    );")
 
         return "\n".join(lines)
@@ -122,7 +122,7 @@ def generate_gru_sv(INT_WIDTH=8, FRAC_WIDTH=8, d=64, h=4):
 
         for i in range(h):
             lines.append(f"    tanh #(.INT_WIDTH(INT_WIDTH), .FRAC_WIDTH(FRAC_WIDTH)) tanh_n{i} (")
-            lines.append(f"        .clk(clk), .reset(reset), .x(n_sum[{i}]), .y(n_act[{i}])")
+            lines.append(f"         .reset(reset), .x(n_sum[{i}]), .y(n_act[{i}])")
             lines.append("    );")
 
         return "\n".join(lines)

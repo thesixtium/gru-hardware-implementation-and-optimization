@@ -33,18 +33,6 @@ update_compile_order -fileset sources_1
 set_property top $tb_module [get_filesets sim_1]
 update_compile_order -fileset sim_1
 
-puts "====================================="
-puts "📋 Synthesis top module: $top_module"
-puts "📋 Simulation top module: $tb_module"
-puts "====================================="
-
-# ==========================================
-# RUN TESTBENCH SIMULATION
-# ==========================================
-puts "====================================="
-puts "🧪 Running testbench simulation..."
-puts "====================================="
-
 # Set simulation runtime (adjust as needed)
 set_property -name {xsim.simulate.runtime} -value {1000ns} -objects [get_filesets sim_1]
 
@@ -54,10 +42,6 @@ launch_simulation -mode behavioral
 # Run simulation for specified time (or use run all)
 run 500ns
 
-puts "====================================="
-puts "✅ Simulation complete!"
-puts "====================================="
-
 # Close simulation
 close_sim -force
 
@@ -65,30 +49,16 @@ close_sim -force
 after 500
 
 # Run synthesis
-puts "Running synthesis..."
 synth_design -top $top_module -part $part_name
-
-puts "====================================="
-puts "✅ Synthesis complete!"
-puts "====================================="
 
 # Generate post-synthesis reports
 report_utilization -file utilization_synth.txt
 report_timing_summary -file timing_synth.txt
 report_power -file power_synth.txt
 
-# Optional: Run implementation for more accurate results
-puts "====================================="
-puts "🔧 Running implementation..."
-puts "====================================="
-
 opt_design
 place_design
 route_design
-
-puts "====================================="
-puts "✅ Implementation complete!"
-puts "====================================="
 
 # Generate post-implementation reports (more accurate)
 report_utilization -file utilization_report.txt
@@ -98,17 +68,3 @@ report_power -file power_report.txt
 # Generate additional detailed reports
 report_route_status -file route_status.txt
 report_drc -file drc_report.txt
-
-puts "====================================="
-puts "📊 All reports generated:"
-puts "  Post-Synthesis:"
-puts "    - utilization_synth.txt"
-puts "    - timing_synth.txt"
-puts "    - power_synth.txt"
-puts "  Post-Implementation:"
-puts "    - utilization_report.txt"
-puts "    - timing_report.txt"
-puts "    - power_report.txt"
-puts "    - route_status.txt"
-puts "    - drc_report.txt"
-puts "====================================="

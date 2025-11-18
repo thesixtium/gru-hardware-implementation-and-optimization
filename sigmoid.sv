@@ -6,7 +6,6 @@ module sigmoid #(
     parameter int FRAC_WIDTH = 8,
     parameter int WIDTH      = INT_WIDTH + FRAC_WIDTH + 1
 )(
-    input  logic                     clk,
     input  logic                     reset,
     input  logic signed [WIDTH-1:0]  x,
     output logic signed [WIDTH-1:0]  y
