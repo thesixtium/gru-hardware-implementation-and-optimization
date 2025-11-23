@@ -18,7 +18,7 @@ def generate_top_level_sv(INT_WIDTH=8, FRAC_WIDTH=8, d=64, h=4):
     # Generate output signal declarations
     output_decls = []
     for i in range(h):
-        output_decls.append(f"    (* keep = \"true\", dont_touch = \"true\" *) logic signed [WIDTH-1:0] y_{i} = '0;")
+        output_decls.append(f"    (* keep = \"true\", dont_touch = \"true\" *) logic signed [WIDTH-1:0] y_{i};")
 
     # Generate weight declarations
     def gen_weight_decls(prefix, rows, cols, init_val='16\'sd1'):

@@ -122,20 +122,24 @@ def main():
     with open(filename, "w+") as f:
         f.write("")
 
-    #for attempt in range(1):
-     #   for int_bits in range(4, 35 - 4):
-      #      for frac_bits in range(4, 35 - 4):
-       #         for d in range(4, 65):
 
+    count = 0
+    h_range =    [  2,  3,   4,  5,  6,  7,  8 ]
+    d_range =    h_range  # [  6,  8, 16, 32 ]
+    int_range =  h_range  # [  6  ]
+    frac_range = h_range  # [  4,  6,  8 ]
+    total = len(h_range) * len(d_range) * len(int_range) * len(frac_range)
     for attempt in range(1):
-        for int_bits in range(4, 6):
-            for frac_bits in range(4, 6):
-                for d in range(4, 6):
-                    for h in [4]:
+        for h in h_range:
+            for d in d_range:
+                for int_bits in int_range:
+                    for frac_bits in frac_range:
+                        count += 1
+
                         metrics = {}
 
                         with open(filename, "a") as f:
-                            f.write(f"attempt = {attempt}\tint_bits = {int_bits}\tfrac_bits = {frac_bits}\td = {d}\th = {h}")
+                            f.write(f"{round( (count / total) * 100, 2)}\tattempt = {attempt}\tint_bits = {int_bits}\tfrac_bits = {frac_bits}\td = {d}\th = {h}\n")
 
                         try:
                             # Generate SV code
@@ -183,7 +187,10 @@ def main():
                                 for k, v in metrics.items():
                                     print(f"{k:20s}: {v}")
 
+                                metrics["Time Utilization"] = (10 - metrics["WNS (ns)"]) / 10
+
                                 data.append(metrics)
+                                print(metrics)
                             else:
                                 metrics["LUTs"] = 0
                                 metrics["Registers"] = 0
@@ -193,6 +200,7 @@ def main():
                                 metrics["Total Power (W)"] = 0
                                 metrics["Dynamic Power (W)"] = 0
                                 metrics["Static Power (W)"] = 0
+                                metrics["Time Utilization"] = 0
                                 metrics["D"] = d
                                 metrics["H"] = h
                                 metrics["int bits"] = int_bits
@@ -212,6 +220,7 @@ def main():
                             metrics["Total Power (W)"] = 0
                             metrics["Dynamic Power (W)"] = 0
                             metrics["Static Power (W)"] = 0
+                            metrics["Time Utilization"] = 0
                             metrics["D"] = d
                             metrics["H"] = h
                             metrics["int bits"] = int_bits

@@ -36,19 +36,19 @@ def generate_gru_tb_sv(INT_WIDTH=8, FRAC_WIDTH=8, d=64, h=4, NUM_TEST_VECTORS = 
     input_count = 0
     for i in range(h):
         for j in range(d):
-            testbench += f"logic signed [WIDTH-1:0] w_ir_{i}_{j} = 'b{float_to_fixed_point(input_weights[input_count], INT_WIDTH, FRAC_WIDTH)};\n"
+            testbench += f"logic signed [WIDTH-1:0] w_ir_{i}_{j} = 'b{float_to_fixed_point(input_weights[input_count % len(input_weights)], INT_WIDTH, FRAC_WIDTH)};\n"
             input_count += 1
 
     testbench += f"\n"
     for i in range(h):
         for j in range(d):
-            testbench += f"logic signed [WIDTH-1:0] w_iz_{i}_{j} = 'b{float_to_fixed_point(input_weights[input_count], INT_WIDTH, FRAC_WIDTH)};\n"
+            testbench += f"logic signed [WIDTH-1:0] w_iz_{i}_{j} = 'b{float_to_fixed_point(input_weights[input_count % len(input_weights)], INT_WIDTH, FRAC_WIDTH)};\n"
             input_count += 1
 
     testbench += f"\n"
     for i in range(h):
         for j in range(d):
-            testbench += f"logic signed [WIDTH-1:0] w_in_{i}_{j} = 'b{float_to_fixed_point(input_weights[input_count], INT_WIDTH, FRAC_WIDTH)};\n"
+            testbench += f"logic signed [WIDTH-1:0] w_in_{i}_{j} = 'b{float_to_fixed_point(input_weights[input_count % len(input_weights)], INT_WIDTH, FRAC_WIDTH)};\n"
             input_count += 1
 
     testbench += f"\n"
@@ -70,19 +70,19 @@ def generate_gru_tb_sv(INT_WIDTH=8, FRAC_WIDTH=8, d=64, h=4, NUM_TEST_VECTORS = 
 
     for i in range(h):
         for j in range(h):
-            testbench += f"logic signed [WIDTH-1:0] w_hr_{i}_{j} = 'b{float_to_fixed_point(recurrent_weights[recurrent_count], INT_WIDTH, FRAC_WIDTH)};\n"
+            testbench += f"logic signed [WIDTH-1:0] w_hr_{i}_{j} = 'b{float_to_fixed_point(recurrent_weights[recurrent_count % len(recurrent_weights)], INT_WIDTH, FRAC_WIDTH)};\n"
             recurrent_count += 1
 
     testbench += f"\n"
     for i in range(h):
         for j in range(h):
-            testbench += f"logic signed [WIDTH-1:0] w_hz_{i}_{j} = 'b{float_to_fixed_point(recurrent_weights[recurrent_count], INT_WIDTH, FRAC_WIDTH)};\n"
+            testbench += f"logic signed [WIDTH-1:0] w_hz_{i}_{j} = 'b{float_to_fixed_point(recurrent_weights[recurrent_count % len(recurrent_weights)], INT_WIDTH, FRAC_WIDTH)};\n"
             recurrent_count += 1
 
     testbench += f"\n"
     for i in range(h):
         for j in range(h):
-            testbench += f"logic signed [WIDTH-1:0] w_hn_{i}_{j} = 'b{float_to_fixed_point(recurrent_weights[recurrent_count], INT_WIDTH, FRAC_WIDTH)};\n"
+            testbench += f"logic signed [WIDTH-1:0] w_hn_{i}_{j} = 'b{float_to_fixed_point(recurrent_weights[recurrent_count % len(recurrent_weights)], INT_WIDTH, FRAC_WIDTH)};\n"
             recurrent_count += 1
 
     testbench += f"\n"
@@ -96,7 +96,7 @@ def generate_gru_tb_sv(INT_WIDTH=8, FRAC_WIDTH=8, d=64, h=4, NUM_TEST_VECTORS = 
 
     for gate in ['ir', 'iz', 'in', 'hr', 'hz', 'hn']:
         for i in range(h):
-            testbench += f"logic signed [WIDTH-1:0] b_{gate}_{i} = 'b{float_to_fixed_point(bias_weights[bias_count], INT_WIDTH, FRAC_WIDTH)};\n"
+            testbench += f"logic signed [WIDTH-1:0] b_{gate}_{i} = 'b{float_to_fixed_point(bias_weights[bias_count % len(bias_weights)], INT_WIDTH, FRAC_WIDTH)};\n"
             bias_count += 1
         testbench += "\n"
 

@@ -1,0 +1,82 @@
+LUTs,Registers,BRAMs,DSPs,WNS (ns),Total Power (W),Dynamic Power (W),Static Power (W),D,H,int bits,frac bits,result,Time Utilization,MAE
+14763,72,0,0,8.494,0.085,0.001,0.084,8,4,4,4,success,0.1506,0.5281448872884115
+4296,104,0,156,8.23,0.086,0.002,0.084,8,4,4,8,success,0.17699999999999996,0.04672134399414062
+20931,168,0,156,7.633,0.087,0.003,0.084,8,4,4,16,success,0.2367,0.0
+4352,104,0,156,8.277,0.086,0.002,0.084,8,4,8,4,success,0.17230000000000006,2.2318580627441404
+6048,136,0,156,8.498,0.086,0.002,0.084,8,4,8,8,success,0.15020000000000006,0.04239812215169271
+36506,200,0,232,8.242,0.087,0.003,0.084,8,4,8,16,success,0.1757999999999999,0.0
+12336,168,0,156,8.411,0.087,0.003,0.084,8,4,16,4,success,0.15890000000000004,529.258359375
+29924,200,0,240,8.225,0.087,0.003,0.084,8,4,16,8,success,0.17750000000000005,0.0
+0,0,0,0,0.0,0.0,0.0,0.0,8,4,16,16,"exception: (1, ['C:\\Xilinx\\Vivado\\2024.1\\bin\\vivado.bat', '-mode', 'batch', '-source', 'run_vivado.tcl'])",0.0,0.0
+42347,72,0,0,8.45,0.086,0.002,0.084,32,4,4,4,success,0.15500000000000008,0.0
+0,0,0,0,0.0,0.0,0.0,0.0,32,4,4,8,"exception: (1, ['C:\\Xilinx\\Vivado\\2024.1\\bin\\vivado.bat', '-mode', 'batch', '-source', 'run_vivado.tcl'])",0.0,0.0
+0,0,0,0,0.0,0.0,0.0,0.0,32,4,4,16,"exception: (1, ['C:\\Xilinx\\Vivado\\2024.1\\bin\\vivado.bat', '-mode', 'batch', '-source', 'run_vivado.tcl'])",0.0,0.0
+42803,104,0,240,8.227,0.086,0.002,0.084,32,4,8,4,success,0.17729999999999996,0.0
+0,0,0,0,0.0,0.0,0.0,0.0,32,4,8,8,"exception: (1, ['C:\\Xilinx\\Vivado\\2024.1\\bin\\vivado.bat', '-mode', 'batch', '-source', 'run_vivado.tcl'])",0.0,0.0
+0,0,0,0,0.0,0.0,0.0,0.0,32,4,8,16,"exception: (1, ['C:\\Xilinx\\Vivado\\2024.1\\bin\\vivado.bat', '-mode', 'batch', '-source', 'run_vivado.tcl'])",0.0,0.0
+0,0,0,0,0.0,0.0,0.0,0.0,32,4,16,4,"exception: (1, ['C:\\Xilinx\\Vivado\\2024.1\\bin\\vivado.bat', '-mode', 'batch', '-source', 'run_vivado.tcl'])",0.0,0.0
+0,0,0,0,0.0,0.0,0.0,0.0,32,4,16,8,"exception: (1, ['C:\\Xilinx\\Vivado\\2024.1\\bin\\vivado.bat', '-mode', 'batch', '-source', 'run_vivado.tcl'])",0.0,0.0
+0,0,0,0,0.0,0.0,0.0,0.0,32,4,16,16,"exception: (1, ['C:\\Xilinx\\Vivado\\2024.1\\bin\\vivado.bat', '-mode', 'batch', '-source', 'run_vivado.tcl'])",0.0,0.0
+0,0,0,0,0.0,0.0,0.0,0.0,64,4,4,4,"exception: (1, ['C:\\Xilinx\\Vivado\\2024.1\\bin\\vivado.bat', '-mode', 'batch', '-source', 'run_vivado.tcl'])",0.0,0.0
+0,0,0,0,0.0,0.0,0.0,0.0,64,4,4,8,"exception: (1, ['C:\\Xilinx\\Vivado\\2024.1\\bin\\vivado.bat', '-mode', 'batch', '-source', 'run_vivado.tcl'])",0.0,0.0
+0,0,0,0,0.0,0.0,0.0,0.0,64,4,4,16,"exception: (1, ['C:\\Xilinx\\Vivado\\2024.1\\bin\\vivado.bat', '-mode', 'batch', '-source', 'run_vivado.tcl'])",0.0,0.0
+0,0,0,0,0.0,0.0,0.0,0.0,64,4,8,4,"exception: (1, ['C:\\Xilinx\\Vivado\\2024.1\\bin\\vivado.bat', '-mode', 'batch', '-source', 'run_vivado.tcl'])",0.0,0.0
+0,0,0,0,0.0,0.0,0.0,0.0,64,4,8,8,"exception: (1, ['C:\\Xilinx\\Vivado\\2024.1\\bin\\vivado.bat', '-mode', 'batch', '-source', 'run_vivado.tcl'])",0.0,0.0
+0,0,0,0,0.0,0.0,0.0,0.0,64,4,8,16,"exception: (1, ['C:\\Xilinx\\Vivado\\2024.1\\bin\\vivado.bat', '-mode', 'batch', '-source', 'run_vivado.tcl'])",0.0,0.0
+0,0,0,0,0.0,0.0,0.0,0.0,64,4,16,4,"exception: (1, ['C:\\Xilinx\\Vivado\\2024.1\\bin\\vivado.bat', '-mode', 'batch', '-source', 'run_vivado.tcl'])",0.0,0.0
+0,0,0,0,0.0,0.0,0.0,0.0,64,4,16,8,"exception: (1, ['C:\\Xilinx\\Vivado\\2024.1\\bin\\vivado.bat', '-mode', 'batch', '-source', 'run_vivado.tcl'])",0.0,0.0
+0,0,0,0,0.0,0.0,0.0,0.0,64,4,16,16,"exception: (1, ['C:\\Xilinx\\Vivado\\2024.1\\bin\\vivado.bat', '-mode', 'batch', '-source', 'run_vivado.tcl'])",0.0,0.0
+38783,144,0,0,8.433,0.087,0.003,0.084,8,8,4,4,success,0.1567,0.5533723958333333
+40985,208,0,240,8.363,0.088,0.004,0.084,8,8,4,8,success,0.16370000000000004,0.0
+0,0,0,0,0.0,0.0,0.0,0.0,8,8,4,16,"exception: (1, ['C:\\Xilinx\\Vivado\\2024.1\\bin\\vivado.bat', '-mode', 'batch', '-source', 'run_vivado.tcl'])",0.0,0.0
+37783,208,0,240,8.227,0.087,0.003,0.084,8,8,8,4,success,0.17729999999999996,0.0
+0,0,0,0,0.0,0.0,0.0,0.0,8,8,8,8,"exception: (1, ['C:\\Xilinx\\Vivado\\2024.1\\bin\\vivado.bat', '-mode', 'batch', '-source', 'run_vivado.tcl'])",0.0,0.0
+0,0,0,0,0.0,0.0,0.0,0.0,8,8,8,16,"exception: (1, ['C:\\Xilinx\\Vivado\\2024.1\\bin\\vivado.bat', '-mode', 'batch', '-source', 'run_vivado.tcl'])",0.0,0.0
+0,0,0,0,0.0,0.0,0.0,0.0,8,8,16,4,"exception: (1, ['C:\\Xilinx\\Vivado\\2024.1\\bin\\vivado.bat', '-mode', 'batch', '-source', 'run_vivado.tcl'])",0.0,0.0
+0,0,0,0,0.0,0.0,0.0,0.0,8,8,16,8,"exception: (1, ['C:\\Xilinx\\Vivado\\2024.1\\bin\\vivado.bat', '-mode', 'batch', '-source', 'run_vivado.tcl'])",0.0,0.0
+0,0,0,0,0.0,0.0,0.0,0.0,8,8,16,16,"exception: (1, ['C:\\Xilinx\\Vivado\\2024.1\\bin\\vivado.bat', '-mode', 'batch', '-source', 'run_vivado.tcl'])",0.0,0.0
+0,0,0,0,0.0,0.0,0.0,0.0,32,8,4,4,"exception: (1, ['C:\\Xilinx\\Vivado\\2024.1\\bin\\vivado.bat', '-mode', 'batch', '-source', 'run_vivado.tcl'])",0.0,0.0
+0,0,0,0,0.0,0.0,0.0,0.0,32,8,4,8,"exception: (1, ['C:\\Xilinx\\Vivado\\2024.1\\bin\\vivado.bat', '-mode', 'batch', '-source', 'run_vivado.tcl'])",0.0,0.0
+0,0,0,0,0.0,0.0,0.0,0.0,32,8,4,16,"exception: (1, ['C:\\Xilinx\\Vivado\\2024.1\\bin\\vivado.bat', '-mode', 'batch', '-source', 'run_vivado.tcl'])",0.0,0.0
+0,0,0,0,0.0,0.0,0.0,0.0,32,8,8,4,"exception: (1, ['C:\\Xilinx\\Vivado\\2024.1\\bin\\vivado.bat', '-mode', 'batch', '-source', 'run_vivado.tcl'])",0.0,0.0
+0,0,0,0,0.0,0.0,0.0,0.0,32,8,8,8,"exception: (1, ['C:\\Xilinx\\Vivado\\2024.1\\bin\\vivado.bat', '-mode', 'batch', '-source', 'run_vivado.tcl'])",0.0,0.0
+0,0,0,0,0.0,0.0,0.0,0.0,32,8,8,16,"exception: (1, ['C:\\Xilinx\\Vivado\\2024.1\\bin\\vivado.bat', '-mode', 'batch', '-source', 'run_vivado.tcl'])",0.0,0.0
+0,0,0,0,0.0,0.0,0.0,0.0,32,8,16,4,"exception: (1, ['C:\\Xilinx\\Vivado\\2024.1\\bin\\vivado.bat', '-mode', 'batch', '-source', 'run_vivado.tcl'])",0.0,0.0
+0,0,0,0,0.0,0.0,0.0,0.0,32,8,16,8,"exception: (1, ['C:\\Xilinx\\Vivado\\2024.1\\bin\\vivado.bat', '-mode', 'batch', '-source', 'run_vivado.tcl'])",0.0,0.0
+0,0,0,0,0.0,0.0,0.0,0.0,32,8,16,16,"exception: (1, ['C:\\Xilinx\\Vivado\\2024.1\\bin\\vivado.bat', '-mode', 'batch', '-source', 'run_vivado.tcl'])",0.0,0.0
+0,0,0,0,0.0,0.0,0.0,0.0,64,8,4,4,"exception: (1, ['C:\\Xilinx\\Vivado\\2024.1\\bin\\vivado.bat', '-mode', 'batch', '-source', 'run_vivado.tcl'])",0.0,0.0
+0,0,0,0,0.0,0.0,0.0,0.0,64,8,4,8,"exception: (1, ['C:\\Xilinx\\Vivado\\2024.1\\bin\\vivado.bat', '-mode', 'batch', '-source', 'run_vivado.tcl'])",0.0,0.0
+0,0,0,0,0.0,0.0,0.0,0.0,64,8,4,16,"exception: (1, ['C:\\Xilinx\\Vivado\\2024.1\\bin\\vivado.bat', '-mode', 'batch', '-source', 'run_vivado.tcl'])",0.0,0.0
+0,0,0,0,0.0,0.0,0.0,0.0,64,8,8,4,"exception: (1, ['C:\\Xilinx\\Vivado\\2024.1\\bin\\vivado.bat', '-mode', 'batch', '-source', 'run_vivado.tcl'])",0.0,0.0
+0,0,0,0,0.0,0.0,0.0,0.0,64,8,8,8,"exception: (1, ['C:\\Xilinx\\Vivado\\2024.1\\bin\\vivado.bat', '-mode', 'batch', '-source', 'run_vivado.tcl'])",0.0,0.0
+0,0,0,0,0.0,0.0,0.0,0.0,64,8,8,16,"exception: (1, ['C:\\Xilinx\\Vivado\\2024.1\\bin\\vivado.bat', '-mode', 'batch', '-source', 'run_vivado.tcl'])",0.0,0.0
+0,0,0,0,0.0,0.0,0.0,0.0,64,8,16,4,"exception: (1, ['C:\\Xilinx\\Vivado\\2024.1\\bin\\vivado.bat', '-mode', 'batch', '-source', 'run_vivado.tcl'])",0.0,0.0
+0,0,0,0,0.0,0.0,0.0,0.0,64,8,16,8,"exception: (1, ['C:\\Xilinx\\Vivado\\2024.1\\bin\\vivado.bat', '-mode', 'batch', '-source', 'run_vivado.tcl'])",0.0,0.0
+0,0,0,0,0.0,0.0,0.0,0.0,64,8,16,16,"exception: (1, ['C:\\Xilinx\\Vivado\\2024.1\\bin\\vivado.bat', '-mode', 'batch', '-source', 'run_vivado.tcl'])",0.0,0.0
+0,0,0,0,0.0,0.0,0.0,0.0,8,16,4,4,"exception: (1, ['C:\\Xilinx\\Vivado\\2024.1\\bin\\vivado.bat', '-mode', 'batch', '-source', 'run_vivado.tcl'])",0.0,0.0
+0,0,0,0,0.0,0.0,0.0,0.0,8,16,4,8,"exception: (1, ['C:\\Xilinx\\Vivado\\2024.1\\bin\\vivado.bat', '-mode', 'batch', '-source', 'run_vivado.tcl'])",0.0,0.0
+0,0,0,0,0.0,0.0,0.0,0.0,8,16,4,16,"exception: (1, ['C:\\Xilinx\\Vivado\\2024.1\\bin\\vivado.bat', '-mode', 'batch', '-source', 'run_vivado.tcl'])",0.0,0.0
+0,0,0,0,0.0,0.0,0.0,0.0,8,16,8,4,"exception: (1, ['C:\\Xilinx\\Vivado\\2024.1\\bin\\vivado.bat', '-mode', 'batch', '-source', 'run_vivado.tcl'])",0.0,0.0
+0,0,0,0,0.0,0.0,0.0,0.0,8,16,8,8,"exception: (1, ['C:\\Xilinx\\Vivado\\2024.1\\bin\\vivado.bat', '-mode', 'batch', '-source', 'run_vivado.tcl'])",0.0,0.0
+0,0,0,0,0.0,0.0,0.0,0.0,8,16,8,16,"exception: (1, ['C:\\Xilinx\\Vivado\\2024.1\\bin\\vivado.bat', '-mode', 'batch', '-source', 'run_vivado.tcl'])",0.0,0.0
+0,0,0,0,0.0,0.0,0.0,0.0,8,16,16,4,"exception: (1, ['C:\\Xilinx\\Vivado\\2024.1\\bin\\vivado.bat', '-mode', 'batch', '-source', 'run_vivado.tcl'])",0.0,0.0
+0,0,0,0,0.0,0.0,0.0,0.0,8,16,16,8,"exception: (1, ['C:\\Xilinx\\Vivado\\2024.1\\bin\\vivado.bat', '-mode', 'batch', '-source', 'run_vivado.tcl'])",0.0,0.0
+0,0,0,0,0.0,0.0,0.0,0.0,8,16,16,16,"exception: (1, ['C:\\Xilinx\\Vivado\\2024.1\\bin\\vivado.bat', '-mode', 'batch', '-source', 'run_vivado.tcl'])",0.0,0.0
+0,0,0,0,0.0,0.0,0.0,0.0,32,16,4,4,"exception: (1, ['C:\\Xilinx\\Vivado\\2024.1\\bin\\vivado.bat', '-mode', 'batch', '-source', 'run_vivado.tcl'])",0.0,0.0
+0,0,0,0,0.0,0.0,0.0,0.0,32,16,4,8,"exception: (1, ['C:\\Xilinx\\Vivado\\2024.1\\bin\\vivado.bat', '-mode', 'batch', '-source', 'run_vivado.tcl'])",0.0,0.0
+0,0,0,0,0.0,0.0,0.0,0.0,32,16,4,16,"exception: (1, ['C:\\Xilinx\\Vivado\\2024.1\\bin\\vivado.bat', '-mode', 'batch', '-source', 'run_vivado.tcl'])",0.0,0.0
+0,0,0,0,0.0,0.0,0.0,0.0,32,16,8,4,"exception: (1, ['C:\\Xilinx\\Vivado\\2024.1\\bin\\vivado.bat', '-mode', 'batch', '-source', 'run_vivado.tcl'])",0.0,0.0
+0,0,0,0,0.0,0.0,0.0,0.0,32,16,8,8,"exception: (1, ['C:\\Xilinx\\Vivado\\2024.1\\bin\\vivado.bat', '-mode', 'batch', '-source', 'run_vivado.tcl'])",0.0,0.0
+0,0,0,0,0.0,0.0,0.0,0.0,32,16,8,16,"exception: (1, ['C:\\Xilinx\\Vivado\\2024.1\\bin\\vivado.bat', '-mode', 'batch', '-source', 'run_vivado.tcl'])",0.0,0.0
+0,0,0,0,0.0,0.0,0.0,0.0,32,16,16,4,"exception: (1, ['C:\\Xilinx\\Vivado\\2024.1\\bin\\vivado.bat', '-mode', 'batch', '-source', 'run_vivado.tcl'])",0.0,0.0
+0,0,0,0,0.0,0.0,0.0,0.0,32,16,16,8,"exception: (1, ['C:\\Xilinx\\Vivado\\2024.1\\bin\\vivado.bat', '-mode', 'batch', '-source', 'run_vivado.tcl'])",0.0,0.0
+0,0,0,0,0.0,0.0,0.0,0.0,32,16,16,16,"exception: (1, ['C:\\Xilinx\\Vivado\\2024.1\\bin\\vivado.bat', '-mode', 'batch', '-source', 'run_vivado.tcl'])",0.0,0.0
+0,0,0,0,0.0,0.0,0.0,0.0,64,16,4,4,"exception: (1, ['C:\\Xilinx\\Vivado\\2024.1\\bin\\vivado.bat', '-mode', 'batch', '-source', 'run_vivado.tcl'])",0.0,0.0
+0,0,0,0,0.0,0.0,0.0,0.0,64,16,4,8,"exception: (1, ['C:\\Xilinx\\Vivado\\2024.1\\bin\\vivado.bat', '-mode', 'batch', '-source', 'run_vivado.tcl'])",0.0,0.0
+0,0,0,0,0.0,0.0,0.0,0.0,64,16,4,16,"exception: (1, ['C:\\Xilinx\\Vivado\\2024.1\\bin\\vivado.bat', '-mode', 'batch', '-source', 'run_vivado.tcl'])",0.0,0.0
+0,0,0,0,0.0,0.0,0.0,0.0,64,16,8,4,"exception: (1, ['C:\\Xilinx\\Vivado\\2024.1\\bin\\vivado.bat', '-mode', 'batch', '-source', 'run_vivado.tcl'])",0.0,0.0
+0,0,0,0,0.0,0.0,0.0,0.0,64,16,8,8,"exception: (1, ['C:\\Xilinx\\Vivado\\2024.1\\bin\\vivado.bat', '-mode', 'batch', '-source', 'run_vivado.tcl'])",0.0,0.0
+0,0,0,0,0.0,0.0,0.0,0.0,64,16,8,16,"exception: (1, ['C:\\Xilinx\\Vivado\\2024.1\\bin\\vivado.bat', '-mode', 'batch', '-source', 'run_vivado.tcl'])",0.0,0.0
+0,0,0,0,0.0,0.0,0.0,0.0,64,16,16,4,"exception: (1, ['C:\\Xilinx\\Vivado\\2024.1\\bin\\vivado.bat', '-mode', 'batch', '-source', 'run_vivado.tcl'])",0.0,0.0
+0,0,0,0,0.0,0.0,0.0,0.0,64,16,16,8,"exception: (1, ['C:\\Xilinx\\Vivado\\2024.1\\bin\\vivado.bat', '-mode', 'batch', '-source', 'run_vivado.tcl'])",0.0,0.0
+0,0,0,0,0.0,0.0,0.0,0.0,64,16,16,16,"exception: (1, ['C:\\Xilinx\\Vivado\\2024.1\\bin\\vivado.bat', '-mode', 'batch', '-source', 'run_vivado.tcl'])",0.0,0.0
