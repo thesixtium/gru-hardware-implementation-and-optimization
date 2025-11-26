@@ -163,12 +163,12 @@ def generate_gru_sv(INT_WIDTH=8, FRAC_WIDTH=8, d=64, h=4):
 `timescale 1ns / 1ps
 // GRU Cell Implementation (Fixed-Point Qm.f)
 // d = {d} (input features), h = {h} (hidden units)
-// WIDTH = INT_WIDTH + FRAC_WIDTH + 1 (sign)
+// WIDTH = INT_WIDTH + FRAC_WIDTH
 
 module gru #(
     parameter int INT_WIDTH  = {INT_WIDTH},
     parameter int FRAC_WIDTH = {FRAC_WIDTH},
-    parameter int WIDTH      = INT_WIDTH + FRAC_WIDTH + 1
+    parameter int WIDTH      = INT_WIDTH + FRAC_WIDTH
 )(
     input  logic                     clk,
     input  logic                     reset,

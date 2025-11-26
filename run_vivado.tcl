@@ -15,6 +15,7 @@ add_files C:/Users/ajrbe/Documents/School/Thesis/BCI/Code/top_level.sv
 add_files C:/Users/ajrbe/Documents/School/Thesis/BCI/Code/gru.sv
 add_files C:/Users/ajrbe/Documents/School/Thesis/BCI/Code/tanh.sv
 add_files C:/Users/ajrbe/Documents/School/Thesis/BCI/Code/sigmoid.sv
+add_files C:/Users/ajrbe/Documents/School/Thesis/BCI/Code/mult.sv
 add_files -fileset sim_1 C:/Users/ajrbe/Documents/School/Thesis/BCI/Code/gru_tb.sv
 read_xdc C:/Users/ajrbe/Documents/School/Thesis/BCI/Code/constraints.xdc
 

@@ -1,10 +1,9 @@
 `timescale 1ns / 1ps
 
-
 module sigmoid #(
     parameter int INT_WIDTH  = 8,
     parameter int FRAC_WIDTH = 8,
-    parameter int WIDTH      = INT_WIDTH + FRAC_WIDTH + 1
+    parameter int WIDTH      = INT_WIDTH + FRAC_WIDTH
 )(
     input  logic                     reset,
     input  logic signed [WIDTH-1:0]  x,

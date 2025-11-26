@@ -5,6 +5,7 @@ import numpy as np
 from pathlib import Path
 
 from extract_metrics import extract_metrics
+from generate_gru_ground_truth import generate_gru_ground_truth
 from generate_gru_sv import generate_gru_sv
 from generate_gru_tb_sv import generate_gru_tb_sv
 from generate_top_level_sv import generate_top_level_sv
@@ -53,57 +54,60 @@ def read_q_format_file(filename, int_bits, frac_bits):
     return np.array(values)
 
 
+def read_ground_truth_file(filename):
+    """Read ground truth file and return numpy array of float values."""
+    values = []
+
+    with open(filename, 'r') as f:
+        for line in f:
+            line = line.strip()
+            if line:
+                # Parse space-separated float values
+                line_values = [float(x) for x in line.split()]
+                values.extend(line_values)
+
+    return np.array(values)
+
+
 def calculate_mae(array1, array2):
     """Calculate Mean Absolute Error between two arrays."""
     if len(array1) != len(array2):
-        raise ValueError(f"Arrays must have same length. Got {len(array1)} and {len(array2)}")
+        min_len = min(len(array1), len(array2))
+        print(
+            f"Warning: Arrays have different lengths ({len(array1)} vs {len(array2)}). Using first {min_len} elements.")
+        array1 = array1[:min_len]
+        array2 = array2[:min_len]
 
     return np.mean(np.abs(array1 - array2))
 
 
-def calculate_mae_metrics(d, h, int_bits, collected_outputs):
+def calculate_mae_against_ground_truth(d, h, int_bits, frac_bits, output_data):
     """
-    Calculate MAE for outputs with same d, h, int_bits but different frac_bits.
-    Uses the highest frac_bits as ground truth.
+    Calculate MAE by comparing output_data against ground truth file.
 
     Args:
         d: dimension parameter
         h: hidden size parameter
         int_bits: integer bits
-        collected_outputs: dict mapping (d, h, int_bits, frac_bits) -> output_data
+        frac_bits: fractional bits
+        output_data: numpy array of output values from hardware
 
     Returns:
-        dict mapping frac_bits -> MAE value (or None for ground truth)
+        MAE value or None if ground truth file not found
     """
-    # Find all outputs with matching d, h, int_bits
-    matching_outputs = {
-        frac_bits: data
-        for (d_, h_, int_bits_, frac_bits), data in collected_outputs.items()
-        if d_ == d and h_ == h and int_bits_ == int_bits
-    }
+    ground_truth_filename = f'ground_truth_d{d}_h{h}.txt'
 
-    if len(matching_outputs) < 2:
-        # Not enough data to compare
-        return {frac_bits: None for frac_bits in matching_outputs.keys()}
+    if not Path(ground_truth_filename).exists():
+        print(f"Warning: Ground truth file {ground_truth_filename} not found")
+        return None
 
-    # Ground truth is the one with most fractional bits
-    ground_truth_frac = max(matching_outputs.keys())
-    ground_truth_data = matching_outputs[ground_truth_frac]
-
-    # Calculate MAE for each configuration
-    mae_results = {}
-    for frac_bits, data in matching_outputs.items():
-        if frac_bits == ground_truth_frac:
-            mae_results[frac_bits] = None  # Ground truth has no error
-        else:
-            try:
-                mae = calculate_mae(data, ground_truth_data)
-                mae_results[frac_bits] = mae
-            except Exception as e:
-                print(f"Error calculating MAE for frac_bits={frac_bits}: {e}")
-                mae_results[frac_bits] = None
-
-    return mae_results
+    try:
+        ground_truth_data = read_ground_truth_file(ground_truth_filename)
+        mae = calculate_mae(output_data, ground_truth_data)
+        return mae
+    except Exception as e:
+        print(f"Error calculating MAE against ground truth: {e}")
+        return None
 
 
 def run_vivado():
@@ -112,26 +116,26 @@ def run_vivado():
 
 def main():
     data = []
-    # Store output data for MAE calculation
-    # Key: (d, h, int_bits, frac_bits), Value: numpy array of outputs
-    collected_outputs = {}
-
     filename = "status.txt"
 
     # Clear the file at the start
     with open(filename, "w+") as f:
         f.write("")
 
-
     count = 0
-    h_range =    [  2,  3,   4,  5,  6,  7,  8 ]
-    d_range =    h_range  # [  6,  8, 16, 32 ]
-    int_range =  h_range  # [  6  ]
-    frac_range = h_range  # [  4,  6,  8 ]
+    h_range    = [ 2, 3 ]
+    d_range    = [ 4, 5 ]
+    int_range  = [4]
+    frac_range = [3, 4, 5]
     total = len(h_range) * len(d_range) * len(int_range) * len(frac_range)
+
     for attempt in range(1):
         for h in h_range:
             for d in d_range:
+                # Generate ground truth once per (d, h) combination
+                print(f"\nGenerating ground truth for d={d}, h={h}")
+                generate_gru_ground_truth(d=d, h=h)
+
                 for int_bits in int_range:
                     for frac_bits in frac_range:
                         count += 1
@@ -139,7 +143,8 @@ def main():
                         metrics = {}
 
                         with open(filename, "a") as f:
-                            f.write(f"{round( (count / total) * 100, 2)}\tattempt = {attempt}\tint_bits = {int_bits}\tfrac_bits = {frac_bits}\td = {d}\th = {h}\n")
+                            f.write(
+                                f"{round((count / total) * 100, 2)}\tattempt = {attempt}\tint_bits = {int_bits}\tfrac_bits = {frac_bits}\td = {d}\th = {h}\n")
 
                         try:
                             # Generate SV code
@@ -165,13 +170,22 @@ def main():
                             # Step 3: Extract metrics
                             metrics = extract_metrics()
 
-                            # Read output file for MAE calculation
+                            # Read output file and calculate MAE against ground truth
                             output_filename = f"output_d{d}_h{h}_int{int_bits}_frac{frac_bits}.txt"
+                            mae_value = None
+
                             if Path(output_filename).exists():
                                 try:
                                     output_data = read_q_format_file(output_filename, int_bits, frac_bits)
-                                    collected_outputs[(d, h, int_bits, frac_bits)] = output_data
                                     print(f"Loaded {len(output_data)} output values from {output_filename}")
+
+                                    # Calculate MAE against ground truth
+                                    mae_value = calculate_mae_against_ground_truth(d, h, int_bits, frac_bits,
+                                                                                   output_data)
+
+                                    if mae_value is not None:
+                                        print(f"MAE against ground truth: {mae_value:.8f}")
+
                                 except Exception as e:
                                     print(f"Error reading output file {output_filename}: {e}")
 
@@ -182,6 +196,7 @@ def main():
                                 metrics["H"] = h
                                 metrics["int bits"] = int_bits
                                 metrics["frac bits"] = frac_bits
+                                metrics["MAE"] = mae_value if mae_value is not None else 0
                                 metrics["result"] = "success"
 
                                 for k, v in metrics.items():
@@ -190,7 +205,6 @@ def main():
                                 metrics["Time Utilization"] = (10 - metrics["WNS (ns)"]) / 10
 
                                 data.append(metrics)
-                                print(metrics)
                             else:
                                 metrics["LUTs"] = 0
                                 metrics["Registers"] = 0
@@ -205,6 +219,7 @@ def main():
                                 metrics["H"] = h
                                 metrics["int bits"] = int_bits
                                 metrics["frac bits"] = frac_bits
+                                metrics["MAE"] = mae_value if mae_value is not None else 0
                                 metrics["result"] = "no metrics"
                                 data.append(metrics)
                                 print("No metrics extracted - reports may not have been generated")
@@ -225,42 +240,9 @@ def main():
                             metrics["H"] = h
                             metrics["int bits"] = int_bits
                             metrics["frac bits"] = frac_bits
+                            metrics["MAE"] = 0
                             metrics["result"] = f"exception: {e.args}"
                             data.append(metrics)
-
-    # Calculate MAE metrics for all configurations
-    print("\n" + "=" * 60)
-    print("Calculating MAE Metrics")
-    print("=" * 60)
-
-    # Group by (d, h, int_bits) and calculate MAE
-    processed_groups = set()
-    for idx, row in enumerate(data):
-        d = row["D"]
-        h = row["H"]
-        int_bits = row["int bits"]
-        frac_bits = row["frac bits"]
-
-        group_key = (d, h, int_bits)
-
-        # Calculate MAE for this group if not already done
-        if group_key not in processed_groups:
-            mae_results = calculate_mae_metrics(d, h, int_bits, collected_outputs)
-            processed_groups.add(group_key)
-
-            # Print MAE results
-            if mae_results:
-                print(f"\nGroup: d={d}, h={h}, int_bits={int_bits}")
-                ground_truth_frac = max(k for k, v in mae_results.items() if v is None)
-                print(f"  Ground Truth: frac_bits={ground_truth_frac}")
-                for fb, mae in sorted(mae_results.items()):
-                    if mae is not None:
-                        print(f"  frac_bits={fb}: MAE = {mae:.8f}")
-
-        # Add MAE to the corresponding row
-        mae_results = calculate_mae_metrics(d, h, int_bits, collected_outputs)
-        mae_value = mae_results.get(frac_bits)
-        data[idx]["MAE"] = mae_value if mae_value is not None else 0
 
     # Save to CSV
     df = pd.DataFrame(data)
@@ -269,6 +251,12 @@ def main():
     print("Results saved to data.csv")
     print("=" * 60)
 
+    # Print summary of MAE results
+    print("\nMAE Summary:")
+    print("=" * 60)
+    for _, row in df.iterrows():
+        if row["MAE"] > 0:
+            print(f"d={row['D']}, h={row['H']}, int={row['int bits']}, frac={row['frac bits']}: MAE = {row['MAE']:.8f}")
 
 if __name__ == "__main__":
     main()

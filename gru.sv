@@ -1,13 +1,13 @@
 
 `timescale 1ns / 1ps
 // GRU Cell Implementation (Fixed-Point Qm.f)
-// d = 5 (input features), h = 4 (hidden units)
-// WIDTH = INT_WIDTH + FRAC_WIDTH + 1 (sign)
+// d = 5 (input features), h = 3 (hidden units)
+// WIDTH = INT_WIDTH + FRAC_WIDTH
 
 module gru #(
-    parameter int INT_WIDTH  = 5,
+    parameter int INT_WIDTH  = 4,
     parameter int FRAC_WIDTH = 5,
-    parameter int WIDTH      = INT_WIDTH + FRAC_WIDTH + 1
+    parameter int WIDTH      = INT_WIDTH + FRAC_WIDTH
 )(
     input  logic                     clk,
     input  logic                     reset,
@@ -19,30 +19,28 @@ module gru #(
     input  logic signed [WIDTH-1:0]  x_3,
     input  logic signed [WIDTH-1:0]  x_4,
 
-    // Previous hidden state (h=4)
+    // Previous hidden state (h=3)
         input  logic signed [WIDTH-1:0]  h_0,
     input  logic signed [WIDTH-1:0]  h_1,
     input  logic signed [WIDTH-1:0]  h_2,
-    input  logic signed [WIDTH-1:0]  h_3,
 
     // Input weights (h×d for each gate)
-    input  logic signed [WIDTH-1:0]  w_ir_0_0, w_ir_0_1, w_ir_0_2, w_ir_0_3, w_ir_0_4, w_ir_1_0, w_ir_1_1, w_ir_1_2, w_ir_1_3, w_ir_1_4, w_ir_2_0, w_ir_2_1, w_ir_2_2, w_ir_2_3, w_ir_2_4, w_ir_3_0, w_ir_3_1, w_ir_3_2, w_ir_3_3, w_ir_3_4,
-    input  logic signed [WIDTH-1:0]  w_iz_0_0, w_iz_0_1, w_iz_0_2, w_iz_0_3, w_iz_0_4, w_iz_1_0, w_iz_1_1, w_iz_1_2, w_iz_1_3, w_iz_1_4, w_iz_2_0, w_iz_2_1, w_iz_2_2, w_iz_2_3, w_iz_2_4, w_iz_3_0, w_iz_3_1, w_iz_3_2, w_iz_3_3, w_iz_3_4,
-    input  logic signed [WIDTH-1:0]  w_in_0_0, w_in_0_1, w_in_0_2, w_in_0_3, w_in_0_4, w_in_1_0, w_in_1_1, w_in_1_2, w_in_1_3, w_in_1_4, w_in_2_0, w_in_2_1, w_in_2_2, w_in_2_3, w_in_2_4, w_in_3_0, w_in_3_1, w_in_3_2, w_in_3_3, w_in_3_4,
+    input  logic signed [WIDTH-1:0]  w_ir_0_0, w_ir_0_1, w_ir_0_2, w_ir_0_3, w_ir_0_4, w_ir_1_0, w_ir_1_1, w_ir_1_2, w_ir_1_3, w_ir_1_4, w_ir_2_0, w_ir_2_1, w_ir_2_2, w_ir_2_3, w_ir_2_4,
+    input  logic signed [WIDTH-1:0]  w_iz_0_0, w_iz_0_1, w_iz_0_2, w_iz_0_3, w_iz_0_4, w_iz_1_0, w_iz_1_1, w_iz_1_2, w_iz_1_3, w_iz_1_4, w_iz_2_0, w_iz_2_1, w_iz_2_2, w_iz_2_3, w_iz_2_4,
+    input  logic signed [WIDTH-1:0]  w_in_0_0, w_in_0_1, w_in_0_2, w_in_0_3, w_in_0_4, w_in_1_0, w_in_1_1, w_in_1_2, w_in_1_3, w_in_1_4, w_in_2_0, w_in_2_1, w_in_2_2, w_in_2_3, w_in_2_4,
 
     // Recurrent weights (h×h for each gate)
-    input  logic signed [WIDTH-1:0]  w_hr_0_0, w_hr_0_1, w_hr_0_2, w_hr_0_3, w_hr_1_0, w_hr_1_1, w_hr_1_2, w_hr_1_3, w_hr_2_0, w_hr_2_1, w_hr_2_2, w_hr_2_3, w_hr_3_0, w_hr_3_1, w_hr_3_2, w_hr_3_3,
-    input  logic signed [WIDTH-1:0]  w_hz_0_0, w_hz_0_1, w_hz_0_2, w_hz_0_3, w_hz_1_0, w_hz_1_1, w_hz_1_2, w_hz_1_3, w_hz_2_0, w_hz_2_1, w_hz_2_2, w_hz_2_3, w_hz_3_0, w_hz_3_1, w_hz_3_2, w_hz_3_3,
-    input  logic signed [WIDTH-1:0]  w_hn_0_0, w_hn_0_1, w_hn_0_2, w_hn_0_3, w_hn_1_0, w_hn_1_1, w_hn_1_2, w_hn_1_3, w_hn_2_0, w_hn_2_1, w_hn_2_2, w_hn_2_3, w_hn_3_0, w_hn_3_1, w_hn_3_2, w_hn_3_3,
+    input  logic signed [WIDTH-1:0]  w_hr_0_0, w_hr_0_1, w_hr_0_2, w_hr_1_0, w_hr_1_1, w_hr_1_2, w_hr_2_0, w_hr_2_1, w_hr_2_2,
+    input  logic signed [WIDTH-1:0]  w_hz_0_0, w_hz_0_1, w_hz_0_2, w_hz_1_0, w_hz_1_1, w_hz_1_2, w_hz_2_0, w_hz_2_1, w_hz_2_2,
+    input  logic signed [WIDTH-1:0]  w_hn_0_0, w_hn_0_1, w_hn_0_2, w_hn_1_0, w_hn_1_1, w_hn_1_2, w_hn_2_0, w_hn_2_1, w_hn_2_2,
 
     // Biases (h for each gate type)
-    input  logic signed [WIDTH-1:0]  b_ir_0, b_ir_1, b_ir_2, b_ir_3, b_iz_0, b_iz_1, b_iz_2, b_iz_3, b_in_0, b_in_1, b_in_2, b_in_3, b_hr_0, b_hr_1, b_hr_2, b_hr_3, b_hz_0, b_hz_1, b_hz_2, b_hz_3, b_hn_0, b_hn_1, b_hn_2, b_hn_3,
+    input  logic signed [WIDTH-1:0]  b_ir_0, b_ir_1, b_ir_2, b_iz_0, b_iz_1, b_iz_2, b_in_0, b_in_1, b_in_2, b_hr_0, b_hr_1, b_hr_2, b_hz_0, b_hz_1, b_hz_2, b_hn_0, b_hn_1, b_hn_2,
 
-    // Outputs (h=4)
+    // Outputs (h=3)
         output logic signed [WIDTH-1:0]  y_0,
     output logic signed [WIDTH-1:0]  y_1,
-    output logic signed [WIDTH-1:0]  y_2,
-    output logic signed [WIDTH-1:0]  y_3
+    output logic signed [WIDTH-1:0]  y_2
 );
 
     // Helper functions
@@ -81,8 +79,8 @@ module gru #(
 
     // Reset gate: r_t = σ(W_ir*x + b_ir + W_hr*h + b_hr)
     // r gate computation
-    logic signed [WIDTH-1:0] r_sum[4];
-    logic signed [WIDTH-1:0] r_act[4];
+    logic signed [WIDTH-1:0] r_sum[3];
+    logic signed [WIDTH-1:0] r_act[3];
 
     always_comb begin
         // r_sum[0]
@@ -96,7 +94,6 @@ module gru #(
         r_sum[0] = sat_add(r_sum[0], fx_mult_round(w_hr_0_0, h_0));
         r_sum[0] = sat_add(r_sum[0], fx_mult_round(w_hr_0_1, h_1));
         r_sum[0] = sat_add(r_sum[0], fx_mult_round(w_hr_0_2, h_2));
-        r_sum[0] = sat_add(r_sum[0], fx_mult_round(w_hr_0_3, h_3));
 
         // r_sum[1]
         r_sum[1] = b_ir_1;
@@ -109,7 +106,6 @@ module gru #(
         r_sum[1] = sat_add(r_sum[1], fx_mult_round(w_hr_1_0, h_0));
         r_sum[1] = sat_add(r_sum[1], fx_mult_round(w_hr_1_1, h_1));
         r_sum[1] = sat_add(r_sum[1], fx_mult_round(w_hr_1_2, h_2));
-        r_sum[1] = sat_add(r_sum[1], fx_mult_round(w_hr_1_3, h_3));
 
         // r_sum[2]
         r_sum[2] = b_ir_2;
@@ -122,20 +118,6 @@ module gru #(
         r_sum[2] = sat_add(r_sum[2], fx_mult_round(w_hr_2_0, h_0));
         r_sum[2] = sat_add(r_sum[2], fx_mult_round(w_hr_2_1, h_1));
         r_sum[2] = sat_add(r_sum[2], fx_mult_round(w_hr_2_2, h_2));
-        r_sum[2] = sat_add(r_sum[2], fx_mult_round(w_hr_2_3, h_3));
-
-        // r_sum[3]
-        r_sum[3] = b_ir_3;
-        r_sum[3] = sat_add(r_sum[3], fx_mult_round(w_ir_3_0, x_0));
-        r_sum[3] = sat_add(r_sum[3], fx_mult_round(w_ir_3_1, x_1));
-        r_sum[3] = sat_add(r_sum[3], fx_mult_round(w_ir_3_2, x_2));
-        r_sum[3] = sat_add(r_sum[3], fx_mult_round(w_ir_3_3, x_3));
-        r_sum[3] = sat_add(r_sum[3], fx_mult_round(w_ir_3_4, x_4));
-        r_sum[3] = sat_add(r_sum[3], b_hr_3);
-        r_sum[3] = sat_add(r_sum[3], fx_mult_round(w_hr_3_0, h_0));
-        r_sum[3] = sat_add(r_sum[3], fx_mult_round(w_hr_3_1, h_1));
-        r_sum[3] = sat_add(r_sum[3], fx_mult_round(w_hr_3_2, h_2));
-        r_sum[3] = sat_add(r_sum[3], fx_mult_round(w_hr_3_3, h_3));
 
     end
 
@@ -148,14 +130,11 @@ module gru #(
     sigmoid #(.INT_WIDTH(INT_WIDTH), .FRAC_WIDTH(FRAC_WIDTH)) sigmoid_r2 (
         .reset(reset), .x(r_sum[2]), .y(r_act[2])
     );
-    sigmoid #(.INT_WIDTH(INT_WIDTH), .FRAC_WIDTH(FRAC_WIDTH)) sigmoid_r3 (
-        .reset(reset), .x(r_sum[3]), .y(r_act[3])
-    );
 
     // Update gate: z_t = σ(W_iz*x + b_iz + W_hz*h + b_hz)
     // z gate computation
-    logic signed [WIDTH-1:0] z_sum[4];
-    logic signed [WIDTH-1:0] z_act[4];
+    logic signed [WIDTH-1:0] z_sum[3];
+    logic signed [WIDTH-1:0] z_act[3];
 
     always_comb begin
         // z_sum[0]
@@ -169,7 +148,6 @@ module gru #(
         z_sum[0] = sat_add(z_sum[0], fx_mult_round(w_hz_0_0, h_0));
         z_sum[0] = sat_add(z_sum[0], fx_mult_round(w_hz_0_1, h_1));
         z_sum[0] = sat_add(z_sum[0], fx_mult_round(w_hz_0_2, h_2));
-        z_sum[0] = sat_add(z_sum[0], fx_mult_round(w_hz_0_3, h_3));
 
         // z_sum[1]
         z_sum[1] = b_iz_1;
@@ -182,7 +160,6 @@ module gru #(
         z_sum[1] = sat_add(z_sum[1], fx_mult_round(w_hz_1_0, h_0));
         z_sum[1] = sat_add(z_sum[1], fx_mult_round(w_hz_1_1, h_1));
         z_sum[1] = sat_add(z_sum[1], fx_mult_round(w_hz_1_2, h_2));
-        z_sum[1] = sat_add(z_sum[1], fx_mult_round(w_hz_1_3, h_3));
 
         // z_sum[2]
         z_sum[2] = b_iz_2;
@@ -195,20 +172,6 @@ module gru #(
         z_sum[2] = sat_add(z_sum[2], fx_mult_round(w_hz_2_0, h_0));
         z_sum[2] = sat_add(z_sum[2], fx_mult_round(w_hz_2_1, h_1));
         z_sum[2] = sat_add(z_sum[2], fx_mult_round(w_hz_2_2, h_2));
-        z_sum[2] = sat_add(z_sum[2], fx_mult_round(w_hz_2_3, h_3));
-
-        // z_sum[3]
-        z_sum[3] = b_iz_3;
-        z_sum[3] = sat_add(z_sum[3], fx_mult_round(w_iz_3_0, x_0));
-        z_sum[3] = sat_add(z_sum[3], fx_mult_round(w_iz_3_1, x_1));
-        z_sum[3] = sat_add(z_sum[3], fx_mult_round(w_iz_3_2, x_2));
-        z_sum[3] = sat_add(z_sum[3], fx_mult_round(w_iz_3_3, x_3));
-        z_sum[3] = sat_add(z_sum[3], fx_mult_round(w_iz_3_4, x_4));
-        z_sum[3] = sat_add(z_sum[3], b_hz_3);
-        z_sum[3] = sat_add(z_sum[3], fx_mult_round(w_hz_3_0, h_0));
-        z_sum[3] = sat_add(z_sum[3], fx_mult_round(w_hz_3_1, h_1));
-        z_sum[3] = sat_add(z_sum[3], fx_mult_round(w_hz_3_2, h_2));
-        z_sum[3] = sat_add(z_sum[3], fx_mult_round(w_hz_3_3, h_3));
 
     end
 
@@ -221,16 +184,13 @@ module gru #(
     sigmoid #(.INT_WIDTH(INT_WIDTH), .FRAC_WIDTH(FRAC_WIDTH)) sigmoid_z2 (
         .reset(reset), .x(z_sum[2]), .y(z_act[2])
     );
-    sigmoid #(.INT_WIDTH(INT_WIDTH), .FRAC_WIDTH(FRAC_WIDTH)) sigmoid_z3 (
-        .reset(reset), .x(z_sum[3]), .y(z_act[3])
-    );
 
     // Candidate hidden state: n_t = tanh(W_in*x + b_in + r_t ⊙ (W_hn*h + b_hn))
     // Candidate hidden state computation
-    logic signed [WIDTH-1:0] wn_h[4];
-    logic signed [WIDTH-1:0] gated_h[4];
-    logic signed [WIDTH-1:0] n_sum[4];
-    logic signed [WIDTH-1:0] n_act[4];
+    logic signed [WIDTH-1:0] wn_h[3];
+    logic signed [WIDTH-1:0] gated_h[3];
+    logic signed [WIDTH-1:0] n_sum[3];
+    logic signed [WIDTH-1:0] n_act[3];
 
     always_comb begin
         // wn_h[0] = W_hn*h + b_hn
@@ -238,7 +198,6 @@ module gru #(
         wn_h[0] = sat_add(wn_h[0], fx_mult_round(w_hn_0_0, h_0));
         wn_h[0] = sat_add(wn_h[0], fx_mult_round(w_hn_0_1, h_1));
         wn_h[0] = sat_add(wn_h[0], fx_mult_round(w_hn_0_2, h_2));
-        wn_h[0] = sat_add(wn_h[0], fx_mult_round(w_hn_0_3, h_3));
 
         // gated_h[0] = r_t ⊙ wn_h
         gated_h[0] = fx_mult_round(r_act[0], wn_h[0]);
@@ -257,7 +216,6 @@ module gru #(
         wn_h[1] = sat_add(wn_h[1], fx_mult_round(w_hn_1_0, h_0));
         wn_h[1] = sat_add(wn_h[1], fx_mult_round(w_hn_1_1, h_1));
         wn_h[1] = sat_add(wn_h[1], fx_mult_round(w_hn_1_2, h_2));
-        wn_h[1] = sat_add(wn_h[1], fx_mult_round(w_hn_1_3, h_3));
 
         // gated_h[1] = r_t ⊙ wn_h
         gated_h[1] = fx_mult_round(r_act[1], wn_h[1]);
@@ -276,7 +234,6 @@ module gru #(
         wn_h[2] = sat_add(wn_h[2], fx_mult_round(w_hn_2_0, h_0));
         wn_h[2] = sat_add(wn_h[2], fx_mult_round(w_hn_2_1, h_1));
         wn_h[2] = sat_add(wn_h[2], fx_mult_round(w_hn_2_2, h_2));
-        wn_h[2] = sat_add(wn_h[2], fx_mult_round(w_hn_2_3, h_3));
 
         // gated_h[2] = r_t ⊙ wn_h
         gated_h[2] = fx_mult_round(r_act[2], wn_h[2]);
@@ -290,25 +247,6 @@ module gru #(
         n_sum[2] = sat_add(n_sum[2], fx_mult_round(w_in_2_4, x_4));
         n_sum[2] = sat_add(n_sum[2], gated_h[2]);
 
-        // wn_h[3] = W_hn*h + b_hn
-        wn_h[3] = b_hn_3;
-        wn_h[3] = sat_add(wn_h[3], fx_mult_round(w_hn_3_0, h_0));
-        wn_h[3] = sat_add(wn_h[3], fx_mult_round(w_hn_3_1, h_1));
-        wn_h[3] = sat_add(wn_h[3], fx_mult_round(w_hn_3_2, h_2));
-        wn_h[3] = sat_add(wn_h[3], fx_mult_round(w_hn_3_3, h_3));
-
-        // gated_h[3] = r_t ⊙ wn_h
-        gated_h[3] = fx_mult_round(r_act[3], wn_h[3]);
-
-        // n_sum[3] = W_in*x + b_in + gated_h
-        n_sum[3] = b_in_3;
-        n_sum[3] = sat_add(n_sum[3], fx_mult_round(w_in_3_0, x_0));
-        n_sum[3] = sat_add(n_sum[3], fx_mult_round(w_in_3_1, x_1));
-        n_sum[3] = sat_add(n_sum[3], fx_mult_round(w_in_3_2, x_2));
-        n_sum[3] = sat_add(n_sum[3], fx_mult_round(w_in_3_3, x_3));
-        n_sum[3] = sat_add(n_sum[3], fx_mult_round(w_in_3_4, x_4));
-        n_sum[3] = sat_add(n_sum[3], gated_h[3]);
-
     end
 
     tanh #(.INT_WIDTH(INT_WIDTH), .FRAC_WIDTH(FRAC_WIDTH)) tanh_n0 (
@@ -320,15 +258,12 @@ module gru #(
     tanh #(.INT_WIDTH(INT_WIDTH), .FRAC_WIDTH(FRAC_WIDTH)) tanh_n2 (
          .reset(reset), .x(n_sum[2]), .y(n_act[2])
     );
-    tanh #(.INT_WIDTH(INT_WIDTH), .FRAC_WIDTH(FRAC_WIDTH)) tanh_n3 (
-         .reset(reset), .x(n_sum[3]), .y(n_act[3])
-    );
 
     // Final hidden state update
     // Hidden state update: h_t = (1 - z_t) ⊙ n_t + z_t ⊙ h_{t-1}
-    logic signed [WIDTH-1:0] one_minus_z[4];
-    logic signed [WIDTH-1:0] part1[4], part2[4];
-    logic signed [WIDTH-1:0] h_new[4];
+    logic signed [WIDTH-1:0] one_minus_z[3];
+    logic signed [WIDTH-1:0] part1[3], part2[3];
+    logic signed [WIDTH-1:0] h_new[3];
 
     always_comb begin
         one_minus_z[0] = sat_add(ONE, -z_act[0]);
@@ -343,10 +278,6 @@ module gru #(
         part1[2] = fx_mult_round(one_minus_z[2], n_act[2]);
         part2[2] = fx_mult_round(z_act[2], h_2);
         h_new[2] = sat_add(part1[2], part2[2]);
-        one_minus_z[3] = sat_add(ONE, -z_act[3]);
-        part1[3] = fx_mult_round(one_minus_z[3], n_act[3]);
-        part2[3] = fx_mult_round(z_act[3], h_3);
-        h_new[3] = sat_add(part1[3], part2[3]);
     end
 
     // Register outputs
@@ -355,12 +286,10 @@ module gru #(
             y_0 <= '0;
             y_1 <= '0;
             y_2 <= '0;
-            y_3 <= '0;
         end else begin
             y_0 <= h_new[0];
             y_1 <= h_new[1];
             y_2 <= h_new[2];
-            y_3 <= h_new[3];
         end
     end
 
