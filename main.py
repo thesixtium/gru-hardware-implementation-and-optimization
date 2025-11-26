@@ -9,6 +9,7 @@ from generate_gru_ground_truth import generate_gru_ground_truth
 from generate_gru_sv import generate_gru_sv
 from generate_gru_tb_sv import generate_gru_tb_sv
 from generate_top_level_sv import generate_top_level_sv
+import time
 
 # 🔧 CHANGE THIS to match your Vivado installation path
 VIVADO_PATH = r"C:\Xilinx\Vivado\2024.1\bin\vivado.bat"
@@ -123,10 +124,24 @@ def main():
         f.write("")
 
     count = 0
-    h_range    = [ 2, 3 ]
-    d_range    = [ 4, 5 ]
+    h_range    = [8, 4]# [ 2, 4, 8, 16, 32 ]
+
+    d_range    = [ 256, 4, 16, 64 ] # [ 4, 5, 8, 16, 20, 32, 50, 64, 256 ]
+    """
+    https://pmc-ncbi-nlm-nih-gov.ezproxy.lib.ucalgary.ca/articles/PMC11297882/
+    https://www.frontiersin.org/journals/neuroscience/articles/10.3389/fnins.2018.00227/full
+    https://www.mdpi.com/2079-9292/13/3/565
+    https://www-sciencedirect-com.ezproxy.lib.ucalgary.ca/science/article/pii/S1746809419300175
+    https://pmc-ncbi-nlm-nih-gov.ezproxy.lib.ucalgary.ca/articles/PMC6508950/
+    https://www-sciencedirect-com.ezproxy.lib.ucalgary.ca/science/article/pii/S1053811922008953
+    https://pmc-ncbi-nlm-nih-gov.ezproxy.lib.ucalgary.ca/articles/PMC8286886/
+    https://www.researchgate.net/publication/335505633_An_integrated_brain-machine_interface_platform_with_thousands_of_channels
+    https://pmc-ncbi-nlm-nih-gov.ezproxy.lib.ucalgary.ca/articles/PMC6508958/
+    https://www.medrxiv.org/content/medrxiv/early/2025/07/02/2025.07.02.25330310.full.pdf
+    """
+
     int_range  = [4]
-    frac_range = [3, 4, 5]
+    frac_range = [5]  # [3, 5, 8]
     total = len(h_range) * len(d_range) * len(int_range) * len(frac_range)
 
     for attempt in range(1):
@@ -138,13 +153,14 @@ def main():
 
                 for int_bits in int_range:
                     for frac_bits in frac_range:
+                        start_time = time.time()
                         count += 1
 
                         metrics = {}
 
                         with open(filename, "a") as f:
                             f.write(
-                                f"{round((count / total) * 100, 2)}\tattempt = {attempt}\tint_bits = {int_bits}\tfrac_bits = {frac_bits}\td = {d}\th = {h}\n")
+                                f"{round((count / total) * 100, 2)}\tattempt = {attempt}\tint_bits = {int_bits}\tfrac_bits = {frac_bits}\td = {d}\th = {h}")
 
                         try:
                             # Generate SV code
@@ -198,6 +214,9 @@ def main():
                                 metrics["frac bits"] = frac_bits
                                 metrics["MAE"] = mae_value if mae_value is not None else 0
                                 metrics["result"] = "success"
+                                metrics["Execution Time (m)"] = (time.time() - start_time) / 60
+                                with open(filename, "a") as f:
+                                    f.write(f'\t{metrics["Execution Time (m)"]}\n')
 
                                 for k, v in metrics.items():
                                     print(f"{k:20s}: {v}")
@@ -221,6 +240,9 @@ def main():
                                 metrics["frac bits"] = frac_bits
                                 metrics["MAE"] = mae_value if mae_value is not None else 0
                                 metrics["result"] = "no metrics"
+                                metrics["Execution Time (m)"] = (time.time() - start_time) / 60
+                                with open(filename, "a") as f:
+                                    f.write(f'\t{metrics["Execution Time (m)"]}\n')
                                 data.append(metrics)
                                 print("No metrics extracted - reports may not have been generated")
                             print("=" * 50)
@@ -242,6 +264,9 @@ def main():
                             metrics["frac bits"] = frac_bits
                             metrics["MAE"] = 0
                             metrics["result"] = f"exception: {e.args}"
+                            metrics["Execution Time (m)"] = (time.time() - start_time) / 60
+                            with open(filename, "a") as f:
+                                f.write(f'\t{metrics["Execution Time (m)"]}\n')
                             data.append(metrics)
 
     # Save to CSV

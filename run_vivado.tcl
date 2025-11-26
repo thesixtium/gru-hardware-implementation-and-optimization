@@ -1,6 +1,6 @@
 set proj_name gru_proj
 set proj_dir ./vivado_proj
-set part_name xc7a100tcsg324-1
+set part_name xcu250-figd2104-2L-e
 set top_module top_level
 set tb_module gru_tb
 

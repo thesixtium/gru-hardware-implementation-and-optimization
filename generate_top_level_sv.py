@@ -81,7 +81,7 @@ module top_level(
     // Parameters must match the generated GRU module parameters
     localparam int INT_WIDTH  = {INT_WIDTH};
     localparam int FRAC_WIDTH = {FRAC_WIDTH};
-    localparam int WIDTH      = INT_WIDTH + FRAC_WIDTH + 1;
+    localparam int WIDTH      = INT_WIDTH + FRAC_WIDTH;
 
     // --- Input signals (d={d}) ---
 {chr(10).join(input_decls)}
