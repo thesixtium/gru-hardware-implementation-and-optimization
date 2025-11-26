@@ -124,24 +124,10 @@ def main():
         f.write("")
 
     count = 0
-    h_range    = [8, 4]# [ 2, 4, 8, 16, 32 ]
-
-    d_range    = [ 256, 4, 16, 64 ] # [ 4, 5, 8, 16, 20, 32, 50, 64, 256 ]
-    """
-    https://pmc-ncbi-nlm-nih-gov.ezproxy.lib.ucalgary.ca/articles/PMC11297882/
-    https://www.frontiersin.org/journals/neuroscience/articles/10.3389/fnins.2018.00227/full
-    https://www.mdpi.com/2079-9292/13/3/565
-    https://www-sciencedirect-com.ezproxy.lib.ucalgary.ca/science/article/pii/S1746809419300175
-    https://pmc-ncbi-nlm-nih-gov.ezproxy.lib.ucalgary.ca/articles/PMC6508950/
-    https://www-sciencedirect-com.ezproxy.lib.ucalgary.ca/science/article/pii/S1053811922008953
-    https://pmc-ncbi-nlm-nih-gov.ezproxy.lib.ucalgary.ca/articles/PMC8286886/
-    https://www.researchgate.net/publication/335505633_An_integrated_brain-machine_interface_platform_with_thousands_of_channels
-    https://pmc-ncbi-nlm-nih-gov.ezproxy.lib.ucalgary.ca/articles/PMC6508958/
-    https://www.medrxiv.org/content/medrxiv/early/2025/07/02/2025.07.02.25330310.full.pdf
-    """
-
-    int_range  = [4]
-    frac_range = [5]  # [3, 5, 8]
+    h_range    = [ i for i in range( 4, 16 + 1 ) ]
+    d_range    = [ i for i in range( 6, 64 + 1 ) ]
+    int_range  = [ i for i in range( 3,  3 + 1 ) ]
+    frac_range = [ i for i in range( 1, 53 + 1 ) ]
     total = len(h_range) * len(d_range) * len(int_range) * len(frac_range)
 
     for attempt in range(1):
