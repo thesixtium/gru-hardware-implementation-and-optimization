@@ -165,10 +165,10 @@ def main():
         f.write("")
 
     count = 0
-    h_range    = [ i for i in range( 4, 16 + 1 ) ]
-    d_range    = [ i for i in range( 6, 64 + 1 ) ]
-    int_range  = [ i for i in range( 3,  3 + 1 ) ]
-    frac_range = [ i for i in range( 1, 53 + 1 ) ]
+    h_range    = [ 16, 12,  8,  6,  4 ]
+    d_range    = [ 64, 32, 16,  8,  4 ]
+    int_range  = [  3 ]
+    frac_range = [ 24, 21, 18, 15, 12,  9,  6,  3 ]
     total = len(h_range) * len(d_range) * len(int_range) * len(frac_range)
 
     for attempt in range(1):
@@ -187,7 +187,7 @@ def main():
 
                         with open(filename, "a") as f:
                             f.write(
-                                f"{round((count / total) * 100, 2)}\tattempt = {attempt}\tint_bits = {int_bits}\tfrac_bits = {frac_bits}\td = {d}\th = {h}")
+                                f"{round((count / total) * 100, 5)}\tattempt = {attempt}\tint_bits = {int_bits}\tfrac_bits = {frac_bits}\td = {d}\th = {h}")
 
                         try:
                             # Generate SV code
