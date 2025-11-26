@@ -82,6 +82,18 @@ def calculate_mae(array1, array2):
     return np.mean(np.abs(array1 - array2))
 
 
+def calculate_rmse(array1, array2):
+    """Calculate Mean Absolute Error between two arrays."""
+    if len(array1) != len(array2):
+        min_len = min(len(array1), len(array2))
+        print(
+            f"Warning: Arrays have different lengths ({len(array1)} vs {len(array2)}). Using first {min_len} elements.")
+        array1 = array1[:min_len]
+        array2 = array2[:min_len]
+
+    return np.sqrt(np.mean( (array1 - array2) ** 2) )
+
+
 def calculate_mae_against_ground_truth(d, h, int_bits, frac_bits, output_data):
     """
     Calculate MAE by comparing output_data against ground truth file.
@@ -108,6 +120,35 @@ def calculate_mae_against_ground_truth(d, h, int_bits, frac_bits, output_data):
         return mae
     except Exception as e:
         print(f"Error calculating MAE against ground truth: {e}")
+        return None
+
+
+def calculate_rmse_against_ground_truth(d, h, int_bits, frac_bits, output_data):
+    """
+    Calculate rmse by comparing output_data against ground truth file.
+
+    Args:
+        d: dimension parameter
+        h: hidden size parameter
+        int_bits: integer bits
+        frac_bits: fractional bits
+        output_data: numpy array of output values from hardware
+
+    Returns:
+        rmse value or None if ground truth file not found
+    """
+    ground_truth_filename = f'ground_truth_d{d}_h{h}.txt'
+
+    if not Path(ground_truth_filename).exists():
+        print(f"Warning: Ground truth file {ground_truth_filename} not found")
+        return None
+
+    try:
+        ground_truth_data = read_ground_truth_file(ground_truth_filename)
+        rmse = calculate_rmse(output_data, ground_truth_data)
+        return rmse
+    except Exception as e:
+        print(f"Error calculating rmse against ground truth: {e}")
         return None
 
 
@@ -175,6 +216,7 @@ def main():
                             # Read output file and calculate MAE against ground truth
                             output_filename = f"output_d{d}_h{h}_int{int_bits}_frac{frac_bits}.txt"
                             mae_value = None
+                            rmse_value = None
 
                             if Path(output_filename).exists():
                                 try:
@@ -183,6 +225,8 @@ def main():
 
                                     # Calculate MAE against ground truth
                                     mae_value = calculate_mae_against_ground_truth(d, h, int_bits, frac_bits,
+                                                                                   output_data)
+                                    rmse_value = calculate_rmse_against_ground_truth(d, h, int_bits, frac_bits,
                                                                                    output_data)
 
                                     if mae_value is not None:
@@ -199,10 +243,11 @@ def main():
                                 metrics["int bits"] = int_bits
                                 metrics["frac bits"] = frac_bits
                                 metrics["MAE"] = mae_value if mae_value is not None else 0
+                                metrics["RMSE"] = rmse_value if rmse_value is not None else 0
                                 metrics["result"] = "success"
                                 metrics["Execution Time (m)"] = (time.time() - start_time) / 60
                                 with open(filename, "a") as f:
-                                    f.write(f'\t{metrics["Execution Time (m)"]}\n')
+                                    f.write(f'\t{metrics["MAE"]}\t{metrics["RMSE"]}\t{metrics["Execution Time (m)"]}\n')
 
                                 for k, v in metrics.items():
                                     print(f"{k:20s}: {v}")
@@ -225,10 +270,11 @@ def main():
                                 metrics["int bits"] = int_bits
                                 metrics["frac bits"] = frac_bits
                                 metrics["MAE"] = mae_value if mae_value is not None else 0
+                                metrics["RMSE"] = rmse_value if rmse_value is not None else 0
                                 metrics["result"] = "no metrics"
                                 metrics["Execution Time (m)"] = (time.time() - start_time) / 60
                                 with open(filename, "a") as f:
-                                    f.write(f'\t{metrics["Execution Time (m)"]}\n')
+                                    f.write(f'\t{metrics["MAE"]}\t{metrics["RMSE"]}\t{metrics["Execution Time (m)"]}\n')
                                 data.append(metrics)
                                 print("No metrics extracted - reports may not have been generated")
                             print("=" * 50)
@@ -249,10 +295,11 @@ def main():
                             metrics["int bits"] = int_bits
                             metrics["frac bits"] = frac_bits
                             metrics["MAE"] = 0
+                            metrics["RMSE"] = 0
                             metrics["result"] = f"exception: {e.args}"
                             metrics["Execution Time (m)"] = (time.time() - start_time) / 60
                             with open(filename, "a") as f:
-                                f.write(f'\t{metrics["Execution Time (m)"]}\n')
+                                f.write(f'\t{metrics["MAE"]}\t{metrics["RMSE"]}\t{metrics["Execution Time (m)"]}\n')
                             data.append(metrics)
 
     # Save to CSV
