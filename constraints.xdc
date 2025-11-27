@@ -1,31 +1,33 @@
 # ================================================================
-# Constraints for top_level (XC7A100TCSG324-1)
+# Constraints for top_level (XCU250-FIGD2104-2L-E)
+# AUTO-PLACEMENT - Let Vivado choose pins
 # ================================================================
 
 # -------------------------
 # Clock definition (100 MHz)
 # -------------------------
-# Using E3 as the clock pin (typical for Nexys A7/Basys3 boards)
-set_property PACKAGE_PIN E3 [get_ports clk]
-set_property IOSTANDARD LVCMOS33 [get_ports clk]
-
-# Define the timing constraint for the clock (100 MHz = 10ns period)
+# NO PIN ASSIGNMENT - Vivado will auto-place
+set_property IOSTANDARD LVCMOS18 [get_ports clk]
 create_clock -period 10.000 -name sys_clk -waveform {0.000 5.000} [get_ports clk]
 
 # -------------------------
 # Reset signal (active high)
 # -------------------------
-# Using C12 as reset button pin
-set_property PACKAGE_PIN C12 [get_ports reset]
-set_property IOSTANDARD LVCMOS33 [get_ports reset]
+# NO PIN ASSIGNMENT - Vivado will auto-place
+set_property IOSTANDARD LVCMOS18 [get_ports reset]
+set_false_path -from [get_ports reset]
 
 # -------------------------
 # Configuration settings
 # -------------------------
-set_property CFGBVS VCCO [current_design]
-set_property CONFIG_VOLTAGE 3.3 [current_design]
+set_property CFGBVS GND [current_design]
+set_property CONFIG_VOLTAGE 1.8 [current_design]
+set_property BITSTREAM.CONFIG.OVERTEMPSHUTDOWN ENABLE [current_design]
+set_property BITSTREAM.GENERAL.COMPRESS TRUE [current_design]
 
-# -------------------------
-# Timing exceptions (optional)
-# -------------------------
-# Add false paths or multicycle paths if needed for your design
+# ================================================================
+# NOTE: Pins are not assigned - Vivado will auto-place them
+# After implementation, you can see which pins were chosen in:
+# - Implemented Design -> I/O Ports window
+# - Or export: File -> Export -> Export I/O Ports
+# ================================================================
