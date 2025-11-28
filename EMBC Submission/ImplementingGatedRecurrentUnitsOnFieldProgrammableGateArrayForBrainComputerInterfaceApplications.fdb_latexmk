@@ -1,5 +1,5 @@
 # Fdb version 4
-["bibtex ImplementingGatedRecurrentUnitsOnFieldProgrammableGateArrayForBrainComputerInterfaceApplications"] 0 "ImplementingGatedRecurrentUnitsOnFieldProgrammableGateArrayForBrainComputerInterfaceApplications.aux" "ImplementingGatedRecurrentUnitsOnFieldProgrammableGateArrayForBrainComputerInterfaceApplications.bbl" "ImplementingGatedRecurrentUnitsOnFieldProgrammableGateArrayForBrainComputerInterfaceApplications" 0 0
+["bibtex ImplementingGatedRecurrentUnitsOnFieldProgrammableGateArrayForBrainComputerInterfaceApplications"] 0 "ImplementingGatedRecurrentUnitsOnFieldProgrammableGateArrayForBrainComputerInterfaceApplications.aux" "ImplementingGatedRecurrentUnitsOnFieldProgrammableGateArrayForBrainComputerInterfaceApplications.bbl" "ImplementingGatedRecurrentUnitsOnFieldProgrammableGateArrayForBrainComputerInterfaceApplications" 1764290242.82531 0
   "C:/Users/ajrbe/AppData/Local/Programs/MiKTeX/bibtex/bst/ieeetran/IEEEtran.bst" 1440622569 57748 7c8250ecf02814ce6ddc0cdbb63df1dd ""
   "ImplementingGatedRecurrentUnitsOnFieldProgrammableGateArrayForBrainComputerInterfaceApplications.aux" 0 -1 0 "pdflatex"
   "LiteratureReview.bib" 0 -1 0 ""
@@ -7,7 +7,7 @@
   "ImplementingGatedRecurrentUnitsOnFieldProgrammableGateArrayForBrainComputerInterfaceApplications.bbl"
   "ImplementingGatedRecurrentUnitsOnFieldProgrammableGateArrayForBrainComputerInterfaceApplications.blg"
   (rewritten before read)
-["pdflatex"] 1764285533.28153 "c:/Users/ajrbe/Documents/School/Thesis/BCI/EMBC Submission/ImplementingGatedRecurrentUnitsOnFieldProgrammableGateArrayForBrainComputerInterfaceApplications.tex" "ImplementingGatedRecurrentUnitsOnFieldProgrammableGateArrayForBrainComputerInterfaceApplications.pdf" "ImplementingGatedRecurrentUnitsOnFieldProgrammableGateArrayForBrainComputerInterfaceApplications" 1764285534.4582 0
+["pdflatex"] 1764290241.77588 "c:/Users/ajrbe/Documents/School/Thesis/BCI/gru-hardware-implementation-and-optimization/EMBC Submission/ImplementingGatedRecurrentUnitsOnFieldProgrammableGateArrayForBrainComputerInterfaceApplications.tex" "ImplementingGatedRecurrentUnitsOnFieldProgrammableGateArrayForBrainComputerInterfaceApplications.pdf" "ImplementingGatedRecurrentUnitsOnFieldProgrammableGateArrayForBrainComputerInterfaceApplications" 1764290242.82598 0
   "C:/Users/ajrbe/AppData/Local/MiKTeX/fonts/map/pdftex/pdftex.map" 1761268182 82507 a9eef8696c92627b87e9975edea03b2a ""
   "C:/Users/ajrbe/AppData/Local/MiKTeX/miktex/data/le/pdftex/pdflatex.fmt" 1761086364 13321623 f81ef0e0f696d6e51926e6645b452cf8 ""
   "C:/Users/ajrbe/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/base/8r.enc" 1458473887 4993 80dc9bab7f31fb78a000ccfed0e27cab ""
@@ -41,6 +41,7 @@
   "C:/Users/ajrbe/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr7.pfb" 1247596667 32762 7fee39e011c23b3589931effd97b9702 ""
   "C:/Users/ajrbe/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy10.pfb" 1247596667 32569 5e5ddc8df908dea60932f3c484a54c0d ""
   "C:/Users/ajrbe/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy7.pfb" 1247596666 32716 08e384dc442464e7285e891af9f45947 ""
+  "C:/Users/ajrbe/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/symbols/msbm10.pfb" 1247596673 34694 870c211f62cb72718a00e353f14f254d ""
   "C:/Users/ajrbe/AppData/Local/Programs/MiKTeX/fonts/type1/urw/times/utmb8a.pfb" 1136878548 44729 fea0975e20ec51c992338362f05f1146 ""
   "C:/Users/ajrbe/AppData/Local/Programs/MiKTeX/fonts/type1/urw/times/utmbi8a.pfb" 1136878548 44656 0cbca70e0534538582128f6b54593cca ""
   "C:/Users/ajrbe/AppData/Local/Programs/MiKTeX/fonts/type1/urw/times/utmr8a.pfb" 1136878548 46026 687528a208fbfc1f00832bb96cccebbb ""
@@ -78,10 +79,10 @@
   "C:/Users/ajrbe/AppData/Local/Programs/MiKTeX/tex/latex/psnfss/ot1ptm.fd" 1585253778 1007 15056f4a61917ceed3a44e4ac11fcc52 ""
   "C:/Users/ajrbe/AppData/Local/Programs/MiKTeX/tex/latex/xcolor/xcolor.sty" 1729265222 55384 b454dec21c2d9f45ec0b793f0995b992 ""
   "IEEEtran.cls" 1761085484 288304 5b2e4fa15b0f7eabb840ebf67df4c0f7 ""
-  "ImplementingGatedRecurrentUnitsOnFieldProgrammableGateArrayForBrainComputerInterfaceApplications.aux" 1764285533 818 2c4ee6106b5ccbeb7f7771b371414bed "pdflatex"
+  "ImplementingGatedRecurrentUnitsOnFieldProgrammableGateArrayForBrainComputerInterfaceApplications.aux" 1764290242 1682 a0c27219a1d5608b64c6cb9640376f19 "pdflatex"
   "ImplementingGatedRecurrentUnitsOnFieldProgrammableGateArrayForBrainComputerInterfaceApplications.bbl" 0 -1 0 "bibtex ImplementingGatedRecurrentUnitsOnFieldProgrammableGateArrayForBrainComputerInterfaceApplications"
-  "ImplementingGatedRecurrentUnitsOnFieldProgrammableGateArrayForBrainComputerInterfaceApplications.tex" 1764285531 18341 d4723ec014e9d73925bd620da4afcd6f ""
-  "c:/Users/ajrbe/Documents/School/Thesis/BCI/EMBC Submission/ImplementingGatedRecurrentUnitsOnFieldProgrammableGateArrayForBrainComputerInterfaceApplications.tex" 1764285531 18341 d4723ec014e9d73925bd620da4afcd6f ""
+  "ImplementingGatedRecurrentUnitsOnFieldProgrammableGateArrayForBrainComputerInterfaceApplications.tex" 1764290240 15344 a108d5ee8028a3421151e6b8846906c2 ""
+  "c:/Users/ajrbe/Documents/School/Thesis/BCI/gru-hardware-implementation-and-optimization/EMBC Submission/ImplementingGatedRecurrentUnitsOnFieldProgrammableGateArrayForBrainComputerInterfaceApplications.tex" 1764290240 15344 a108d5ee8028a3421151e6b8846906c2 ""
   (generated)
   "ImplementingGatedRecurrentUnitsOnFieldProgrammableGateArrayForBrainComputerInterfaceApplications.aux"
   "ImplementingGatedRecurrentUnitsOnFieldProgrammableGateArrayForBrainComputerInterfaceApplications.log"

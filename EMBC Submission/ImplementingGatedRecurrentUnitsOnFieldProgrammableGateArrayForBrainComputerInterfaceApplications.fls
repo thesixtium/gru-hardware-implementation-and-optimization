@@ -1,6 +1,6 @@
-PWD c:\Users\ajrbe\Documents\School\Thesis\BCI\EMBC Submission
+PWD c:\Users\ajrbe\Documents\School\Thesis\BCI\gru-hardware-implementation-and-optimization\EMBC Submission
 INPUT C:\Users\ajrbe\AppData\Local\MiKTeX\miktex\data\le\pdftex\pdflatex.fmt
-INPUT c:\Users\ajrbe\Documents\School\Thesis\BCI\EMBC Submission\ImplementingGatedRecurrentUnitsOnFieldProgrammableGateArrayForBrainComputerInterfaceApplications.tex
+INPUT c:\Users\ajrbe\Documents\School\Thesis\BCI\gru-hardware-implementation-and-optimization\EMBC Submission\ImplementingGatedRecurrentUnitsOnFieldProgrammableGateArrayForBrainComputerInterfaceApplications.tex
 OUTPUT ImplementingGatedRecurrentUnitsOnFieldProgrammableGateArrayForBrainComputerInterfaceApplications.log
 INPUT .\IEEEtran.cls
 INPUT IEEEtran.cls
@@ -170,6 +170,8 @@ INPUT C:\Users\ajrbe\AppData\Local\Programs\MiKTeX\fonts\type1\public\amsfonts\c
 INPUT C:\Users\ajrbe\AppData\Local\Programs\MiKTeX\fonts\type1\public\amsfonts\cm\cmsy10.pfb
 INPUT C:\Users\ajrbe\AppData\Local\Programs\MiKTeX\fonts\type1\public\amsfonts\cm\cmsy7.pfb
 INPUT C:\Users\ajrbe\AppData\Local\Programs\MiKTeX\fonts\type1\public\amsfonts\cm\cmsy7.pfb
+INPUT C:\Users\ajrbe\AppData\Local\Programs\MiKTeX\fonts\type1\public\amsfonts\symbols\msbm10.pfb
+INPUT C:\Users\ajrbe\AppData\Local\Programs\MiKTeX\fonts\type1\public\amsfonts\symbols\msbm10.pfb
 INPUT C:\Users\ajrbe\AppData\Local\Programs\MiKTeX\fonts\type1\urw\times\utmb8a.pfb
 INPUT C:\Users\ajrbe\AppData\Local\Programs\MiKTeX\fonts\type1\urw\times\utmb8a.pfb
 INPUT C:\Users\ajrbe\AppData\Local\Programs\MiKTeX\fonts\type1\urw\times\utmbi8a.pfb
