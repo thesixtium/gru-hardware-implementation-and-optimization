@@ -165,10 +165,10 @@ def main():
         f.write("")
 
     count = 0
-    h_range    = [ 16, 12,  8,  6,  4 ]
-    d_range    = [ 64, 32, 16,  8,  4 ]
-    int_range  = [  3 ]
-    frac_range = [ 24, 21, 18, 15, 12,  9,  6,  3 ]
+    h_range    = [ 8, 6, 4 ]  # [ 16, 12,  8,  6,  4 ]
+    d_range    = [ 16, 8, 4 ]  # [ 64, 32, 16,  8,  4 ]
+    int_range  = [  6 ]
+    frac_range = [ 14, 9, 4 ]  # [ 24, 19, 14,  9,  4 ]
     total = len(h_range) * len(d_range) * len(int_range) * len(frac_range)
 
     for attempt in range(1):
