@@ -67,9 +67,9 @@ interface gated recurrent unit machine learning models deployed on field-program
 
 The primary objective of this research is to systematically characterize how different design parameters affect the 
 performance metrics of hardware-implemented GRUs. By quantifying the trade-offs between competing design goals, this 
-work aims to provide actionable guidance for designing optimal FPGA-based GRUs for BCI systems. Different parameter 
-combinations are hypothesized to yield varying trade-offs, and understanding these relationships is crucial for 
-determining the best GRU design for specific application constraints.
+work aims to provide actionable guidance for designing optimal FPGA-based GRUs for BCI systems. Understanding the 
+relationships between parameters is crucial for determining the best GRU design for specific application 
+constraints.
 
 
 \section{Background and Related Work}
@@ -82,12 +82,12 @@ RNNs suffer from vanishing and exploding gradient problems, making them struggle
 To address this, Hochreiter et al. proposed Long Short-Term Memory (LSTM) units, which use gates to selectively retain, 
 update, and output information [6].
 
-Gated Recurrent Units (GRUs), proposed in 2014 by Cho et al., are a type of hidden unit similar to LSTM units but 
-computationally simpler and more efficient. GRUs use only two gates—a reset gate and an update gate—to control 
-information flow through the hidden state, allowing them to capture dependencies over multiple time scales [7]. 
-Chung et al. demonstrated that GRUs and LSTMs achieve comparable performance on multiple datasets [9], while Rivas et 
-al. found their performance comparable over several evaluation metrics including Root Mean Square Error (RMSE), Mean 
-Square Error (MSE), and Mean Average Error (MAE) [25].
+GRUs, proposed by Cho et al., are a type of hidden unit similar to LSTM units but 
+computationally simpler and more efficient. GRUs use only two gates, compared to LSTMs using four gates, to control 
+information flow through the hidden state allowing them to capture dependencies over multiple time scales [7]. 
+Chung et al. demonstrated that GRUs and LSTMs achieve comparable performance on multiple datasets [9]. Rivas et 
+al. found GRU's and LSTM's performance comparable over several evaluation metrics including Root Mean Square Error (RMSE), 
+Mean Square Error (MSE), and Mean Average Error (MAE) [25].
 
 In modern implementations, GRUs are calculated using Equations~\eqref{eq:reset_gate}--\eqref{eq:hidden_state} [30-31].
 
@@ -98,14 +98,15 @@ z_t &= \sigma(W_{iz} x_t + b_{iz} + W_{hz} h_{t-1} + b_{hz}) \label{eq:update_ga
 h_t &= (1-z_t) \odot n_t + z_t \odot h_{t-1} \label{eq:hidden_state}
 \end{align}
 
-$r_t$ (Equation~\eqref{eq:reset_gate}) is the reset gate, $n_t$ (Equation~\eqref{eq:candidate}) is the candidate 
-hidden state, $z_t$ (Equation~\eqref{eq:update_gate}) is the update gate, and $h_t$ (Equation~\eqref{eq:hidden_state}) 
-is the final hidden state. The variables are defined as follows: $x_t \in \mathbb{R}^d$ is the input vector at timestep 
-$t$, $h_{t-1} \in \mathbb{R}^h$ is the previous hidden state, $d$ is the input feature dimension, $h$ is the number 
-of hidden units, $W_{ir}, W_{iz}, W_{in} \in \mathbb{R}^{h \times d}$ are input-to-hidden weight matrices, $W_{hr}, 
-W_{hz}, W_{hn} \in \mathbb{R}^{h \times h}$ are hidden-to-hidden weight matrices, $b_{ir}, b_{iz}, b_{in}, b_{hr}, 
-b_{hz}, b_{hn} \in \mathbb{R}^h$ are bias vectors, $\sigma$ denotes the sigmoid activation function, $\tanh$ denotes 
-the hyperbolic tangent function, and $\odot$ denotes the Hadamard (element-wise) product.
+$r_t$ (defined by Equation~\eqref{eq:reset_gate}) is the reset gate, $n_t$ (defined by Equation~\eqref{eq:candidate}) 
+is the candidate hidden state, $z_t$ (defined by Equation~\eqref{eq:update_gate}) is the update gate, and $h_t$ (defined 
+by Equation~\eqref{eq:hidden_state}) is the final hidden state. The variables are defined as follows: $d$ is the input 
+feature dimension, $h$ is the number of hidden units, $x_t \in \mathbb{R}^d$ is the input vector at timestep $t$, 
+$h_{t-1} \in \mathbb{R}^h$ is the previous hidden state, $W_{ir}, W_{iz}, W_{in} \in \mathbb{R}^{h \times d}$ are 
+input-to-hidden weight matrices, $W_{hr}, W_{hz}, W_{hn} \in \mathbb{R}^{h \times h}$ are hidden-to-hidden weight 
+matrices, $b_{ir}, b_{iz}, b_{in}, b_{hr}, b_{hz}, b_{hn} \in \mathbb{R}^h$ are bias vectors, $\sigma$ denotes the 
+sigmoid activation function, $\tanh$ denotes the hyperbolic tangent function, and $\odot$ denotes the Hadamard (element-wise) 
+product.
 
 \subsection{FPGA-Based Neural Network Implementations}
 
@@ -115,11 +116,10 @@ deployment close to users [12-14]. In 2021, Cai et al. implemented an epilepsy d
 demonstrating that FPGA-based BCI systems tend to have higher accuracy than software-based implementations while 
 achieving improved classification performance and reduced power consumption [18].
 
-Despite GRUs having a smaller design architecture and fewer computations compared to LSTMs, the first hardware 
-implementation of a GRU was not presented until 2021 by Zaghoul et al. [11]. As shown in their work, the GRU hardware 
-implementation used 50\% fewer Buffers, 42\% fewer Digital Signal Processors (DSPs), 39\% less Block RAM, and 35\% fewer 
-Slice Look-Up Tables (LUTs) compared to an LSTM implementation. Additionally, the GRU had higher inference performance 
-per watt and lower execution time [11]. This implementation was later refined by Rizwan et al. in 2025 [33].
+As shown by Zaghoul et al., the GRU hardware implementation used 50\% fewer Buffers, 42\% fewer Digital Signal Processors 
+(DSPs), 39\% less Block RAM (BRAM), and 35\% fewer Slice Look-Up Tables (LUTs) compared to an LSTM implementation [11]. 
+Additionally, the GRU had higher inference performance per Watt and lower execution time [11]. This implementation was later 
+refined by Rizwan et al. in 2025 [33].
 
 The hardware implementation architecture consists of two primary modules: the gate module and the output module. The 
 gate module implements the reset gate, update gate, and activation functions using two Multiply-and-Accumulate (MAC) 
@@ -131,43 +131,16 @@ products and summation to generate the final hidden state [11].
 
 \subsection{Experimental Design}
 
-The experimental system comprises several interconnected Python modules and a TCL script that automate the entire 
+The experimental system comprises several interconnected Python modules and a Tcl script that automate the entire 
 design, implementation, and analysis pipeline. This automated framework enables systematic exploration of the GRU 
 design space by programmatically generating hardware descriptions, orchestrating FPGA toolchain execution, and 
 extracting performance metrics.
 
-Python scripts automatically generate SystemVerilog code for the GRU module, top-level wrapper, and testbench based on 
-specified parameters. A TCL script orchestrates the Xilinx Vivado tool to perform simulation, synthesis, optimization, 
+Python scripts automatically generate SystemVerilog code for the GRU module, top-level wrapper, and a testbench based on 
+specified parameters. A Tcl script orchestrates the Xilinx Vivado tool to perform simulation, synthesis, optimization, 
 placement, and routing while generating detailed reports. Additional Python scripts parse Vivado-generated reports and 
 simulation outputs to extract hardware metrics and calculate the accuracy measurements Mean Absolute Error (MAE) and 
 Root Mean Squared Error (RMSE).
-
-\subsection{Trial Execution Flow}
-
-Each experimental trial follows a structured sequence to ensure consistency:
-\begin{enumerate}
-\item RTL Generation: An untested combination of INT\_WIDTH, FRAC\_WIDTH, $d$, and $h$ is 
-selected from the design space and used as input parameters for RTL generation. Three SystemVerilog modules are 
-automatically generated: (1) the GRU module implementing Equations~\eqref{eq:reset_gate}--\eqref{eq:hidden_state}, 
-(2) a wrapper module that instantiates the GRU with synthesis preservation directives to prevent logic optimization, 
-and (3) a testbench with 100 deterministic test vectors using a BCI motor imagery dataset for reproducible accuracy 
-evaluation.
-
-\item Vivado Execution: A Vivado project targeting the Artix-7 FPGA (XXX) is created and all generated SystemVerilog 
-files are added to it. Synthesis is executed with resource and timing optimizations, placement and routing is performed, 
-and detailed reports on resource utilization, timing analysis, and power consumption are generated. Finally, a simulation 
-is ran using the generated testbench to produce a simulated output.
-
-\item Data Capture: The detailed reports are parsed to extract hardware metrics including LUTs, registers, BRAMs, DSPs, 
-WNS, and power consumption. 
-
-\item Accuracy Calculation: Each simulated output is compared to a ground truth calculated using floating point numbers 
-using MAE and MSE to determine GRU implementation accuracy.
-
-\end{enumerate}
-
-This structured flow ensures that each trial is executed identically and carryover effects are eliminated through complete 
-regeneration of all files.
 
 
 \subsection{Design Space and Variables}
@@ -231,6 +204,35 @@ differences result from architectural parameters rather than weight variation.
 \item Generation Scripts: SystemVerilog generation logic remains constant across all parameter combinations, varying only 
 the parametric inputs.
 \end{itemize}
+
+
+\subsection{Trial Execution Flow}
+
+Each experimental trial follows a structured sequence to ensure consistency:
+\begin{enumerate}
+\item RTL Generation: An untested combination of INT\_WIDTH, FRAC\_WIDTH, $d$, and $h$ is 
+selected from the design space and used as input parameters for RTL generation. Three SystemVerilog modules are 
+automatically generated: (1) the GRU module implementing Equations~\eqref{eq:reset_gate}--\eqref{eq:hidden_state}, 
+(2) a wrapper module that instantiates the GRU with synthesis preservation directives to prevent logic optimization, 
+and (3) a testbench with 100 deterministic test vectors using a BCI motor imagery dataset for reproducible accuracy 
+evaluation.
+
+\item Vivado Execution: A Vivado project targeting the Artix-7 FPGA (XXX) is created and all generated SystemVerilog 
+files are added to it. Synthesis is executed with resource and timing optimizations, placement and routing is performed, 
+and detailed reports on resource utilization, timing analysis, and power consumption are generated. Finally, a simulation 
+is run using the generated testbench to produce a simulated output.
+
+\item Data Capture: The detailed reports are parsed to extract hardware metrics including LUTs, registers, BRAMs, DSPs, 
+WNS, and power consumption. 
+
+\item Accuracy Calculation: Each simulated output is compared to a ground truth calculated using floating point numbers 
+using MAE and MSE to determine GRU implementation accuracy.
+
+\end{enumerate}
+
+This structured flow ensures that each trial is executed identically and carryover effects are eliminated through complete 
+regeneration of all files.
+
 
 
 \section{Results and Analysis}
