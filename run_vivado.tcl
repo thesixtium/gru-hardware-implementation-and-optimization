@@ -11,16 +11,16 @@ if { [file exists $proj_dir] } {
 create_project $proj_name $proj_dir -part $part_name
 
 # Add files
-add_files C:/Users/ajrbe/Documents/School/Thesis/BCI/Code/top_level.sv
-add_files C:/Users/ajrbe/Documents/School/Thesis/BCI/Code/gru.sv
-add_files C:/Users/ajrbe/Documents/School/Thesis/BCI/Code/tanh.sv
-add_files C:/Users/ajrbe/Documents/School/Thesis/BCI/Code/sigmoid.sv
-add_files C:/Users/ajrbe/Documents/School/Thesis/BCI/Code/mult.sv
-add_files -fileset sim_1 C:/Users/ajrbe/Documents/School/Thesis/BCI/Code/gru_tb.sv
-read_xdc C:/Users/ajrbe/Documents/School/Thesis/BCI/Code/constraints.xdc
+add_files /home/lex/Documents/git/gru-hardware-implementation-and-optimization/top_level.sv
+add_files /home/lex/Documents/git/gru-hardware-implementation-and-optimization/gru.sv
+add_files /home/lex/Documents/git/gru-hardware-implementation-and-optimization/tanh.sv
+add_files /home/lex/Documents/git/gru-hardware-implementation-and-optimization/sigmoid.sv
+add_files /home/lex/Documents/git/gru-hardware-implementation-and-optimization/mult.sv
+add_files -fileset sim_1 /home/lex/Documents/git/gru-hardware-implementation-and-optimization/gru_tb.sv
+read_xdc /home/lex/Documents/git/gru-hardware-implementation-and-optimization/constraints.xdc
 
 # Set all .sv files as SystemVerilog
-foreach sv_file [glob -nocomplain C:/Users/ajrbe/Documents/School/Thesis/BCI/Code/*.sv] {
+foreach sv_file [glob -nocomplain /home/lex/Documents/git/gru-hardware-implementation-and-optimization/*.sv] {
     if {[file tail $sv_file] ne "gru_tb.sv"} {
         set_property file_type {SystemVerilog} [get_files $sv_file]
     }
