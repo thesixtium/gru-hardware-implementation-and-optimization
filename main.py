@@ -12,7 +12,8 @@ from generate_top_level_sv import generate_top_level_sv
 import time
 
 # 🔧 CHANGE THIS to match your Vivado installation path
-VIVADO_PATH = r"C:\Xilinx\Vivado\2024.1\bin\vivado.bat"
+# VIVADO_PATH = r"C:\Xilinx\Vivado\2024.1\bin\vivado.bat"
+VIVADO_PATH = r"/tools/Xilinx/Vivado/2024.1/bin/vivado"
 
 
 def parse_q_format(binary_str, int_bits, frac_bits):

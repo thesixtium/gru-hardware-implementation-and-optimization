@@ -1,0 +1,103 @@
+#-----------------------------------------------------------
+# Vivado v2024.1 (64-bit)
+# SW Build 5076996 on Wed May 22 18:36:09 MDT 2024
+# IP Build 5075265 on Wed May 22 21:45:21 MDT 2024
+# SharedData Build 5076995 on Wed May 22 18:29:18 MDT 2024
+# Start of session at: Wed Dec  3 20:16:23 2025
+# Process ID: 22510
+# Current directory: /home/lex/Documents/git/gru-hardware-implementation-and-optimization
+# Command line: vivado -mode batch -source run_vivado.tcl
+# Log file: /home/lex/Documents/git/gru-hardware-implementation-and-optimization/vivado.log
+# Journal file: /home/lex/Documents/git/gru-hardware-implementation-and-optimization/vivado.jou
+# Running On        :Toothless
+# Platform          :Ubuntu
+# Operating System  :Ubuntu 20.04.6 LTS
+# Processor Detail  :AMD Ryzen 5 7600X 6-Core Processor
+# CPU Frequency     :2969.585 MHz
+# CPU Physical cores:6
+# CPU Logical cores :12
+# Host memory       :32695 MB
+# Swap memory       :2147 MB
+# Total Virtual     :34842 MB
+# Available Virtual :27678 MB
+#-----------------------------------------------------------
+source run_vivado.tcl
+# set proj_name gru_proj
+# set proj_dir ./vivado_proj
+# set part_name xcu250-figd2104-2L-e
+# set top_module top_level
+# set tb_module gru_tb
+# if { [file exists $proj_dir] } {
+#     file delete -force $proj_dir
+# }
+# create_project $proj_name $proj_dir -part $part_name
+# add_files /home/lex/Documents/git/gru-hardware-implementation-and-optimization/top_level.sv
+# add_files /home/lex/Documents/git/gru-hardware-implementation-and-optimization/gru.sv
+# add_files /home/lex/Documents/git/gru-hardware-implementation-and-optimization/tanh.sv
+# add_files /home/lex/Documents/git/gru-hardware-implementation-and-optimization/sigmoid.sv
+# add_files /home/lex/Documents/git/gru-hardware-implementation-and-optimization/mult.sv
+# add_files -fileset sim_1 /home/lex/Documents/git/gru-hardware-implementation-and-optimization/gru_tb.sv
+# read_xdc /home/lex/Documents/git/gru-hardware-implementation-and-optimization/constraints.xdc
+# foreach sv_file [glob -nocomplain /home/lex/Documents/git/gru-hardware-implementation-and-optimization/*.sv] {
+#     if {[file tail $sv_file] ne "gru_tb.sv"} {
+#         set_property file_type {SystemVerilog} [get_files $sv_file]
+#     }
+# }
+# set_property top $top_module [current_fileset]
+# update_compile_order -fileset sources_1
+# set_property top $tb_module [get_filesets sim_1]
+# update_compile_order -fileset sim_1
+# set_property -name {xsim.simulate.runtime} -value {1000ns} -objects [get_filesets sim_1]
+# launch_simulation -mode behavioral
+Command: launch_simulation  -mode behavioral
+INFO: [Vivado 12-12493] Simulation top is 'gru_tb'
+INFO: [Vivado 12-5682] Launching behavioral simulation in '/home/lex/Documents/git/gru-hardware-implementation-and-optimization/vivado_proj/gru_proj.sim/sim_1/behav/xsim'
+INFO: [SIM-utils-51] Simulation object is 'sim_1'
+INFO: [SIM-utils-72] Using boost library from '/tools/Xilinx/Vivado/2024.1/tps/boost_1_72_0'
+INFO: [SIM-utils-54] Inspecting design source files for 'gru_tb' in fileset 'sim_1'...
+INFO: [USF-XSim-97] Finding global include files...
+INFO: [USF-XSim-98] Fetching design files from 'sim_1'...
+INFO: [USF-XSim-2] XSim::Compile design
+INFO: [USF-XSim-61] Executing 'COMPILE and ANALYZE' step in '/home/lex/Documents/git/gru-hardware-implementation-and-optimization/vivado_proj/gru_proj.sim/sim_1/behav/xsim'
+xvlog --incr --relax -L uvm -prj gru_tb_vlog.prj
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "/home/lex/Documents/git/gru-hardware-implementation-and-optimization/gru.sv" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module gru
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "/home/lex/Documents/git/gru-hardware-implementation-and-optimization/mult.sv" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module mult
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "/home/lex/Documents/git/gru-hardware-implementation-and-optimization/sigmoid.sv" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module sigmoid
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "/home/lex/Documents/git/gru-hardware-implementation-and-optimization/tanh.sv" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module tanh
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "/home/lex/Documents/git/gru-hardware-implementation-and-optimization/gru_tb.sv" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module gru_tb
+INFO: [VRFC 10-2263] Analyzing Verilog file "/home/lex/Documents/git/gru-hardware-implementation-and-optimization/vivado_proj/gru_proj.sim/sim_1/behav/xsim/glbl.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module glbl
+Waiting for jobs to finish...
+No pending jobs, compilation finished.
+INFO: [USF-XSim-69] 'compile' step finished in '1' seconds
+INFO: [USF-XSim-3] XSim::Elaborate design
+INFO: [USF-XSim-61] Executing 'ELABORATE' step in '/home/lex/Documents/git/gru-hardware-implementation-and-optimization/vivado_proj/gru_proj.sim/sim_1/behav/xsim'
+xelab --incr --debug typical --relax --mt 8 -L xil_defaultlib -L uvm -L unisims_ver -L unimacro_ver -L secureip --snapshot gru_tb_behav xil_defaultlib.gru_tb xil_defaultlib.glbl -log elaborate.log
+Vivado Simulator v2024.1
+Copyright 1986-2022 Xilinx, Inc. All Rights Reserved.
+Copyright 2022-2024 Advanced Micro Devices, Inc. All Rights Reserved.
+Running: /tools/Xilinx/Vivado/2024.1/bin/unwrapped/lnx64.o/xelab --incr --debug typical --relax --mt 8 -L xil_defaultlib -L uvm -L unisims_ver -L unimacro_ver -L secureip --snapshot gru_tb_behav xil_defaultlib.gru_tb xil_defaultlib.glbl -log elaborate.log 
+Using 8 slave threads.
+Starting static elaboration
+Pass Through NonSizing Optimizer
+Completed static elaboration
+Starting simulation data flow analysis
+Completed simulation data flow analysis
+Time Resolution for simulation is 1ps
+ERROR: [XSIM 43-3388] /usr/bin/gcc not found, please install GCC for your Linux distribution.
+ERROR: [XSIM 43-3915] Encountered a fatal error. Cannot continue. Exiting... 
+INFO: [USF-XSim-69] 'elaborate' step finished in '1' seconds
+INFO: [USF-XSim-99] Step results log file:'/home/lex/Documents/git/gru-hardware-implementation-and-optimization/vivado_proj/gru_proj.sim/sim_1/behav/xsim/elaborate.log'
+ERROR: [USF-XSim-62] 'elaborate' step failed with error(s). Please check the Tcl console output or '/home/lex/Documents/git/gru-hardware-implementation-and-optimization/vivado_proj/gru_proj.sim/sim_1/behav/xsim/elaborate.log' file for more information.
+ERROR: [Vivado 12-4473] Detected error while running simulation. Please correct the issue and retry this operation.
+ERROR: [Common 17-39] 'launch_simulation' failed due to earlier errors.
+
+    while executing
+"launch_simulation -mode behavioral"
+    (file "run_vivado.tcl" line 41)
+INFO: [Common 17-206] Exiting Vivado at Wed Dec  3 20:16:31 2025...

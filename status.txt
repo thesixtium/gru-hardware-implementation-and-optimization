@@ -1,0 +1,1 @@
+3.7037	attempt = 0	int_bits = 6	frac_bits = 14	d = 16	h = 8

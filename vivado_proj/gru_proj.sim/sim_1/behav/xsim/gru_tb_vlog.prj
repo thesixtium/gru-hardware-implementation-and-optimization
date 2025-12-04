@@ -1,0 +1,13 @@
+# compile verilog/system verilog design source files
+sv xil_defaultlib  \
+"../../../../../gru.sv" \
+"../../../../../mult.sv" \
+"../../../../../sigmoid.sv" \
+"../../../../../tanh.sv" \
+"../../../../../gru_tb.sv" \
+
+# compile glbl module
+verilog xil_defaultlib "glbl.v"
+
+# Do not sort compile order
+nosort
