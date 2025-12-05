@@ -392,11 +392,53 @@ and power consumption.
 
 \section{Conclusion and Future Work}
 
-Summary of contributions
-Shift-and-add multiplication investigation
-Real-world validation plans
+This research systematically investigated the fundamental design trade-offs in FPGA-based GRU implementations for BCI 
+applications, addressing the critical question of how input size, hidden state size, and numerical precision affect resource 
+utilization, inference time, power consumption, and accuracy. Through comprehensive exploration of 114 successfully 
+synthesized design configurations, this work provides the first quantitative characterization of the complex relationships 
+between architectural parameters and performance metrics in hardware-implemented GRUs for neural signal processing.
 
+The primary contributions of this work includes establishment of a reproducible, automated framework for systematic GRU 
+hardware design space exploration, quantitative analysis revealing that fractional precision (FRAC\_WIDTH) serves as the 
+dominant factor affecting both accuracy and timing performance, while hidden state size ($h$) primarily influences resource 
+consumption, and identification of critical optimization opportunities through temporal multiplexing that could achieve 
+order-of-magnitude hardware reductions without compromising BCI processing requirements. The correlation analysis revealed 
+strong negative relationships between FRAC\_WIDTH and accuracy metrics (MAE: -0.70, RMSE: -0.69), while demonstrating the 
+accuracy plateau beyond moderate precision levels (FRAC\_WIDTH $\approx$ 9-14 bits), establishing practical guidelines for 
+precision selection in resource-constrained deployments.
 
+A key finding with profound implications for future implementations is the identification of massive underutilization stemming 
+from the temporal mismatch between FPGA clock frequencies (100 MHz) and BCI sampling rates (typically on the order of Hz). The 
+observed timing margins (mean WNS: 9.29 ns, representing 93\% idle time per clock cycle) combined with the million-fold 
+difference between processing and sampling rates reveals that current implementations complete computations within 
+microseconds yet remain idle for milliseconds awaiting new samples. This fundamental inefficiency presents an extraordinary 
+optimization opportunity: temporal multiplexing strategies, particularly bit-serial architectures, could dramatically reduce 
+hardware resource requirements while maintaining sufficient throughput for real-time BCI processing. Such temporal reuse 
+approaches could fundamentally shift the design paradigm from spatial parallelism to temporal efficiency, potentially enabling 
+GRU implementations on substantially smaller, lower-cost FPGAs suitable for wearable and implantable BCI devices.
+
+Future theoretical work should investigate hardware-specific arithmetic optimizations to further reduce resource consumption. 
+Shift-and-add multiplication techniques, which replace costly multipliers with sequences of shift and addition operations, 
+could significantly reduce DSP and LUT utilization, particularly given the timing margins available for distributing 
+operations across multiple clock cycles. Exploration of approximate computing techniques, custom activation function 
+implementations, and coefficient quantization strategies could yield additional resource savings. Most 
+critically, detailed investigation of bit-serial and time-multiplexed architectures should quantify the achievable hardware 
+reductions and their impact on power consumption, potentially demonstrating feasibility of ultra-low-resource implementations 
+that process operations sequentially rather than in parallel.
+
+On the practical side, validation of FPGA-based BCI GRU implementations with real human subjects represents essential future 
+work that has not previously been demonstrated. While this study utilized a motor imagery dataset for accuracy evaluation, 
+real-time deployment with live neural signal acquisition would validate the complete BCI pipeline including signal 
+preprocessing, real-time inference, and closed-loop device control. Such validation would assess system robustness to signal 
+variability, noise characteristics, and artifacts inherent in real-world BCI applications, while evaluating user experience 
+metrics including system responsiveness, control accuracy, and usability. Successful human validation would establish the 
+clinical and practical viability of FPGA-based GRU systems for assistive technology applications, potentially demonstrating 
+superior performance compared to conventional CPU and GPU implementations in terms of latency, power efficiency, and 
+portability.
+
+By providing quantitative characterization of design trade-offs and identifying critical optimization pathways, this work 
+establishes a foundation for developing next-generation FPGA-based BCI systems that balance computational accuracy, hardware 
+efficiency, and power consumption to enable practical deployment in clinical and assistive technology applications.
 
 \section{References}
 \renewcommand{\refname}{}

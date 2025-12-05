@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.27 (MiKTeX 25.4) (preloaded format=pdflatex 2025.10.21)  5 DEC 2025 10:48
+This is pdfTeX, Version 3.141592653-2.6-1.40.27 (MiKTeX 25.4) (preloaded format=pdflatex 2025.10.21)  5 DEC 2025 11:20
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -345,9 +345,16 @@ Package pdftex.def Info: boxplot_colored_RMSE.png  used on input line 374.
 (pdftex.def)             Requested size: 258.0pt x 138.02908pt.
 
 
-[5 <./describe_output.png (PNG copy)> <./boxplot_colored_MAE.png>] (GRU_FPGA_BCI.bbl
+[5 <./describe_output.png (PNG copy)> <./boxplot_colored_MAE.png>]
 
 
+Underfull \hbox (badness 1990) in paragraph at lines 439--442
+\OT1/ptm/m/n/10 offs and iden-ti-fy-ing crit-i-cal op-ti-miza-tion path-ways, this
+ []
+
+
+
+[6 <./boxplot_colored_RMSE.png>] (GRU_FPGA_BCI.bbl
 Underfull \hbox (badness 3623) in paragraph at lines 86--89
 []\OT1/ptm/m/n/8 PyTorch, ``Gru,'' Jan 2023. [On-line]. Avail-able:
  []
@@ -356,6 +363,8 @@ Underfull \hbox (badness 3623) in paragraph at lines 86--89
 Underfull \hbox (badness 3547) in paragraph at lines 97--101
 []\OT1/ptm/m/n/8 K. Mo-hammed Rizwan, S. Nikhil Gowda, S. Yash-wanth, and
  []
+
+
 
 )
 
@@ -371,7 +380,7 @@ Before submitting the final camera ready copy, remember to:
 
 
 
-[6 <./boxplot_colored_RMSE.png>] (GRU_FPGA_BCI.aux)
+[7] (GRU_FPGA_BCI.aux)
  ***********
 LaTeX2e <2025-06-01> patch level 1
 L3 programming layer <2025-09-02>
@@ -380,15 +389,15 @@ L3 programming layer <2025-09-02>
 Here is how much of TeX's memory you used:
  4269 strings out of 468081
  68698 string characters out of 5425788
- 486107 words of memory out of 5000000
+ 486546 words of memory out of 5000000
  32902 multiletter control sequences out of 15000+600000
  666333 words of font info for 115 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  57i,11n,65p,403b,336s stack positions out of 10000i,1000n,20000p,200000b,200000s
 <C:/Users/ajrbe/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi10.pfb><C:/Users/ajrbe/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi7.pfb><C:/Users/ajrbe/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr10.pfb><C:/Users/ajrbe/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr7.pfb><C:/Users/ajrbe/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy10.pfb><C:/Users/ajrbe/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy7.pfb><C:/Users/ajrbe/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/symbols/msbm10.pfb><C:/Users/ajrbe/AppData/Local/Programs/MiKTeX/fonts/type1/urw/times/utmb8a.pfb><C:/Users/ajrbe/AppData/Local/Programs/MiKTeX/fonts/type1/urw/times/utmbi8a.pfb><C:/Users/ajrbe/AppData/Local/Programs/MiKTeX/fonts/type1/urw/times/utmr8a.pfb><C:/Users/ajrbe/AppData/Local/Programs/MiKTeX/fonts/type1/urw/times/utmri8a.pfb>
-Output written on GRU_FPGA_BCI.pdf (6 pages, 578301 bytes).
+Output written on GRU_FPGA_BCI.pdf (7 pages, 582384 bytes).
 PDF statistics:
- 86 PDF objects out of 1000 (max. 8388607)
+ 91 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
  26 words of extra memory for PDF output out of 10000 (max. 10000000)
 
