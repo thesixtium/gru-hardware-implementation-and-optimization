@@ -186,7 +186,7 @@ error metric less sensitive to outliers than RMSE, however RMSE does a better jo
 
 Controlled Variables
 \begin{itemize}
-\item Target FPGA: Fixed to Xilinx Artix-7 XXX, ensuring consistent LUT architecture, slice organization, and 
+\item Target FPGA: Fixed to a Xilinx Artix-7, ensuring consistent LUT architecture, slice organization, and 
 resource availability across all trials, as this can affect the outputted design [48].
 
 \item Clock Frequency: Fixed to 100 MHz, providing a consistent performance target.
@@ -244,17 +244,150 @@ performance characteristics demonstrated herein are device-agnostic and can be a
 target FPGA should be selected based on the resource requirements of the optimized design rather than constraining the design to fit a 
 predetermined device.
 
-Design Space Exploration Results
-Parameter Correlation Analysis
-Accuracy vs. Resource Trade-offs
-Performance Comparisons
+\subsection{Design Space Exploration Results}
+Of the 125 design parameter sets, 11 could not be generated due to insufficient resource availability on the FPGA. This limitation could 
+not be addressed by selecting a larger FPGA, as the largest device available in Xilinx Vivado had already been employed. The failed design 
+parameter sets are presented in Table~\ref{dfFail}.
 
+\begin{figure}[htbp]
+\centerline{\includegraphics[width=0.3\textwidth]{df_fail.png}}
+\caption{Table illustrating failed design parameter sets.}
+\label{dfFail}
+\end{figure}
+
+
+\subsection{Parameter Correlation Analysis}
+
+\begin{figure*}[htbp]
+\centerline{\includegraphics[width=1\textwidth]{reduced_corr_matrix.png}}
+\caption{Correlation matrix illustrating the relationships between independent variables and dependent variables.}
+\label{corrMatrix}
+\end{figure*}
+
+The correlation matrix presented in Figure~\ref{corrMatrix} reveals several significant relationships between design parameters and 
+performance metrics, providing insights into the fundamental trade-offs inherent in FPGA-based GRU implementations.
+
+\subsubsection{Resource Utilization Patterns}
+
+The hidden state size ($h$) exhibits the strongest positive correlation with hardware resource consumption, demonstrating correlations of 
+0.41 with LUTs, 0.50 with registers, and 0.27 with DSPs. This relationship reflects the quadratic scaling of hidden-to-hidden weight 
+matrices ($W_{hr}, W_{hz}, W_{hn} \in \mathbb{R}^{h \times h}$) with respect to $h$, as defined in 
+Equations~\eqref{eq:reset_gate}--\eqref{eq:hidden_state}. The input dimension ($d$) demonstrates a moderate positive correlation with LUT 
+utilization (0.36) and DSP usage (0.18), attributable to the linear scaling of input-to-hidden weight matrices ($W_{ir}, W_{iz}, W_{in} 
+\in \mathbb{R}^{h \times d}$). Conversely, FRAC\_WIDTH shows a weak negative correlation with LUT consumption (-0.29), suggesting that 
+increased precision does not proportionally increase combinational logic requirements, likely due to the fixed-width arithmetic units in 
+the implementation.
+
+\subsubsection{Timing Performance}
+
+Both WNS and time utilization demonstrate inverse relationships with architectural complexity. The hidden state size exhibits negative 
+correlations with WNS (-0.27) and time utilization (-0.14), indicating that larger hidden states impose greater timing constraints due to 
+increased computational depth and interconnect complexity. Similarly, the input dimension shows negative correlations with WNS (-0.30) and 
+time utilization (-0.20), reflecting the additional logic delays introduced by wider input vectors. FRAC\_WIDTH presents a more substantial 
+negative correlation with both WNS (-0.38) and time utilization (-0.30), demonstrating that higher precision arithmetic operations 
+introduce longer critical paths through the combinational logic.
+
+\subsubsection{Accuracy Characteristics}
+
+FRAC\_WIDTH exhibits the strongest influence on implementation accuracy, with correlation coefficients of -0.70 for MAE and -0.69 for RMSE. 
+These strong negative correlations confirm that increased fractional precision directly reduces quantization error, as expected from 
+fixed-point number theory. The architectural parameters $h$ and $d$ show negligible correlations with accuracy metrics (MAE: 0.02 and 0.13; 
+RMSE: 0.03 and 0.14, respectively), indicating that network topology does not significantly affect numerical precision in hardware 
+implementations when precision is held constant.
+
+\subsubsection{Power Consumption}
+
+Total power consumption demonstrates modest negative correlations with $d$ (-0.30), $h$ (-0.25), and FRAC\_WIDTH (-0.32), contrary to the 
+expected positive relationship between circuit complexity and power dissipation. This counterintuitive finding warrants further 
+investigation and may result from Vivado's power estimation methodology or interactions between resource utilization and routing 
+efficiency. Dynamic power exhibits a strong positive correlation with FRAC\_WIDTH (0.56), suggesting that higher precision arithmetic 
+operations generate increased switching activity, consistent with the larger number of bits transitioning during computations. The 
+architectural parameters $d$ and $h$ show weak negative correlations with dynamic power (-0.07 and 0.08, respectively), indicating minimal 
+impact of network topology on switching activity. Static power demonstrates negative correlations with all design parameters ($d$: -0.30, $h$: -0.27, FRAC\_WIDTH: -0.38), mirroring the 
+pattern observed in total power consumption. This relationship suggests that static power may be influenced by factors beyond simple 
+resource count, potentially including variations in routing congestion, placement density, or device-level power optimization strategies 
+employed by the synthesis toolchain. The correlation patterns between static and total power are nearly identical, indicating that static 
+power constitutes a significant fraction of total power dissipation in these implementations.
+
+\subsubsection{Design Trade-off Implications}
+
+The correlation analysis reveals a fundamental design trade-off between accuracy and hardware efficiency. FRAC\_WIDTH simultaneously 
+improves accuracy (strong negative correlations with MAE and RMSE) while degrading timing performance (negative correlation with WNS) and 
+increasing dynamic power consumption (positive correlation of 0.56). The hidden state size primarily affects resource utilization with 
+minimal impact on accuracy, suggesting that $h$ can be optimized for computational requirements without significantly compromising 
+numerical precision. The relatively weak correlations between structural parameters ($d$, $h$) and timing metrics indicate that the 
+implemented architecture maintains acceptable timing margins across the explored design space, with FRAC\_WIDTH serving as the primary 
+determinant of critical path delay.
 
 \section{Discussion}
 
-Interpretation of findings
-Design guidelines for FPGA-based GRU implementations
-Practical implications for BCI systems
+Figure~\ref{desc} shows a description of the output variables, which is used in this discussion.
+
+\begin{figure*}[htbp]
+\centerline{\includegraphics[width=1\textwidth]{describe_output.png}}
+\caption{Description of the dependent variables.}
+\label{desc}
+\end{figure*}
+
+\subsection{Static Power Dominance and Idle Operation}
+
+The descriptive statistics reveal that static power consumption (mean: 2.95 W, standard deviation: 0.00 W) constitutes the dominant 
+component of total power dissipation (mean: 3.00 W, standard deviation: 0.09 W), while dynamic power contributes minimally (mean: 0.05 W, 
+standard deviation: 0.09 W). This distribution directly correlates with the observed timing characteristics, where the mean WNS of 9.29 ns 
+indicates substantial timing margin relative to the 10 ns clock period constraint, resulting in a mean time utilization of only 7\%. 
+Consequently, the FPGA remains idle for approximately 93\% of each clock cycle, with logic transitions occurring only during the brief 
+computation window. This idle time explains the negligible dynamic power consumption, as switching activity, the primary driver of dynamic 
+power dissipation, occurs infrequently. The near-constant static power across all design configurations (range: 2.94-2.95 W) reflects 
+continuous leakage current independent of computational activity, confirming that power optimization in these implementations must 
+primarily address static rather than dynamic power consumption.
+
+\subsection{Temporal Multiplexing and Bit-Serial Optimization Opportunities}
+
+The vast disparity between FPGA clock frequencies (100 MHz in this study) and typical BCI sampling rates (on the order of Hz) [39] presents 
+a substantial optimization opportunity through temporal multiplexing across multiple clock cycles. The FPGA executes approximately one 
+million clock cycles between successive BCI data samples, yet the current implementations complete their computations within a single 
+clock cycle and remain idle while awaiting new input data [40]. The exceptionally low time utilization (mean: 7\%, maximum: 18\%) 
+quantifies the underutilization within each clock cycle, but the more significant inefficiency lies in the extended idle periods between 
+BCI samples, during which the hardware remains powered but performs no useful computation. By distributing GRU computations across clock 
+cycles through time-multiplexed architectures, hardware resource requirements could be dramatically reduced without compromising real-time 
+processing requirements. One particularly effective implementation of temporal multiplexing is through bit-serial architectures, which 
+compute results sequentially one bit position at a time rather than processing all bits in parallel, trading temporal resources for 
+spatial efficiency [38]. While parallel addition of two 32-bit integers requires 32 adders operating in a single clock cycle, an 
+equivalent bit-serial implementation utilizes only one adder over 32 cycles. This architectural approach could significantly reduce the 
+LUT, register, and DSP resource requirements observed in the current implementations. The observed timing margins (mean WNS: 9.29 ns) 
+indicate that extending individual arithmetic operations across multiple clock cycles would not violate timing constraints. Given the 
+million-fold difference between FPGA clock rates and BCI sampling rates, even fully bit-serial implementations of all arithmetic 
+operations would complete well within the inter-sample interval, making this aggressive hardware minimization strategy viable for BCI 
+applications while fundamentally shifting the design paradigm from spatial parallelism to temporal efficiency. This and other temporal 
+reuse strategies could achieve order-of-magnitude reductions in hardware consumption while maintaining sufficient throughput to process 
+BCI signals.
+
+\subsection{Diminishing Returns of Fractional Precision}
+
+\begin{figure}[htbp]
+\centerline{\includegraphics[width=0.5\textwidth]{boxplot_colored_MAE.png}}
+\caption{Boxplot and scatter visualization for MAE.}
+\label{mae_boxplot}
+\end{figure}
+
+\begin{figure}[htbp]
+\centerline{\includegraphics[width=0.5\textwidth]{boxplot_colored_RMSE.png}}
+\caption{Boxplot and scatter visualization for RMSE.}
+\label{rmse_boxplot}
+\end{figure}
+
+The boxplot and scatter visualizations for MAE (Figure~\ref{mae_boxplot}) and RMSE (Figure~\ref{rmse_boxplot}) reveal a critical threshold 
+effect in the relationship between fractional precision and accuracy. While FRAC\_WIDTH = 4 exhibits substantially degraded accuracy with 
+high error dispersion (MAE range: approximately 0.04-0.10, RMSE range: approximately 0.06-0.15), the accuracy improvements diminish 
+rapidly beyond moderate precision levels. The implementations with FRAC\_WIDTH $\in \{9, 14, 19, 24\}$ form tightly clustered distributions 
+in the lower portion of both plots, with both boxplots indicating statistically similar performance. The marginal reduction in error 
+between FRAC\_WIDTH = 14 and FRAC\_WIDTH = 24 is negligible relative to the substantial hardware and timing costs associated with higher 
+precision arithmetic, as evidenced by the correlation analysis showing FRAC\_WIDTH's strong negative impact on WNS (-0.38) and positive 
+impact on dynamic power (0.56). This plateau effect suggests that FRAC\_WIDTH values beyond approximately 9-14 bits provide minimal 
+accuracy benefits while incurring disproportionate implementation costs, establishing an optimal precision threshold for 
+resource-constrained FPGA deployments. The clustering pattern indicates that practitioners can confidently select moderate precision 
+configurations (FRAC\_WIDTH $\approx$ 9-14) to achieve near-optimal accuracy while minimizing hardware overhead, critical path delays, 
+and power consumption.
 
 
 \section{Conclusion and Future Work}
