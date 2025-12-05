@@ -1,7 +1,7 @@
 PWD c:\Users\ajrbe\Documents\School\Thesis\BCI\gru-hardware-implementation-and-optimization\EMBC Submission
 INPUT C:\Users\ajrbe\AppData\Local\MiKTeX\miktex\data\le\pdftex\pdflatex.fmt
-INPUT c:\Users\ajrbe\Documents\School\Thesis\BCI\gru-hardware-implementation-and-optimization\EMBC Submission\ImplementingGatedRecurrentUnitsOnFieldProgrammableGateArrayForBrainComputerInterfaceApplications.tex
-OUTPUT ImplementingGatedRecurrentUnitsOnFieldProgrammableGateArrayForBrainComputerInterfaceApplications.log
+INPUT c:\Users\ajrbe\Documents\School\Thesis\BCI\gru-hardware-implementation-and-optimization\EMBC Submission\GRU_FPGA_BCI.tex
+OUTPUT GRU_FPGA_BCI.log
 INPUT .\IEEEtran.cls
 INPUT IEEEtran.cls
 INPUT C:\Users\ajrbe\AppData\Local\Programs\MiKTeX\tex\latex\psnfss\ot1ptm.fd
@@ -93,10 +93,10 @@ INPUT C:\Users\ajrbe\AppData\Local\Programs\MiKTeX\tex\latex\graphics\mathcolor.
 INPUT C:\Users\ajrbe\AppData\Local\Programs\MiKTeX\tex\latex\graphics\mathcolor.ltx
 INPUT C:\Users\ajrbe\AppData\Local\Programs\MiKTeX\tex\latex\l3backend\l3backend-pdftex.def
 INPUT C:\Users\ajrbe\AppData\Local\Programs\MiKTeX\tex\latex\l3backend\l3backend-pdftex.def
-INPUT .\ImplementingGatedRecurrentUnitsOnFieldProgrammableGateArrayForBrainComputerInterfaceApplications.aux
-INPUT .\ImplementingGatedRecurrentUnitsOnFieldProgrammableGateArrayForBrainComputerInterfaceApplications.aux
-INPUT ImplementingGatedRecurrentUnitsOnFieldProgrammableGateArrayForBrainComputerInterfaceApplications.aux
-OUTPUT ImplementingGatedRecurrentUnitsOnFieldProgrammableGateArrayForBrainComputerInterfaceApplications.aux
+INPUT .\GRU_FPGA_BCI.aux
+INPUT .\GRU_FPGA_BCI.aux
+INPUT GRU_FPGA_BCI.aux
+OUTPUT GRU_FPGA_BCI.aux
 INPUT C:\Users\ajrbe\AppData\Local\Programs\MiKTeX\tex\context\base\mkii\supp-pdf.mkii
 INPUT C:\Users\ajrbe\AppData\Local\Programs\MiKTeX\tex\context\base\mkii\supp-pdf.mkii
 INPUT C:\Users\ajrbe\AppData\Local\Programs\MiKTeX\tex\context\base\mkii\supp-pdf.mkii
@@ -136,7 +136,7 @@ INPUT C:\Users\ajrbe\AppData\Local\Programs\MiKTeX\fonts\tfm\public\amsfonts\sym
 INPUT C:\Users\ajrbe\AppData\Local\Programs\MiKTeX\fonts\tfm\public\amsfonts\symbols\msbm10.tfm
 INPUT C:\Users\ajrbe\AppData\Local\Programs\MiKTeX\fonts\tfm\public\amsfonts\symbols\msbm7.tfm
 INPUT C:\Users\ajrbe\AppData\Local\Programs\MiKTeX\fonts\tfm\public\amsfonts\symbols\msbm5.tfm
-OUTPUT ImplementingGatedRecurrentUnitsOnFieldProgrammableGateArrayForBrainComputerInterfaceApplications.pdf
+OUTPUT GRU_FPGA_BCI.pdf
 INPUT C:\Users\ajrbe\AppData\Local\Programs\MiKTeX\fonts\vf\adobe\times\ptmr7t.vf
 INPUT C:\Users\ajrbe\AppData\Local\Programs\MiKTeX\fonts\tfm\adobe\times\ptmr8r.tfm
 INPUT C:\Users\ajrbe\AppData\Local\MiKTeX\fonts\map\pdftex\pdftex.map
@@ -193,7 +193,12 @@ INPUT .\boxplot_colored_RMSE.png
 INPUT .\boxplot_colored_RMSE.png
 INPUT .\boxplot_colored_RMSE.png
 INPUT .\boxplot_colored_RMSE.png
-INPUT ImplementingGatedRecurrentUnitsOnFieldProgrammableGateArrayForBrainComputerInterfaceApplications.aux
+INPUT .\GRU_FPGA_BCI.bbl
+INPUT .\GRU_FPGA_BCI.bbl
+INPUT GRU_FPGA_BCI.bbl
+INPUT C:\Users\ajrbe\AppData\Local\Programs\MiKTeX\fonts\vf\adobe\times\ptmri7t.vf
+INPUT C:\Users\ajrbe\AppData\Local\Programs\MiKTeX\fonts\tfm\adobe\times\ptmri8r.tfm
+INPUT GRU_FPGA_BCI.aux
 INPUT C:\Users\ajrbe\AppData\Local\Programs\MiKTeX\fonts\type1\public\amsfonts\cm\cmmi10.pfb
 INPUT C:\Users\ajrbe\AppData\Local\Programs\MiKTeX\fonts\type1\public\amsfonts\cm\cmmi10.pfb
 INPUT C:\Users\ajrbe\AppData\Local\Programs\MiKTeX\fonts\type1\public\amsfonts\cm\cmmi7.pfb

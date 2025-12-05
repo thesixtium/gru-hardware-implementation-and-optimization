@@ -47,17 +47,17 @@
 
 Brain-Computer Interfaces (BCIs) enable communication between the human brain and external devices by processing neural 
 signals through machine learning algorithms. These systems follow a structured pipeline encompassing signal acquisition, 
-preprocessing, feature extraction, classification, and device control [1]. Due to the temporal and sequential nature of 
+preprocessing, feature extraction, classification, and device control \cite{Nicolas-Alonso_Gomez-Gil_2012}. Due to the temporal and sequential nature of 
 brain signals, machine learning algorithms capable of capturing dependencies over time are required. Gated Recurrent 
 Units (GRUs) offer a computationally efficient solution for modeling these time-series signals, achieving performance 
 comparable to commonly used Long Short-Term Memory (LSTM) networks while requiring significantly fewer computational 
-resources due to their simplified architecture [7,9].
+resources due to their simplified architecture \cite{Cho_van, chung2014empiricalevaluationgatedrecurrent}.
 
 The deployment platform for BCI systems critically impacts their practical viability, particularly for real-time, 
 low-power applications. Field-Programmable Gate Arrays (FPGAs) provide significant advantages over traditional Central 
 Processing Unit (CPU) and Graphics Processing Unit (GPU) implementations due to their reconfigurable hardware, high 
-parallelism, and superior power efficiency [12-14]. Despite these benefits, the first hardware implementation of a GRU 
-was not presented until 2021 by Zaghloul et al. [11].
+parallelism, and superior power efficiency \cite{Schneider_2025, fpgaGpu, Pacini_Pacini_Lai_Zocco_Fanucci_2024}. Despite these benefits, the first hardware implementation of a GRU 
+was not presented until 2021 by Zaghloul et al. \cite{Zaghloul_Elsayed_2021}.
 
 This research explores how fundamental design parameters affect the trade-offs between resource utilization, inference 
 speed, power consumption, and accuracy in FPGA-based GRU implementations for BCI applications. Specifically, we 
@@ -78,18 +78,18 @@ constraints.
 
 EEG signals used in BCI are often lengthy, one-dimensional, complicated, and nonlinear time sequence signals. Due to 
 these signal characteristics, Recurrent Neural Networks (RNNs) are commonly used to model this data. However, simple 
-RNNs suffer from vanishing and exploding gradient problems, making them struggle to learn long-term dependencies [5]. 
+RNNs suffer from vanishing and exploding gradient problems, making them struggle to learn long-term dependencies \cite{Bengio_Simard_Frasconi_1994}. 
 To address this, Hochreiter et al. proposed Long Short-Term Memory (LSTM) units, which use gates to selectively retain, 
-update, and output information [6].
+update, and output information \cite{Hochreiter_Schmidhuber_1997}.
 
 GRUs, proposed by Cho et al., are a type of hidden unit similar to LSTM units but 
 computationally simpler and more efficient. GRUs use only two gates, compared to LSTMs using four gates, to control 
-information flow through the hidden state allowing them to capture dependencies over multiple time scales [7]. 
-Chung et al. demonstrated that GRUs and LSTMs achieve comparable performance on multiple datasets [9]. Rivas et 
+information flow through the hidden state allowing them to capture dependencies over multiple time scales \cite{Cho_van}. 
+Chung et al. demonstrated that GRUs and LSTMs achieve comparable performance on multiple datasets \cite{chung2014empiricalevaluationgatedrecurrent}. Rivas et 
 al. found GRU's and LSTM's performance comparable over several evaluation metrics including Root Mean Square Error (RMSE), 
-Mean Square Error (MSE), and Mean Average Error (MAE) [25].
+Mean Square Error (MSE), and Mean Average Error (MAE) \cite{Garcia_Camara_2025}.
 
-In modern implementations, GRUs are calculated using Equations~\eqref{eq:reset_gate}--\eqref{eq:hidden_state} [30-31].
+In modern implementations, GRUs are calculated using Equations~\eqref{eq:reset_gate}--\eqref{eq:hidden_state} \cite{zhang2023dive, PyTorch_2023}.
 
 \begin{align}
 r_t &= \sigma(W_{ir} x_t + b_{ir} + W_{hr} h_{t-1} + b_{hr}) \label{eq:reset_gate} \\
@@ -112,19 +112,19 @@ product.
 
 FPGAs are well-suited for BCI systems because their reconfigurability allows for flexible deployment and updating of 
 different BCI machine learning models, while their high performance and low power consumption make them ideal for edge 
-deployment close to users [12-14]. In 2021, Cai et al. implemented an epilepsy detection algorithm on an FPGA, 
+deployment close to users \cite{Schneider_2025, fpgaGpu, Pacini_Pacini_Lai_Zocco_Fanucci_2024}. In 2021, Cai et al. implemented an epilepsy detection algorithm on an FPGA, 
 demonstrating that FPGA-based BCI systems tend to have higher accuracy than software-based implementations while 
-achieving improved classification performance and reduced power consumption [18].
+achieving improved classification performance and reduced power consumption \cite{Cai_Li_Cheng_Yuan_Li_Li_2024}.
 
 As shown by Zaghoul et al., the GRU hardware implementation used 50\% fewer Buffers, 42\% fewer Digital Signal Processors 
-(DSPs), 39\% less Block RAM (BRAM), and 35\% fewer Slice Look-Up Tables (LUTs) compared to an LSTM implementation [11]. 
-Additionally, the GRU had higher inference performance per Watt and lower execution time [11]. This implementation was later 
-refined by Rizwan et al. in 2025 [33].
+(DSPs), 39\% less Block RAM (BRAM), and 35\% fewer Slice Look-Up Tables (LUTs) compared to an LSTM implementation \cite{Zaghloul_Elsayed_2021}. 
+Additionally, the GRU had higher inference performance per Watt and lower execution time \cite{Zaghloul_Elsayed_2021}. This implementation was later 
+refined by Rizwan et al. in 2025 \cite{Rizwan}.
 
 The hardware implementation architecture consists of two primary modules: the gate module and the output module. The 
 gate module implements the reset gate, update gate, and activation functions using two Multiply-and-Accumulate (MAC) 
 units that are summed and passed through sigmoid or tanh activation functions. The output module performs Hadamard 
-products and summation to generate the final hidden state [11].
+products and summation to generate the final hidden state \cite{Zaghloul_Elsayed_2021}.
 
 
 \section{Methodology}
@@ -155,11 +155,11 @@ INT\_WIDTH = 6 to provide sufficient headroom and prevent overflow during interm
 
 \item FRAC\_WIDTH: Number of fractional bits in fixed-point representation, determining numerical precision. Lower values 
 reduce hardware size but increase quantization error. The tested range is \(FRAC\_WIDTH  \in \{4, 9, 14, 19, 24\}\), 
-representing a spectrum from coarse precision to floating-point precision [X].
+representing a spectrum from coarse precision to floating-point precision \cite{Goldberg_1991}.
 
 \item d (Input Dimension): Input feature dimension corresponding to the number of EEG channels in BCI applications. The 
-dataset used contains 64 channels, thus 64 will be the upper range for $d$ [46]. Özkahraman et al. demonstrated an 83\% 
-accuracy using Motor Imagery with just 6 channels, thus 6 will be the lower range for $d$ [47]. The tested range is 
+dataset used contains 64 channels, thus 64 will be the upper range for $d$ \cite{Goldberger_Amaral_Glass_Hausdorff_Ivanov_Mark_Mietus_Moody_Peng_Stanley_2000}. Özkahraman et al. demonstrated an 83\% 
+accuracy using Motor Imagery with just 6 channels, thus 6 will be the lower range for $d$ \cite{Dokur_2024}. The tested range is 
 \(d \in \{4, 8, 16, 32, 64\}\).
 
 
@@ -174,24 +174,24 @@ Dependent Variables
 and DSPs (Digital Signal Processors) used.These metrics are extracted from detailed reports output by Vivado.
 
 \item Timing Metrics: Worst Negative Slack (WNS) measures timing margin relative to the 100 MHz clock constraint (10ns 
-period). Time utilization is calculated as (10ns - WNS) / 10ns, representing the fraction of the clock period utilized.
+period).
 
 \item Power Metrics: Total power (W) represents complete FPGA power consumption. Dynamic power (W) measures power from 
 switching activity. Static power (W) quantifies leakage current. All power metrics are extracted from Vivado's power 
 analysis reports.
 
 \item Accuracy Metrics: MAE and RMSE quantifies prediction accuracy relative to the ground truth. MAE provides a robust 
-error metric less sensitive to outliers than RMSE, however RMSE does a better job quantifying sensitivity to outliers [27].
+error metric less sensitive to outliers than RMSE, however RMSE does a better job quantifying sensitivity to outliers \cite{Willmott_Matsuura_2005}.
 \end{itemize}
 
 Controlled Variables
 \begin{itemize}
 \item Target FPGA: Fixed to a Xilinx Artix-7, ensuring consistent LUT architecture, slice organization, and 
-resource availability across all trials, as this can affect the outputted design [48].
+resource availability across all trials, as this can affect the outputted design \cite{Yan_Cheng_Wilton_2002}.
 
 \item Clock Frequency: Fixed to 100 MHz, providing a consistent performance target.
 
-\item Vivado Version: Fixed to 2024.1, as CAD tool versions can affect synthesis and implementation results [48].
+\item Vivado Version: Fixed to 2024.1, as CAD tool versions can affect synthesis and implementation results \cite{Yan_Cheng_Wilton_2002}.
 
 \item Synthesis Settings: Identical optimization flags and strategies applied across all designs.
 
@@ -280,11 +280,11 @@ the implementation.
 
 \subsubsection{Timing Performance}
 
-Both WNS and time utilization demonstrate inverse relationships with architectural complexity. The hidden state size exhibits negative 
-correlations with WNS (-0.27) and time utilization (-0.14), indicating that larger hidden states impose greater timing constraints due to 
-increased computational depth and interconnect complexity. Similarly, the input dimension shows negative correlations with WNS (-0.30) and 
-time utilization (-0.20), reflecting the additional logic delays introduced by wider input vectors. FRAC\_WIDTH presents a more substantial 
-negative correlation with both WNS (-0.38) and time utilization (-0.30), demonstrating that higher precision arithmetic operations 
+WNS demonstrates an inverse relationships with architectural complexity. The hidden state size exhibits a negative 
+correlation with WNS (-0.27), indicating that larger hidden states impose greater timing constraints due to 
+increased computational depth and interconnect complexity. Similarly, the input dimension shows a negative correlation with WNS (-0.30), 
+reflecting the additional logic delays introduced by wider input vectors. FRAC\_WIDTH presents a more substantial 
+negative correlation with WNS (-0.38), demonstrating that higher precision arithmetic operations 
 introduce longer critical paths through the combinational logic.
 
 \subsubsection{Accuracy Characteristics}
@@ -334,33 +334,33 @@ Figure~\ref{desc} shows a description of the output variables, which is used in 
 The descriptive statistics reveal that static power consumption (mean: 2.95 W, standard deviation: 0.00 W) constitutes the dominant 
 component of total power dissipation (mean: 3.00 W, standard deviation: 0.09 W), while dynamic power contributes minimally (mean: 0.05 W, 
 standard deviation: 0.09 W). This distribution directly correlates with the observed timing characteristics, where the mean WNS of 9.29 ns 
-indicates substantial timing margin relative to the 10 ns clock period constraint, resulting in a mean time utilization of only 7\%. 
-Consequently, the FPGA remains idle for approximately 93\% of each clock cycle, with logic transitions occurring only during the brief 
-computation window. This idle time explains the negligible dynamic power consumption, as switching activity, the primary driver of dynamic 
-power dissipation, occurs infrequently. The near-constant static power across all design configurations (range: 2.94-2.95 W) reflects 
-continuous leakage current independent of computational activity, confirming that power optimization in these implementations must 
-primarily address static rather than dynamic power consumption.
+indicates substantial timing margin relative to the 10 ns clock period constraint. The critical path delay averages only 0.71 ns (7\% of 
+the clock period), meaning the FPGA logic remains idle for approximately 93\% of each clock cycle, with logic transitions occurring only 
+during the brief computation window. This idle time explains the negligible dynamic power consumption, as switching activity, the primary 
+driver of dynamic power dissipation, occurs infrequently. The near-constant static power across all design configurations (range: 2.94-2.95 
+W) reflects continuous leakage current independent of computational activity, confirming that power optimization in these implementations 
+must primarily address static rather than dynamic power consumption.
 
 \subsection{Temporal Multiplexing and Bit-Serial Optimization Opportunities}
 
-The vast disparity between FPGA clock frequencies (100 MHz in this study) and typical BCI sampling rates (on the order of Hz) [39] presents 
+The vast disparity between FPGA clock frequencies (100 MHz in this study) and typical BCI sampling rates (on the order of Hz) \cite{Ajami_Mahnam_Abootalebi_2018} presents 
 a substantial optimization opportunity through temporal multiplexing across multiple clock cycles. The FPGA executes approximately one 
 million clock cycles between successive BCI data samples, yet the current implementations complete their computations within a single 
-clock cycle and remain idle while awaiting new input data [40]. The exceptionally low time utilization (mean: 7\%, maximum: 18\%) 
-quantifies the underutilization within each clock cycle, but the more significant inefficiency lies in the extended idle periods between 
-BCI samples, during which the hardware remains powered but performs no useful computation. By distributing GRU computations across clock 
-cycles through time-multiplexed architectures, hardware resource requirements could be dramatically reduced without compromising real-time 
-processing requirements. One particularly effective implementation of temporal multiplexing is through bit-serial architectures, which 
-compute results sequentially one bit position at a time rather than processing all bits in parallel, trading temporal resources for 
-spatial efficiency [38]. While parallel addition of two 32-bit integers requires 32 adders operating in a single clock cycle, an 
-equivalent bit-serial implementation utilizes only one adder over 32 cycles. This architectural approach could significantly reduce the 
-LUT, register, and DSP resource requirements observed in the current implementations. The observed timing margins (mean WNS: 9.29 ns) 
-indicate that extending individual arithmetic operations across multiple clock cycles would not violate timing constraints. Given the 
-million-fold difference between FPGA clock rates and BCI sampling rates, even fully bit-serial implementations of all arithmetic 
-operations would complete well within the inter-sample interval, making this aggressive hardware minimization strategy viable for BCI 
-applications while fundamentally shifting the design paradigm from spatial parallelism to temporal efficiency. This and other temporal 
-reuse strategies could achieve order-of-magnitude reductions in hardware consumption while maintaining sufficient throughput to process 
-BCI signals.
+clock cycle and remain idle while awaiting new input data. The exceptionally short critical path delays (mean: 0.71 ns, maximum: 1.79 
+ns) represent only 7\% to 18\% of the available 10 ns clock period, quantifying the underutilization within each clock cycle. However, the 
+more significant inefficiency lies in the extended idle periods between BCI samples, during which the hardware remains powered but performs 
+no useful computation. By distributing GRU computations across clock cycles through time-multiplexed architectures, hardware resource 
+requirements could be dramatically reduced without compromising real-time processing requirements. One particularly effective implementation 
+of temporal multiplexing is through bit-serial architectures, which compute results sequentially one bit position at a time rather than 
+processing all bits in parallel, trading temporal resources for spatial efficiency \cite{Thongkham_Jewajinda_2024, TAKAMAEDA-YAMAZAKI_NAKATSUKA_TANAKA_KISE_2015}. While parallel addition of two 32-bit integers 
+requires 32 adders operating in a single clock cycle, an equivalent bit-serial implementation utilizes only one adder over 32 cycles. This 
+architectural approach could significantly reduce the LUT, register, and DSP resource requirements observed in the current implementations. 
+The observed timing margins (mean WNS: 9.29 ns) indicate that extending individual arithmetic operations across multiple clock cycles would 
+not violate timing constraints. Given the million-fold difference between FPGA clock rates and BCI sampling rates, even fully bit-serial 
+implementations of all arithmetic operations would complete well within the inter-sample interval, making this aggressive hardware 
+minimization strategy viable for BCI applications while fundamentally shifting the design paradigm from spatial parallelism to temporal 
+efficiency. This and other temporal reuse strategies could achieve order-of-magnitude reductions in hardware consumption while maintaining 
+sufficient throughput to process BCI signals.
 
 \subsection{Diminishing Returns of Fractional Precision}
 
@@ -401,6 +401,6 @@ Real-world validation plans
 \section{References}
 \renewcommand{\refname}{}
 \bibliographystyle{IEEEtran}
-\bibliography{LiteratureReview}
+\bibliography{references}
 
 \end{document}

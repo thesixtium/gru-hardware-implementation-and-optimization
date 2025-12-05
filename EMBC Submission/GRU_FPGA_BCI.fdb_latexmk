@@ -1,13 +1,13 @@
 # Fdb version 4
-["bibtex ImplementingGatedRecurrentUnitsOnFieldProgrammableGateArrayForBrainComputerInterfaceApplications"] 0 "ImplementingGatedRecurrentUnitsOnFieldProgrammableGateArrayForBrainComputerInterfaceApplications.aux" "ImplementingGatedRecurrentUnitsOnFieldProgrammableGateArrayForBrainComputerInterfaceApplications.bbl" "ImplementingGatedRecurrentUnitsOnFieldProgrammableGateArrayForBrainComputerInterfaceApplications" 1764910483.58665 0
+["bibtex GRU_FPGA_BCI"] 1764956828.15585 "GRU_FPGA_BCI.aux" "GRU_FPGA_BCI.bbl" "GRU_FPGA_BCI" 1764956924.63215 0
+  "./references.bib" 1764956825 7153 0e2896c17e36d302f88f868096ba8278 ""
   "C:/Users/ajrbe/AppData/Local/Programs/MiKTeX/bibtex/bst/ieeetran/IEEEtran.bst" 1440622569 57748 7c8250ecf02814ce6ddc0cdbb63df1dd ""
-  "ImplementingGatedRecurrentUnitsOnFieldProgrammableGateArrayForBrainComputerInterfaceApplications.aux" 0 -1 0 "pdflatex"
-  "LiteratureReview.bib" 0 -1 0 ""
+  "GRU_FPGA_BCI.aux" 1764956924 5984 9cf2941db927829d5a107a8ccff0e68e "pdflatex"
   (generated)
-  "ImplementingGatedRecurrentUnitsOnFieldProgrammableGateArrayForBrainComputerInterfaceApplications.bbl"
-  "ImplementingGatedRecurrentUnitsOnFieldProgrammableGateArrayForBrainComputerInterfaceApplications.blg"
+  "GRU_FPGA_BCI.bbl"
+  "GRU_FPGA_BCI.blg"
   (rewritten before read)
-["pdflatex"] 1764910482.12351 "c:/Users/ajrbe/Documents/School/Thesis/BCI/gru-hardware-implementation-and-optimization/EMBC Submission/ImplementingGatedRecurrentUnitsOnFieldProgrammableGateArrayForBrainComputerInterfaceApplications.tex" "ImplementingGatedRecurrentUnitsOnFieldProgrammableGateArrayForBrainComputerInterfaceApplications.pdf" "ImplementingGatedRecurrentUnitsOnFieldProgrammableGateArrayForBrainComputerInterfaceApplications" 1764910483.58733 0
+["pdflatex"] 1764956923.12237 "c:/Users/ajrbe/Documents/School/Thesis/BCI/gru-hardware-implementation-and-optimization/EMBC Submission/GRU_FPGA_BCI.tex" "GRU_FPGA_BCI.pdf" "GRU_FPGA_BCI" 1764956924.63315 0
   "C:/Users/ajrbe/AppData/Local/MiKTeX/fonts/map/pdftex/pdftex.map" 1761268182 82507 a9eef8696c92627b87e9975edea03b2a ""
   "C:/Users/ajrbe/AppData/Local/MiKTeX/miktex/data/le/pdftex/pdflatex.fmt" 1761086364 13321623 f81ef0e0f696d6e51926e6645b452cf8 ""
   "C:/Users/ajrbe/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/base/8r.enc" 1458473887 4993 80dc9bab7f31fb78a000ccfed0e27cab ""
@@ -78,18 +78,18 @@
   "C:/Users/ajrbe/AppData/Local/Programs/MiKTeX/tex/latex/l3backend/l3backend-pdftex.def" 1751005717 30351 a2b09edc6c93a742566b222c33d0278e ""
   "C:/Users/ajrbe/AppData/Local/Programs/MiKTeX/tex/latex/psnfss/ot1ptm.fd" 1585253778 1007 15056f4a61917ceed3a44e4ac11fcc52 ""
   "C:/Users/ajrbe/AppData/Local/Programs/MiKTeX/tex/latex/xcolor/xcolor.sty" 1729265222 55384 b454dec21c2d9f45ec0b793f0995b992 ""
+  "GRU_FPGA_BCI.aux" 1764956924 5984 9cf2941db927829d5a107a8ccff0e68e "pdflatex"
+  "GRU_FPGA_BCI.bbl" 1764956828 6629 73b924f28a82df6ea649e6c49f73eca1 "bibtex GRU_FPGA_BCI"
+  "GRU_FPGA_BCI.tex" 1764956922 27697 378d4df02f5612197f5c247f65f80d10 ""
   "IEEEtran.cls" 1761085484 288304 5b2e4fa15b0f7eabb840ebf67df4c0f7 ""
-  "ImplementingGatedRecurrentUnitsOnFieldProgrammableGateArrayForBrainComputerInterfaceApplications.aux" 1764910482 4059 97a7385ec744a3ebfc1ed05aa9a0ad13 "pdflatex"
-  "ImplementingGatedRecurrentUnitsOnFieldProgrammableGateArrayForBrainComputerInterfaceApplications.bbl" 0 -1 0 "bibtex ImplementingGatedRecurrentUnitsOnFieldProgrammableGateArrayForBrainComputerInterfaceApplications"
-  "ImplementingGatedRecurrentUnitsOnFieldProgrammableGateArrayForBrainComputerInterfaceApplications.tex" 1764910480 27027 3039c976fab078a31172f2dbb454a32a ""
-  "boxplot_colored_MAE.png" 1764905592 144502 1dd89f7ac6dd575dbc4338c92949252b ""
-  "boxplot_colored_RMSE.png" 1764905593 150037 d63cc0fac89583f71fee94a505a0d04f ""
-  "c:/Users/ajrbe/Documents/School/Thesis/BCI/gru-hardware-implementation-and-optimization/EMBC Submission/ImplementingGatedRecurrentUnitsOnFieldProgrammableGateArrayForBrainComputerInterfaceApplications.tex" 1764910480 27027 3039c976fab078a31172f2dbb454a32a ""
-  "describe_output.png" 1764907947 18518 3571862dbc45c830cbe6180631b23736 ""
+  "boxplot_colored_MAE.png" 1764951865 150355 320f6b865f7acb393b98b092add41908 ""
+  "boxplot_colored_RMSE.png" 1764951866 156749 27079bff6069020e609b7d48b6a33b1a ""
+  "c:/Users/ajrbe/Documents/School/Thesis/BCI/gru-hardware-implementation-and-optimization/EMBC Submission/GRU_FPGA_BCI.tex" 1764956922 27697 378d4df02f5612197f5c247f65f80d10 ""
+  "describe_output.png" 1764951617 17308 3bb4b0faf804db029c6adea5dae81f3a ""
   "df_fail.png" 1764906189 7269 71f14ef6a2f5bcd1c9b4658101852867 ""
-  "reduced_corr_matrix.png" 1764907215 226780 a62fdb5efd264a337321a59ecc485d6d ""
+  "reduced_corr_matrix.png" 1764951618 208981 ba3156dbcee1d764a66b7cc29e44b19f ""
   (generated)
-  "ImplementingGatedRecurrentUnitsOnFieldProgrammableGateArrayForBrainComputerInterfaceApplications.aux"
-  "ImplementingGatedRecurrentUnitsOnFieldProgrammableGateArrayForBrainComputerInterfaceApplications.log"
-  "ImplementingGatedRecurrentUnitsOnFieldProgrammableGateArrayForBrainComputerInterfaceApplications.pdf"
+  "GRU_FPGA_BCI.aux"
+  "GRU_FPGA_BCI.log"
+  "GRU_FPGA_BCI.pdf"
   (rewritten before read)

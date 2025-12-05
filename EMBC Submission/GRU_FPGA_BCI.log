@@ -1,10 +1,10 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.27 (MiKTeX 25.4) (preloaded format=pdflatex 2025.10.21)  4 DEC 2025 21:54
+This is pdfTeX, Version 3.141592653-2.6-1.40.27 (MiKTeX 25.4) (preloaded format=pdflatex 2025.10.21)  5 DEC 2025 10:48
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
  %&-line parsing enabled.
-**"c:/Users/ajrbe/Documents/School/Thesis/BCI/gru-hardware-implementation-and-optimization/EMBC Submission/ImplementingGatedRecurrentUnitsOnFieldProgrammableGateArrayForBrainComputerInterfaceApplications.tex"
-(c:/Users/ajrbe/Documents/School/Thesis/BCI/gru-hardware-implementation-and-optimization/EMBC Submission/ImplementingGatedRecurrentUnitsOnFieldProgrammableGateArrayForBrainComputerInterfaceApplications.tex
+**"c:/Users/ajrbe/Documents/School/Thesis/BCI/gru-hardware-implementation-and-optimization/EMBC Submission/GRU_FPGA_BCI.tex"
+(c:/Users/ajrbe/Documents/School/Thesis/BCI/gru-hardware-implementation-and-optimization/EMBC Submission/GRU_FPGA_BCI.tex
 LaTeX2e <2025-06-01> patch level 1
 L3 programming layer <2025-09-02>
 (IEEEtran.cls
@@ -233,8 +233,8 @@ Package xcolor Info: Model `wave' substituted by `hsb' on input line 1372.
 ) (C:\Users\ajrbe\AppData\Local\Programs\MiKTeX\tex/latex/l3backend\l3backend-pdftex.def
 File: l3backend-pdftex.def 2025-06-09 L3 backend support: PDF output (pdfTeX)
 \l__color_backend_stack_int=\count306
-) (ImplementingGatedRecurrentUnitsOnFieldProgrammableGateArrayForBrainComputerInterfaceApplications.aux)
-\openout1 = `ImplementingGatedRecurrentUnitsOnFieldProgrammableGateArrayForBrainComputerInterfaceApplications.aux'.
+) (GRU_FPGA_BCI.aux)
+\openout1 = `GRU_FPGA_BCI.aux'.
 
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 12.
 LaTeX Font Info:    ... okay on input line 12.
@@ -324,32 +324,40 @@ Underfull \vbox (badness 4120) has occurred while \output is active []
 
 
 
-<describe_output.png, id=25, 1023.825pt x 243.91125pt>
+<describe_output.png, id=25, 905.3825pt x 243.91125pt>
 File: describe_output.png Graphic file (type png)
 <use describe_output.png>
 Package pdftex.def Info: describe_output.png  used on input line 327.
-(pdftex.def)             Requested size: 516.0pt x 122.93042pt.
-
-Underfull \vbox (badness 1484) has occurred while \output is active []
-
+(pdftex.def)             Requested size: 516.0pt x 139.00851pt.
 
 
 [4 <./reduced_corr_matrix.png>]
 
-<boxplot_colored_MAE.png, id=30, 529.7391pt x 296.5479pt>
+<boxplot_colored_MAE.png, id=30, 554.3109pt x 296.5479pt>
 File: boxplot_colored_MAE.png Graphic file (type png)
 <use boxplot_colored_MAE.png>
 Package pdftex.def Info: boxplot_colored_MAE.png  used on input line 368.
-(pdftex.def)             Requested size: 258.0pt x 144.43188pt.
-<boxplot_colored_RMSE.png, id=31, 529.7391pt x 296.5479pt>
+(pdftex.def)             Requested size: 258.0pt x 138.02908pt.
+<boxplot_colored_RMSE.png, id=31, 554.3109pt x 296.5479pt>
 File: boxplot_colored_RMSE.png Graphic file (type png)
 <use boxplot_colored_RMSE.png>
 Package pdftex.def Info: boxplot_colored_RMSE.png  used on input line 374.
-(pdftex.def)             Requested size: 258.0pt x 144.43188pt.
+(pdftex.def)             Requested size: 258.0pt x 138.02908pt.
 
 
-[5 <./describe_output.png (PNG copy)> <./boxplot_colored_MAE.png>]
-No file ImplementingGatedRecurrentUnitsOnFieldProgrammableGateArrayForBrainComputerInterfaceApplications.bbl.
+[5 <./describe_output.png (PNG copy)> <./boxplot_colored_MAE.png>] (GRU_FPGA_BCI.bbl
+
+
+Underfull \hbox (badness 3623) in paragraph at lines 86--89
+[]\OT1/ptm/m/n/8 PyTorch, ``Gru,'' Jan 2023. [On-line]. Avail-able:
+ []
+
+
+Underfull \hbox (badness 3547) in paragraph at lines 97--101
+[]\OT1/ptm/m/n/8 K. Mo-hammed Rizwan, S. Nikhil Gowda, S. Yash-wanth, and
+ []
+
+)
 
 ** Conference Paper **
 Before submitting the final camera ready copy, remember to:
@@ -363,26 +371,22 @@ Before submitting the final camera ready copy, remember to:
 
 
 
-
-
-[6
-
- <./boxplot_colored_RMSE.png>] (ImplementingGatedRecurrentUnitsOnFieldProgrammableGateArrayForBrainComputerInterfaceApplications.aux)
+[6 <./boxplot_colored_RMSE.png>] (GRU_FPGA_BCI.aux)
  ***********
 LaTeX2e <2025-06-01> patch level 1
 L3 programming layer <2025-09-02>
  ***********
  ) 
 Here is how much of TeX's memory you used:
- 4233 strings out of 468081
- 69016 string characters out of 5425788
- 486196 words of memory out of 5000000
- 32870 multiletter control sequences out of 15000+600000
- 665197 words of font info for 114 fonts, out of 8000000 for 9000
+ 4269 strings out of 468081
+ 68698 string characters out of 5425788
+ 486107 words of memory out of 5000000
+ 32902 multiletter control sequences out of 15000+600000
+ 666333 words of font info for 115 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 57i,11n,65p,437b,336s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 57i,11n,65p,403b,336s stack positions out of 10000i,1000n,20000p,200000b,200000s
 <C:/Users/ajrbe/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi10.pfb><C:/Users/ajrbe/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi7.pfb><C:/Users/ajrbe/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr10.pfb><C:/Users/ajrbe/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr7.pfb><C:/Users/ajrbe/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy10.pfb><C:/Users/ajrbe/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy7.pfb><C:/Users/ajrbe/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/symbols/msbm10.pfb><C:/Users/ajrbe/AppData/Local/Programs/MiKTeX/fonts/type1/urw/times/utmb8a.pfb><C:/Users/ajrbe/AppData/Local/Programs/MiKTeX/fonts/type1/urw/times/utmbi8a.pfb><C:/Users/ajrbe/AppData/Local/Programs/MiKTeX/fonts/type1/urw/times/utmr8a.pfb><C:/Users/ajrbe/AppData/Local/Programs/MiKTeX/fonts/type1/urw/times/utmri8a.pfb>
-Output written on ImplementingGatedRecurrentUnitsOnFieldProgrammableGateArrayForBrainComputerInterfaceApplications.pdf (6 pages, 577669 bytes).
+Output written on GRU_FPGA_BCI.pdf (6 pages, 578301 bytes).
 PDF statistics:
  86 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
