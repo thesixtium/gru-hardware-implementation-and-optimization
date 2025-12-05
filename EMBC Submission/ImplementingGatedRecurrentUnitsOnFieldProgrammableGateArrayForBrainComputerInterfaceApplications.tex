@@ -212,12 +212,12 @@ Each experimental trial follows a structured sequence to ensure consistency:
 \begin{enumerate}
 \item RTL Generation: An untested combination of INT\_WIDTH, FRAC\_WIDTH, $d$, and $h$ is 
 selected from the design space and used as input parameters for RTL generation. Three SystemVerilog modules are 
-automatically generated: (1) the GRU module implementing Equations~\eqref{eq:reset_gate}--\eqref{eq:hidden_state}, 
-(2) a wrapper module that instantiates the GRU with synthesis preservation directives to prevent logic optimization, 
-and (3) a testbench with 100 deterministic test vectors using a BCI motor imagery dataset for reproducible accuracy 
+automatically generated: the GRU module implementing Equations~\eqref{eq:reset_gate}--\eqref{eq:hidden_state}, 
+a wrapper module that instantiates the GRU with synthesis preservation directives to prevent logic optimization, 
+and a testbench with 100 deterministic test vectors using a BCI motor imagery dataset for reproducible accuracy 
 evaluation.
 
-\item Vivado Execution: A Vivado project targeting the Artix-7 FPGA (XXX) is created and all generated SystemVerilog 
+\item Vivado Execution: A Vivado project is created and all generated SystemVerilog 
 files are added to it. Synthesis is executed with resource and timing optimizations, placement and routing is performed, 
 and detailed reports on resource utilization, timing analysis, and power consumption are generated. Finally, a simulation 
 is run using the generated testbench to produce a simulated output.
@@ -237,10 +237,12 @@ regeneration of all files.
 
 \section{Results and Analysis}
 
-GRU implementations were evaluated across a design space with the following parameters: INT\_WIDTH = 6, \(FRAC\_WIDTH  \in \{2, 4, 6, 8\}\),
- \(d \in \{4, 5, 6, 7, 8\}\), and \(h \in \{4, 5, 6, 7, 8\}\), targeting the PUT FPGA PART HERE. This yielded XXX unique 
-configurations, each processed through automated SystemVerilog generation, Vivado synthesis and implementation, and 
-metrics extraction.
+GRU implementations were synthesized for the XCU250-FIGD2104-2L-E FPGA. This particular FPGA was selected solely to ensure sufficient 
+resources for all design variations under investigation, thereby preventing resource constraints from limiting the scope of experimental 
+results. The choice of this specific device does not constrain the applicability of findings; the architectural optimizations and 
+performance characteristics demonstrated herein are device-agnostic and can be applied to any FPGA platform. In practical deployments, the 
+target FPGA should be selected based on the resource requirements of the optimized design rather than constraining the design to fit a 
+predetermined device.
 
 Design Space Exploration Results
 Parameter Correlation Analysis
