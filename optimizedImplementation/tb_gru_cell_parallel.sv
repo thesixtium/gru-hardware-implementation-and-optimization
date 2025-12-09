@@ -108,7 +108,7 @@ module tb_gru_cell_parallel #(
     // Test stimulus and verification
     initial begin
         // Generate filename with all parameters
-        results_filename = $sformatf("gru_results_D%0d_H%0d_DW%0d_FB%0d_NP%0d.txt",
+        results_filename = $sformatf("../../../../../gru_results_D%0d_H%0d_DW%0d_FB%0d_NP%0d.txt",
                                       D, H, DATA_WIDTH, FRAC_BITS, NUM_PARALLEL);
         results_file = $fopen(results_filename, "w");
         
