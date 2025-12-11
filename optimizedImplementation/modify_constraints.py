@@ -1,6 +1,4 @@
-import sys
 import re
-import os
 
 
 def modify_clock_period(xdc_file, new_period):
@@ -19,24 +17,50 @@ def modify_clock_period(xdc_file, new_period):
         # Calculate waveform values (half period for 50% duty cycle)
         half_period = new_period / 2.0
 
-        # Pattern to match create_clock line with period and waveform
-        # Matches: create_clock -period X.XXX -name ... -waveform {X.XXX X.XXX} [get_ports ...]
-        pattern = r'(create_clock\s+-period\s+)\d+\.?\d*(\s+-name\s+\S+\s+-waveform\s+\{)\d+\.?\d*\s+\d+\.?\d*(\}\s+\[get_ports\s+\S+\])'
+        # Split content into lines for line-by-line processing
+        lines = content.split('\n')
+        modified = False
 
-        # Replace with new period and waveform values
-        replacement = rf'\g<1>{new_period:.3f}\g<2>0.000 {half_period:.3f}\g<3>'
+        new_lines = []
+        for line in lines:
+            # Check if this line contains create_clock
+            if 'create_clock' in line and '-period' in line:
+                original_line = line
 
-        new_content = re.sub(pattern, replacement, content)
+                # Replace period value
+                line = re.sub(r'-period\s+\d+\.?\d*', f'-period {new_period:.3f}', line)
+
+                # Replace waveform values if present
+                line = re.sub(
+                    r'-waveform\s+\{\s*\d+\.?\d*\s+\d+\.?\d*\s*\}',
+                    f'-waveform {{0.000 {half_period:.3f}}}',
+                    line
+                )
+
+                if line != original_line:
+                    modified = True
+                    print(f"Modified line found:")
+                    print(f"  OLD: {original_line.strip()}")
+                    print(f"  NEW: {line.strip()}")
+
+            new_lines.append(line)
+
+        new_content = '\n'.join(new_lines)
 
         # Check if replacement was made
-        if new_content == content:
-            # Try simpler pattern without waveform
-            pattern_simple = r'(create_clock\s+-period\s+)\d+\.?\d*'
-            new_content = re.sub(pattern_simple, rf'\g<1>{new_period:.3f}', content)
+        if not modified:
+            print(f"Warning: No create_clock statement found or modified in {xdc_file}")
+            print("\nSearching for create_clock statements...")
 
-            if new_content == content:
-                print(f"Warning: No create_clock statement found in {xdc_file}")
-                return False
+            # Debug: show what we found
+            matches = re.findall(r'.*create_clock.*', content)
+            if matches:
+                print("Found create_clock line(s):")
+                for m in matches:
+                    print(f"  {m}")
+            else:
+                print("No create_clock statements found in file")
+            return False
 
         # Create backup
         backup_file = xdc_file + '.backup'
@@ -64,12 +88,6 @@ def modify_clock_period(xdc_file, new_period):
         return False
     except Exception as e:
         print(f"Error: {e}")
+        import traceback
+        traceback.print_exc()
         return False
-
-
-def period_from_frequency(freq_mhz):
-    """Convert frequency in MHz to period in nanoseconds."""
-    return 1000.0 / freq_mhz
-
-if __name__ == "__main__":
-    modify_clock_period( r"C:\Users\ajrbe\Documents\School\Thesis\BCI\Code\constraints.xdc", 20 )

@@ -2,7 +2,7 @@ set proj_name gru_proj
 set proj_dir ./vivado_proj
 set part_name xcu250-figd2104-2L-e
 set top_module top_level
-set tb_module gru_tb
+set tb_module tb_gru_cell_parallel
 
 # Clean and create project
 if { [file exists $proj_dir] } {
@@ -11,17 +11,18 @@ if { [file exists $proj_dir] } {
 create_project $proj_name $proj_dir -part $part_name
 
 # Add files
-add_files C:/Users/ajrbe/Documents/School/Thesis/BCI/Code/top_level.sv
-add_files C:/Users/ajrbe/Documents/School/Thesis/BCI/Code/gru.sv
-add_files C:/Users/ajrbe/Documents/School/Thesis/BCI/Code/tanh.sv
-add_files C:/Users/ajrbe/Documents/School/Thesis/BCI/Code/sigmoid.sv
-add_files C:/Users/ajrbe/Documents/School/Thesis/BCI/Code/mult.sv
-add_files -fileset sim_1 C:/Users/ajrbe/Documents/School/Thesis/BCI/Code/gru_tb.sv
-read_xdc C:/Users/ajrbe/Documents/School/Thesis/BCI/Code/constraints.xdc
+add_files /home/lex/Documents/git/gru-hardware-implementation-and-optimization/optimizedImplementation/gru_cell_parallel.sv
+add_files /home/lex/Documents/git/gru-hardware-implementation-and-optimization/optimizedImplementation/gru_hidden_state_element.sv
+add_files /home/lex/Documents/git/gru-hardware-implementation-and-optimization/optimizedImplementation/gru_new_gate_element.sv
+add_files /home/lex/Documents/git/gru-hardware-implementation-and-optimization/optimizedImplementation/gru_reset_gate_element.sv
+add_files /home/lex/Documents/git/gru-hardware-implementation-and-optimization/optimizedImplementation/gru_update_gate_element.sv
+add_files /home/lex/Documents/git/gru-hardware-implementation-and-optimization/optimizedImplementation/top_level.sv
+add_files -fileset sim_1 /home/lex/Documents/git/gru-hardware-implementation-and-optimization/optimizedImplementation/tb_gru_cell_parallel.sv
+read_xdc /home/lex/Documents/git/gru-hardware-implementation-and-optimization/optimizedImplementation/constraints.xdc
 
 # Set all .sv files as SystemVerilog
-foreach sv_file [glob -nocomplain C:/Users/ajrbe/Documents/School/Thesis/BCI/Code/*.sv] {
-    if {[file tail $sv_file] ne "gru_tb.sv"} {
+foreach sv_file [glob -nocomplain /home/lex/Documents/git/gru-hardware-implementation-and-optimization/optimizedImplementation/*.sv] {
+    if {[file tail $sv_file] ne "tb_gru_cell_parallel.sv"} {
         set_property file_type {SystemVerilog} [get_files $sv_file]
     }
 }
@@ -41,7 +42,7 @@ set_property -name {xsim.simulate.runtime} -value {1000ns} -objects [get_fileset
 launch_simulation -mode behavioral
 
 # Run simulation for specified time (or use run all)
-run 500ns
+run 500us
 
 # Close simulation
 close_sim -force

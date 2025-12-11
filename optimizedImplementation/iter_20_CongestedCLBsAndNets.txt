@@ -1,0 +1,32 @@
+List of CLB Tiles
+CLEL_R_X91Y418
+CLEL_R_X91Y409
+CLEL_R_X91Y417
+CLEM_X88Y395
+CLEL_R_X88Y395
+CLEM_X87Y388
+CLEL_R_X87Y388
+CLEL_L_X84Y373
+CLEL_R_X84Y373
+CLEL_L_X84Y411
+CLEL_R_X84Y411
+CLEM_X83Y412
+CLEL_R_X83Y412
+CLEM_X83Y415
+CLEL_R_X83Y415
+CLEM_X82Y371
+
+List of Congested Nets
+gru_inst/gen_update_gates[2].update_gate_inst/input_mac_count_reg[0]_rep__0_n_0
+h_t_prev[10][7]
+h_t_prev[14][7]
+gru_inst/gen_update_gates[3].update_gate_inst/b_iz[12]
+gru_inst/gen_update_gates[3].update_gate_inst/sum_input_reg_n_0_[22]
+gru_inst/r_t_reg_n_0_[12][4]
+gru_inst/r_t_reg_n_0_[14][4]
+x_t[36][7]
+x_t[51][1]
+x_t[50][1]
+x_t[49][1]
+x_t[48][1]
+

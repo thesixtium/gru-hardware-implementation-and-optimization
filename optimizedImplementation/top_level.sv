@@ -1,7 +1,7 @@
 `timescale 1ns / 1ps
 // Top-level wrapper for GRU Cell Parallel
-// D = 128 (input features)
-// H = 256 (hidden units)
+// D = 64 (input features)
+// H = 16 (hidden units)
 module top_level(
     input  logic clk,
     input  logic rst_n,
@@ -14,7 +14,7 @@ module top_level(
     localparam int H = 16;
     localparam int DATA_WIDTH = 15;
     localparam int FRAC_BITS = 9;
-    localparam int NUM_PARALLEL = 4;
+    localparam int NUM_PARALLEL = 7;
 
     // ========================================================================
     // All signals with keep and dont_touch attributes
@@ -22,48 +22,48 @@ module top_level(
 
     // Input vectors
     (* keep = "true", dont_touch = "true" *)
-    logic signed [DATA_WIDTH-1:0] x_t [D-1:0] = '{default: '0};
+    logic signed [DATA_WIDTH-1:0] x_t [D-1:0];
 
     (* keep = "true", dont_touch = "true" *)
-    logic signed [DATA_WIDTH-1:0] h_t_prev [H-1:0] = '{default: '0};
+    logic signed [DATA_WIDTH-1:0] h_t_prev [H-1:0];
 
     // Weight matrices
     (* keep = "true", dont_touch = "true" *)
-    logic signed [DATA_WIDTH-1:0] W_ir [H-1:0][D-1:0] = '{default: '{default: 16'sd1}};
+    logic signed [DATA_WIDTH-1:0] W_ir [H-1:0][D-1:0];
 
     (* keep = "true", dont_touch = "true" *)
-    logic signed [DATA_WIDTH-1:0] W_hr [H-1:0][H-1:0] = '{default: '{default: 16'sd1}};
+    logic signed [DATA_WIDTH-1:0] W_hr [H-1:0][H-1:0];
 
     (* keep = "true", dont_touch = "true" *)
-    logic signed [DATA_WIDTH-1:0] W_iz [H-1:0][D-1:0] = '{default: '{default: 16'sd1}};
+    logic signed [DATA_WIDTH-1:0] W_iz [H-1:0][D-1:0];
 
     (* keep = "true", dont_touch = "true" *)
-    logic signed [DATA_WIDTH-1:0] W_hz [H-1:0][H-1:0] = '{default: '{default: 16'sd1}};
+    logic signed [DATA_WIDTH-1:0] W_hz [H-1:0][H-1:0];
 
     (* keep = "true", dont_touch = "true" *)
-    logic signed [DATA_WIDTH-1:0] W_in [H-1:0][D-1:0] = '{default: '{default: 16'sd1}};
+    logic signed [DATA_WIDTH-1:0] W_in [H-1:0][D-1:0];
 
     (* keep = "true", dont_touch = "true" *)
-    logic signed [DATA_WIDTH-1:0] W_hn [H-1:0][H-1:0] = '{default: '{default: 16'sd1}};
+    logic signed [DATA_WIDTH-1:0] W_hn [H-1:0][H-1:0];
 
     // Bias vectors
     (* keep = "true", dont_touch = "true" *)
-    logic signed [DATA_WIDTH-1:0] b_ir [H-1:0] = '{default: '0};
+    logic signed [DATA_WIDTH-1:0] b_ir [H-1:0];
 
     (* keep = "true", dont_touch = "true" *)
-    logic signed [DATA_WIDTH-1:0] b_hr [H-1:0] = '{default: '0};
+    logic signed [DATA_WIDTH-1:0] b_hr [H-1:0];
 
     (* keep = "true", dont_touch = "true" *)
-    logic signed [DATA_WIDTH-1:0] b_iz [H-1:0] = '{default: '0};
+    logic signed [DATA_WIDTH-1:0] b_iz [H-1:0];
 
     (* keep = "true", dont_touch = "true" *)
-    logic signed [DATA_WIDTH-1:0] b_hz [H-1:0] = '{default: '0};
+    logic signed [DATA_WIDTH-1:0] b_hz [H-1:0];
 
     (* keep = "true", dont_touch = "true" *)
-    logic signed [DATA_WIDTH-1:0] b_in [H-1:0] = '{default: '0};
+    logic signed [DATA_WIDTH-1:0] b_in [H-1:0];
 
     (* keep = "true", dont_touch = "true" *)
-    logic signed [DATA_WIDTH-1:0] b_hn [H-1:0] = '{default: '0};
+    logic signed [DATA_WIDTH-1:0] b_hn [H-1:0];
 
     // Output hidden state
     (* keep = "true", dont_touch = "true" *)
@@ -71,7 +71,53 @@ module top_level(
 
     // Preserved outputs
     (* keep = "true", dont_touch = "true" *)
-    logic signed [DATA_WIDTH-1:0] preserved_h_t [H-1:0] = '{default: '0};
+    logic signed [DATA_WIDTH-1:0] preserved_h_t [H-1:0];
+
+    // ========================================================================
+    // Initialize all arrays in an initial block
+    // ========================================================================
+    initial begin
+        // Initialize input vectors to zero
+        for (int i = 0; i < D; i++) begin
+            x_t[i] = '0;
+        end
+
+        for (int i = 0; i < H; i++) begin
+            h_t_prev[i] = '0;
+        end
+
+        // Initialize weight matrices to 1
+        for (int i = 0; i < H; i++) begin
+            for (int j = 0; j < D; j++) begin
+                W_ir[i][j] = 16'sd1;
+                W_iz[i][j] = 16'sd1;
+                W_in[i][j] = 16'sd1;
+            end
+        end
+
+        for (int i = 0; i < H; i++) begin
+            for (int j = 0; j < H; j++) begin
+                W_hr[i][j] = 16'sd1;
+                W_hz[i][j] = 16'sd1;
+                W_hn[i][j] = 16'sd1;
+            end
+        end
+
+        // Initialize bias vectors to zero
+        for (int i = 0; i < H; i++) begin
+            b_ir[i] = '0;
+            b_hr[i] = '0;
+            b_iz[i] = '0;
+            b_hz[i] = '0;
+            b_in[i] = '0;
+            b_hn[i] = '0;
+        end
+
+        // Initialize preserved output to zero
+        for (int i = 0; i < H; i++) begin
+            preserved_h_t[i] = '0;
+        end
+    end
 
     // ========================================================================
     // Instantiate GRU Cell Parallel
@@ -110,7 +156,9 @@ module top_level(
     // ========================================================================
     always_ff @(posedge clk or negedge rst_n) begin
         if (!rst_n) begin
-            preserved_h_t <= '{default: '0};
+            for (int i = 0; i < H; i++) begin
+                preserved_h_t[i] <= '0;
+            end
         end else begin
             preserved_h_t <= h_t;
         end

@@ -8,7 +8,7 @@ module tb_gru_cell_parallel #(
     parameter int H = 16,         // Smaller for faster testing
     parameter int DATA_WIDTH = 15,
     parameter int FRAC_BITS = 9,
-    parameter int NUM_PARALLEL = 4
+    parameter int NUM_PARALLEL = 7
 );
 
     // Clock and reset

@@ -1,7 +1,6 @@
 import subprocess
 import pandas as pd
 import re
-import numpy as np
 from pathlib import Path
 
 from modify_num_parallel import modify_num_parallel
@@ -11,10 +10,8 @@ import time
 from modify_constraints import modify_clock_period
 
 # 🔧 CHANGE THIS to match your Vivado installation path
-VIVADO_PATH = r"C:\Xilinx\Vivado\2024.1\bin\vivado.bat"
-
-import sys
-import re
+# VIVADO_PATH = r"C:\Xilinx\Vivado\2024.1\bin\vivado.bat"
+VIVADO_PATH = r"/tools/Xilinx/Vivado/2024.1/bin/vivado"
 
 
 def extract_avg_cycles(filename):
@@ -63,7 +60,7 @@ def main():
         f.write("")
 
     count = 0
-    clock_period_range = [ 4, 5, 10 ]
+    clock_period_range = [ i for i in range(1, 21) ]
     """
     500 MHz: -period 2.000
     250 MHz: -period 4.000
@@ -72,13 +69,13 @@ def main():
     50 MHz: -period 20.000
     """
 
-    num_parallel_range = [1, 2, 4, 8]
+    num_parallel_range = [ i for i in range(1, 17) ]
 
     total = len(clock_period_range) * len(num_parallel_range)
 
     for attempt in range(1):
-        for clock_period in clock_period_range:
-            for num_parallel in num_parallel_range:
+        for num_parallel in num_parallel_range:
+            for clock_period in clock_period_range:
 
                 start_time = time.time()
                 count += 1
@@ -91,12 +88,12 @@ def main():
 
                 try:
                     modify_clock_period(
-                        r"C:\Users\ajrbe\Documents\School\Thesis\BCI\Code\constraints.xdc",
+                        r"/home/lex/Documents/git/gru-hardware-implementation-and-optimization/optimizedImplementation/constraints.xdc",
                         clock_period
                     )
 
                     modify_num_parallel(
-                        r"C:\Users\ajrbe\Documents\School\Thesis\BCI\Code\gru_cell_parallel.sv",
+                        r"/home/lex/Documents/git/gru-hardware-implementation-and-optimization/optimizedImplementation/",
                         num_parallel
                     )
 
@@ -120,11 +117,12 @@ def main():
                         metrics["Cycles"] = cycles
                         metrics["Clock Period"] = clock_period
                         metrics["Execution Time (m)"] = (time.time() - start_time) / 60
-                        with open(filename, "a") as f:
-                            f.write(f'\t{metrics["Cycles"]}\t{metrics["Execution Time (m)"]}\n')
 
                         for k, v in metrics.items():
                             print(f"{k:20s}: {v}")
+
+                        with open(filename, "a") as f:
+                            f.write(f'\tCycles: {metrics["Cycles"]}\tWNS: {metrics["WNS (ns)"]}\t{metrics["Execution Time (m)"]}\n')
 
                         data.append(metrics)
                     else:
@@ -141,9 +139,9 @@ def main():
                         metrics["Cycles"] = 0
                         metrics["Clock Period"] = clock_period
                         metrics["Execution Time (m)"] = (time.time() - start_time) / 60
-                        with open(filename, "a") as f:
-                            f.write(f'\t{metrics["Cycles"]}\t{metrics["Execution Time (m)"]}\n')
 
+                        with open(filename, "a") as f:
+                            f.write(f'\tCycles: {metrics["Cycles"]}\tWNS: {metrics["WNS (ns)"]}\t{metrics["Execution Time (m)"]}\n')
                         data.append(metrics)
                         print("No metrics extracted - reports may not have been generated")
                     print("=" * 50)
@@ -163,24 +161,19 @@ def main():
                     metrics["Cycles"] = 0
                     metrics["Clock Period"] = clock_period
                     metrics["Execution Time (m)"] = (time.time() - start_time) / 60
-                    with open(filename, "a") as f:
-                        f.write(f'\t{metrics["Cycles"]}\t{metrics["Execution Time (m)"]}\n')
 
+                    with open(filename, "a") as f:
+                        f.write(
+                            f'\tCycles: {metrics["Cycles"]}\tWNS: {metrics["WNS (ns)"]}\t{metrics["Execution Time (m)"]}\n')
                     data.append(metrics)
 
     # Save to CSV
     df = pd.DataFrame(data)
-    df.to_csv("data.csv", index=False)
+    df.to_csv("optimized_data.csv", index=False)
     print("\n" + "=" * 60)
-    print("Results saved to data.csv")
+    print("Results saved to optimized_data.csv")
     print("=" * 60)
 
-    # Print summary of MAE results
-    print("\nMAE Summary:")
-    print("=" * 60)
-    for _, row in df.iterrows():
-        if row["MAE"] > 0:
-            print(f"d={row['D']}, h={row['H']}, int={row['int bits']}, frac={row['frac bits']}: MAE = {row['MAE']:.8f}")
-
+    #
 if __name__ == "__main__":
     main()

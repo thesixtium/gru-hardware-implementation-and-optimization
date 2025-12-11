@@ -1,0 +1,14 @@
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "/home/lex/Documents/git/gru-hardware-implementation-and-optimization/optimizedImplementation/gru_cell_parallel.sv" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module gru_cell_parallel
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "/home/lex/Documents/git/gru-hardware-implementation-and-optimization/optimizedImplementation/gru_hidden_state_element.sv" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module gru_hidden_state_element
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "/home/lex/Documents/git/gru-hardware-implementation-and-optimization/optimizedImplementation/gru_new_gate_element.sv" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module gru_new_gate_element
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "/home/lex/Documents/git/gru-hardware-implementation-and-optimization/optimizedImplementation/gru_reset_gate_element.sv" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module gru_reset_gate_element
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "/home/lex/Documents/git/gru-hardware-implementation-and-optimization/optimizedImplementation/gru_update_gate_element.sv" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module gru_update_gate_element
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "/home/lex/Documents/git/gru-hardware-implementation-and-optimization/optimizedImplementation/tb_gru_cell_parallel.sv" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module tb_gru_cell_parallel
+INFO: [VRFC 10-2263] Analyzing Verilog file "/home/lex/Documents/git/gru-hardware-implementation-and-optimization/optimizedImplementation/vivado_proj/gru_proj.sim/sim_1/behav/xsim/glbl.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module glbl

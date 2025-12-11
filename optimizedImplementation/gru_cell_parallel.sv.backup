@@ -6,7 +6,7 @@ module gru_cell_parallel #(
     parameter int H = 16,
     parameter int DATA_WIDTH = 15,
     parameter int FRAC_BITS = 9,
-    parameter int NUM_PARALLEL = 8
+    parameter int NUM_PARALLEL = 6
 ) (
     input  logic                     clk,
     input  logic                     rst_n,

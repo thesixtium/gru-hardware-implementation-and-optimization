@@ -1,0 +1,14 @@
+# compile verilog/system verilog design source files
+sv xil_defaultlib  \
+"../../../../../gru_cell_parallel.sv" \
+"../../../../../gru_hidden_state_element.sv" \
+"../../../../../gru_new_gate_element.sv" \
+"../../../../../gru_reset_gate_element.sv" \
+"../../../../../gru_update_gate_element.sv" \
+"../../../../../tb_gru_cell_parallel.sv" \
+
+# compile glbl module
+verilog xil_defaultlib "glbl.v"
+
+# Do not sort compile order
+nosort
