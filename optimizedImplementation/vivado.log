@@ -1,0 +1,291 @@
+#-----------------------------------------------------------
+# Vivado v2024.1 (64-bit)
+# SW Build 5076996 on Wed May 22 18:36:09 MDT 2024
+# IP Build 5075265 on Wed May 22 21:45:21 MDT 2024
+# SharedData Build 5076995 on Wed May 22 18:29:18 MDT 2024
+# Start of session at: Thu Dec 11 18:40:16 2025
+# Process ID: 265413
+# Current directory: /home/lex/Documents/git/gru-hardware-implementation-and-optimization/optimizedImplementation
+# Command line: vivado -mode batch -source run_vivado.tcl
+# Log file: /home/lex/Documents/git/gru-hardware-implementation-and-optimization/optimizedImplementation/vivado.log
+# Journal file: /home/lex/Documents/git/gru-hardware-implementation-and-optimization/optimizedImplementation/vivado.jou
+# Running On        :Toothless
+# Platform          :Ubuntu
+# Operating System  :Ubuntu 20.04.6 LTS
+# Processor Detail  :AMD Ryzen 5 7600X 6-Core Processor
+# CPU Frequency     :3000.000 MHz
+# CPU Physical cores:6
+# CPU Logical cores :12
+# Host memory       :32695 MB
+# Swap memory       :2147 MB
+# Total Virtual     :34842 MB
+# Available Virtual :28927 MB
+#-----------------------------------------------------------
+source run_vivado.tcl
+# set proj_name gru_proj
+# set proj_dir ./vivado_proj
+# set part_name xcu250-figd2104-2L-e
+# set top_module top_level
+# set tb_module tb_gru_cell_parallel
+# if { [file exists $proj_dir] } {
+#     file delete -force $proj_dir
+# }
+# create_project $proj_name $proj_dir -part $part_name
+# add_files /home/lex/Documents/git/gru-hardware-implementation-and-optimization/optimizedImplementation/gru_cell_parallel.sv
+# add_files /home/lex/Documents/git/gru-hardware-implementation-and-optimization/optimizedImplementation/gru_hidden_state_element.sv
+# add_files /home/lex/Documents/git/gru-hardware-implementation-and-optimization/optimizedImplementation/gru_new_gate_element.sv
+# add_files /home/lex/Documents/git/gru-hardware-implementation-and-optimization/optimizedImplementation/gru_reset_gate_element.sv
+# add_files /home/lex/Documents/git/gru-hardware-implementation-and-optimization/optimizedImplementation/gru_update_gate_element.sv
+# add_files /home/lex/Documents/git/gru-hardware-implementation-and-optimization/optimizedImplementation/top_level.sv
+# add_files -fileset sim_1 /home/lex/Documents/git/gru-hardware-implementation-and-optimization/optimizedImplementation/tb_gru_cell_parallel.sv
+# read_xdc /home/lex/Documents/git/gru-hardware-implementation-and-optimization/optimizedImplementation/constraints.xdc
+# foreach sv_file [glob -nocomplain /home/lex/Documents/git/gru-hardware-implementation-and-optimization/optimizedImplementation/*.sv] {
+#     if {[file tail $sv_file] ne "tb_gru_cell_parallel.sv"} {
+#         set_property file_type {SystemVerilog} [get_files $sv_file]
+#     }
+# }
+# set_property top $top_module [current_fileset]
+# update_compile_order -fileset sources_1
+# set_property top $tb_module [get_filesets sim_1]
+# update_compile_order -fileset sim_1
+# set_property -name {xsim.simulate.runtime} -value {1000ns} -objects [get_filesets sim_1]
+# launch_simulation -mode behavioral
+Command: launch_simulation  -mode behavioral
+INFO: [Vivado 12-12493] Simulation top is 'tb_gru_cell_parallel'
+INFO: [Vivado 12-5682] Launching behavioral simulation in '/home/lex/Documents/git/gru-hardware-implementation-and-optimization/optimizedImplementation/vivado_proj/gru_proj.sim/sim_1/behav/xsim'
+INFO: [SIM-utils-51] Simulation object is 'sim_1'
+INFO: [SIM-utils-72] Using boost library from '/tools/Xilinx/Vivado/2024.1/tps/boost_1_72_0'
+INFO: [SIM-utils-54] Inspecting design source files for 'tb_gru_cell_parallel' in fileset 'sim_1'...
+INFO: [USF-XSim-97] Finding global include files...
+INFO: [USF-XSim-98] Fetching design files from 'sim_1'...
+INFO: [USF-XSim-2] XSim::Compile design
+INFO: [USF-XSim-61] Executing 'COMPILE and ANALYZE' step in '/home/lex/Documents/git/gru-hardware-implementation-and-optimization/optimizedImplementation/vivado_proj/gru_proj.sim/sim_1/behav/xsim'
+xvlog --incr --relax -L uvm -prj tb_gru_cell_parallel_vlog.prj
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "/home/lex/Documents/git/gru-hardware-implementation-and-optimization/optimizedImplementation/gru_cell_parallel.sv" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module gru_cell_parallel
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "/home/lex/Documents/git/gru-hardware-implementation-and-optimization/optimizedImplementation/gru_hidden_state_element.sv" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module gru_hidden_state_element
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "/home/lex/Documents/git/gru-hardware-implementation-and-optimization/optimizedImplementation/gru_new_gate_element.sv" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module gru_new_gate_element
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "/home/lex/Documents/git/gru-hardware-implementation-and-optimization/optimizedImplementation/gru_reset_gate_element.sv" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module gru_reset_gate_element
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "/home/lex/Documents/git/gru-hardware-implementation-and-optimization/optimizedImplementation/gru_update_gate_element.sv" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module gru_update_gate_element
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "/home/lex/Documents/git/gru-hardware-implementation-and-optimization/optimizedImplementation/tb_gru_cell_parallel.sv" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module tb_gru_cell_parallel
+INFO: [VRFC 10-2263] Analyzing Verilog file "/home/lex/Documents/git/gru-hardware-implementation-and-optimization/optimizedImplementation/vivado_proj/gru_proj.sim/sim_1/behav/xsim/glbl.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module glbl
+Waiting for jobs to finish...
+No pending jobs, compilation finished.
+INFO: [USF-XSim-69] 'compile' step finished in '0' seconds
+INFO: [USF-XSim-3] XSim::Elaborate design
+INFO: [USF-XSim-61] Executing 'ELABORATE' step in '/home/lex/Documents/git/gru-hardware-implementation-and-optimization/optimizedImplementation/vivado_proj/gru_proj.sim/sim_1/behav/xsim'
+xelab --incr --debug typical --relax --mt 8 -L xil_defaultlib -L uvm -L unisims_ver -L unimacro_ver -L secureip --snapshot tb_gru_cell_parallel_behav xil_defaultlib.tb_gru_cell_parallel xil_defaultlib.glbl -log elaborate.log
+Vivado Simulator v2024.1
+Copyright 1986-2022 Xilinx, Inc. All Rights Reserved.
+Copyright 2022-2024 Advanced Micro Devices, Inc. All Rights Reserved.
+Running: /tools/Xilinx/Vivado/2024.1/bin/unwrapped/lnx64.o/xelab --incr --debug typical --relax --mt 8 -L xil_defaultlib -L uvm -L unisims_ver -L unimacro_ver -L secureip --snapshot tb_gru_cell_parallel_behav xil_defaultlib.tb_gru_cell_parallel xil_defaultlib.glbl -log elaborate.log 
+Using 8 slave threads.
+Starting static elaboration
+Pass Through NonSizing Optimizer
+Completed static elaboration
+Starting simulation data flow analysis
+WARNING: [XSIM 43-4099] "/home/lex/Documents/git/gru-hardware-implementation-and-optimization/optimizedImplementation/gru_cell_parallel.sv" Line 4. Module gru_cell_parallel_default doesn't have a timescale but at least one module in design has a timescale.
+WARNING: [XSIM 43-4099] "/home/lex/Documents/git/gru-hardware-implementation-and-optimization/optimizedImplementation/gru_reset_gate_element.sv" Line 1. Module gru_reset_gate_element(D=64,H=16,DATA_WIDTH=15,FRAC_BITS=9) doesn't have a timescale but at least one module in design has a timescale.
+WARNING: [XSIM 43-4099] "/home/lex/Documents/git/gru-hardware-implementation-and-optimization/optimizedImplementation/gru_reset_gate_element.sv" Line 1. Module gru_reset_gate_element(D=64,H=16,DATA_WIDTH=15,FRAC_BITS=9) doesn't have a timescale but at least one module in design has a timescale.
+WARNING: [XSIM 43-4099] "/home/lex/Documents/git/gru-hardware-implementation-and-optimization/optimizedImplementation/gru_reset_gate_element.sv" Line 1. Module gru_reset_gate_element(D=64,H=16,DATA_WIDTH=15,FRAC_BITS=9) doesn't have a timescale but at least one module in design has a timescale.
+WARNING: [XSIM 43-4099] "/home/lex/Documents/git/gru-hardware-implementation-and-optimization/optimizedImplementation/gru_reset_gate_element.sv" Line 1. Module gru_reset_gate_element(D=64,H=16,DATA_WIDTH=15,FRAC_BITS=9) doesn't have a timescale but at least one module in design has a timescale.
+WARNING: [XSIM 43-4099] "/home/lex/Documents/git/gru-hardware-implementation-and-optimization/optimizedImplementation/gru_reset_gate_element.sv" Line 1. Module gru_reset_gate_element(D=64,H=16,DATA_WIDTH=15,FRAC_BITS=9) doesn't have a timescale but at least one module in design has a timescale.
+WARNING: [XSIM 43-4099] "/home/lex/Documents/git/gru-hardware-implementation-and-optimization/optimizedImplementation/gru_reset_gate_element.sv" Line 1. Module gru_reset_gate_element(D=64,H=16,DATA_WIDTH=15,FRAC_BITS=9) doesn't have a timescale but at least one module in design has a timescale.
+WARNING: [XSIM 43-4099] "/home/lex/Documents/git/gru-hardware-implementation-and-optimization/optimizedImplementation/gru_reset_gate_element.sv" Line 1. Module gru_reset_gate_element(D=64,H=16,DATA_WIDTH=15,FRAC_BITS=9) doesn't have a timescale but at least one module in design has a timescale.
+WARNING: [XSIM 43-4099] "/home/lex/Documents/git/gru-hardware-implementation-and-optimization/optimizedImplementation/gru_reset_gate_element.sv" Line 1. Module gru_reset_gate_element(D=64,H=16,DATA_WIDTH=15,FRAC_BITS=9) doesn't have a timescale but at least one module in design has a timescale.
+WARNING: [XSIM 43-4099] "/home/lex/Documents/git/gru-hardware-implementation-and-optimization/optimizedImplementation/gru_update_gate_element.sv" Line 4. Module gru_update_gate_element(D=64,H=16,DATA_WIDTH=15,FRAC_BITS=9) doesn't have a timescale but at least one module in design has a timescale.
+WARNING: [XSIM 43-4099] "/home/lex/Documents/git/gru-hardware-implementation-and-optimization/optimizedImplementation/gru_update_gate_element.sv" Line 4. Module gru_update_gate_element(D=64,H=16,DATA_WIDTH=15,FRAC_BITS=9) doesn't have a timescale but at least one module in design has a timescale.
+WARNING: [XSIM 43-4099] "/home/lex/Documents/git/gru-hardware-implementation-and-optimization/optimizedImplementation/gru_update_gate_element.sv" Line 4. Module gru_update_gate_element(D=64,H=16,DATA_WIDTH=15,FRAC_BITS=9) doesn't have a timescale but at least one module in design has a timescale.
+WARNING: [XSIM 43-4099] "/home/lex/Documents/git/gru-hardware-implementation-and-optimization/optimizedImplementation/gru_update_gate_element.sv" Line 4. Module gru_update_gate_element(D=64,H=16,DATA_WIDTH=15,FRAC_BITS=9) doesn't have a timescale but at least one module in design has a timescale.
+WARNING: [XSIM 43-4099] "/home/lex/Documents/git/gru-hardware-implementation-and-optimization/optimizedImplementation/gru_update_gate_element.sv" Line 4. Module gru_update_gate_element(D=64,H=16,DATA_WIDTH=15,FRAC_BITS=9) doesn't have a timescale but at least one module in design has a timescale.
+WARNING: [XSIM 43-4099] "/home/lex/Documents/git/gru-hardware-implementation-and-optimization/optimizedImplementation/gru_update_gate_element.sv" Line 4. Module gru_update_gate_element(D=64,H=16,DATA_WIDTH=15,FRAC_BITS=9) doesn't have a timescale but at least one module in design has a timescale.
+WARNING: [XSIM 43-4099] "/home/lex/Documents/git/gru-hardware-implementation-and-optimization/optimizedImplementation/gru_update_gate_element.sv" Line 4. Module gru_update_gate_element(D=64,H=16,DATA_WIDTH=15,FRAC_BITS=9) doesn't have a timescale but at least one module in design has a timescale.
+WARNING: [XSIM 43-4099] "/home/lex/Documents/git/gru-hardware-implementation-and-optimization/optimizedImplementation/gru_update_gate_element.sv" Line 4. Module gru_update_gate_element(D=64,H=16,DATA_WIDTH=15,FRAC_BITS=9) doesn't have a timescale but at least one module in design has a timescale.
+WARNING: [XSIM 43-4099] "/home/lex/Documents/git/gru-hardware-implementation-and-optimization/optimizedImplementation/gru_new_gate_element.sv" Line 4. Module gru_new_gate_element(D=64,H=16,DATA_WIDTH=15,FRAC_BITS=9) doesn't have a timescale but at least one module in design has a timescale.
+WARNING: [XSIM 43-4099] "/home/lex/Documents/git/gru-hardware-implementation-and-optimization/optimizedImplementation/gru_new_gate_element.sv" Line 4. Module gru_new_gate_element(D=64,H=16,DATA_WIDTH=15,FRAC_BITS=9) doesn't have a timescale but at least one module in design has a timescale.
+WARNING: [XSIM 43-4099] "/home/lex/Documents/git/gru-hardware-implementation-and-optimization/optimizedImplementation/gru_new_gate_element.sv" Line 4. Module gru_new_gate_element(D=64,H=16,DATA_WIDTH=15,FRAC_BITS=9) doesn't have a timescale but at least one module in design has a timescale.
+WARNING: [XSIM 43-4099] "/home/lex/Documents/git/gru-hardware-implementation-and-optimization/optimizedImplementation/gru_new_gate_element.sv" Line 4. Module gru_new_gate_element(D=64,H=16,DATA_WIDTH=15,FRAC_BITS=9) doesn't have a timescale but at least one module in design has a timescale.
+WARNING: [XSIM 43-4099] "/home/lex/Documents/git/gru-hardware-implementation-and-optimization/optimizedImplementation/gru_new_gate_element.sv" Line 4. Module gru_new_gate_element(D=64,H=16,DATA_WIDTH=15,FRAC_BITS=9) doesn't have a timescale but at least one module in design has a timescale.
+WARNING: [XSIM 43-4099] "/home/lex/Documents/git/gru-hardware-implementation-and-optimization/optimizedImplementation/gru_new_gate_element.sv" Line 4. Module gru_new_gate_element(D=64,H=16,DATA_WIDTH=15,FRAC_BITS=9) doesn't have a timescale but at least one module in design has a timescale.
+WARNING: [XSIM 43-4099] "/home/lex/Documents/git/gru-hardware-implementation-and-optimization/optimizedImplementation/gru_new_gate_element.sv" Line 4. Module gru_new_gate_element(D=64,H=16,DATA_WIDTH=15,FRAC_BITS=9) doesn't have a timescale but at least one module in design has a timescale.
+WARNING: [XSIM 43-4099] "/home/lex/Documents/git/gru-hardware-implementation-and-optimization/optimizedImplementation/gru_new_gate_element.sv" Line 4. Module gru_new_gate_element(D=64,H=16,DATA_WIDTH=15,FRAC_BITS=9) doesn't have a timescale but at least one module in design has a timescale.
+WARNING: [XSIM 43-4099] "/home/lex/Documents/git/gru-hardware-implementation-and-optimization/optimizedImplementation/gru_hidden_state_element.sv" Line 4. Module gru_hidden_state_element(DATA_WIDTH=15,FRAC_BITS=9) doesn't have a timescale but at least one module in design has a timescale.
+WARNING: [XSIM 43-4099] "/home/lex/Documents/git/gru-hardware-implementation-and-optimization/optimizedImplementation/gru_hidden_state_element.sv" Line 4. Module gru_hidden_state_element(DATA_WIDTH=15,FRAC_BITS=9) doesn't have a timescale but at least one module in design has a timescale.
+WARNING: [XSIM 43-4099] "/home/lex/Documents/git/gru-hardware-implementation-and-optimization/optimizedImplementation/gru_hidden_state_element.sv" Line 4. Module gru_hidden_state_element(DATA_WIDTH=15,FRAC_BITS=9) doesn't have a timescale but at least one module in design has a timescale.
+WARNING: [XSIM 43-4099] "/home/lex/Documents/git/gru-hardware-implementation-and-optimization/optimizedImplementation/gru_hidden_state_element.sv" Line 4. Module gru_hidden_state_element(DATA_WIDTH=15,FRAC_BITS=9) doesn't have a timescale but at least one module in design has a timescale.
+WARNING: [XSIM 43-4099] "/home/lex/Documents/git/gru-hardware-implementation-and-optimization/optimizedImplementation/gru_hidden_state_element.sv" Line 4. Module gru_hidden_state_element(DATA_WIDTH=15,FRAC_BITS=9) doesn't have a timescale but at least one module in design has a timescale.
+WARNING: [XSIM 43-4099] "/home/lex/Documents/git/gru-hardware-implementation-and-optimization/optimizedImplementation/gru_hidden_state_element.sv" Line 4. Module gru_hidden_state_element(DATA_WIDTH=15,FRAC_BITS=9) doesn't have a timescale but at least one module in design has a timescale.
+WARNING: [XSIM 43-4099] "/home/lex/Documents/git/gru-hardware-implementation-and-optimization/optimizedImplementation/gru_hidden_state_element.sv" Line 4. Module gru_hidden_state_element(DATA_WIDTH=15,FRAC_BITS=9) doesn't have a timescale but at least one module in design has a timescale.
+WARNING: [XSIM 43-4099] "/home/lex/Documents/git/gru-hardware-implementation-and-optimization/optimizedImplementation/gru_hidden_state_element.sv" Line 4. Module gru_hidden_state_element(DATA_WIDTH=15,FRAC_BITS=9) doesn't have a timescale but at least one module in design has a timescale.
+WARNING: [XSIM 43-4099] "/home/lex/Documents/git/gru-hardware-implementation-and-optimization/optimizedImplementation/gru_cell_parallel.sv" Line 4. Module gru_cell_parallel_default doesn't have a timescale but at least one module in design has a timescale.
+WARNING: [XSIM 43-4099] "/home/lex/Documents/git/gru-hardware-implementation-and-optimization/optimizedImplementation/gru_reset_gate_element.sv" Line 1. Module gru_reset_gate_element(D=64,H=16,DATA_WIDTH=15,FRAC_BITS=9) doesn't have a timescale but at least one module in design has a timescale.
+WARNING: [XSIM 43-4099] "/home/lex/Documents/git/gru-hardware-implementation-and-optimization/optimizedImplementation/gru_reset_gate_element.sv" Line 1. Module gru_reset_gate_element(D=64,H=16,DATA_WIDTH=15,FRAC_BITS=9) doesn't have a timescale but at least one module in design has a timescale.
+WARNING: [XSIM 43-4099] "/home/lex/Documents/git/gru-hardware-implementation-and-optimization/optimizedImplementation/gru_reset_gate_element.sv" Line 1. Module gru_reset_gate_element(D=64,H=16,DATA_WIDTH=15,FRAC_BITS=9) doesn't have a timescale but at least one module in design has a timescale.
+WARNING: [XSIM 43-4099] "/home/lex/Documents/git/gru-hardware-implementation-and-optimization/optimizedImplementation/gru_reset_gate_element.sv" Line 1. Module gru_reset_gate_element(D=64,H=16,DATA_WIDTH=15,FRAC_BITS=9) doesn't have a timescale but at least one module in design has a timescale.
+WARNING: [XSIM 43-4099] "/home/lex/Documents/git/gru-hardware-implementation-and-optimization/optimizedImplementation/gru_reset_gate_element.sv" Line 1. Module gru_reset_gate_element(D=64,H=16,DATA_WIDTH=15,FRAC_BITS=9) doesn't have a timescale but at least one module in design has a timescale.
+WARNING: [XSIM 43-4099] "/home/lex/Documents/git/gru-hardware-implementation-and-optimization/optimizedImplementation/gru_reset_gate_element.sv" Line 1. Module gru_reset_gate_element(D=64,H=16,DATA_WIDTH=15,FRAC_BITS=9) doesn't have a timescale but at least one module in design has a timescale.
+WARNING: [XSIM 43-4099] "/home/lex/Documents/git/gru-hardware-implementation-and-optimization/optimizedImplementation/gru_reset_gate_element.sv" Line 1. Module gru_reset_gate_element(D=64,H=16,DATA_WIDTH=15,FRAC_BITS=9) doesn't have a timescale but at least one module in design has a timescale.
+WARNING: [XSIM 43-4099] "/home/lex/Documents/git/gru-hardware-implementation-and-optimization/optimizedImplementation/gru_reset_gate_element.sv" Line 1. Module gru_reset_gate_element(D=64,H=16,DATA_WIDTH=15,FRAC_BITS=9) doesn't have a timescale but at least one module in design has a timescale.
+WARNING: [XSIM 43-4099] "/home/lex/Documents/git/gru-hardware-implementation-and-optimization/optimizedImplementation/gru_update_gate_element.sv" Line 4. Module gru_update_gate_element(D=64,H=16,DATA_WIDTH=15,FRAC_BITS=9) doesn't have a timescale but at least one module in design has a timescale.
+WARNING: [XSIM 43-4099] "/home/lex/Documents/git/gru-hardware-implementation-and-optimization/optimizedImplementation/gru_update_gate_element.sv" Line 4. Module gru_update_gate_element(D=64,H=16,DATA_WIDTH=15,FRAC_BITS=9) doesn't have a timescale but at least one module in design has a timescale.
+WARNING: [XSIM 43-4099] "/home/lex/Documents/git/gru-hardware-implementation-and-optimization/optimizedImplementation/gru_update_gate_element.sv" Line 4. Module gru_update_gate_element(D=64,H=16,DATA_WIDTH=15,FRAC_BITS=9) doesn't have a timescale but at least one module in design has a timescale.
+WARNING: [XSIM 43-4099] "/home/lex/Documents/git/gru-hardware-implementation-and-optimization/optimizedImplementation/gru_update_gate_element.sv" Line 4. Module gru_update_gate_element(D=64,H=16,DATA_WIDTH=15,FRAC_BITS=9) doesn't have a timescale but at least one module in design has a timescale.
+WARNING: [XSIM 43-4099] "/home/lex/Documents/git/gru-hardware-implementation-and-optimization/optimizedImplementation/gru_update_gate_element.sv" Line 4. Module gru_update_gate_element(D=64,H=16,DATA_WIDTH=15,FRAC_BITS=9) doesn't have a timescale but at least one module in design has a timescale.
+WARNING: [XSIM 43-4099] "/home/lex/Documents/git/gru-hardware-implementation-and-optimization/optimizedImplementation/gru_update_gate_element.sv" Line 4. Module gru_update_gate_element(D=64,H=16,DATA_WIDTH=15,FRAC_BITS=9) doesn't have a timescale but at least one module in design has a timescale.
+WARNING: [XSIM 43-4099] "/home/lex/Documents/git/gru-hardware-implementation-and-optimization/optimizedImplementation/gru_update_gate_element.sv" Line 4. Module gru_update_gate_element(D=64,H=16,DATA_WIDTH=15,FRAC_BITS=9) doesn't have a timescale but at least one module in design has a timescale.
+WARNING: [XSIM 43-4099] "/home/lex/Documents/git/gru-hardware-implementation-and-optimization/optimizedImplementation/gru_update_gate_element.sv" Line 4. Module gru_update_gate_element(D=64,H=16,DATA_WIDTH=15,FRAC_BITS=9) doesn't have a timescale but at least one module in design has a timescale.
+WARNING: [XSIM 43-4099] "/home/lex/Documents/git/gru-hardware-implementation-and-optimization/optimizedImplementation/gru_new_gate_element.sv" Line 4. Module gru_new_gate_element(D=64,H=16,DATA_WIDTH=15,FRAC_BITS=9) doesn't have a timescale but at least one module in design has a timescale.
+WARNING: [XSIM 43-4099] "/home/lex/Documents/git/gru-hardware-implementation-and-optimization/optimizedImplementation/gru_new_gate_element.sv" Line 4. Module gru_new_gate_element(D=64,H=16,DATA_WIDTH=15,FRAC_BITS=9) doesn't have a timescale but at least one module in design has a timescale.
+WARNING: [XSIM 43-4099] "/home/lex/Documents/git/gru-hardware-implementation-and-optimization/optimizedImplementation/gru_new_gate_element.sv" Line 4. Module gru_new_gate_element(D=64,H=16,DATA_WIDTH=15,FRAC_BITS=9) doesn't have a timescale but at least one module in design has a timescale.
+WARNING: [XSIM 43-4099] "/home/lex/Documents/git/gru-hardware-implementation-and-optimization/optimizedImplementation/gru_new_gate_element.sv" Line 4. Module gru_new_gate_element(D=64,H=16,DATA_WIDTH=15,FRAC_BITS=9) doesn't have a timescale but at least one module in design has a timescale.
+WARNING: [XSIM 43-4099] "/home/lex/Documents/git/gru-hardware-implementation-and-optimization/optimizedImplementation/gru_new_gate_element.sv" Line 4. Module gru_new_gate_element(D=64,H=16,DATA_WIDTH=15,FRAC_BITS=9) doesn't have a timescale but at least one module in design has a timescale.
+WARNING: [XSIM 43-4099] "/home/lex/Documents/git/gru-hardware-implementation-and-optimization/optimizedImplementation/gru_new_gate_element.sv" Line 4. Module gru_new_gate_element(D=64,H=16,DATA_WIDTH=15,FRAC_BITS=9) doesn't have a timescale but at least one module in design has a timescale.
+WARNING: [XSIM 43-4099] "/home/lex/Documents/git/gru-hardware-implementation-and-optimization/optimizedImplementation/gru_new_gate_element.sv" Line 4. Module gru_new_gate_element(D=64,H=16,DATA_WIDTH=15,FRAC_BITS=9) doesn't have a timescale but at least one module in design has a timescale.
+WARNING: [XSIM 43-4099] "/home/lex/Documents/git/gru-hardware-implementation-and-optimization/optimizedImplementation/gru_new_gate_element.sv" Line 4. Module gru_new_gate_element(D=64,H=16,DATA_WIDTH=15,FRAC_BITS=9) doesn't have a timescale but at least one module in design has a timescale.
+WARNING: [XSIM 43-4099] "/home/lex/Documents/git/gru-hardware-implementation-and-optimization/optimizedImplementation/gru_hidden_state_element.sv" Line 4. Module gru_hidden_state_element(DATA_WIDTH=15,FRAC_BITS=9) doesn't have a timescale but at least one module in design has a timescale.
+WARNING: [XSIM 43-4099] "/home/lex/Documents/git/gru-hardware-implementation-and-optimization/optimizedImplementation/gru_hidden_state_element.sv" Line 4. Module gru_hidden_state_element(DATA_WIDTH=15,FRAC_BITS=9) doesn't have a timescale but at least one module in design has a timescale.
+WARNING: [XSIM 43-4099] "/home/lex/Documents/git/gru-hardware-implementation-and-optimization/optimizedImplementation/gru_hidden_state_element.sv" Line 4. Module gru_hidden_state_element(DATA_WIDTH=15,FRAC_BITS=9) doesn't have a timescale but at least one module in design has a timescale.
+WARNING: [XSIM 43-4099] "/home/lex/Documents/git/gru-hardware-implementation-and-optimization/optimizedImplementation/gru_hidden_state_element.sv" Line 4. Module gru_hidden_state_element(DATA_WIDTH=15,FRAC_BITS=9) doesn't have a timescale but at least one module in design has a timescale.
+WARNING: [XSIM 43-4099] "/home/lex/Documents/git/gru-hardware-implementation-and-optimization/optimizedImplementation/gru_hidden_state_element.sv" Line 4. Module gru_hidden_state_element(DATA_WIDTH=15,FRAC_BITS=9) doesn't have a timescale but at least one module in design has a timescale.
+WARNING: [XSIM 43-4099] "/home/lex/Documents/git/gru-hardware-implementation-and-optimization/optimizedImplementation/gru_hidden_state_element.sv" Line 4. Module gru_hidden_state_element(DATA_WIDTH=15,FRAC_BITS=9) doesn't have a timescale but at least one module in design has a timescale.
+WARNING: [XSIM 43-4099] "/home/lex/Documents/git/gru-hardware-implementation-and-optimization/optimizedImplementation/gru_hidden_state_element.sv" Line 4. Module gru_hidden_state_element(DATA_WIDTH=15,FRAC_BITS=9) doesn't have a timescale but at least one module in design has a timescale.
+WARNING: [XSIM 43-4099] "/home/lex/Documents/git/gru-hardware-implementation-and-optimization/optimizedImplementation/gru_hidden_state_element.sv" Line 4. Module gru_hidden_state_element(DATA_WIDTH=15,FRAC_BITS=9) doesn't have a timescale but at least one module in design has a timescale.
+Completed simulation data flow analysis
+Time Resolution for simulation is 1ps
+Compiling module xil_defaultlib.gru_reset_gate_element(D=64,H=16...
+Compiling module xil_defaultlib.gru_update_gate_element(D=64,H=1...
+Compiling module xil_defaultlib.gru_new_gate_element(D=64,H=16,D...
+Compiling module xil_defaultlib.gru_hidden_state_element(DATA_WI...
+Compiling module xil_defaultlib.gru_cell_parallel_default
+Compiling module xil_defaultlib.tb_gru_cell_parallel
+Compiling module xil_defaultlib.glbl
+Built simulation snapshot tb_gru_cell_parallel_behav
+INFO: [USF-XSim-69] 'elaborate' step finished in '3' seconds
+INFO: [USF-XSim-4] XSim::Simulate design
+INFO: [USF-XSim-61] Executing 'SIMULATE' step in '/home/lex/Documents/git/gru-hardware-implementation-and-optimization/optimizedImplementation/vivado_proj/gru_proj.sim/sim_1/behav/xsim'
+INFO: [USF-XSim-98] *** Running xsim
+   with args "tb_gru_cell_parallel_behav -key {Behavioral:sim_1:Functional:tb_gru_cell_parallel} -tclbatch {tb_gru_cell_parallel.tcl} -log {simulate.log}"
+INFO: [USF-XSim-8] Loading simulator feature
+Time resolution is 1 ps
+source tb_gru_cell_parallel.tcl
+## set curr_wave [current_wave_config]
+## if { [string length $curr_wave] == 0 } {
+##   if { [llength [get_objects]] > 0} {
+##     add_wave /
+##     set_property needs_save false [current_wave_config]
+##   } else {
+##      send_msg_id Add_Wave-1 WARNING "No top level signals found. Simulator will start without a wave window. If you want to open a wave window go to 'File->New Waveform Configuration' or type 'create_wave_config' in the TCL console."
+##   }
+## }
+WARNING: Simulation object /tb_gru_cell_parallel/results_filename was not traceable in the design for the following reason:
+Vivado Simulator does not support tracing of System Verilog Dynamic Type object.
+## run 1000ns
+
+========================================
+Test 1
+========================================
+INFO: [USF-XSim-96] XSim completed. Design snapshot 'tb_gru_cell_parallel_behav' loaded.
+INFO: [USF-XSim-97] XSim simulation ran for 1000ns
+# run 500us
+Computation completed in 535 cycles
+Time: 5.35 us @ 100MHz
+PASS: All 16 outputs within tolerance
+
+========================================
+Test 2
+========================================
+Computation completed in 535 cycles
+Time: 5.35 us @ 100MHz
+PASS: All 16 outputs within tolerance
+
+========================================
+Test 3
+========================================
+Computation completed in 535 cycles
+Time: 5.35 us @ 100MHz
+PASS: All 16 outputs within tolerance
+
+========================================
+Test 4
+========================================
+Computation completed in 535 cycles
+Time: 5.35 us @ 100MHz
+PASS: All 16 outputs within tolerance
+
+========================================
+Test 5
+========================================
+Computation completed in 535 cycles
+Time: 5.35 us @ 100MHz
+PASS: All 16 outputs within tolerance
+
+========================================
+Test 6
+========================================
+Computation completed in 535 cycles
+Time: 5.35 us @ 100MHz
+PASS: All 16 outputs within tolerance
+
+========================================
+Test 7
+========================================
+Computation completed in 535 cycles
+Time: 5.35 us @ 100MHz
+PASS: All 16 outputs within tolerance
+
+========================================
+Test 8
+========================================
+Computation completed in 535 cycles
+Time: 5.35 us @ 100MHz
+PASS: All 16 outputs within tolerance
+
+========================================
+Test 9
+========================================
+Computation completed in 535 cycles
+Time: 5.35 us @ 100MHz
+PASS: All 16 outputs within tolerance
+
+========================================
+Test 10
+========================================
+Computation completed in 535 cycles
+Time: 5.35 us @ 100MHz
+PASS: All 16 outputs within tolerance
+
+========================================
+SUMMARY
+========================================
+Total tests:  10
+Passed:       10
+Failed:       0
+Avg cycles:   535
+
+Results written to: ../../../../../gru_results_D64_H16_DW15_FB9_NP8.txt
+$finish called at time : 55145 ns : File "/home/lex/Documents/git/gru-hardware-implementation-and-optimization/optimizedImplementation/tb_gru_cell_parallel.sv" Line 242
+# close_sim -force
+INFO: [Simtcl 6-16] Simulation closed
+# after 500
+# synth_design -top $top_module -part $part_name
+Command: synth_design -top top_level -part xcu250-figd2104-2L-e
+Starting synth_design
+Attempting to get a license for feature 'Synthesis' and/or device 'xcu250'
+INFO: [Common 17-349] Got license for feature 'Synthesis' and/or device 'xcu250'
+INFO: [Device 21-403] Loading part xcu250-figd2104-2L-e
+INFO: [Synth 8-7079] Multithreading enabled for synth_design using a maximum of 4 processes.
+INFO: [Synth 8-7078] Launching helper process for spawning children vivado processes
+INFO: [Synth 8-7075] Helper process launched with PID 265565
+INFO: [Common 17-41] Interrupt caught. Command should exit soon.
+1
+INFO: [Common 17-83] Releasing license: Synthesis
+7 Infos, 0 Warnings, 0 Critical Warnings and 1 Errors encountered.
+synth_design failed
+INFO: [Common 17-344] 'source' was cancelled
+INFO: [Common 17-206] Exiting Vivado at Thu Dec 11 18:40:33 2025...

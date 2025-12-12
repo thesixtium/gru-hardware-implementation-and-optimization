@@ -1,0 +1,8 @@
+List of CLB Tiles
+CLEM_X87Y395
+CLEL_R_X87Y395
+
+List of Congested Nets
+gru_inst/r_t_reg_n_0_[6][1]
+gru_inst/r_t_reg_n_0_[5][1]
+

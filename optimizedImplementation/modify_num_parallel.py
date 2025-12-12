@@ -1,6 +1,7 @@
 import sys
 import re
 import os
+from pathlib import Path
 
 
 def modify_num_parallel(sv_file, num_parallel=None, data_width=None, frac_bits=None, d=None, h=None):

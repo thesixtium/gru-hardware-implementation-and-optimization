@@ -1,7 +1,6 @@
 import subprocess
 import pandas as pd
 import re
-import numpy as np
 from pathlib import Path
 
 from generate_gru_ground_truth import generate_gru_ground_truth
@@ -13,10 +12,8 @@ import time
 from modify_constraints import modify_clock_period
 
 # 🔧 CHANGE THIS to match your Vivado installation path
-VIVADO_PATH = r"C:\Xilinx\Vivado\2024.1\bin\vivado.bat"
-
-import sys
-import re
+# VIVADO_PATH = r"C:\Xilinx\Vivado\2024.1\bin\vivado.bat"
+VIVADO_PATH = r"/tools/Xilinx/Vivado/2024.1/bin/vivado"
 
 def parse_q_format(binary_str, int_bits, frac_bits):
     """

@@ -1,0 +1,2 @@
+LUTs,Registers,BRAMs,DSPs,WNS (ns),Total Power (W),Dynamic Power (W),Static Power (W),Time Utilization,result,Cycles,Clock Period,Execution Time (m)
+0,0,0,0,0,0,0,0,0,"exception: (1, ['/tools/Xilinx/Vivado/2024.1/bin/vivado', '-mode', 'batch', '-source', 'run_vivado.tcl'])",0,5,0.2447492520014445

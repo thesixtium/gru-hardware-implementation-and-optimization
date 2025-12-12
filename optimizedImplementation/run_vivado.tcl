@@ -42,7 +42,7 @@ set_property -name {xsim.simulate.runtime} -value {1000ns} -objects [get_fileset
 launch_simulation -mode behavioral
 
 # Run simulation for specified time (or use run all)
-run 5000ns
+run 500us
 
 # Close simulation
 close_sim -force
