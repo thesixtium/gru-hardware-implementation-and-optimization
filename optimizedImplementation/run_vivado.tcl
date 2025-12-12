@@ -12,10 +12,11 @@ create_project $proj_name $proj_dir -part $part_name
 
 # Add files
 add_files C:/Users/ajrbe/Documents/School/Thesis/BCI/Code/top_level.sv
-add_files C:/Users/ajrbe/Documents/School/Thesis/BCI/Code/gru.sv
-add_files C:/Users/ajrbe/Documents/School/Thesis/BCI/Code/tanh.sv
-add_files C:/Users/ajrbe/Documents/School/Thesis/BCI/Code/sigmoid.sv
-add_files C:/Users/ajrbe/Documents/School/Thesis/BCI/Code/mult.sv
+add_files C:/Users/ajrbe/Documents/School/Thesis/BCI/Code/gru_cell_parallel.sv
+add_files C:/Users/ajrbe/Documents/School/Thesis/BCI/Code/gru_hidden_state_element.sv
+add_files C:/Users/ajrbe/Documents/School/Thesis/BCI/Code/gru_new_gate_element.sv
+add_files C:/Users/ajrbe/Documents/School/Thesis/BCI/Code/gru_reset_gate_element.sv
+add_files C:/Users/ajrbe/Documents/School/Thesis/BCI/Code/gru_update_gate_element.sv
 add_files -fileset sim_1 C:/Users/ajrbe/Documents/School/Thesis/BCI/Code/gru_tb.sv
 read_xdc C:/Users/ajrbe/Documents/School/Thesis/BCI/Code/constraints.xdc
 
@@ -41,7 +42,7 @@ set_property -name {xsim.simulate.runtime} -value {1000ns} -objects [get_fileset
 launch_simulation -mode behavioral
 
 # Run simulation for specified time (or use run all)
-run 500ns
+run 5000ns
 
 # Close simulation
 close_sim -force

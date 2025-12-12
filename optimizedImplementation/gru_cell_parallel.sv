@@ -2,11 +2,11 @@
 // Complete GRU Cell - Parallel Implementation (FIXED)
 // ============================================================================
 module gru_cell_parallel #(
-    parameter int D = 64,
-    parameter int H = 16,
+    parameter int D = 4,
+    parameter int H = 2,
     parameter int DATA_WIDTH = 15,
     parameter int FRAC_BITS = 9,
-    parameter int NUM_PARALLEL = 10
+    parameter int NUM_PARALLEL = 4
 ) (
     input  logic                     clk,
     input  logic                     rst_n,
