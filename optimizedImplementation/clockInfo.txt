@@ -1,6 +1,6 @@
 -------------------------------------
 | Tool Version : Vivado v.2024.1
-| Date         : Thu Dec 11 14:09:45 2025
+| Date         : Thu Dec 11 18:25:39 2025
 | Host         : Toothless
 | Design       : design_1
 | Device       : xcu250-figd2104-2L-E-
@@ -27,7 +27,7 @@ Clock Net Route Info (CRP Input)
 Clock 1: clk_IBUF_BUFG
 	Clock source type: BUFGCE
 	Clock source region: X4Y7
-	initial rect ((1, 5), (7, 7))
+	initial rect ((1, 5), (6, 7))
 
 
 

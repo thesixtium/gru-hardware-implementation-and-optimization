@@ -14,7 +14,7 @@ module top_level(
     localparam int H = 16;
     localparam int DATA_WIDTH = 15;
     localparam int FRAC_BITS = 9;
-    localparam int NUM_PARALLEL = 6;
+    localparam int NUM_PARALLEL = 7;
 
     // ========================================================================
     // All signals with keep and dont_touch attributes

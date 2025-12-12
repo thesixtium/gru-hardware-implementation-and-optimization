@@ -1,7 +1,7 @@
 Copyright 1986-2022 Xilinx, Inc. All Rights Reserved. Copyright 2022-2024 Advanced Micro Devices, Inc. All Rights Reserved.
 -------------------------------------------------------------------------------------------------------------------------------------------------
 | Tool Version     : Vivado v.2024.1 (lin64) Build 5076996 Wed May 22 18:36:09 MDT 2024
-| Date             : Thu Dec 11 14:03:35 2025
+| Date             : Thu Dec 11 18:40:05 2025
 | Host             : Toothless running 64-bit Ubuntu 20.04.6 LTS
 | Command          : report_power -file power_report.txt
 | Design           : top_level
@@ -30,14 +30,14 @@ Table of Contents
 ----------
 
 +--------------------------+--------------+
-| Total On-Chip Power (W)  | 3.192        |
+| Total On-Chip Power (W)  | 3.035        |
 | Design Power Budget (W)  | Unspecified* |
 | Power Budget Margin (W)  | NA           |
-| Dynamic (W)              | 0.243        |
-| Device Static (W)        | 2.949        |
+| Dynamic (W)              | 0.089        |
+| Device Static (W)        | 2.946        |
 | Effective TJA (C/W)      | 0.5          |
-| Max Ambient (C)          | 98.3         |
-| Junction Temperature (C) | 26.7         |
+| Max Ambient (C)          | 98.4         |
+| Junction Temperature (C) | 26.6         |
 | Confidence Level         | Medium       |
 | Setting File             | ---          |
 | Simulation Activity File | ---          |
@@ -52,18 +52,18 @@ Table of Contents
 +----------------+-----------+----------+-----------+-----------------+
 | On-Chip        | Power (W) | Used     | Available | Utilization (%) |
 +----------------+-----------+----------+-----------+-----------------+
-| Clocks         |     0.016 |        3 |       --- |             --- |
-| CLB Logic      |     0.091 |   281513 |       --- |             --- |
-|   LUT as Logic |     0.091 |   155791 |   1728000 |            9.02 |
-|   Register     |    <0.001 |     5374 |   3456000 |            0.16 |
-|   CARRY8       |    <0.001 |      366 |    216000 |            0.17 |
-|   Others       |     0.000 |       90 |       --- |             --- |
-|   F7/F8 Muxes  |     0.000 |    82882 |   1728000 |            4.80 |
-| Signals        |     0.132 |   113022 |       --- |             --- |
-| DSPs           |     0.004 |       63 |     12288 |            0.51 |
+| Clocks         |     0.015 |        3 |       --- |             --- |
+| CLB Logic      |     0.033 |   155127 |       --- |             --- |
+|   LUT as Logic |     0.033 |    88734 |   1728000 |            5.14 |
+|   Register     |    <0.001 |     5553 |   3456000 |            0.16 |
+|   CARRY8       |    <0.001 |      418 |    216000 |            0.19 |
+|   Others       |     0.000 |      102 |       --- |             --- |
+|   F7/F8 Muxes  |     0.000 |    10635 |   1728000 |            0.62 |
+| Signals        |     0.034 |   131215 |       --- |             --- |
+| DSPs           |     0.006 |       72 |     12288 |            0.59 |
 | I/O            |    <0.001 |        4 |       676 |            0.59 |
-| Static Power   |     2.949 |          |           |                 |
-| Total          |     3.192 |          |           |                 |
+| Static Power   |     2.946 |          |           |                 |
+| Total          |     3.035 |          |           |                 |
 +----------------+-----------+----------+-----------+-----------------+
 
 
@@ -73,7 +73,7 @@ Table of Contents
 +------------+-------------+-----------+-------------+------------+-------------+-------------+------------+
 | Source     | Voltage (V) | Total (A) | Dynamic (A) | Static (A) | Powerup (A) | Budget (A)  | Margin (A) |
 +------------+-------------+-----------+-------------+------------+-------------+-------------+------------+
-| Vccint     |       0.850 |     1.427 |       0.286 |      1.141 |       NA    | Unspecified | NA         |
+| Vccint     |       0.850 |     1.241 |       0.104 |      1.137 |       NA    | Unspecified | NA         |
 | Vccint_io  |       0.850 |     0.142 |       0.000 |      0.142 |       NA    | Unspecified | NA         |
 | Vccbram    |       0.850 |     0.020 |       0.000 |      0.020 |       NA    | Unspecified | NA         |
 | Vccaux     |       1.800 |     0.887 |       0.000 |      0.887 |       NA    | Unspecified | NA         |
@@ -132,7 +132,7 @@ Table of Contents
 +---------+--------+-----------------+
 | Clock   | Domain | Constraint (ns) |
 +---------+--------+-----------------+
-| sys_clk | clk    |            19.0 |
+| sys_clk | clk    |            13.0 |
 +---------+--------+-----------------+
 
 
@@ -142,36 +142,35 @@ Table of Contents
 3.1 By Hierarchy
 ----------------
 
-+--------------------------------------------+-----------+
-| Name                                       | Power (W) |
-+--------------------------------------------+-----------+
-| top_level                                  |     0.243 |
-|   gru_inst                                 |     0.242 |
-|     gen_hidden_states[1].hidden_state_inst |     0.001 |
-|     gen_hidden_states[2].hidden_state_inst |     0.001 |
-|     gen_hidden_states[3].hidden_state_inst |     0.001 |
-|     gen_hidden_states[6].hidden_state_inst |     0.001 |
-|     gen_new_gates[0].new_gate_inst         |     0.006 |
-|     gen_new_gates[1].new_gate_inst         |     0.005 |
-|     gen_new_gates[2].new_gate_inst         |     0.005 |
-|     gen_new_gates[3].new_gate_inst         |     0.005 |
-|     gen_new_gates[4].new_gate_inst         |     0.005 |
-|     gen_new_gates[5].new_gate_inst         |     0.005 |
-|     gen_new_gates[6].new_gate_inst         |     0.006 |
-|     gen_reset_gates[0].reset_gate_inst     |     0.006 |
-|     gen_reset_gates[1].reset_gate_inst     |     0.005 |
-|     gen_reset_gates[2].reset_gate_inst     |     0.006 |
-|     gen_reset_gates[3].reset_gate_inst     |     0.005 |
-|     gen_reset_gates[4].reset_gate_inst     |     0.006 |
-|     gen_reset_gates[5].reset_gate_inst     |     0.005 |
-|     gen_reset_gates[6].reset_gate_inst     |     0.006 |
-|     gen_update_gates[0].update_gate_inst   |     0.006 |
-|     gen_update_gates[1].update_gate_inst   |     0.005 |
-|     gen_update_gates[2].update_gate_inst   |     0.006 |
-|     gen_update_gates[3].update_gate_inst   |     0.005 |
-|     gen_update_gates[4].update_gate_inst   |     0.006 |
-|     gen_update_gates[5].update_gate_inst   |     0.005 |
-|     gen_update_gates[6].update_gate_inst   |     0.006 |
-+--------------------------------------------+-----------+
++------------------------------------------+-----------+
+| Name                                     | Power (W) |
++------------------------------------------+-----------+
+| top_level                                |     0.089 |
+|   gru_inst                               |     0.088 |
+|     gen_new_gates[0].new_gate_inst       |     0.003 |
+|     gen_new_gates[1].new_gate_inst       |     0.003 |
+|     gen_new_gates[2].new_gate_inst       |     0.003 |
+|     gen_new_gates[3].new_gate_inst       |     0.003 |
+|     gen_new_gates[4].new_gate_inst       |     0.003 |
+|     gen_new_gates[5].new_gate_inst       |     0.003 |
+|     gen_new_gates[6].new_gate_inst       |     0.003 |
+|     gen_new_gates[7].new_gate_inst       |     0.003 |
+|     gen_reset_gates[0].reset_gate_inst   |     0.003 |
+|     gen_reset_gates[1].reset_gate_inst   |     0.003 |
+|     gen_reset_gates[2].reset_gate_inst   |     0.003 |
+|     gen_reset_gates[3].reset_gate_inst   |     0.003 |
+|     gen_reset_gates[4].reset_gate_inst   |     0.003 |
+|     gen_reset_gates[5].reset_gate_inst   |     0.003 |
+|     gen_reset_gates[6].reset_gate_inst   |     0.003 |
+|     gen_reset_gates[7].reset_gate_inst   |     0.003 |
+|     gen_update_gates[0].update_gate_inst |     0.003 |
+|     gen_update_gates[1].update_gate_inst |     0.003 |
+|     gen_update_gates[2].update_gate_inst |     0.003 |
+|     gen_update_gates[3].update_gate_inst |     0.003 |
+|     gen_update_gates[4].update_gate_inst |     0.003 |
+|     gen_update_gates[5].update_gate_inst |     0.003 |
+|     gen_update_gates[6].update_gate_inst |     0.003 |
+|     gen_update_gates[7].update_gate_inst |     0.003 |
++------------------------------------------+-----------+
 
 

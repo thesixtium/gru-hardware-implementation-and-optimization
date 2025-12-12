@@ -8,7 +8,7 @@
 # -------------------------
 # NO PIN ASSIGNMENT - Vivado will auto-place
 set_property IOSTANDARD LVCMOS18 [get_ports clk]
-create_clock -period 20.000 -name sys_clk -waveform {0.000 10.000} [get_ports clk]
+create_clock -period 14.000 -name sys_clk -waveform {0.000 7.000} [get_ports clk]
 
 # -------------------------
 # Reset signal (active high)

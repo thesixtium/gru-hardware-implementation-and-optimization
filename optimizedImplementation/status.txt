@@ -137,4 +137,18 @@
 42.8125	attempt = 0	num_parallel = 7	clock_period = 17	Cycles: 799	WNS: 4.508	22.9175820906957
 43.125	attempt = 0	num_parallel = 7	clock_period = 18	Cycles: 799	WNS: 5.346	39.65520211060842
 43.4375	attempt = 0	num_parallel = 7	clock_period = 19	Cycles: 799	WNS: 5.958	28.557389668623607
-43.75	attempt = 0	num_parallel = 7	clock_period = 20
+43.75	attempt = 0	num_parallel = 7	clock_period = 20	Cycles: 799	WNS: 7.165	23.34743962287903
+44.0625	attempt = 0	num_parallel = 8	clock_period = 1	Cycles: 535	WNS: -2.591	22.752718476454415
+44.375	attempt = 0	num_parallel = 8	clock_period = 2	Cycles: 535	WNS: -1.542	22.947524746259052
+44.6875	attempt = 0	num_parallel = 8	clock_period = 3	Cycles: 535	WNS: -0.491	20.66695816119512
+45.0	attempt = 0	num_parallel = 8	clock_period = 4	Cycles: 535	WNS: 0.294	17.876085889339446
+45.3125	attempt = 0	num_parallel = 8	clock_period = 5	Cycles: 535	WNS: 0.386	17.06508997678757
+45.625	attempt = 0	num_parallel = 8	clock_period = 6	Cycles: 535	WNS: 0.662	13.100323633352916
+45.9375	attempt = 0	num_parallel = 8	clock_period = 7	Cycles: 535	WNS: 0.802	16.223240021864573
+46.25	attempt = 0	num_parallel = 8	clock_period = 8	Cycles: 535	WNS: 1.304	19.065607023239135
+46.5625	attempt = 0	num_parallel = 8	clock_period = 9	Cycles: 535	WNS: 1.02	22.14028867880503
+46.875	attempt = 0	num_parallel = 8	clock_period = 10	Cycles: 535	WNS: 1.438	21.504287433624267
+47.1875	attempt = 0	num_parallel = 8	clock_period = 11	Cycles: 535	WNS: 2.688	16.717279728253683
+47.5	attempt = 0	num_parallel = 8	clock_period = 12	Cycles: 535	WNS: 2.806	22.538616840044657
+47.8125	attempt = 0	num_parallel = 8	clock_period = 13	Cycles: 535	WNS: 3.33	20.461774889628092
+48.125	attempt = 0	num_parallel = 8	clock_period = 14

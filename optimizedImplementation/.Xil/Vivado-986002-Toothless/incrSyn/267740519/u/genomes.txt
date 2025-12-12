@@ -1,5 +1,0 @@
-gru_cell_parallel__GB0
-gru_cell_parallel__GB1
-gru_cell_parallel__GB2
-gru_cell_parallel__GB3
-top_level__GC0

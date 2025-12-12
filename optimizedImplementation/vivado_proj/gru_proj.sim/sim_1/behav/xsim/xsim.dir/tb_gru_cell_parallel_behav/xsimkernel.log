@@ -1,7 +1,0 @@
-Running: xsim.dir/tb_gru_cell_parallel_behav/xsimk -simmode gui -wdb tb_gru_cell_parallel_behav.wdb -simrunnum 0 -socket 57563
-Design successfully loaded
-Design Loading Memory Usage: 21100 KB (Peak: 21108 KB)
-Design Loading CPU Usage: 10 ms
-Simulation completed
-Simulation Memory Usage: 115908 KB (Peak: 160368 KB)
-Simulation CPU Usage: 30 ms
