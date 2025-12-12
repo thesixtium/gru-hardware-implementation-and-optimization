@@ -1,7 +1,7 @@
 Copyright 1986-2022 Xilinx, Inc. All Rights Reserved. Copyright 2022-2024 Advanced Micro Devices, Inc. All Rights Reserved.
 --------------------------------------------------------------------------------------------------------------------------------------------------
 | Tool Version      : Vivado v.2024.1 (lin64) Build 5076996 Wed May 22 18:36:09 MDT 2024
-| Date              : Thu Dec 11 18:25:06 2025
+| Date              : Fri Dec 12 02:42:47 2025
 | Host              : Toothless running 64-bit Ubuntu 20.04.6 LTS
 | Command           : report_timing_summary -file timing_synth.txt
 | Design            : top_level
@@ -139,7 +139,7 @@ Table of Contents
 
     WNS(ns)      TNS(ns)  TNS Failing Endpoints  TNS Total Endpoints      WHS(ns)      THS(ns)  THS Failing Endpoints  THS Total Endpoints     WPWS(ns)     TPWS(ns)  TPWS Failing Endpoints  TPWS Total Endpoints  
     -------      -------  ---------------------  -------------------      -------      -------  ---------------------  -------------------     --------     --------  ----------------------  --------------------  
-      9.071        0.000                      0                11971       -0.067     -145.401                   5220                11971        6.225        0.000                       0                  5578  
+    996.070        0.000                      0                11971       -0.067     -145.401                   5220                11971      499.725        0.000                       0                  5578  
 
 
 Timing constraints are not met.
@@ -150,9 +150,9 @@ Timing constraints are not met.
 | -------------
 ------------------------------------------------------------------------------------------------
 
-Clock    Waveform(ns)       Period(ns)      Frequency(MHz)
------    ------------       ----------      --------------
-sys_clk  {0.000 6.500}      13.000          76.923          
+Clock    Waveform(ns)         Period(ns)      Frequency(MHz)
+-----    ------------         ----------      --------------
+sys_clk  {0.000 500.000}      1000.000        1.000           
 
 
 ------------------------------------------------------------------------------------------------
@@ -162,7 +162,7 @@ sys_clk  {0.000 6.500}      13.000          76.923
 
 Clock             WNS(ns)      TNS(ns)  TNS Failing Endpoints  TNS Total Endpoints      WHS(ns)      THS(ns)  THS Failing Endpoints  THS Total Endpoints     WPWS(ns)     TPWS(ns)  TPWS Failing Endpoints  TPWS Total Endpoints  
 -----             -------      -------  ---------------------  -------------------      -------      -------  ---------------------  -------------------     --------     --------  ----------------------  --------------------  
-sys_clk             9.071        0.000                      0                11971       -0.067     -145.401                   5220                11971        6.225        0.000                       0                  5578  
+sys_clk           996.070        0.000                      0                11971       -0.067     -145.401                   5220                11971      499.725        0.000                       0                  5578  
 
 
 ------------------------------------------------------------------------------------------------
@@ -193,26 +193,26 @@ Path Group    From Clock    To Clock          WNS(ns)      TNS(ns)  TNS Failing 
 From Clock:  sys_clk
   To Clock:  sys_clk
 
-Setup :            0  Failing Endpoints,  Worst Slack        9.071ns,  Total Violation        0.000ns
+Setup :            0  Failing Endpoints,  Worst Slack      996.070ns,  Total Violation        0.000ns
 Hold  :         5220  Failing Endpoints,  Worst Slack       -0.067ns,  Total Violation     -145.401ns
-PW    :            0  Failing Endpoints,  Worst Slack        6.225ns,  Total Violation        0.000ns
+PW    :            0  Failing Endpoints,  Worst Slack      499.725ns,  Total Violation        0.000ns
 ---------------------------------------------------------------------------------------------------
 
 
 Max Delay Paths
 --------------------------------------------------------------------------------------
-Slack (MET) :             9.071ns  (required time - arrival time)
+Slack (MET) :             996.070ns  (required time - arrival time)
   Source:                 gru_inst/element_index_reg[3][3]/C
-                            (rising edge-triggered cell FDCE clocked by sys_clk  {rise@0.000ns fall@6.500ns period=13.000ns})
+                            (rising edge-triggered cell FDCE clocked by sys_clk  {rise@0.000ns fall@500.000ns period=1000.000ns})
   Destination:            gru_inst/gen_new_gates[5].new_gate_inst/sum_input_reg[29]/D
-                            (rising edge-triggered cell FDCE clocked by sys_clk  {rise@0.000ns fall@6.500ns period=13.000ns})
+                            (rising edge-triggered cell FDCE clocked by sys_clk  {rise@0.000ns fall@500.000ns period=1000.000ns})
   Path Group:             sys_clk
   Path Type:              Setup (Max at Slow Process Corner)
-  Requirement:            13.000ns  (sys_clk rise@13.000ns - sys_clk rise@0.000ns)
+  Requirement:            1000.000ns  (sys_clk rise@1000.000ns - sys_clk rise@0.000ns)
   Data Path Delay:        3.774ns  (logic 2.154ns (57.075%)  route 1.620ns (42.925%))
   Logic Levels:           14  (DSP_A_B_DATA=1 DSP_ALU=1 DSP_M_DATA=1 DSP_MULTIPLIER=1 DSP_OUTPUT=1 DSP_PREADD_DATA=1 LUT2=2 LUT4=1 LUT5=1 LUT6=2 MUXF7=1 MUXF8=1)
   Clock Path Skew:        -0.145ns (DCD - SCD + CPR)
-    Destination Clock Delay (DCD):    2.989ns = ( 15.989 - 13.000 ) 
+    Destination Clock Delay (DCD):    2.989ns = ( 1002.989 - 1000.000 ) 
     Source Clock Delay      (SCD):    3.417ns
     Clock Pessimism Removal (CPR):    0.283ns
   Clock Uncertainty:      0.035ns  ((TSJ^2 + TIJ^2)^1/2 + DJ) / 2 + PE
@@ -274,25 +274,25 @@ Slack (MET) :             9.071ns  (required time - arrival time)
                          FDCE                                         r  gru_inst/gen_new_gates[5].new_gate_inst/sum_input_reg[29]/D
   -------------------------------------------------------------------    -------------------
 
-                         (clock sys_clk rise edge)   13.000    13.000 r  
-                                                      0.000    13.000 r  clk (IN)
-                         net (fo=0)                   0.000    13.000    clk_IBUF_inst/I
-                         INBUF (Prop_INBUF_PAD_O)     0.279    13.279 r  clk_IBUF_inst/INBUF_INST/O
-                         net (fo=1, unplaced)         0.000    13.279    clk_IBUF_inst/OUT
+                         (clock sys_clk rise edge) 1000.000  1000.000 r  
+                                                      0.000  1000.000 r  clk (IN)
+                         net (fo=0)                   0.000  1000.000    clk_IBUF_inst/I
+                         INBUF (Prop_INBUF_PAD_O)     0.279  1000.279 r  clk_IBUF_inst/INBUF_INST/O
+                         net (fo=1, unplaced)         0.000  1000.279    clk_IBUF_inst/OUT
                          IBUFCTRL (Prop_IBUFCTRL_I_O)
-                                                      0.000    13.279 r  clk_IBUF_inst/IBUFCTRL_INST/O
-                         net (fo=1, unplaced)         0.247    13.526    clk_IBUF
-                         BUFGCE (Prop_BUFGCE_I_O)     0.024    13.550 r  clk_IBUF_BUFG_inst/O
-                         net (fo=5697, unplaced)      2.439    15.989    gru_inst/gen_new_gates[5].new_gate_inst/clk
+                                                      0.000  1000.279 r  clk_IBUF_inst/IBUFCTRL_INST/O
+                         net (fo=1, unplaced)         0.247  1000.526    clk_IBUF
+                         BUFGCE (Prop_BUFGCE_I_O)     0.024  1000.550 r  clk_IBUF_BUFG_inst/O
+                         net (fo=5697, unplaced)      2.439  1002.989    gru_inst/gen_new_gates[5].new_gate_inst/clk
                          FDCE                                         r  gru_inst/gen_new_gates[5].new_gate_inst/sum_input_reg[29]/C
-                         clock pessimism              0.283    16.272    
-                         clock uncertainty           -0.035    16.237    
-                         FDCE (Setup_FDCE_C_D)        0.025    16.262    gru_inst/gen_new_gates[5].new_gate_inst/sum_input_reg[29]
+                         clock pessimism              0.283  1003.272    
+                         clock uncertainty           -0.035  1003.237    
+                         FDCE (Setup_FDCE_C_D)        0.025  1003.262    gru_inst/gen_new_gates[5].new_gate_inst/sum_input_reg[29]
   -------------------------------------------------------------------
-                         required time                         16.262    
+                         required time                       1003.262    
                          arrival time                          -7.191    
   -------------------------------------------------------------------
-                         slack                                  9.071    
+                         slack                                996.070    
 
 
 
@@ -302,9 +302,9 @@ Min Delay Paths
 --------------------------------------------------------------------------------------
 Slack (VIOLATED) :        -0.067ns  (arrival time - required time)
   Source:                 gru_inst/gen_reset_gates[0].reset_gate_inst/sum_input_reg[9]/C
-                            (rising edge-triggered cell FDCE clocked by sys_clk  {rise@0.000ns fall@6.500ns period=13.000ns})
+                            (rising edge-triggered cell FDCE clocked by sys_clk  {rise@0.000ns fall@500.000ns period=1000.000ns})
   Destination:            gru_inst/gen_reset_gates[0].reset_gate_inst/mac_result_reg[1]/D
-                            (rising edge-triggered cell FDRE clocked by sys_clk  {rise@0.000ns fall@6.500ns period=13.000ns})
+                            (rising edge-triggered cell FDRE clocked by sys_clk  {rise@0.000ns fall@500.000ns period=1000.000ns})
   Path Group:             sys_clk
   Path Type:              Hold (Min at Fast Process Corner)
   Requirement:            0.000ns  (sys_clk rise@0.000ns - sys_clk rise@0.000ns)
@@ -363,14 +363,14 @@ Slack (VIOLATED) :        -0.067ns  (arrival time - required time)
 Pulse Width Checks
 --------------------------------------------------------------------------------------
 Clock Name:         sys_clk
-Waveform(ns):       { 0.000 6.500 }
-Period(ns):         13.000
+Waveform(ns):       { 0.000 500.000 }
+Period(ns):         1000.000
 Sources:            { clk }
 
 Check Type        Corner  Lib Pin   Reference Pin  Required(ns)  Actual(ns)  Slack(ns)  Location  Pin
-Min Period        n/a     BUFGCE/I  n/a            1.290         13.000      11.710               clk_IBUF_BUFG_inst/I
-Low Pulse Width   Slow    FDCE/C    n/a            0.275         6.500       6.225                preserved_h_t_reg[0][0]/C
-High Pulse Width  Slow    FDCE/C    n/a            0.275         6.500       6.225                preserved_h_t_reg[0][0]/C
+Min Period        n/a     BUFGCE/I  n/a            1.290         1000.000    998.710              clk_IBUF_BUFG_inst/I
+Low Pulse Width   Slow    FDCE/C    n/a            0.275         500.000     499.725              preserved_h_t_reg[0][0]/C
+High Pulse Width  Slow    FDCE/C    n/a            0.275         500.000     499.725              preserved_h_t_reg[0][0]/C
 
 
 

@@ -5,19 +5,74 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="bc78fd11-c455-41b4-8284-3743fd03d946" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/gru-hardware-implementation-and-optimization.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/gru-hardware-implementation-and-optimization.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/optimizedImplementation/clockInfo.txt" beforeDir="false" afterPath="$PROJECT_DIR$/optimizedImplementation/clockInfo.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/optimizedImplementation/constraints.xdc" beforeDir="false" afterPath="$PROJECT_DIR$/optimizedImplementation/constraints.xdc" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/optimizedImplementation/constraints.xdc.backup" beforeDir="false" afterPath="$PROJECT_DIR$/optimizedImplementation/constraints.xdc.backup" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/optimizedImplementation/constraints.xdc.backup" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/optimizedImplementation/drc_report.txt" beforeDir="false" afterPath="$PROJECT_DIR$/optimizedImplementation/drc_report.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/optimizedImplementation/gru_cell_parallel.sv" beforeDir="false" afterPath="$PROJECT_DIR$/optimizedImplementation/gru_cell_parallel.sv" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/optimizedImplementation/gru_cell_parallel.sv.backup" beforeDir="false" afterPath="$PROJECT_DIR$/optimizedImplementation/gru_cell_parallel.sv.backup" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/optimizedImplementation/gru_results_D64_H16_DW15_FB9_NP1.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/optimizedImplementation/gru_results_D64_H16_DW15_FB9_NP2.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/optimizedImplementation/gru_results_D64_H16_DW15_FB9_NP3.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/optimizedImplementation/gru_results_D64_H16_DW15_FB9_NP4.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/optimizedImplementation/gru_results_D64_H16_DW15_FB9_NP5.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/optimizedImplementation/gru_results_D64_H16_DW15_FB9_NP6.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/optimizedImplementation/gru_results_D64_H16_DW15_FB9_NP7.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/optimizedImplementation/gru_results_D64_H16_DW15_FB9_NP8.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/optimizedImplementation/gru_tb.sv" beforeDir="false" afterPath="$PROJECT_DIR$/optimizedImplementation/gru_tb.sv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/optimizedImplementation/iter_100_CongestedCLBsAndNets.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/optimizedImplementation/iter_10_CongestedCLBsAndNets.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/optimizedImplementation/iter_11_CongestedCLBsAndNets.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/optimizedImplementation/iter_13_CongestedCLBsAndNets.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/optimizedImplementation/iter_14_CongestedCLBsAndNets.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/optimizedImplementation/iter_15_CongestedCLBsAndNets.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/optimizedImplementation/iter_16_CongestedCLBsAndNets.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/optimizedImplementation/iter_17_CongestedCLBsAndNets.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/optimizedImplementation/iter_18_CongestedCLBsAndNets.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/optimizedImplementation/iter_20_CongestedCLBsAndNets.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/optimizedImplementation/iter_22_CongestedCLBsAndNets.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/optimizedImplementation/iter_23_CongestedCLBsAndNets.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/optimizedImplementation/iter_27_CongestedCLBsAndNets.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/optimizedImplementation/iter_2_CongestedCLBsAndNets.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/optimizedImplementation/iter_31_CongestedCLBsAndNets.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/optimizedImplementation/iter_3_CongestedCLBsAndNets.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/optimizedImplementation/iter_42_CongestedCLBsAndNets.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/optimizedImplementation/iter_43_CongestedCLBsAndNets.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/optimizedImplementation/iter_6_CongestedCLBsAndNets.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/optimizedImplementation/iter_7_CongestedCLBsAndNets.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/optimizedImplementation/iter_9_CongestedCLBsAndNets.txt" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/optimizedImplementation/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/optimizedImplementation/main.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/optimizedImplementation/modify_constraints.py" beforeDir="false" afterPath="$PROJECT_DIR$/optimizedImplementation/modify_constraints.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/optimizedImplementation/modify_num_parallel.py" beforeDir="false" afterPath="$PROJECT_DIR$/optimizedImplementation/modify_num_parallel.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/optimizedImplementation/optimized_data.csv" beforeDir="false" afterPath="$PROJECT_DIR$/optimizedImplementation/optimized_data.csv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/optimizedImplementation/power_report.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/optimizedImplementation/power_synth.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/optimizedImplementation/route_status.txt" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/optimizedImplementation/run_vivado.tcl" beforeDir="false" afterPath="$PROJECT_DIR$/optimizedImplementation/run_vivado.tcl" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/optimizedImplementation/tb_gru_cell_parallel.sv" beforeDir="false" afterPath="$PROJECT_DIR$/optimizedImplementation/tb_gru_cell_parallel.sv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/optimizedImplementation/top_level.sv" beforeDir="false" afterPath="$PROJECT_DIR$/optimizedImplementation/top_level.sv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/optimizedImplementation/status.txt" beforeDir="false" afterPath="$PROJECT_DIR$/optimizedImplementation/status.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/optimizedImplementation/tb_gru_cell_parallel.sv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/optimizedImplementation/tb_gru_cell_parallel.sv.backup" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/optimizedImplementation/tight_setup_hold_pins.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/optimizedImplementation/timing_report.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/optimizedImplementation/timing_synth.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/optimizedImplementation/utilization_report.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/optimizedImplementation/utilization_synth.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/optimizedImplementation/vivado.jou" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/optimizedImplementation/vivado.log" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/optimizedImplementation/vivado_178248.backup.jou" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/optimizedImplementation/vivado_178248.backup.log" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/optimizedImplementation/vivado_4018922.backup.jou" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/optimizedImplementation/vivado_4018922.backup.log" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/optimizedImplementation/vivado_4111667.backup.jou" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/optimizedImplementation/vivado_4111667.backup.log" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/optimizedImplementation/vivado_98610.backup.jou" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/optimizedImplementation/vivado_98610.backup.log" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/optimizedImplementation/vivado_9924.backup.jou" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/optimizedImplementation/vivado_9924.backup.log" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/testbenchInputs/bias_weights.txt" beforeDir="false" afterPath="$PROJECT_DIR$/optimizedImplementation/testbenchInputs/bias_weights.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/testbenchInputs/hd_weights.txt" beforeDir="false" afterPath="$PROJECT_DIR$/optimizedImplementation/testbenchInputs/hd_weights.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/testbenchInputs/hh_weights.txt" beforeDir="false" afterPath="$PROJECT_DIR$/optimizedImplementation/testbenchInputs/hh_weights.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/testbenchInputs/input_data.txt" beforeDir="false" afterPath="$PROJECT_DIR$/optimizedImplementation/testbenchInputs/input_data.txt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -53,6 +108,11 @@
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/optimizedImplementation" />
+    </key>
+  </component>
   <component name="RunManager">
     <configuration name="main" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="gru-hardware-implementation-and-optimization" />
@@ -103,7 +163,7 @@
       <workItem from="1765252417125" duration="39000" />
       <workItem from="1765255887730" duration="8000" />
       <workItem from="1765309786930" duration="330000" />
-      <workItem from="1765314176026" duration="13255000" />
+      <workItem from="1765314176026" duration="31952000" />
     </task>
     <servers />
   </component>
@@ -114,19 +174,25 @@
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/optimizedImplementation/modify_constraints.py</url>
-          <line>11</line>
-          <option name="timeStamp" value="1" />
+          <url>file://$PROJECT_DIR$/optimizedImplementation/main.py</url>
+          <line>373</line>
+          <option name="timeStamp" value="4" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/optimizedImplementation/modify_num_parallel.py</url>
-          <option name="timeStamp" value="2" />
+          <url>file://$PROJECT_DIR$/optimizedImplementation/main.py</url>
+          <line>269</line>
+          <option name="timeStamp" value="6" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/optimizedImplementation/main.py</url>
+          <line>166</line>
+          <option name="timeStamp" value="8" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/gru_hardware_implementation_and_optimization$modify_num_parallel.coverage" NAME="modify_num_parallel Coverage Results" MODIFIED="1765315311905" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/optimizedImplementation" />
-    <SUITE FILE_PATH="coverage/gru_hardware_implementation_and_optimization$main.coverage" NAME="main Coverage Results" MODIFIED="1765324123247" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/optimizedImplementation" />
+    <SUITE FILE_PATH="coverage/gru_hardware_implementation_and_optimization$main.coverage" NAME="main Coverage Results" MODIFIED="1765526731964" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/optimizedImplementation" />
   </component>
 </project>

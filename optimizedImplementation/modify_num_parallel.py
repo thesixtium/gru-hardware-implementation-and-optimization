@@ -107,7 +107,7 @@ def modify_num_parallel(sv_file, num_parallel=None, data_width=None, frac_bits=N
 if __name__ == "__main__":
     # Example usage
     modify_num_parallel(
-        r"C:\Users\ajrbe\Documents\School\Thesis\BCI\Code\gru_cell_parallel.sv",
+        r"/home/lex/Documents/git/gru-hardware-implementation-and-optimization/optimizedImplementation/gru_cell_parallel.sv",
         num_parallel=2,
         data_width=15,
         frac_bits=9,

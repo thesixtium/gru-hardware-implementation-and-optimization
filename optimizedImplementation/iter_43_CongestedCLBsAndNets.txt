@@ -1,9 +1,0 @@
-List of CLB Tiles
-CLEM_X117Y365
-CLEL_L_X86Y407
-CLEL_R_X86Y407
-
-List of Congested Nets
-gru_inst/gen_reset_gates[4].reset_gate_inst/sum_input0_i_872__16_n_0
-gru_inst/gen_reset_gates[4].reset_gate_inst/sum_input0_i_874__6_n_0
-

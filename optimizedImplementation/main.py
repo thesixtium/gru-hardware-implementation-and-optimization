@@ -2,6 +2,7 @@ import subprocess
 import pandas as pd
 import re
 from pathlib import Path
+import numpy as np
 
 from generate_gru_ground_truth import generate_gru_ground_truth
 from generate_gru_tb_sv import generate_gru_tb_sv
@@ -168,12 +169,12 @@ def extract_avg_cycles(filename):
             content = f.read()
 
         # Pattern to match "Avg cycles: XXXX per computation"
-        pattern = r'Avg cycles:\s+(\d+)\s+per computation'
+        pattern = r'Average Cycles:[\s]+([0-9]*\.[0-9]*)'
 
         match = re.search(pattern, content)
 
         if match:
-            avg_cycles = int(match.group(1))
+            avg_cycles = float(match.group(1))
             return avg_cycles
         else:
             print(f"Warning: 'Avg cycles' not found in {filename}")
@@ -199,8 +200,9 @@ def main():
         f.write("")
 
     count = 0
-    clock_period_range = [ 4, 5 ]
+    clock_period_range = [ 2, 2.5, 4, 20, 100, 500, 1000 ]
     """
+    https://docs.amd.com/v/u/en-US/ds181_Artix_7_Data_Sheet
     500 MHz: -period 2.000
     250 MHz: -period 4.000
     200 MHz: -period 5.000
@@ -208,14 +210,14 @@ def main():
     50 MHz: -period 20.000
     """
 
-    num_parallel_range = [4]
-    int_width_range = [6]
-    frac_width_range = [9]
+    num_parallel_range = [ 1, 2, 4, 8, 16 ]
+    int_width_range = [ 6 ]
+    frac_width_range = [ 5, 6, 7, 8, 9, 10, 11]
 
     total = len(clock_period_range) * len(num_parallel_range) * len(int_width_range) * len(frac_width_range)
 
-    d = 4
-    h = 2
+    d = 64
+    h = 16
 
     generate_gru_ground_truth(d, h, 100)
 
@@ -236,12 +238,12 @@ def main():
 
                         try:
                             modify_clock_period(
-                                r"C:\Users\ajrbe\Documents\School\Thesis\BCI\Code\constraints.xdc",
+                                r"/home/lex/Documents/git/gru-hardware-implementation-and-optimization/optimizedImplementation/constraints.xdc",
                                 clock_period
                             )
 
                             modify_num_parallel(
-                                r"C:\Users\ajrbe\Documents\School\Thesis\BCI\Code\gru_cell_parallel.sv",
+                                r"/home/lex/Documents/git/gru-hardware-implementation-and-optimization/optimizedImplementation/gru_cell_parallel.sv",
                                 num_parallel=num_parallel,
                                 data_width=int_bits + frac_bits,
                                 frac_bits=frac_bits,
@@ -250,7 +252,7 @@ def main():
                             )
 
                             # Accuracy Metrics
-                            tb_code = generate_gru_tb_sv(INT_WIDTH=int_bits, FRAC_WIDTH=frac_bits, d=d, h=h)
+                            tb_code = generate_gru_tb_sv(INT_WIDTH=int_bits, FRAC_WIDTH=frac_bits, d=d, h=h, NUM_PARALLEL=num_parallel)
                             with open("gru_tb.sv", "w+", encoding="utf-8") as f:
                                 f.write(tb_code)
                             print("Generated gru_tb.sv")
@@ -262,14 +264,14 @@ def main():
                             metrics = extract_metrics()
 
                             # Read output file and calculate cycles
-                            output_filename = f"cycles_d{d}_h{h}_df{int_bits+frac_bits}_fb{frac_bits}_np{num_parallel}.txt"
+                            output_filename = f"cycles_d{d}_h{h}_dw{int_bits+frac_bits}_fb{frac_bits}_np{num_parallel}.txt"
 
                             cycles = None
                             if Path(output_filename).exists():
                                 cycles = extract_avg_cycles( output_filename )
 
                             # Read output file and calculate MAE against ground truth
-                            output_filename = f"output_d{d}_h{h}_df{int_bits+frac_bits}_fb{frac_bits}_np{num_parallel}.txt"
+                            output_filename = f"output_d{d}_h{h}_dw{int_bits+frac_bits}_fb{frac_bits}_np{num_parallel}.txt"
                             mae_value = None
                             rmse_value = None
 
@@ -296,6 +298,8 @@ def main():
                                 metrics["result"] = "success"
                                 metrics["Cycles"] = cycles
                                 metrics["Clock Period"] = clock_period
+                                metrics["D"] = d
+                                metrics["H"] = h
                                 metrics["MAE"] = mae_value
                                 metrics["RMSE"] = rmse_value
                                 metrics["Execution Time (m)"] = (time.time() - start_time) / 60
@@ -314,6 +318,8 @@ def main():
                                 metrics["WNS (ns)"] = 0
                                 metrics["Total Power (W)"] = 0
                                 metrics["Dynamic Power (W)"] = 0
+                                metrics["D"] = d
+                                metrics["H"] = h
                                 metrics["Static Power (W)"] = 0
                                 metrics["Time Utilization"] = 0
                                 metrics["MAE"] = 0
@@ -337,6 +343,8 @@ def main():
                             metrics["DSPs"] = 0
                             metrics["WNS (ns)"] = 0
                             metrics["Total Power (W)"] = 0
+                            metrics["D"] = d
+                            metrics["H"] = h
                             metrics["Dynamic Power (W)"] = 0
                             metrics["Static Power (W)"] = 0
                             metrics["Time Utilization"] = 0
