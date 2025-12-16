@@ -1,5 +1,5 @@
 // ============================================================================
-// New/Candidate Gate Element Module (n_t)
+// New/Candidate Gate Element Module (n_t) - Using Proper Tanh Module
 // ============================================================================
 module gru_new_gate_element #(
     parameter int D = 128,
@@ -27,6 +27,8 @@ module gru_new_gate_element #(
     logic signed [2*DATA_WIDTH-1:0] sum_hidden;
     logic signed [2*DATA_WIDTH-1:0] sum_hidden_gated;
     logic signed [2*DATA_WIDTH-1:0] mac_result;
+    logic signed [DATA_WIDTH-1:0] pre_activation;
+    logic tanh_reset;
     
     int input_mac_count;
     int hidden_mac_count;
@@ -43,6 +45,17 @@ module gru_new_gate_element #(
     
     state_t state, next_state;
     
+    // Instantiate tanh module
+    tanh #(
+        .INT_WIDTH(DATA_WIDTH - FRAC_BITS),
+        .FRAC_WIDTH(FRAC_BITS),
+        .WIDTH(DATA_WIDTH)
+    ) tanh_inst (
+        .reset(tanh_reset),
+        .x(pre_activation),
+        .y(n_t_n)
+    );
+    
     always_ff @(posedge clk or negedge rst_n) begin
         if (!rst_n) begin
             state <= IDLE;
@@ -51,8 +64,9 @@ module gru_new_gate_element #(
             sum_hidden_gated <= '0;
             input_mac_count <= 0;
             hidden_mac_count <= 0;
-            n_t_n <= '0;
+            pre_activation <= '0;
             valid_out <= 1'b0;
+            tanh_reset <= 1'b1;
         end else begin
             state <= next_state;
             
@@ -64,6 +78,7 @@ module gru_new_gate_element #(
                         input_mac_count <= 0;
                         hidden_mac_count <= 0;
                         valid_out <= 1'b0;
+                        tanh_reset <= 1'b1;
                     end
                 end
                 
@@ -88,15 +103,20 @@ module gru_new_gate_element #(
                     mac_result <= (sum_input >>> FRAC_BITS) + 
                                   {{DATA_WIDTH{b_in_n[DATA_WIDTH-1]}}, b_in_n} + 
                                   sum_hidden_gated[DATA_WIDTH-1:0];
+                    pre_activation <= ((sum_input >>> FRAC_BITS) + 
+                                      {{DATA_WIDTH{b_in_n[DATA_WIDTH-1]}}, b_in_n} + 
+                                      sum_hidden_gated[DATA_WIDTH-1:0])[DATA_WIDTH-1:0];
+                    tanh_reset <= 1'b0;
                 end
                 
                 TANH: begin
-                    n_t_n <= tanh_approx(mac_result[DATA_WIDTH-1:0]);
+                    // Output is now driven by tanh module
                     valid_out <= 1'b1;
                 end
                 
                 DONE: begin
                     valid_out <= 1'b0;
+                    tanh_reset <= 1'b1;
                 end
             endcase
         end
@@ -115,27 +135,5 @@ module gru_new_gate_element #(
             DONE: next_state = IDLE;
         endcase
     end
-    
-    function automatic logic signed [DATA_WIDTH-1:0] tanh_approx(
-        input logic signed [DATA_WIDTH-1:0] x
-    );
-        logic signed [DATA_WIDTH-1:0] result;
-        logic signed [DATA_WIDTH-1:0] one = (1 << FRAC_BITS);
-        logic signed [DATA_WIDTH-1:0] neg_one = -(1 << FRAC_BITS);
-        
-        // Piecewise linear approximation:
-        // tanh(x) ≈ -1     if x < -2
-        // tanh(x) ≈ 0.5x   if -2 ≤ x ≤ 2
-        // tanh(x) ≈ 1      if x > 2
-        
-        if (x < -(one << 1))
-            result = neg_one;
-        else if (x > (one << 1))
-            result = one;
-        else
-            result = x >>> 1; // 0.5x
-        
-        return result;
-    endfunction
 
 endmodule

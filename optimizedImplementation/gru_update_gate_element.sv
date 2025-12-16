@@ -1,5 +1,5 @@
 // ============================================================================
-// Update Gate Element Module (z_t)
+// Update Gate Element Module (z_t) - Using Proper Sigmoid Module
 // ============================================================================
 module gru_update_gate_element #(
     parameter int D = 128,
@@ -25,6 +25,8 @@ module gru_update_gate_element #(
     logic signed [2*DATA_WIDTH-1:0] sum_input;
     logic signed [2*DATA_WIDTH-1:0] sum_hidden;
     logic signed [2*DATA_WIDTH-1:0] mac_result;
+    logic signed [DATA_WIDTH-1:0] pre_activation;
+    logic sigmoid_reset;
     
     int input_mac_count;
     int hidden_mac_count;
@@ -40,6 +42,17 @@ module gru_update_gate_element #(
     
     state_t state, next_state;
     
+    // Instantiate sigmoid module
+    sigmoid #(
+        .INT_WIDTH(DATA_WIDTH - FRAC_BITS),
+        .FRAC_WIDTH(FRAC_BITS),
+        .WIDTH(DATA_WIDTH)
+    ) sigmoid_inst (
+        .reset(sigmoid_reset),
+        .x(pre_activation),
+        .y(z_t_n)
+    );
+    
     always_ff @(posedge clk or negedge rst_n) begin
         if (!rst_n) begin
             state <= IDLE;
@@ -47,8 +60,9 @@ module gru_update_gate_element #(
             sum_hidden <= '0;
             input_mac_count <= 0;
             hidden_mac_count <= 0;
-            z_t_n <= '0;
+            pre_activation <= '0;
             valid_out <= 1'b0;
+            sigmoid_reset <= 1'b1;
         end else begin
             state <= next_state;
             
@@ -60,6 +74,7 @@ module gru_update_gate_element #(
                         input_mac_count <= 0;
                         hidden_mac_count <= 0;
                         valid_out <= 1'b0;
+                        sigmoid_reset <= 1'b1;
                     end
                 end
                 
@@ -77,15 +92,20 @@ module gru_update_gate_element #(
                     mac_result <= (sum_input >>> FRAC_BITS) + (sum_hidden >>> FRAC_BITS) + 
                                   {{DATA_WIDTH{b_iz_n[DATA_WIDTH-1]}}, b_iz_n} + 
                                   {{DATA_WIDTH{b_hz_n[DATA_WIDTH-1]}}, b_hz_n};
+                    pre_activation <= ((sum_input >>> FRAC_BITS) + (sum_hidden >>> FRAC_BITS) + 
+                                      {{DATA_WIDTH{b_iz_n[DATA_WIDTH-1]}}, b_iz_n} + 
+                                      {{DATA_WIDTH{b_hz_n[DATA_WIDTH-1]}}, b_hz_n})[DATA_WIDTH-1:0];
+                    sigmoid_reset <= 1'b0;
                 end
                 
                 SIGMOID: begin
-                    z_t_n <= sigmoid_approx(mac_result[DATA_WIDTH-1:0]);
+                    // Output is now driven by sigmoid module
                     valid_out <= 1'b1;
                 end
                 
                 DONE: begin
                     valid_out <= 1'b0;
+                    sigmoid_reset <= 1'b1;
                 end
             endcase
         end
@@ -103,22 +123,5 @@ module gru_update_gate_element #(
             DONE: next_state = IDLE;
         endcase
     end
-    
-    function automatic logic signed [DATA_WIDTH-1:0] sigmoid_approx(
-        input logic signed [DATA_WIDTH-1:0] x
-    );
-        logic signed [DATA_WIDTH-1:0] result;
-        logic signed [DATA_WIDTH-1:0] one = (1 << FRAC_BITS);
-        logic signed [DATA_WIDTH-1:0] half = (1 << (FRAC_BITS-1));
-        
-        if (x < -(5*half))
-            result = 0;
-        else if (x > (5*half))
-            result = one;
-        else
-            result = ((x >>> 2) + (x >>> 3)) + half;
-        
-        return result;
-    endfunction
 
 endmodule
