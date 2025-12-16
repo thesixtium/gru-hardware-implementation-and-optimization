@@ -222,10 +222,10 @@ def main():
     generate_gru_ground_truth(d, h, 100)
 
     for attempt in range(1):
-        for clock_period in clock_period_range:
-            for num_parallel in num_parallel_range:
-                for int_bits in int_width_range:
-                    for frac_bits in frac_width_range:
+        for int_bits in int_width_range:
+            for frac_bits in frac_width_range:
+                for clock_period in clock_period_range:
+                    for num_parallel in num_parallel_range:
 
                         start_time = time.time()
                         count += 1
@@ -298,6 +298,9 @@ def main():
                                 metrics["result"] = "success"
                                 metrics["Cycles"] = cycles
                                 metrics["Clock Period"] = clock_period
+                                metrics["Frac Width"] = frac_bits
+                                metrics["Num Parallel"] = num_parallel
+                                metrics["Int Bits"] = int_bits
                                 metrics["D"] = d
                                 metrics["H"] = h
                                 metrics["MAE"] = mae_value
@@ -365,13 +368,6 @@ def main():
                         print("\n" + "=" * 60)
                         print("Results saved to optimized_data.csv")
                         print("=" * 60)
-
-    # Print summary of MAE results
-    print("\nMAE Summary:")
-    print("=" * 60)
-    for _, row in df.iterrows():
-        if row["MAE"] > 0:
-            print(f"d={row['D']}, h={row['H']}, int={row['int bits']}, frac={row['frac bits']}: MAE = {row['MAE']:.8f}")
 
 if __name__ == "__main__":
     main()

@@ -1,0 +1,1982 @@
+#-----------------------------------------------------------
+# Vivado v2024.1 (64-bit)
+# SW Build 5076996 on Wed May 22 18:36:09 MDT 2024
+# IP Build 5075265 on Wed May 22 21:45:21 MDT 2024
+# SharedData Build 5076995 on Wed May 22 18:29:18 MDT 2024
+# Start of session at: Mon Dec 15 18:56:20 2025
+# Process ID: 71491
+# Current directory: /home/lex/Documents/git/gru-hardware-implementation-and-optimization/optimizedImplementation
+# Command line: vivado -mode batch -source run_vivado.tcl
+# Log file: /home/lex/Documents/git/gru-hardware-implementation-and-optimization/optimizedImplementation/vivado.log
+# Journal file: /home/lex/Documents/git/gru-hardware-implementation-and-optimization/optimizedImplementation/vivado.jou
+# Running On        :Toothless
+# Platform          :Ubuntu
+# Operating System  :Ubuntu 20.04.6 LTS
+# Processor Detail  :AMD Ryzen 5 7600X 6-Core Processor
+# CPU Frequency     :3000.000 MHz
+# CPU Physical cores:6
+# CPU Logical cores :12
+# Host memory       :32695 MB
+# Swap memory       :2147 MB
+# Total Virtual     :34842 MB
+# Available Virtual :29054 MB
+#-----------------------------------------------------------
+source run_vivado.tcl
+# set proj_name gru_proj
+# set proj_dir ./vivado_proj
+# set part_name xcu250-figd2104-2L-e
+# set top_module top_level
+# set tb_module gru_tb
+# if { [file exists $proj_dir] } {
+#     file delete -force $proj_dir
+# }
+# create_project $proj_name $proj_dir -part $part_name
+# add_files /home/lex/Documents/git/gru-hardware-implementation-and-optimization/optimizedImplementation/top_level.sv
+# add_files /home/lex/Documents/git/gru-hardware-implementation-and-optimization/optimizedImplementation/gru_cell_parallel.sv
+# add_files /home/lex/Documents/git/gru-hardware-implementation-and-optimization/optimizedImplementation/gru_hidden_state_element.sv
+# add_files /home/lex/Documents/git/gru-hardware-implementation-and-optimization/optimizedImplementation/gru_new_gate_element.sv
+# add_files /home/lex/Documents/git/gru-hardware-implementation-and-optimization/optimizedImplementation/gru_reset_gate_element.sv
+# add_files /home/lex/Documents/git/gru-hardware-implementation-and-optimization/optimizedImplementation/gru_update_gate_element.sv
+# add_files -fileset sim_1 /home/lex/Documents/git/gru-hardware-implementation-and-optimization/optimizedImplementation/gru_tb.sv
+# read_xdc /home/lex/Documents/git/gru-hardware-implementation-and-optimization/optimizedImplementation/constraints.xdc
+# foreach sv_file [glob -nocomplain /home/lex/Documents/git/gru-hardware-implementation-and-optimization/optimizedImplementation/*.sv] {
+#     if {[file tail $sv_file] ne "gru_tb.sv"} {
+#         set_property file_type {SystemVerilog} [get_files $sv_file]
+#     }
+# }
+# set_property top $top_module [current_fileset]
+# update_compile_order -fileset sources_1
+# set_property top $tb_module [get_filesets sim_1]
+# update_compile_order -fileset sim_1
+# set_property -name {xsim.simulate.runtime} -value {1000ns} -objects [get_filesets sim_1]
+# launch_simulation -mode behavioral
+Command: launch_simulation  -mode behavioral
+INFO: [Vivado 12-12493] Simulation top is 'gru_tb'
+INFO: [Vivado 12-5682] Launching behavioral simulation in '/home/lex/Documents/git/gru-hardware-implementation-and-optimization/optimizedImplementation/vivado_proj/gru_proj.sim/sim_1/behav/xsim'
+INFO: [SIM-utils-51] Simulation object is 'sim_1'
+INFO: [SIM-utils-72] Using boost library from '/tools/Xilinx/Vivado/2024.1/tps/boost_1_72_0'
+INFO: [SIM-utils-54] Inspecting design source files for 'gru_tb' in fileset 'sim_1'...
+INFO: [USF-XSim-97] Finding global include files...
+INFO: [USF-XSim-98] Fetching design files from 'sim_1'...
+INFO: [USF-XSim-2] XSim::Compile design
+INFO: [USF-XSim-61] Executing 'COMPILE and ANALYZE' step in '/home/lex/Documents/git/gru-hardware-implementation-and-optimization/optimizedImplementation/vivado_proj/gru_proj.sim/sim_1/behav/xsim'
+xvlog --incr --relax -L uvm -prj gru_tb_vlog.prj
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "/home/lex/Documents/git/gru-hardware-implementation-and-optimization/optimizedImplementation/gru_cell_parallel.sv" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module gru_cell_parallel
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "/home/lex/Documents/git/gru-hardware-implementation-and-optimization/optimizedImplementation/gru_hidden_state_element.sv" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module gru_hidden_state_element
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "/home/lex/Documents/git/gru-hardware-implementation-and-optimization/optimizedImplementation/gru_new_gate_element.sv" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module gru_new_gate_element
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "/home/lex/Documents/git/gru-hardware-implementation-and-optimization/optimizedImplementation/gru_reset_gate_element.sv" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module gru_reset_gate_element
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "/home/lex/Documents/git/gru-hardware-implementation-and-optimization/optimizedImplementation/gru_update_gate_element.sv" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module gru_update_gate_element
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "/home/lex/Documents/git/gru-hardware-implementation-and-optimization/optimizedImplementation/gru_tb.sv" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module gru_tb
+INFO: [VRFC 10-2263] Analyzing Verilog file "/home/lex/Documents/git/gru-hardware-implementation-and-optimization/optimizedImplementation/vivado_proj/gru_proj.sim/sim_1/behav/xsim/glbl.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module glbl
+Waiting for jobs to finish...
+No pending jobs, compilation finished.
+INFO: [USF-XSim-69] 'compile' step finished in '1' seconds
+INFO: [USF-XSim-3] XSim::Elaborate design
+INFO: [USF-XSim-61] Executing 'ELABORATE' step in '/home/lex/Documents/git/gru-hardware-implementation-and-optimization/optimizedImplementation/vivado_proj/gru_proj.sim/sim_1/behav/xsim'
+xelab --incr --debug typical --relax --mt 8 -L xil_defaultlib -L uvm -L unisims_ver -L unimacro_ver -L secureip --snapshot gru_tb_behav xil_defaultlib.gru_tb xil_defaultlib.glbl -log elaborate.log
+Vivado Simulator v2024.1
+Copyright 1986-2022 Xilinx, Inc. All Rights Reserved.
+Copyright 2022-2024 Advanced Micro Devices, Inc. All Rights Reserved.
+Running: /tools/Xilinx/Vivado/2024.1/bin/unwrapped/lnx64.o/xelab --incr --debug typical --relax --mt 8 -L xil_defaultlib -L uvm -L unisims_ver -L unimacro_ver -L secureip --snapshot gru_tb_behav xil_defaultlib.gru_tb xil_defaultlib.glbl -log elaborate.log 
+Using 8 slave threads.
+Starting static elaboration
+Pass Through NonSizing Optimizer
+Completed static elaboration
+Starting simulation data flow analysis
+WARNING: [XSIM 43-4099] "/home/lex/Documents/git/gru-hardware-implementation-and-optimization/optimizedImplementation/gru_cell_parallel.sv" Line 4. Module gru_cell_parallel_default doesn't have a timescale but at least one module in design has a timescale.
+WARNING: [XSIM 43-4099] "/home/lex/Documents/git/gru-hardware-implementation-and-optimization/optimizedImplementation/gru_reset_gate_element.sv" Line 1. Module gru_reset_gate_element(D=64,H=16,DATA_WIDTH=17,FRAC_BITS=11) doesn't have a timescale but at least one module in design has a timescale.
+WARNING: [XSIM 43-4099] "/home/lex/Documents/git/gru-hardware-implementation-and-optimization/optimizedImplementation/gru_update_gate_element.sv" Line 4. Module gru_update_gate_element(D=64,H=16,DATA_WIDTH=17,FRAC_BITS=11) doesn't have a timescale but at least one module in design has a timescale.
+WARNING: [XSIM 43-4099] "/home/lex/Documents/git/gru-hardware-implementation-and-optimization/optimizedImplementation/gru_new_gate_element.sv" Line 4. Module gru_new_gate_element(D=64,H=16,DATA_WIDTH=17,FRAC_BITS=11) doesn't have a timescale but at least one module in design has a timescale.
+WARNING: [XSIM 43-4099] "/home/lex/Documents/git/gru-hardware-implementation-and-optimization/optimizedImplementation/gru_hidden_state_element.sv" Line 4. Module gru_hidden_state_element(DATA_WIDTH=17,FRAC_BITS=11) doesn't have a timescale but at least one module in design has a timescale.
+WARNING: [XSIM 43-4099] "/home/lex/Documents/git/gru-hardware-implementation-and-optimization/optimizedImplementation/gru_cell_parallel.sv" Line 4. Module gru_cell_parallel_default doesn't have a timescale but at least one module in design has a timescale.
+WARNING: [XSIM 43-4099] "/home/lex/Documents/git/gru-hardware-implementation-and-optimization/optimizedImplementation/gru_reset_gate_element.sv" Line 1. Module gru_reset_gate_element(D=64,H=16,DATA_WIDTH=17,FRAC_BITS=11) doesn't have a timescale but at least one module in design has a timescale.
+WARNING: [XSIM 43-4099] "/home/lex/Documents/git/gru-hardware-implementation-and-optimization/optimizedImplementation/gru_update_gate_element.sv" Line 4. Module gru_update_gate_element(D=64,H=16,DATA_WIDTH=17,FRAC_BITS=11) doesn't have a timescale but at least one module in design has a timescale.
+WARNING: [XSIM 43-4099] "/home/lex/Documents/git/gru-hardware-implementation-and-optimization/optimizedImplementation/gru_new_gate_element.sv" Line 4. Module gru_new_gate_element(D=64,H=16,DATA_WIDTH=17,FRAC_BITS=11) doesn't have a timescale but at least one module in design has a timescale.
+WARNING: [XSIM 43-4099] "/home/lex/Documents/git/gru-hardware-implementation-and-optimization/optimizedImplementation/gru_hidden_state_element.sv" Line 4. Module gru_hidden_state_element(DATA_WIDTH=17,FRAC_BITS=11) doesn't have a timescale but at least one module in design has a timescale.
+Completed simulation data flow analysis
+Time Resolution for simulation is 1ps
+Compiling module xil_defaultlib.gru_reset_gate_element(D=64,H=16...
+Compiling module xil_defaultlib.gru_update_gate_element(D=64,H=1...
+Compiling module xil_defaultlib.gru_new_gate_element(D=64,H=16,D...
+Compiling module xil_defaultlib.gru_hidden_state_element(DATA_WI...
+Compiling module xil_defaultlib.gru_cell_parallel_default
+Compiling module xil_defaultlib.gru_tb
+Compiling module xil_defaultlib.glbl
+Built simulation snapshot gru_tb_behav
+INFO: [USF-XSim-69] 'elaborate' step finished in '3' seconds
+INFO: [USF-XSim-4] XSim::Simulate design
+INFO: [USF-XSim-61] Executing 'SIMULATE' step in '/home/lex/Documents/git/gru-hardware-implementation-and-optimization/optimizedImplementation/vivado_proj/gru_proj.sim/sim_1/behav/xsim'
+INFO: [USF-XSim-98] *** Running xsim
+   with args "gru_tb_behav -key {Behavioral:sim_1:Functional:gru_tb} -tclbatch {gru_tb.tcl} -log {simulate.log}"
+INFO: [USF-XSim-8] Loading simulator feature
+Time resolution is 1 ps
+source gru_tb.tcl
+## set curr_wave [current_wave_config]
+## if { [string length $curr_wave] == 0 } {
+##   if { [llength [get_objects]] > 0} {
+##     add_wave /
+##     set_property needs_save false [current_wave_config]
+##   } else {
+##      send_msg_id Add_Wave-1 WARNING "No top level signals found. Simulator will start without a wave window. If you want to open a wave window go to 'File->New Waveform Configuration' or type 'create_wave_config' in the TCL console."
+##   }
+## }
+## run 1000ns
+INFO: [USF-XSim-96] XSim completed. Design snapshot 'gru_tb_behav' loaded.
+INFO: [USF-XSim-97] XSim simulation ran for 1000ns
+launch_simulation: Time (s): cpu = 00:00:08 ; elapsed = 00:00:05 . Memory (MB): peak = 1480.980 ; gain = 61.340 ; free physical = 22383 ; free virtual = 27317
+# run 5000us
+
+==========================================================
+Simulation Complete
+==========================================================
+Test Vectors:   100
+Total Cycles:   423200
+Average Cycles: 4232.00
+==========================================================
+Output file:    output_d64_h16_dw17_fb11_np1.txt
+Cycles file:    cycles_d64_h16_dw17_fb11_np1.txt
+==========================================================
+$finish called at time : 4241145 ns : File "/home/lex/Documents/git/gru-hardware-implementation-and-optimization/optimizedImplementation/gru_tb.sv" Line 16325
+# close_sim -force
+INFO: [Simtcl 6-16] Simulation closed
+# after 500
+# synth_design -top $top_module -part $part_name
+Command: synth_design -top top_level -part xcu250-figd2104-2L-e
+Starting synth_design
+Attempting to get a license for feature 'Synthesis' and/or device 'xcu250'
+INFO: [Common 17-349] Got license for feature 'Synthesis' and/or device 'xcu250'
+INFO: [Device 21-403] Loading part xcu250-figd2104-2L-e
+INFO: [Synth 8-7079] Multithreading enabled for synth_design using a maximum of 4 processes.
+INFO: [Synth 8-7078] Launching helper process for spawning children vivado processes
+INFO: [Synth 8-7075] Helper process launched with PID 71619
+---------------------------------------------------------------------------------
+Starting RTL Elaboration : Time (s): cpu = 00:00:02 ; elapsed = 00:00:02 . Memory (MB): peak = 3016.797 ; gain = 396.711 ; free physical = 20563 ; free virtual = 25503
+---------------------------------------------------------------------------------
+INFO: [Synth 8-6157] synthesizing module 'top_level' [/home/lex/Documents/git/gru-hardware-implementation-and-optimization/optimizedImplementation/top_level.sv:5]
+INFO: [Synth 8-6157] synthesizing module 'gru_cell_parallel' [/home/lex/Documents/git/gru-hardware-implementation-and-optimization/optimizedImplementation/gru_cell_parallel.sv:4]
+	Parameter D bound to: 32'sb00000000000000000000000001000000 
+	Parameter H bound to: 32'sb00000000000000000000000000010000 
+	Parameter DATA_WIDTH bound to: 32'sb00000000000000000000000000001111 
+	Parameter FRAC_BITS bound to: 32'sb00000000000000000000000000001001 
+	Parameter NUM_PARALLEL bound to: 32'sb00000000000000000000000000001000 
+INFO: [Synth 8-6157] synthesizing module 'gru_reset_gate_element' [/home/lex/Documents/git/gru-hardware-implementation-and-optimization/optimizedImplementation/gru_reset_gate_element.sv:1]
+	Parameter D bound to: 32'sb00000000000000000000000001000000 
+	Parameter H bound to: 32'sb00000000000000000000000000010000 
+	Parameter DATA_WIDTH bound to: 32'sb00000000000000000000000000001111 
+	Parameter FRAC_BITS bound to: 32'sb00000000000000000000000000001001 
+INFO: [Synth 8-155] case statement is not full and has no default [/home/lex/Documents/git/gru-hardware-implementation-and-optimization/optimizedImplementation/gru_reset_gate_element.sv:53]
+INFO: [Synth 8-155] case statement is not full and has no default [/home/lex/Documents/git/gru-hardware-implementation-and-optimization/optimizedImplementation/gru_reset_gate_element.sv:96]
+INFO: [Synth 8-6155] done synthesizing module 'gru_reset_gate_element' (0#1) [/home/lex/Documents/git/gru-hardware-implementation-and-optimization/optimizedImplementation/gru_reset_gate_element.sv:1]
+INFO: [Synth 8-6157] synthesizing module 'gru_update_gate_element' [/home/lex/Documents/git/gru-hardware-implementation-and-optimization/optimizedImplementation/gru_update_gate_element.sv:4]
+	Parameter D bound to: 32'sb00000000000000000000000001000000 
+	Parameter H bound to: 32'sb00000000000000000000000000010000 
+	Parameter DATA_WIDTH bound to: 32'sb00000000000000000000000000001111 
+	Parameter FRAC_BITS bound to: 32'sb00000000000000000000000000001001 
+INFO: [Synth 8-155] case statement is not full and has no default [/home/lex/Documents/git/gru-hardware-implementation-and-optimization/optimizedImplementation/gru_update_gate_element.sv:55]
+INFO: [Synth 8-155] case statement is not full and has no default [/home/lex/Documents/git/gru-hardware-implementation-and-optimization/optimizedImplementation/gru_update_gate_element.sv:97]
+INFO: [Synth 8-6155] done synthesizing module 'gru_update_gate_element' (0#1) [/home/lex/Documents/git/gru-hardware-implementation-and-optimization/optimizedImplementation/gru_update_gate_element.sv:4]
+INFO: [Synth 8-6157] synthesizing module 'gru_new_gate_element' [/home/lex/Documents/git/gru-hardware-implementation-and-optimization/optimizedImplementation/gru_new_gate_element.sv:4]
+	Parameter D bound to: 32'sb00000000000000000000000001000000 
+	Parameter H bound to: 32'sb00000000000000000000000000010000 
+	Parameter DATA_WIDTH bound to: 32'sb00000000000000000000000000001111 
+	Parameter FRAC_BITS bound to: 32'sb00000000000000000000000000001001 
+INFO: [Synth 8-155] case statement is not full and has no default [/home/lex/Documents/git/gru-hardware-implementation-and-optimization/optimizedImplementation/gru_new_gate_element.sv:59]
+INFO: [Synth 8-155] case statement is not full and has no default [/home/lex/Documents/git/gru-hardware-implementation-and-optimization/optimizedImplementation/gru_new_gate_element.sv:108]
+INFO: [Synth 8-6155] done synthesizing module 'gru_new_gate_element' (0#1) [/home/lex/Documents/git/gru-hardware-implementation-and-optimization/optimizedImplementation/gru_new_gate_element.sv:4]
+INFO: [Synth 8-6157] synthesizing module 'gru_hidden_state_element' [/home/lex/Documents/git/gru-hardware-implementation-and-optimization/optimizedImplementation/gru_hidden_state_element.sv:4]
+	Parameter DATA_WIDTH bound to: 32'sb00000000000000000000000000001111 
+	Parameter FRAC_BITS bound to: 32'sb00000000000000000000000000001001 
+INFO: [Synth 8-155] case statement is not full and has no default [/home/lex/Documents/git/gru-hardware-implementation-and-optimization/optimizedImplementation/gru_hidden_state_element.sv:43]
+INFO: [Synth 8-155] case statement is not full and has no default [/home/lex/Documents/git/gru-hardware-implementation-and-optimization/optimizedImplementation/gru_hidden_state_element.sv:69]
+INFO: [Synth 8-6155] done synthesizing module 'gru_hidden_state_element' (0#1) [/home/lex/Documents/git/gru-hardware-implementation-and-optimization/optimizedImplementation/gru_hidden_state_element.sv:4]
+INFO: [Synth 8-155] case statement is not full and has no default [/home/lex/Documents/git/gru-hardware-implementation-and-optimization/optimizedImplementation/gru_cell_parallel.sv:182]
+INFO: [Synth 8-155] case statement is not full and has no default [/home/lex/Documents/git/gru-hardware-implementation-and-optimization/optimizedImplementation/gru_cell_parallel.sv:344]
+INFO: [Synth 8-6155] done synthesizing module 'gru_cell_parallel' (0#1) [/home/lex/Documents/git/gru-hardware-implementation-and-optimization/optimizedImplementation/gru_cell_parallel.sv:4]
+INFO: [Synth 8-6155] done synthesizing module 'top_level' (0#1) [/home/lex/Documents/git/gru-hardware-implementation-and-optimization/optimizedImplementation/top_level.sv:5]
+WARNING: [Synth 8-6014] Unused sequential element pre_activation_reg was removed.  [/home/lex/Documents/git/gru-hardware-implementation-and-optimization/optimizedImplementation/gru_reset_gate_element.sv:81]
+WARNING: [Synth 8-7137] Register mac_result_reg in module gru_reset_gate_element has both Set and reset with same priority. This may cause simulation mismatches. Consider rewriting code  [/home/lex/Documents/git/gru-hardware-implementation-and-optimization/optimizedImplementation/gru_reset_gate_element.sv:75]
+WARNING: [Synth 8-7137] Register mac_result_reg in module gru_update_gate_element has both Set and reset with same priority. This may cause simulation mismatches. Consider rewriting code  [/home/lex/Documents/git/gru-hardware-implementation-and-optimization/optimizedImplementation/gru_update_gate_element.sv:77]
+WARNING: [Synth 8-7137] Register mac_result_reg in module gru_new_gate_element has both Set and reset with same priority. This may cause simulation mismatches. Consider rewriting code  [/home/lex/Documents/git/gru-hardware-implementation-and-optimization/optimizedImplementation/gru_new_gate_element.sv:88]
+---------------------------------------------------------------------------------
+Finished RTL Elaboration : Time (s): cpu = 00:00:05 ; elapsed = 00:00:05 . Memory (MB): peak = 3430.672 ; gain = 810.586 ; free physical = 20122 ; free virtual = 25069
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Handling Custom Attributes
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Handling Custom Attributes : Time (s): cpu = 00:00:05 ; elapsed = 00:00:06 . Memory (MB): peak = 3433.641 ; gain = 813.555 ; free physical = 20122 ; free virtual = 25069
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished RTL Optimization Phase 1 : Time (s): cpu = 00:00:05 ; elapsed = 00:00:06 . Memory (MB): peak = 3433.641 ; gain = 813.555 ; free physical = 20122 ; free virtual = 25069
+---------------------------------------------------------------------------------
+Netlist sorting complete. Time (s): cpu = 00:00:00.47 ; elapsed = 00:00:00.46 . Memory (MB): peak = 3433.641 ; gain = 0.000 ; free physical = 20122 ; free virtual = 25068
+INFO: [Project 1-570] Preparing netlist for logic optimization
+
+Processing XDC Constraints
+Initializing timing engine
+Parsing XDC File [/home/lex/Documents/git/gru-hardware-implementation-and-optimization/optimizedImplementation/constraints.xdc]
+CRITICAL WARNING: [Designutils 20-1307] Command '-------------------------' is not supported in the xdc constraint file. [/home/lex/Documents/git/gru-hardware-implementation-and-optimization/optimizedImplementation/constraints.xdc:20]
+Finished Parsing XDC File [/home/lex/Documents/git/gru-hardware-implementation-and-optimization/optimizedImplementation/constraints.xdc]
+Completed Processing XDC Constraints
+
+Netlist sorting complete. Time (s): cpu = 00:00:00.01 ; elapsed = 00:00:00 . Memory (MB): peak = 3650.246 ; gain = 0.000 ; free physical = 20015 ; free virtual = 24961
+INFO: [Project 1-111] Unisim Transformation Summary:
+No Unisim elements were transformed.
+
+Constraint Validation Runtime : Time (s): cpu = 00:00:00.28 ; elapsed = 00:00:00.15 . Memory (MB): peak = 3650.246 ; gain = 0.000 ; free physical = 20014 ; free virtual = 24960
+---------------------------------------------------------------------------------
+Finished Constraint Validation : Time (s): cpu = 00:00:20 ; elapsed = 00:00:19 . Memory (MB): peak = 3650.246 ; gain = 1030.160 ; free physical = 20013 ; free virtual = 24960
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Loading Part and Timing Information
+---------------------------------------------------------------------------------
+Loading part: xcu250-figd2104-2L-e
+INFO: [Synth 8-6742] Reading net delay rules and data
+---------------------------------------------------------------------------------
+Finished Loading Part and Timing Information : Time (s): cpu = 00:00:20 ; elapsed = 00:00:19 . Memory (MB): peak = 3658.250 ; gain = 1038.164 ; free physical = 20013 ; free virtual = 24960
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Applying 'set_property' XDC Constraints
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished applying 'set_property' XDC Constraints : Time (s): cpu = 00:00:20 ; elapsed = 00:00:19 . Memory (MB): peak = 3658.250 ; gain = 1038.164 ; free physical = 20013 ; free virtual = 24960
+---------------------------------------------------------------------------------
+INFO: [Synth 8-802] inferred FSM for state register 'state_reg' in module 'gru_reset_gate_element'
+INFO: [Synth 8-802] inferred FSM for state register 'state_reg' in module 'gru_update_gate_element'
+INFO: [Synth 8-802] inferred FSM for state register 'state_reg' in module 'gru_new_gate_element'
+INFO: [Synth 8-802] inferred FSM for state register 'state_reg' in module 'gru_hidden_state_element'
+INFO: [Synth 8-802] inferred FSM for state register 'state_reg' in module 'gru_cell_parallel'
+---------------------------------------------------------------------------------------------------
+                   State |                     New Encoding |                Previous Encoding 
+---------------------------------------------------------------------------------------------------
+                    IDLE |                              000 |                              000
+               MAC_INPUT |                              001 |                              001
+              MAC_HIDDEN |                              010 |                              010
+                ADD_BIAS |                              011 |                              011
+                 SIGMOID |                              100 |                              100
+                    DONE |                              101 |                              101
+---------------------------------------------------------------------------------------------------
+INFO: [Synth 8-3354] encoded FSM with state register 'state_reg' using encoding 'sequential' in module 'gru_reset_gate_element'
+---------------------------------------------------------------------------------------------------
+                   State |                     New Encoding |                Previous Encoding 
+---------------------------------------------------------------------------------------------------
+                    IDLE |                              000 |                              000
+               MAC_INPUT |                              001 |                              001
+              MAC_HIDDEN |                              010 |                              010
+                ADD_BIAS |                              011 |                              011
+                 SIGMOID |                              100 |                              100
+                    DONE |                              101 |                              101
+---------------------------------------------------------------------------------------------------
+INFO: [Synth 8-3354] encoded FSM with state register 'state_reg' using encoding 'sequential' in module 'gru_update_gate_element'
+---------------------------------------------------------------------------------------------------
+                   State |                     New Encoding |                Previous Encoding 
+---------------------------------------------------------------------------------------------------
+                    IDLE |                              000 |                              000
+               MAC_INPUT |                              001 |                              001
+              MAC_HIDDEN |                              010 |                              010
+             GATE_HIDDEN |                              011 |                              011
+                ADD_BIAS |                              100 |                              100
+                    TANH |                              101 |                              101
+                    DONE |                              110 |                              110
+---------------------------------------------------------------------------------------------------
+INFO: [Synth 8-3354] encoded FSM with state register 'state_reg' using encoding 'sequential' in module 'gru_new_gate_element'
+---------------------------------------------------------------------------------------------------
+                   State |                     New Encoding |                Previous Encoding 
+---------------------------------------------------------------------------------------------------
+                    IDLE |                              001 |                               00
+                 COMPUTE |                              010 |                               01
+                    DONE |                              100 |                               10
+---------------------------------------------------------------------------------------------------
+INFO: [Synth 8-3354] encoded FSM with state register 'state_reg' using encoding 'one-hot' in module 'gru_hidden_state_element'
+---------------------------------------------------------------------------------------------------
+                   State |                     New Encoding |                Previous Encoding 
+---------------------------------------------------------------------------------------------------
+                    IDLE |                             0000 |                             0000
+              INIT_RESET |                             0001 |                             0001
+           COMPUTE_RESET |                             0010 |                             0010
+              WAIT_RESET |                             0011 |                             0011
+             INIT_UPDATE |                             0100 |                             0100
+          COMPUTE_UPDATE |                             0101 |                             0101
+             WAIT_UPDATE |                             0110 |                             0110
+                INIT_NEW |                             0111 |                             0111
+             COMPUTE_NEW |                             1000 |                             1000
+                WAIT_NEW |                             1001 |                             1001
+             INIT_HIDDEN |                             1010 |                             1010
+          COMPUTE_HIDDEN |                             1011 |                             1011
+             WAIT_HIDDEN |                             1100 |                             1100
+                FINISHED |                             1101 |                             1101
+---------------------------------------------------------------------------------------------------
+INFO: [Synth 8-3354] encoded FSM with state register 'state_reg' using encoding 'sequential' in module 'gru_cell_parallel'
+---------------------------------------------------------------------------------
+Finished RTL Optimization Phase 2 : Time (s): cpu = 00:00:30 ; elapsed = 00:00:30 . Memory (MB): peak = 3658.250 ; gain = 1038.164 ; free physical = 20005 ; free virtual = 24958
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start RTL Component Statistics 
+---------------------------------------------------------------------------------
+Detailed RTL Component Info : 
++---Adders : 
+	   2 Input   32 Bit       Adders := 56    
+	   2 Input   30 Bit       Adders := 24    
+	   3 Input   30 Bit       Adders := 8     
+	   4 Input   30 Bit       Adders := 16    
+	   3 Input   15 Bit       Adders := 16    
++---Registers : 
+	               32 Bit    Registers := 49    
+	               30 Bit    Registers := 96    
+	               15 Bit    Registers := 112   
+	                8 Bit    Registers := 4     
+	                1 Bit    Registers := 33    
++---Multipliers : 
+	              15x30  Multipliers := 16    
++---Muxes : 
+	   7 Input   32 Bit        Muxes := 16    
+	   6 Input   32 Bit        Muxes := 32    
+	  14 Input   32 Bit        Muxes := 9     
+	   7 Input   30 Bit        Muxes := 16    
+	   6 Input   30 Bit        Muxes := 32    
+	   2 Input   15 Bit        Muxes := 496   
+	  14 Input    8 Bit        Muxes := 8     
+	  14 Input    4 Bit        Muxes := 1     
+	   2 Input    4 Bit        Muxes := 4     
+	   7 Input    3 Bit        Muxes := 8     
+	   6 Input    3 Bit        Muxes := 16    
+	   7 Input    1 Bit        Muxes := 64    
+	   6 Input    1 Bit        Muxes := 112   
+	   2 Input    1 Bit        Muxes := 448   
+	   3 Input    1 Bit        Muxes := 24    
+	  14 Input    1 Bit        Muxes := 69    
+---------------------------------------------------------------------------------
+Finished RTL Component Statistics 
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Part Resource Summary
+---------------------------------------------------------------------------------
+Part Resources:
+DSPs: 12288 (col length:96)
+BRAMs: 5376 (col length: RAMB18 384 RAMB36 192)
+---------------------------------------------------------------------------------
+Finished Part Resource Summary
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Cross Boundary and Area Optimization
+---------------------------------------------------------------------------------
+INFO: [Synth 8-5845] Not enough pipeline registers after wide multiplier. Recommended levels of pipeline registers is 2 [/home/lex/Documents/git/gru-hardware-implementation-and-optimization/optimizedImplementation/gru_new_gate_element.sv:82]
+DSP Report: Generating DSP sum_hidden0, operation Mode is: C+A*B.
+DSP Report: operator sum_hidden0 is absorbed into DSP sum_hidden0.
+DSP Report: operator sum_hidden1 is absorbed into DSP sum_hidden0.
+DSP Report: Generating DSP sum_hidden_gated1, operation Mode is: A*B.
+DSP Report: operator sum_hidden_gated1 is absorbed into DSP sum_hidden_gated1.
+DSP Report: operator sum_hidden_gated1 is absorbed into DSP sum_hidden_gated1.
+DSP Report: Generating DSP sum_hidden_gated1, operation Mode is: C+A*B.
+DSP Report: operator sum_hidden_gated1 is absorbed into DSP sum_hidden_gated1.
+DSP Report: operator sum_hidden_gated1 is absorbed into DSP sum_hidden_gated1.
+DSP Report: Generating DSP sum_input0, operation Mode is: C+A*B.
+DSP Report: operator sum_input0 is absorbed into DSP sum_input0.
+DSP Report: operator sum_input1 is absorbed into DSP sum_input0.
+INFO: [Synth 8-5845] Not enough pipeline registers after wide multiplier. Recommended levels of pipeline registers is 2 [/home/lex/Documents/git/gru-hardware-implementation-and-optimization/optimizedImplementation/gru_new_gate_element.sv:82]
+DSP Report: Generating DSP sum_hidden0, operation Mode is: C+A*B.
+DSP Report: operator sum_hidden0 is absorbed into DSP sum_hidden0.
+DSP Report: operator sum_hidden1 is absorbed into DSP sum_hidden0.
+DSP Report: Generating DSP sum_hidden_gated1, operation Mode is: A*B.
+DSP Report: operator sum_hidden_gated1 is absorbed into DSP sum_hidden_gated1.
+DSP Report: operator sum_hidden_gated1 is absorbed into DSP sum_hidden_gated1.
+DSP Report: Generating DSP sum_hidden_gated1, operation Mode is: C+A*B.
+DSP Report: operator sum_hidden_gated1 is absorbed into DSP sum_hidden_gated1.
+DSP Report: operator sum_hidden_gated1 is absorbed into DSP sum_hidden_gated1.
+DSP Report: Generating DSP sum_input0, operation Mode is: C+A*B.
+DSP Report: operator sum_input0 is absorbed into DSP sum_input0.
+DSP Report: operator sum_input1 is absorbed into DSP sum_input0.
+INFO: [Synth 8-5845] Not enough pipeline registers after wide multiplier. Recommended levels of pipeline registers is 2 [/home/lex/Documents/git/gru-hardware-implementation-and-optimization/optimizedImplementation/gru_new_gate_element.sv:82]
+DSP Report: Generating DSP sum_hidden0, operation Mode is: C+A*B.
+DSP Report: operator sum_hidden0 is absorbed into DSP sum_hidden0.
+DSP Report: operator sum_hidden1 is absorbed into DSP sum_hidden0.
+DSP Report: Generating DSP sum_hidden_gated1, operation Mode is: A*B.
+DSP Report: operator sum_hidden_gated1 is absorbed into DSP sum_hidden_gated1.
+DSP Report: operator sum_hidden_gated1 is absorbed into DSP sum_hidden_gated1.
+DSP Report: Generating DSP sum_hidden_gated1, operation Mode is: C+A*B.
+DSP Report: operator sum_hidden_gated1 is absorbed into DSP sum_hidden_gated1.
+DSP Report: operator sum_hidden_gated1 is absorbed into DSP sum_hidden_gated1.
+DSP Report: Generating DSP sum_input0, operation Mode is: C+A*B.
+DSP Report: operator sum_input0 is absorbed into DSP sum_input0.
+DSP Report: operator sum_input1 is absorbed into DSP sum_input0.
+INFO: [Synth 8-5845] Not enough pipeline registers after wide multiplier. Recommended levels of pipeline registers is 2 [/home/lex/Documents/git/gru-hardware-implementation-and-optimization/optimizedImplementation/gru_new_gate_element.sv:82]
+DSP Report: Generating DSP sum_hidden0, operation Mode is: C+A*B.
+DSP Report: operator sum_hidden0 is absorbed into DSP sum_hidden0.
+DSP Report: operator sum_hidden1 is absorbed into DSP sum_hidden0.
+DSP Report: Generating DSP sum_hidden_gated1, operation Mode is: A*B.
+DSP Report: operator sum_hidden_gated1 is absorbed into DSP sum_hidden_gated1.
+DSP Report: operator sum_hidden_gated1 is absorbed into DSP sum_hidden_gated1.
+DSP Report: Generating DSP sum_hidden_gated1, operation Mode is: C+A*B.
+DSP Report: operator sum_hidden_gated1 is absorbed into DSP sum_hidden_gated1.
+DSP Report: operator sum_hidden_gated1 is absorbed into DSP sum_hidden_gated1.
+DSP Report: Generating DSP sum_input0, operation Mode is: C+A*B.
+DSP Report: operator sum_input0 is absorbed into DSP sum_input0.
+DSP Report: operator sum_input1 is absorbed into DSP sum_input0.
+INFO: [Synth 8-5845] Not enough pipeline registers after wide multiplier. Recommended levels of pipeline registers is 2 [/home/lex/Documents/git/gru-hardware-implementation-and-optimization/optimizedImplementation/gru_new_gate_element.sv:82]
+DSP Report: Generating DSP sum_hidden0, operation Mode is: C+A*B.
+DSP Report: operator sum_hidden0 is absorbed into DSP sum_hidden0.
+DSP Report: operator sum_hidden1 is absorbed into DSP sum_hidden0.
+DSP Report: Generating DSP sum_hidden_gated1, operation Mode is: A*B.
+DSP Report: operator sum_hidden_gated1 is absorbed into DSP sum_hidden_gated1.
+DSP Report: operator sum_hidden_gated1 is absorbed into DSP sum_hidden_gated1.
+DSP Report: Generating DSP sum_hidden_gated1, operation Mode is: C+A*B.
+DSP Report: operator sum_hidden_gated1 is absorbed into DSP sum_hidden_gated1.
+DSP Report: operator sum_hidden_gated1 is absorbed into DSP sum_hidden_gated1.
+DSP Report: Generating DSP sum_input0, operation Mode is: C+A*B.
+DSP Report: operator sum_input0 is absorbed into DSP sum_input0.
+DSP Report: operator sum_input1 is absorbed into DSP sum_input0.
+INFO: [Synth 8-3886] merging instance 'gen_new_gates[3].new_gate_inst/n_t_n_reg[13]' (FDCE) to 'gen_new_gates[3].new_gate_inst/n_t_n_reg[14]'
+INFO: [Synth 8-3886] merging instance 'gen_new_gates[2].new_gate_inst/n_t_n_reg[13]' (FDCE) to 'gen_new_gates[2].new_gate_inst/n_t_n_reg[14]'
+INFO: [Synth 8-3886] merging instance 'gen_new_gates[7].new_gate_inst/n_t_n_reg[13]' (FDCE) to 'gen_new_gates[7].new_gate_inst/n_t_n_reg[14]'
+INFO: [Synth 8-3886] merging instance 'gen_new_gates[0].new_gate_inst/n_t_n_reg[13]' (FDCE) to 'gen_new_gates[0].new_gate_inst/n_t_n_reg[14]'
+INFO: [Synth 8-3886] merging instance 'gen_new_gates[1].new_gate_inst/n_t_n_reg[13]' (FDCE) to 'gen_new_gates[1].new_gate_inst/n_t_n_reg[14]'
+INFO: [Synth 8-5845] Not enough pipeline registers after wide multiplier. Recommended levels of pipeline registers is 2 [/home/lex/Documents/git/gru-hardware-implementation-and-optimization/optimizedImplementation/gru_new_gate_element.sv:82]
+DSP Report: Generating DSP sum_hidden0, operation Mode is: C+A*B.
+DSP Report: operator sum_hidden0 is absorbed into DSP sum_hidden0.
+DSP Report: operator sum_hidden1 is absorbed into DSP sum_hidden0.
+DSP Report: Generating DSP sum_hidden_gated1, operation Mode is: A*B.
+DSP Report: operator sum_hidden_gated1 is absorbed into DSP sum_hidden_gated1.
+DSP Report: operator sum_hidden_gated1 is absorbed into DSP sum_hidden_gated1.
+DSP Report: Generating DSP sum_hidden_gated1, operation Mode is: C+A*B.
+DSP Report: operator sum_hidden_gated1 is absorbed into DSP sum_hidden_gated1.
+DSP Report: operator sum_hidden_gated1 is absorbed into DSP sum_hidden_gated1.
+DSP Report: Generating DSP sum_input0, operation Mode is: C+A*B.
+DSP Report: operator sum_input0 is absorbed into DSP sum_input0.
+DSP Report: operator sum_input1 is absorbed into DSP sum_input0.
+INFO: [Synth 8-5845] Not enough pipeline registers after wide multiplier. Recommended levels of pipeline registers is 2 [/home/lex/Documents/git/gru-hardware-implementation-and-optimization/optimizedImplementation/gru_new_gate_element.sv:82]
+DSP Report: Generating DSP sum_hidden0, operation Mode is: C+A*B.
+DSP Report: operator sum_hidden0 is absorbed into DSP sum_hidden0.
+DSP Report: operator sum_hidden1 is absorbed into DSP sum_hidden0.
+DSP Report: Generating DSP sum_hidden_gated1, operation Mode is: A*B.
+DSP Report: operator sum_hidden_gated1 is absorbed into DSP sum_hidden_gated1.
+DSP Report: operator sum_hidden_gated1 is absorbed into DSP sum_hidden_gated1.
+DSP Report: Generating DSP sum_hidden_gated1, operation Mode is: C+A*B.
+DSP Report: operator sum_hidden_gated1 is absorbed into DSP sum_hidden_gated1.
+DSP Report: operator sum_hidden_gated1 is absorbed into DSP sum_hidden_gated1.
+DSP Report: Generating DSP sum_input0, operation Mode is: C+A*B.
+DSP Report: operator sum_input0 is absorbed into DSP sum_input0.
+DSP Report: operator sum_input1 is absorbed into DSP sum_input0.
+INFO: [Synth 8-5845] Not enough pipeline registers after wide multiplier. Recommended levels of pipeline registers is 2 [/home/lex/Documents/git/gru-hardware-implementation-and-optimization/optimizedImplementation/gru_new_gate_element.sv:82]
+DSP Report: Generating DSP sum_hidden0, operation Mode is: C+A*B.
+DSP Report: operator sum_hidden0 is absorbed into DSP sum_hidden0.
+DSP Report: operator sum_hidden1 is absorbed into DSP sum_hidden0.
+DSP Report: Generating DSP sum_hidden_gated1, operation Mode is: A*B.
+DSP Report: operator sum_hidden_gated1 is absorbed into DSP sum_hidden_gated1.
+DSP Report: operator sum_hidden_gated1 is absorbed into DSP sum_hidden_gated1.
+DSP Report: Generating DSP sum_hidden_gated1, operation Mode is: C+A*B.
+DSP Report: operator sum_hidden_gated1 is absorbed into DSP sum_hidden_gated1.
+DSP Report: operator sum_hidden_gated1 is absorbed into DSP sum_hidden_gated1.
+DSP Report: Generating DSP sum_input0, operation Mode is: C+A*B.
+DSP Report: operator sum_input0 is absorbed into DSP sum_input0.
+DSP Report: operator sum_input1 is absorbed into DSP sum_input0.
+DSP Report: Generating DSP sum_hidden0, operation Mode is: C+A*B.
+DSP Report: operator sum_hidden0 is absorbed into DSP sum_hidden0.
+DSP Report: operator sum_hidden1 is absorbed into DSP sum_hidden0.
+DSP Report: Generating DSP sum_input0, operation Mode is: C+A*B.
+DSP Report: operator sum_input0 is absorbed into DSP sum_input0.
+DSP Report: operator sum_input1 is absorbed into DSP sum_input0.
+DSP Report: Generating DSP sum_hidden0, operation Mode is: C+A*B.
+DSP Report: operator sum_hidden0 is absorbed into DSP sum_hidden0.
+DSP Report: operator sum_hidden1 is absorbed into DSP sum_hidden0.
+DSP Report: Generating DSP sum_input0, operation Mode is: C+A*B.
+DSP Report: operator sum_input0 is absorbed into DSP sum_input0.
+DSP Report: operator sum_input1 is absorbed into DSP sum_input0.
+INFO: [Synth 8-3886] merging instance 'gen_new_gates[6].new_gate_inst/n_t_n_reg[13]' (FDCE) to 'gen_new_gates[6].new_gate_inst/n_t_n_reg[14]'
+INFO: [Synth 8-3886] merging instance 'gen_new_gates[5].new_gate_inst/n_t_n_reg[13]' (FDCE) to 'gen_new_gates[5].new_gate_inst/n_t_n_reg[14]'
+INFO: [Synth 8-3886] merging instance 'gen_new_gates[4].new_gate_inst/n_t_n_reg[13]' (FDCE) to 'gen_new_gates[4].new_gate_inst/n_t_n_reg[14]'
+DSP Report: Generating DSP sum_hidden0, operation Mode is: C+A*B.
+DSP Report: operator sum_hidden0 is absorbed into DSP sum_hidden0.
+DSP Report: operator sum_hidden1 is absorbed into DSP sum_hidden0.
+DSP Report: Generating DSP sum_input0, operation Mode is: C+A*B.
+DSP Report: operator sum_input0 is absorbed into DSP sum_input0.
+DSP Report: operator sum_input1 is absorbed into DSP sum_input0.
+DSP Report: Generating DSP sum_hidden0, operation Mode is: C+A*B.
+DSP Report: operator sum_hidden0 is absorbed into DSP sum_hidden0.
+DSP Report: operator sum_hidden1 is absorbed into DSP sum_hidden0.
+DSP Report: Generating DSP sum_input0, operation Mode is: C+A*B.
+DSP Report: operator sum_input0 is absorbed into DSP sum_input0.
+DSP Report: operator sum_input1 is absorbed into DSP sum_input0.
+DSP Report: Generating DSP sum_hidden0, operation Mode is: C+A*B.
+DSP Report: operator sum_hidden0 is absorbed into DSP sum_hidden0.
+DSP Report: operator sum_hidden1 is absorbed into DSP sum_hidden0.
+DSP Report: Generating DSP sum_input0, operation Mode is: C+A*B.
+DSP Report: operator sum_input0 is absorbed into DSP sum_input0.
+DSP Report: operator sum_input1 is absorbed into DSP sum_input0.
+DSP Report: Generating DSP sum_hidden0, operation Mode is: C+A*B.
+DSP Report: operator sum_hidden0 is absorbed into DSP sum_hidden0.
+DSP Report: operator sum_hidden1 is absorbed into DSP sum_hidden0.
+DSP Report: Generating DSP sum_input0, operation Mode is: C+A*B.
+DSP Report: operator sum_input0 is absorbed into DSP sum_input0.
+DSP Report: operator sum_input1 is absorbed into DSP sum_input0.
+DSP Report: Generating DSP sum_hidden0, operation Mode is: C+A*B.
+DSP Report: operator sum_hidden0 is absorbed into DSP sum_hidden0.
+DSP Report: operator sum_hidden1 is absorbed into DSP sum_hidden0.
+DSP Report: Generating DSP sum_input0, operation Mode is: C+A*B.
+DSP Report: operator sum_input0 is absorbed into DSP sum_input0.
+DSP Report: operator sum_input1 is absorbed into DSP sum_input0.
+DSP Report: Generating DSP sum_hidden0, operation Mode is: C+A*B.
+DSP Report: operator sum_hidden0 is absorbed into DSP sum_hidden0.
+DSP Report: operator sum_hidden1 is absorbed into DSP sum_hidden0.
+DSP Report: Generating DSP sum_input0, operation Mode is: C+A*B.
+DSP Report: operator sum_input0 is absorbed into DSP sum_input0.
+DSP Report: operator sum_input1 is absorbed into DSP sum_input0.
+DSP Report: Generating DSP sum_hidden0, operation Mode is: C+A*B.
+DSP Report: operator sum_hidden0 is absorbed into DSP sum_hidden0.
+DSP Report: operator sum_hidden1 is absorbed into DSP sum_hidden0.
+DSP Report: Generating DSP sum_input0, operation Mode is: C+A*B.
+DSP Report: operator sum_input0 is absorbed into DSP sum_input0.
+DSP Report: operator sum_input1 is absorbed into DSP sum_input0.
+DSP Report: Generating DSP sum_hidden0, operation Mode is: C+A*B.
+DSP Report: operator sum_hidden0 is absorbed into DSP sum_hidden0.
+DSP Report: operator sum_hidden1 is absorbed into DSP sum_hidden0.
+DSP Report: Generating DSP sum_input0, operation Mode is: C+A*B.
+DSP Report: operator sum_input0 is absorbed into DSP sum_input0.
+DSP Report: operator sum_input1 is absorbed into DSP sum_input0.
+DSP Report: Generating DSP sum_hidden0, operation Mode is: C+A*B.
+DSP Report: operator sum_hidden0 is absorbed into DSP sum_hidden0.
+DSP Report: operator sum_hidden1 is absorbed into DSP sum_hidden0.
+DSP Report: Generating DSP sum_input0, operation Mode is: C+A*B.
+DSP Report: operator sum_input0 is absorbed into DSP sum_input0.
+DSP Report: operator sum_input1 is absorbed into DSP sum_input0.
+DSP Report: Generating DSP sum_hidden0, operation Mode is: C+A*B.
+DSP Report: operator sum_hidden0 is absorbed into DSP sum_hidden0.
+DSP Report: operator sum_hidden1 is absorbed into DSP sum_hidden0.
+DSP Report: Generating DSP sum_input0, operation Mode is: C+A*B.
+DSP Report: operator sum_input0 is absorbed into DSP sum_input0.
+DSP Report: operator sum_input1 is absorbed into DSP sum_input0.
+DSP Report: Generating DSP sum_hidden0, operation Mode is: C+A*B.
+DSP Report: operator sum_hidden0 is absorbed into DSP sum_hidden0.
+DSP Report: operator sum_hidden1 is absorbed into DSP sum_hidden0.
+DSP Report: Generating DSP sum_input0, operation Mode is: C+A*B.
+DSP Report: operator sum_input0 is absorbed into DSP sum_input0.
+DSP Report: operator sum_input1 is absorbed into DSP sum_input0.
+DSP Report: Generating DSP sum_hidden0, operation Mode is: C+A*B.
+DSP Report: operator sum_hidden0 is absorbed into DSP sum_hidden0.
+DSP Report: operator sum_hidden1 is absorbed into DSP sum_hidden0.
+DSP Report: Generating DSP sum_input0, operation Mode is: C+A*B.
+DSP Report: operator sum_input0 is absorbed into DSP sum_input0.
+DSP Report: operator sum_input1 is absorbed into DSP sum_input0.
+DSP Report: Generating DSP sum_hidden0, operation Mode is: C+A*B.
+DSP Report: operator sum_hidden0 is absorbed into DSP sum_hidden0.
+DSP Report: operator sum_hidden1 is absorbed into DSP sum_hidden0.
+DSP Report: Generating DSP sum_input0, operation Mode is: C+A*B.
+DSP Report: operator sum_input0 is absorbed into DSP sum_input0.
+DSP Report: operator sum_input1 is absorbed into DSP sum_input0.
+DSP Report: Generating DSP sum_hidden0, operation Mode is: C+A*B.
+DSP Report: operator sum_hidden0 is absorbed into DSP sum_hidden0.
+DSP Report: operator sum_hidden1 is absorbed into DSP sum_hidden0.
+DSP Report: Generating DSP sum_input0, operation Mode is: C+A*B.
+DSP Report: operator sum_input0 is absorbed into DSP sum_input0.
+DSP Report: operator sum_input1 is absorbed into DSP sum_input0.
+INFO: [Synth 8-5845] Not enough pipeline registers after wide multiplier. Recommended levels of pipeline registers is 2 [/home/lex/Documents/git/gru-hardware-implementation-and-optimization/optimizedImplementation/gru_hidden_state_element.sv:48]
+DSP Report: Generating DSP term20, operation Mode is: A*B.
+DSP Report: operator term20 is absorbed into DSP term20.
+DSP Report: Generating DSP term10, operation Mode is: A*B.
+DSP Report: operator term10 is absorbed into DSP term10.
+DSP Report: operator term10 is absorbed into DSP term10.
+INFO: [Synth 8-5845] Not enough pipeline registers after wide multiplier. Recommended levels of pipeline registers is 2 [/home/lex/Documents/git/gru-hardware-implementation-and-optimization/optimizedImplementation/gru_hidden_state_element.sv:48]
+DSP Report: Generating DSP term20, operation Mode is: A*B.
+DSP Report: operator term20 is absorbed into DSP term20.
+DSP Report: Generating DSP term10, operation Mode is: A*B.
+DSP Report: operator term10 is absorbed into DSP term10.
+DSP Report: operator term10 is absorbed into DSP term10.
+INFO: [Synth 8-5845] Not enough pipeline registers after wide multiplier. Recommended levels of pipeline registers is 2 [/home/lex/Documents/git/gru-hardware-implementation-and-optimization/optimizedImplementation/gru_hidden_state_element.sv:48]
+DSP Report: Generating DSP term20, operation Mode is: A*B.
+DSP Report: operator term20 is absorbed into DSP term20.
+DSP Report: Generating DSP term10, operation Mode is: A*B.
+DSP Report: operator term10 is absorbed into DSP term10.
+DSP Report: operator term10 is absorbed into DSP term10.
+INFO: [Synth 8-5845] Not enough pipeline registers after wide multiplier. Recommended levels of pipeline registers is 2 [/home/lex/Documents/git/gru-hardware-implementation-and-optimization/optimizedImplementation/gru_hidden_state_element.sv:48]
+DSP Report: Generating DSP term20, operation Mode is: A*B.
+DSP Report: operator term20 is absorbed into DSP term20.
+DSP Report: Generating DSP term10, operation Mode is: A*B.
+DSP Report: operator term10 is absorbed into DSP term10.
+DSP Report: operator term10 is absorbed into DSP term10.
+INFO: [Synth 8-5845] Not enough pipeline registers after wide multiplier. Recommended levels of pipeline registers is 2 [/home/lex/Documents/git/gru-hardware-implementation-and-optimization/optimizedImplementation/gru_hidden_state_element.sv:48]
+DSP Report: Generating DSP term20, operation Mode is: A*B.
+DSP Report: operator term20 is absorbed into DSP term20.
+DSP Report: Generating DSP term10, operation Mode is: A*B.
+DSP Report: operator term10 is absorbed into DSP term10.
+DSP Report: operator term10 is absorbed into DSP term10.
+INFO: [Synth 8-5845] Not enough pipeline registers after wide multiplier. Recommended levels of pipeline registers is 2 [/home/lex/Documents/git/gru-hardware-implementation-and-optimization/optimizedImplementation/gru_hidden_state_element.sv:48]
+DSP Report: Generating DSP term20, operation Mode is: A*B.
+DSP Report: operator term20 is absorbed into DSP term20.
+DSP Report: Generating DSP term10, operation Mode is: A*B.
+DSP Report: operator term10 is absorbed into DSP term10.
+DSP Report: operator term10 is absorbed into DSP term10.
+INFO: [Synth 8-5845] Not enough pipeline registers after wide multiplier. Recommended levels of pipeline registers is 2 [/home/lex/Documents/git/gru-hardware-implementation-and-optimization/optimizedImplementation/gru_hidden_state_element.sv:48]
+DSP Report: Generating DSP term20, operation Mode is: A*B.
+DSP Report: operator term20 is absorbed into DSP term20.
+DSP Report: Generating DSP term10, operation Mode is: A*B.
+DSP Report: operator term10 is absorbed into DSP term10.
+DSP Report: operator term10 is absorbed into DSP term10.
+INFO: [Synth 8-5845] Not enough pipeline registers after wide multiplier. Recommended levels of pipeline registers is 2 [/home/lex/Documents/git/gru-hardware-implementation-and-optimization/optimizedImplementation/gru_hidden_state_element.sv:48]
+DSP Report: Generating DSP term20, operation Mode is: A*B.
+DSP Report: operator term20 is absorbed into DSP term20.
+DSP Report: Generating DSP term10, operation Mode is: A*B.
+DSP Report: operator term10 is absorbed into DSP term10.
+DSP Report: operator term10 is absorbed into DSP term10.
+WARNING: [Synth 8-3332] Sequential element (term1_reg[47]) is unused and will be removed from module gru_hidden_state_element__1.
+WARNING: [Synth 8-3332] Sequential element (term1_reg[46]) is unused and will be removed from module gru_hidden_state_element__1.
+WARNING: [Synth 8-3332] Sequential element (term1_reg[45]) is unused and will be removed from module gru_hidden_state_element__1.
+WARNING: [Synth 8-3332] Sequential element (term1_reg[44]) is unused and will be removed from module gru_hidden_state_element__1.
+WARNING: [Synth 8-3332] Sequential element (term1_reg[43]) is unused and will be removed from module gru_hidden_state_element__1.
+WARNING: [Synth 8-3332] Sequential element (term1_reg[42]) is unused and will be removed from module gru_hidden_state_element__1.
+WARNING: [Synth 8-3332] Sequential element (term1_reg[41]) is unused and will be removed from module gru_hidden_state_element__1.
+WARNING: [Synth 8-3332] Sequential element (term1_reg[40]) is unused and will be removed from module gru_hidden_state_element__1.
+WARNING: [Synth 8-3332] Sequential element (term1_reg[39]) is unused and will be removed from module gru_hidden_state_element__1.
+WARNING: [Synth 8-3332] Sequential element (term1_reg[38]) is unused and will be removed from module gru_hidden_state_element__1.
+WARNING: [Synth 8-3332] Sequential element (term1_reg[37]) is unused and will be removed from module gru_hidden_state_element__1.
+WARNING: [Synth 8-3332] Sequential element (term1_reg[36]) is unused and will be removed from module gru_hidden_state_element__1.
+WARNING: [Synth 8-3332] Sequential element (term1_reg[35]) is unused and will be removed from module gru_hidden_state_element__1.
+WARNING: [Synth 8-3332] Sequential element (term1_reg[34]) is unused and will be removed from module gru_hidden_state_element__1.
+WARNING: [Synth 8-3332] Sequential element (term1_reg[33]) is unused and will be removed from module gru_hidden_state_element__1.
+WARNING: [Synth 8-3332] Sequential element (term1_reg[32]) is unused and will be removed from module gru_hidden_state_element__1.
+WARNING: [Synth 8-3332] Sequential element (term1_reg[31]) is unused and will be removed from module gru_hidden_state_element__1.
+WARNING: [Synth 8-3332] Sequential element (term1_reg[30]) is unused and will be removed from module gru_hidden_state_element__1.
+WARNING: [Synth 8-3332] Sequential element (term1_reg[29]) is unused and will be removed from module gru_hidden_state_element__1.
+WARNING: [Synth 8-3332] Sequential element (term1_reg[28]) is unused and will be removed from module gru_hidden_state_element__1.
+WARNING: [Synth 8-3332] Sequential element (term1_reg[27]) is unused and will be removed from module gru_hidden_state_element__1.
+WARNING: [Synth 8-3332] Sequential element (term1_reg[26]) is unused and will be removed from module gru_hidden_state_element__1.
+WARNING: [Synth 8-3332] Sequential element (term1_reg[25]) is unused and will be removed from module gru_hidden_state_element__1.
+WARNING: [Synth 8-3332] Sequential element (term1_reg[24]) is unused and will be removed from module gru_hidden_state_element__1.
+WARNING: [Synth 8-3332] Sequential element (term1_reg[47]__0) is unused and will be removed from module gru_hidden_state_element__1.
+WARNING: [Synth 8-3332] Sequential element (term1_reg[46]__0) is unused and will be removed from module gru_hidden_state_element__1.
+WARNING: [Synth 8-3332] Sequential element (term1_reg[45]__0) is unused and will be removed from module gru_hidden_state_element__1.
+WARNING: [Synth 8-3332] Sequential element (term1_reg[44]__0) is unused and will be removed from module gru_hidden_state_element__1.
+WARNING: [Synth 8-3332] Sequential element (term1_reg[43]__0) is unused and will be removed from module gru_hidden_state_element__1.
+WARNING: [Synth 8-3332] Sequential element (term1_reg[42]__0) is unused and will be removed from module gru_hidden_state_element__1.
+WARNING: [Synth 8-3332] Sequential element (term1_reg[41]__0) is unused and will be removed from module gru_hidden_state_element__1.
+WARNING: [Synth 8-3332] Sequential element (term1_reg[40]__0) is unused and will be removed from module gru_hidden_state_element__1.
+WARNING: [Synth 8-3332] Sequential element (term1_reg[39]__0) is unused and will be removed from module gru_hidden_state_element__1.
+WARNING: [Synth 8-3332] Sequential element (term1_reg[38]__0) is unused and will be removed from module gru_hidden_state_element__1.
+WARNING: [Synth 8-3332] Sequential element (term1_reg[37]__0) is unused and will be removed from module gru_hidden_state_element__1.
+WARNING: [Synth 8-3332] Sequential element (term1_reg[36]__0) is unused and will be removed from module gru_hidden_state_element__1.
+WARNING: [Synth 8-3332] Sequential element (term1_reg[35]__0) is unused and will be removed from module gru_hidden_state_element__1.
+WARNING: [Synth 8-3332] Sequential element (term1_reg[34]__0) is unused and will be removed from module gru_hidden_state_element__1.
+WARNING: [Synth 8-3332] Sequential element (term1_reg[33]__0) is unused and will be removed from module gru_hidden_state_element__1.
+WARNING: [Synth 8-3332] Sequential element (term1_reg[32]__0) is unused and will be removed from module gru_hidden_state_element__1.
+WARNING: [Synth 8-3332] Sequential element (term1_reg[31]__0) is unused and will be removed from module gru_hidden_state_element__1.
+WARNING: [Synth 8-3332] Sequential element (term1_reg[30]__0) is unused and will be removed from module gru_hidden_state_element__1.
+WARNING: [Synth 8-3332] Sequential element (term1_reg[29]__0) is unused and will be removed from module gru_hidden_state_element__1.
+WARNING: [Synth 8-3332] Sequential element (term1_reg[28]__0) is unused and will be removed from module gru_hidden_state_element__1.
+WARNING: [Synth 8-3332] Sequential element (term1_reg[27]__0) is unused and will be removed from module gru_hidden_state_element__1.
+WARNING: [Synth 8-3332] Sequential element (term1_reg[26]__0) is unused and will be removed from module gru_hidden_state_element__1.
+WARNING: [Synth 8-3332] Sequential element (term1_reg[25]__0) is unused and will be removed from module gru_hidden_state_element__1.
+WARNING: [Synth 8-3332] Sequential element (term1_reg[24]__0) is unused and will be removed from module gru_hidden_state_element__1.
+WARNING: [Synth 8-3332] Sequential element (term1_reg[23]__0) is unused and will be removed from module gru_hidden_state_element__1.
+WARNING: [Synth 8-3332] Sequential element (term1_reg[22]__0) is unused and will be removed from module gru_hidden_state_element__1.
+WARNING: [Synth 8-3332] Sequential element (term1_reg[21]__0) is unused and will be removed from module gru_hidden_state_element__1.
+WARNING: [Synth 8-3332] Sequential element (term1_reg[20]__0) is unused and will be removed from module gru_hidden_state_element__1.
+WARNING: [Synth 8-3332] Sequential element (term1_reg[19]__0) is unused and will be removed from module gru_hidden_state_element__1.
+WARNING: [Synth 8-3332] Sequential element (term1_reg[18]__0) is unused and will be removed from module gru_hidden_state_element__1.
+WARNING: [Synth 8-3332] Sequential element (term1_reg[17]__0) is unused and will be removed from module gru_hidden_state_element__1.
+WARNING: [Synth 8-3332] Sequential element (term1_reg[16]__0) is unused and will be removed from module gru_hidden_state_element__1.
+WARNING: [Synth 8-3332] Sequential element (term1_reg[15]__0) is unused and will be removed from module gru_hidden_state_element__1.
+WARNING: [Synth 8-3332] Sequential element (term1_reg[14]__0) is unused and will be removed from module gru_hidden_state_element__1.
+WARNING: [Synth 8-3332] Sequential element (term1_reg[13]__0) is unused and will be removed from module gru_hidden_state_element__1.
+WARNING: [Synth 8-3332] Sequential element (term1_reg[12]__0) is unused and will be removed from module gru_hidden_state_element__1.
+WARNING: [Synth 8-3332] Sequential element (term1_reg[11]__0) is unused and will be removed from module gru_hidden_state_element__1.
+WARNING: [Synth 8-3332] Sequential element (term1_reg[10]__0) is unused and will be removed from module gru_hidden_state_element__1.
+WARNING: [Synth 8-3332] Sequential element (term1_reg[9]__0) is unused and will be removed from module gru_hidden_state_element__1.
+WARNING: [Synth 8-3332] Sequential element (term1_reg[8]__0) is unused and will be removed from module gru_hidden_state_element__1.
+WARNING: [Synth 8-3332] Sequential element (term1_reg[7]__0) is unused and will be removed from module gru_hidden_state_element__1.
+WARNING: [Synth 8-3332] Sequential element (term1_reg[6]__0) is unused and will be removed from module gru_hidden_state_element__1.
+WARNING: [Synth 8-3332] Sequential element (term1_reg[5]__0) is unused and will be removed from module gru_hidden_state_element__1.
+WARNING: [Synth 8-3332] Sequential element (term1_reg[4]__0) is unused and will be removed from module gru_hidden_state_element__1.
+WARNING: [Synth 8-3332] Sequential element (term1_reg[3]__0) is unused and will be removed from module gru_hidden_state_element__1.
+WARNING: [Synth 8-3332] Sequential element (term1_reg[2]__0) is unused and will be removed from module gru_hidden_state_element__1.
+WARNING: [Synth 8-3332] Sequential element (term1_reg[1]__0) is unused and will be removed from module gru_hidden_state_element__1.
+WARNING: [Synth 8-3332] Sequential element (term1_reg[0]__0) is unused and will be removed from module gru_hidden_state_element__1.
+WARNING: [Synth 8-3332] Sequential element (term1_reg[47]) is unused and will be removed from module gru_hidden_state_element__2.
+WARNING: [Synth 8-3332] Sequential element (term1_reg[46]) is unused and will be removed from module gru_hidden_state_element__2.
+WARNING: [Synth 8-3332] Sequential element (term1_reg[45]) is unused and will be removed from module gru_hidden_state_element__2.
+WARNING: [Synth 8-3332] Sequential element (term1_reg[44]) is unused and will be removed from module gru_hidden_state_element__2.
+WARNING: [Synth 8-3332] Sequential element (term1_reg[43]) is unused and will be removed from module gru_hidden_state_element__2.
+WARNING: [Synth 8-3332] Sequential element (term1_reg[42]) is unused and will be removed from module gru_hidden_state_element__2.
+WARNING: [Synth 8-3332] Sequential element (term1_reg[41]) is unused and will be removed from module gru_hidden_state_element__2.
+WARNING: [Synth 8-3332] Sequential element (term1_reg[40]) is unused and will be removed from module gru_hidden_state_element__2.
+WARNING: [Synth 8-3332] Sequential element (term1_reg[39]) is unused and will be removed from module gru_hidden_state_element__2.
+WARNING: [Synth 8-3332] Sequential element (term1_reg[38]) is unused and will be removed from module gru_hidden_state_element__2.
+WARNING: [Synth 8-3332] Sequential element (term1_reg[37]) is unused and will be removed from module gru_hidden_state_element__2.
+WARNING: [Synth 8-3332] Sequential element (term1_reg[36]) is unused and will be removed from module gru_hidden_state_element__2.
+WARNING: [Synth 8-3332] Sequential element (term1_reg[35]) is unused and will be removed from module gru_hidden_state_element__2.
+WARNING: [Synth 8-3332] Sequential element (term1_reg[34]) is unused and will be removed from module gru_hidden_state_element__2.
+WARNING: [Synth 8-3332] Sequential element (term1_reg[33]) is unused and will be removed from module gru_hidden_state_element__2.
+WARNING: [Synth 8-3332] Sequential element (term1_reg[32]) is unused and will be removed from module gru_hidden_state_element__2.
+WARNING: [Synth 8-3332] Sequential element (term1_reg[31]) is unused and will be removed from module gru_hidden_state_element__2.
+WARNING: [Synth 8-3332] Sequential element (term1_reg[30]) is unused and will be removed from module gru_hidden_state_element__2.
+WARNING: [Synth 8-3332] Sequential element (term1_reg[29]) is unused and will be removed from module gru_hidden_state_element__2.
+WARNING: [Synth 8-3332] Sequential element (term1_reg[28]) is unused and will be removed from module gru_hidden_state_element__2.
+WARNING: [Synth 8-3332] Sequential element (term1_reg[27]) is unused and will be removed from module gru_hidden_state_element__2.
+WARNING: [Synth 8-3332] Sequential element (term1_reg[26]) is unused and will be removed from module gru_hidden_state_element__2.
+WARNING: [Synth 8-3332] Sequential element (term1_reg[25]) is unused and will be removed from module gru_hidden_state_element__2.
+WARNING: [Synth 8-3332] Sequential element (term1_reg[24]) is unused and will be removed from module gru_hidden_state_element__2.
+WARNING: [Synth 8-3332] Sequential element (term1_reg[47]__0) is unused and will be removed from module gru_hidden_state_element__2.
+WARNING: [Synth 8-3332] Sequential element (term1_reg[46]__0) is unused and will be removed from module gru_hidden_state_element__2.
+WARNING: [Synth 8-3332] Sequential element (term1_reg[45]__0) is unused and will be removed from module gru_hidden_state_element__2.
+WARNING: [Synth 8-3332] Sequential element (term1_reg[44]__0) is unused and will be removed from module gru_hidden_state_element__2.
+INFO: [Common 17-14] Message 'Synth 8-3332' appears 100 times and further instances of the messages will be disabled. Use the Tcl command set_msg_config to change the current settings.
+INFO: [Common 17-14] Message 'Synth 8-3332' appears 100 times and further instances of the messages will be disabled. Use the Tcl command set_msg_config to change the current settings.
+INFO: [Synth 8-3886] merging instance 'element_index_reg[6][1]' (FDCE) to 'element_index_reg[6][2]'
+INFO: [Synth 8-3886] merging instance 'element_index_reg[5][0]' (FDCE) to 'element_index_reg[5][2]'
+INFO: [Synth 8-3886] merging instance 'element_index_reg[7][1]' (FDCE) to 'element_index_reg[7][0]'
+INFO: [Synth 8-3886] merging instance 'element_index_reg[7][0]' (FDCE) to 'element_index_reg[7][2]'
+INFO: [Synth 8-3886] merging instance 'element_index_reg[3][0]' (FDCE) to 'element_index_reg[3][1]'
+INFO: [Synth 8-3886] merging instance 'element_index_reg[6][2]' (FDCE) to 'element_index_reg[5][2]'
+INFO: [Synth 8-3886] merging instance 'element_index_reg[6][3]' (FDCE) to 'element_index_reg[5][3]'
+INFO: [Synth 8-3886] merging instance 'element_index_reg[5][2]' (FDCE) to 'element_index_reg[4][2]'
+INFO: [Synth 8-3886] merging instance 'element_index_reg[5][3]' (FDCE) to 'element_index_reg[4][3]'
+INFO: [Synth 8-3886] merging instance 'element_index_reg[4][2]' (FDCE) to 'element_index_reg[2][1]'
+INFO: [Synth 8-3886] merging instance 'element_index_reg[4][3]' (FDCE) to 'element_index_reg[2][3]'
+INFO: [Synth 8-3886] merging instance 'element_index_reg[2][1]' (FDCE) to 'element_index_reg[1][0]'
+INFO: [Synth 8-3886] merging instance 'element_index_reg[2][3]' (FDCE) to 'element_index_reg[1][3]'
+INFO: [Synth 8-3886] merging instance 'element_index_reg[1][0]' (FDCE) to 'element_index_reg[7][2]'
+INFO: [Synth 8-3886] merging instance 'element_index_reg[1][3]' (FDCE) to 'element_index_reg[7][3]'
+INFO: [Synth 8-3886] merging instance 'element_index_reg[7][2]' (FDCE) to 'element_index_reg[3][1]'
+INFO: [Synth 8-3886] merging instance 'element_index_reg[7][3]' (FDCE) to 'element_index_reg[3][3]'
+---------------------------------------------------------------------------------
+Finished Cross Boundary and Area Optimization : Time (s): cpu = 00:01:08 ; elapsed = 00:01:28 . Memory (MB): peak = 3686.184 ; gain = 1066.098 ; free physical = 10042 ; free virtual = 15136
+---------------------------------------------------------------------------------
+ Sort Area is gru_cell_parallel__GB0 sum_hidden_gated1_11 : 0 0 : 3272 3272 : Used 1 time 0
+ Sort Area is gru_cell_parallel__GB0 sum_hidden_gated1_15 : 0 0 : 3272 3272 : Used 1 time 0
+ Sort Area is gru_cell_parallel__GB0 sum_hidden_gated1_3 : 0 0 : 3272 3272 : Used 1 time 0
+ Sort Area is gru_cell_parallel__GB1 sum_hidden_gated1_3 : 0 0 : 3272 3272 : Used 1 time 0
+ Sort Area is gru_cell_parallel__GB0 sum_hidden_gated1_9 : 0 0 : 3272 3272 : Used 1 time 0
+ Sort Area is gru_cell_parallel__GB1 sum_hidden_gated1_9 : 0 0 : 3272 3272 : Used 1 time 0
+ Sort Area is gru_cell_parallel__GB0 sum_hidden_gated1_d : 0 0 : 3272 3272 : Used 1 time 0
+ Sort Area is gru_cell_parallel__GB1 sum_hidden_gated1_d : 0 0 : 3272 3272 : Used 1 time 0
+ Sort Area is gru_cell_parallel__GB31 term10_0 : 0 0 : 3129 3129 : Used 1 time 0
+ Sort Area is gru_cell_parallel__GB31 term10_10 : 0 0 : 3129 3129 : Used 1 time 0
+ Sort Area is gru_cell_parallel__GB31 term10_4 : 0 0 : 3129 3129 : Used 1 time 0
+ Sort Area is gru_cell_parallel__GB31 term10_6 : 0 0 : 3129 3129 : Used 1 time 0
+ Sort Area is gru_cell_parallel__GB31 term10_8 : 0 0 : 3129 3129 : Used 1 time 0
+ Sort Area is gru_cell_parallel__GB31 term10_a : 0 0 : 3129 3129 : Used 1 time 0
+ Sort Area is gru_cell_parallel__GB31 term10_c : 0 0 : 3129 3129 : Used 1 time 0
+ Sort Area is gru_cell_parallel__GB31 term10_e : 0 0 : 3129 3129 : Used 1 time 0
+ Sort Area is gru_cell_parallel__GB0 sum_hidden0_10 : 0 0 : 1800 1800 : Used 1 time 0
+ Sort Area is gru_cell_parallel__GB1 sum_hidden0_10 : 0 0 : 1800 1800 : Used 1 time 0
+ Sort Area is gru_cell_parallel__GB1 sum_hidden0_12 : 0 0 : 1800 1800 : Used 1 time 0
+ Sort Area is gru_cell_parallel__GB0 sum_hidden0_14 : 0 0 : 1800 1800 : Used 1 time 0
+ Sort Area is gru_cell_parallel__GB12 sum_hidden0_2 : 0 0 : 1800 1800 : Used 1 time 0
+ Sort Area is gru_cell_parallel__GB6 sum_hidden0_2 : 0 0 : 1800 1800 : Used 1 time 0
+ Sort Area is gru_cell_parallel__GB5 sum_hidden0_2 : 0 0 : 1800 1800 : Used 1 time 0
+ Sort Area is gru_cell_parallel__GB14 sum_hidden0_2 : 0 0 : 1800 1800 : Used 1 time 0
+ Sort Area is gru_cell_parallel__GB0 sum_hidden0_2 : 0 0 : 1800 1800 : Used 1 time 0
+ Sort Area is gru_cell_parallel__GB9 sum_hidden0_2 : 0 0 : 1800 1800 : Used 1 time 0
+ Sort Area is gru_cell_parallel__GB1 sum_hidden0_2 : 0 0 : 1800 1800 : Used 1 time 0
+ Sort Area is gru_cell_parallel__GB12 sum_hidden0_4 : 0 0 : 1800 1800 : Used 1 time 0
+ Sort Area is gru_cell_parallel__GB6 sum_hidden0_4 : 0 0 : 1800 1800 : Used 1 time 0
+ Sort Area is gru_cell_parallel__GB14 sum_hidden0_4 : 0 0 : 1800 1800 : Used 1 time 0
+ Sort Area is gru_cell_parallel__GB12 sum_hidden0_6 : 0 0 : 1800 1800 : Used 1 time 0
+ Sort Area is gru_cell_parallel__GB6 sum_hidden0_6 : 0 0 : 1800 1800 : Used 1 time 0
+ Sort Area is gru_cell_parallel__GB14 sum_hidden0_6 : 0 0 : 1800 1800 : Used 1 time 0
+ Sort Area is gru_cell_parallel__GB12 sum_hidden0_8 : 0 0 : 1800 1800 : Used 1 time 0
+ Sort Area is gru_cell_parallel__GB6 sum_hidden0_8 : 0 0 : 1800 1800 : Used 1 time 0
+ Sort Area is gru_cell_parallel__GB0 sum_hidden0_8 : 0 0 : 1800 1800 : Used 1 time 0
+ Sort Area is gru_cell_parallel__GB1 sum_hidden0_8 : 0 0 : 1800 1800 : Used 1 time 0
+ Sort Area is gru_cell_parallel__GB6 sum_hidden0_a : 0 0 : 1800 1800 : Used 1 time 0
+ Sort Area is gru_cell_parallel__GB0 sum_hidden0_c : 0 0 : 1800 1800 : Used 1 time 0
+ Sort Area is gru_cell_parallel__GB1 sum_hidden0_c : 0 0 : 1800 1800 : Used 1 time 0
+ Sort Area is gru_cell_parallel__GB12 sum_input0_0 : 0 0 : 1800 1800 : Used 1 time 0
+ Sort Area is gru_cell_parallel__GB6 sum_input0_0 : 0 0 : 1800 1800 : Used 1 time 0
+ Sort Area is gru_cell_parallel__GB5 sum_input0_0 : 0 0 : 1800 1800 : Used 1 time 0
+ Sort Area is gru_cell_parallel__GB14 sum_input0_0 : 0 0 : 1800 1800 : Used 1 time 0
+ Sort Area is gru_cell_parallel__GB0 sum_input0_0 : 0 0 : 1800 1800 : Used 1 time 0
+ Sort Area is gru_cell_parallel__GB9 sum_input0_0 : 0 0 : 1800 1800 : Used 1 time 0
+ Sort Area is gru_cell_parallel__GB1 sum_input0_0 : 0 0 : 1800 1800 : Used 1 time 0
+ Sort Area is gru_cell_parallel__GB1 sum_input0_11 : 0 0 : 1800 1800 : Used 1 time 0
+ Sort Area is gru_cell_parallel__GB0 sum_input0_13 : 0 0 : 1800 1800 : Used 1 time 0
+ Sort Area is gru_cell_parallel__GB12 sum_input0_3 : 0 0 : 1800 1800 : Used 1 time 0
+ Sort Area is gru_cell_parallel__GB6 sum_input0_3 : 0 0 : 1800 1800 : Used 1 time 0
+ Sort Area is gru_cell_parallel__GB14 sum_input0_3 : 0 0 : 1800 1800 : Used 1 time 0
+ Sort Area is gru_cell_parallel__GB12 sum_input0_5 : 0 0 : 1800 1800 : Used 1 time 0
+ Sort Area is gru_cell_parallel__GB6 sum_input0_5 : 0 0 : 1800 1800 : Used 1 time 0
+ Sort Area is gru_cell_parallel__GB14 sum_input0_5 : 0 0 : 1800 1800 : Used 1 time 0
+ Sort Area is gru_cell_parallel__GB12 sum_input0_7 : 0 0 : 1800 1800 : Used 1 time 0
+ Sort Area is gru_cell_parallel__GB6 sum_input0_7 : 0 0 : 1800 1800 : Used 1 time 0
+ Sort Area is gru_cell_parallel__GB0 sum_input0_7 : 0 0 : 1800 1800 : Used 1 time 0
+ Sort Area is gru_cell_parallel__GB1 sum_input0_7 : 0 0 : 1800 1800 : Used 1 time 0
+ Sort Area is gru_cell_parallel__GB6 sum_input0_9 : 0 0 : 1800 1800 : Used 1 time 0
+ Sort Area is gru_cell_parallel__GB0 sum_input0_b : 0 0 : 1800 1800 : Used 1 time 0
+ Sort Area is gru_cell_parallel__GB1 sum_input0_b : 0 0 : 1800 1800 : Used 1 time 0
+ Sort Area is gru_cell_parallel__GB0 sum_input0_f : 0 0 : 1800 1800 : Used 1 time 0
+ Sort Area is gru_cell_parallel__GB1 sum_input0_f : 0 0 : 1800 1800 : Used 1 time 0
+ Sort Area is gru_cell_parallel__GB31 term20_11 : 0 0 : 1711 1711 : Used 1 time 0
+ Sort Area is gru_cell_parallel__GB31 term20_2 : 0 0 : 1711 1711 : Used 1 time 0
+ Sort Area is gru_cell_parallel__GB31 term20_5 : 0 0 : 1711 1711 : Used 1 time 0
+ Sort Area is gru_cell_parallel__GB31 term20_7 : 0 0 : 1711 1711 : Used 1 time 0
+ Sort Area is gru_cell_parallel__GB31 term20_9 : 0 0 : 1711 1711 : Used 1 time 0
+ Sort Area is gru_cell_parallel__GB31 term20_b : 0 0 : 1711 1711 : Used 1 time 0
+ Sort Area is gru_cell_parallel__GB31 term20_d : 0 0 : 1711 1711 : Used 1 time 0
+ Sort Area is gru_cell_parallel__GB31 term20_f : 0 0 : 1711 1711 : Used 1 time 0
+ Sort Area is gru_cell_parallel__GB0 sum_hidden_gated1_12 : 0 0 : 805 805 : Used 1 time 0
+ Sort Area is gru_cell_parallel__GB0 sum_hidden_gated1_16 : 0 0 : 805 805 : Used 1 time 0
+ Sort Area is gru_cell_parallel__GB0 sum_hidden_gated1_5 : 0 0 : 805 805 : Used 1 time 0
+ Sort Area is gru_cell_parallel__GB1 sum_hidden_gated1_5 : 0 0 : 805 805 : Used 1 time 0
+ Sort Area is gru_cell_parallel__GB0 sum_hidden_gated1_a : 0 0 : 805 805 : Used 1 time 0
+ Sort Area is gru_cell_parallel__GB1 sum_hidden_gated1_a : 0 0 : 805 805 : Used 1 time 0
+ Sort Area is gru_cell_parallel__GB0 sum_hidden_gated1_e : 0 0 : 805 805 : Used 1 time 0
+ Sort Area is gru_cell_parallel__GB1 sum_hidden_gated1_e : 0 0 : 805 805 : Used 1 time 0
+---------------------------------------------------------------------------------
+Start ROM, RAM, DSP, Shift Register and Retiming Reporting
+---------------------------------------------------------------------------------
+
+DSP: Preliminary Mapping Report (see note below. The ' indicates corresponding REG is set)
++-------------------------+-------------+--------+--------+--------+--------+--------+------+------+------+------+-------+------+------+
+|Module Name              | DSP Mapping | A Size | B Size | C Size | D Size | P Size | AREG | BREG | CREG | DREG | ADREG | MREG | PREG | 
++-------------------------+-------------+--------+--------+--------+--------+--------+------+------+------+------+-------+------+------+
+|gru_new_gate_element     | C+A*B       | 15     | 15     | 30     | -      | 30     | 0    | 0    | 0    | -    | -     | 0    | 0    | 
+|gru_new_gate_element     | A*B         | 27     | 16     | -      | -      | 48     | 0    | 0    | -    | -    | -     | 0    | 0    | 
+|gru_new_gate_element     | C+A*B       | 16     | 5      | 48     | -      | 48     | 0    | 0    | 0    | -    | -     | 0    | 0    | 
+|gru_new_gate_element     | C+A*B       | 15     | 15     | 30     | -      | 30     | 0    | 0    | 0    | -    | -     | 0    | 0    | 
+|gru_new_gate_element     | C+A*B       | 15     | 15     | 30     | -      | 30     | 0    | 0    | 0    | -    | -     | 0    | 0    | 
+|gru_new_gate_element     | A*B         | 27     | 16     | -      | -      | 48     | 0    | 0    | -    | -    | -     | 0    | 0    | 
+|gru_new_gate_element     | C+A*B       | 16     | 5      | 48     | -      | 48     | 0    | 0    | 0    | -    | -     | 0    | 0    | 
+|gru_new_gate_element     | C+A*B       | 15     | 15     | 30     | -      | 30     | 0    | 0    | 0    | -    | -     | 0    | 0    | 
+|gru_new_gate_element     | C+A*B       | 15     | 15     | 30     | -      | 30     | 0    | 0    | 0    | -    | -     | 0    | 0    | 
+|gru_new_gate_element     | A*B         | 27     | 16     | -      | -      | 48     | 0    | 0    | -    | -    | -     | 0    | 0    | 
+|gru_new_gate_element     | C+A*B       | 16     | 5      | 48     | -      | 48     | 0    | 0    | 0    | -    | -     | 0    | 0    | 
+|gru_new_gate_element     | C+A*B       | 15     | 15     | 30     | -      | 30     | 0    | 0    | 0    | -    | -     | 0    | 0    | 
+|gru_new_gate_element     | C+A*B       | 15     | 15     | 30     | -      | 30     | 0    | 0    | 0    | -    | -     | 0    | 0    | 
+|gru_new_gate_element     | A*B         | 27     | 16     | -      | -      | 48     | 0    | 0    | -    | -    | -     | 0    | 0    | 
+|gru_new_gate_element     | C+A*B       | 16     | 5      | 48     | -      | 48     | 0    | 0    | 0    | -    | -     | 0    | 0    | 
+|gru_new_gate_element     | C+A*B       | 15     | 15     | 30     | -      | 30     | 0    | 0    | 0    | -    | -     | 0    | 0    | 
+|gru_new_gate_element     | C+A*B       | 15     | 15     | 30     | -      | 30     | 0    | 0    | 0    | -    | -     | 0    | 0    | 
+|gru_new_gate_element     | A*B         | 27     | 16     | -      | -      | 48     | 0    | 0    | -    | -    | -     | 0    | 0    | 
+|gru_new_gate_element     | C+A*B       | 16     | 5      | 48     | -      | 48     | 0    | 0    | 0    | -    | -     | 0    | 0    | 
+|gru_new_gate_element     | C+A*B       | 15     | 15     | 30     | -      | 30     | 0    | 0    | 0    | -    | -     | 0    | 0    | 
+|gru_new_gate_element     | C+A*B       | 15     | 15     | 30     | -      | 30     | 0    | 0    | 0    | -    | -     | 0    | 0    | 
+|gru_new_gate_element     | A*B         | 27     | 16     | -      | -      | 48     | 0    | 0    | -    | -    | -     | 0    | 0    | 
+|gru_new_gate_element     | C+A*B       | 16     | 5      | 48     | -      | 48     | 0    | 0    | 0    | -    | -     | 0    | 0    | 
+|gru_new_gate_element     | C+A*B       | 15     | 15     | 30     | -      | 30     | 0    | 0    | 0    | -    | -     | 0    | 0    | 
+|gru_new_gate_element     | C+A*B       | 15     | 15     | 30     | -      | 30     | 0    | 0    | 0    | -    | -     | 0    | 0    | 
+|gru_new_gate_element     | A*B         | 27     | 16     | -      | -      | 48     | 0    | 0    | -    | -    | -     | 0    | 0    | 
+|gru_new_gate_element     | C+A*B       | 16     | 5      | 48     | -      | 48     | 0    | 0    | 0    | -    | -     | 0    | 0    | 
+|gru_new_gate_element     | C+A*B       | 15     | 15     | 30     | -      | 30     | 0    | 0    | 0    | -    | -     | 0    | 0    | 
+|gru_new_gate_element     | C+A*B       | 15     | 15     | 30     | -      | 30     | 0    | 0    | 0    | -    | -     | 0    | 0    | 
+|gru_new_gate_element     | A*B         | 27     | 16     | -      | -      | 48     | 0    | 0    | -    | -    | -     | 0    | 0    | 
+|gru_new_gate_element     | C+A*B       | 16     | 5      | 48     | -      | 48     | 0    | 0    | 0    | -    | -     | 0    | 0    | 
+|gru_new_gate_element     | C+A*B       | 15     | 15     | 30     | -      | 30     | 0    | 0    | 0    | -    | -     | 0    | 0    | 
+|gru_reset_gate_element   | C+A*B       | 15     | 15     | 30     | -      | 30     | 0    | 0    | 0    | -    | -     | 0    | 0    | 
+|gru_reset_gate_element   | C+A*B       | 15     | 15     | 30     | -      | 30     | 0    | 0    | 0    | -    | -     | 0    | 0    | 
+|gru_reset_gate_element   | C+A*B       | 15     | 15     | 30     | -      | 30     | 0    | 0    | 0    | -    | -     | 0    | 0    | 
+|gru_reset_gate_element   | C+A*B       | 15     | 15     | 30     | -      | 30     | 0    | 0    | 0    | -    | -     | 0    | 0    | 
+|gru_reset_gate_element   | C+A*B       | 15     | 15     | 30     | -      | 30     | 0    | 0    | 0    | -    | -     | 0    | 0    | 
+|gru_reset_gate_element   | C+A*B       | 15     | 15     | 30     | -      | 30     | 0    | 0    | 0    | -    | -     | 0    | 0    | 
+|gru_reset_gate_element   | C+A*B       | 15     | 15     | 30     | -      | 30     | 0    | 0    | 0    | -    | -     | 0    | 0    | 
+|gru_reset_gate_element   | C+A*B       | 15     | 15     | 30     | -      | 30     | 0    | 0    | 0    | -    | -     | 0    | 0    | 
+|gru_reset_gate_element   | C+A*B       | 15     | 15     | 30     | -      | 30     | 0    | 0    | 0    | -    | -     | 0    | 0    | 
+|gru_reset_gate_element   | C+A*B       | 15     | 15     | 30     | -      | 30     | 0    | 0    | 0    | -    | -     | 0    | 0    | 
+|gru_reset_gate_element   | C+A*B       | 15     | 15     | 30     | -      | 30     | 0    | 0    | 0    | -    | -     | 0    | 0    | 
+|gru_reset_gate_element   | C+A*B       | 15     | 15     | 30     | -      | 30     | 0    | 0    | 0    | -    | -     | 0    | 0    | 
+|gru_reset_gate_element   | C+A*B       | 15     | 15     | 30     | -      | 30     | 0    | 0    | 0    | -    | -     | 0    | 0    | 
+|gru_reset_gate_element   | C+A*B       | 15     | 15     | 30     | -      | 30     | 0    | 0    | 0    | -    | -     | 0    | 0    | 
+|gru_reset_gate_element   | C+A*B       | 15     | 15     | 30     | -      | 30     | 0    | 0    | 0    | -    | -     | 0    | 0    | 
+|gru_reset_gate_element   | C+A*B       | 15     | 15     | 30     | -      | 30     | 0    | 0    | 0    | -    | -     | 0    | 0    | 
+|gru_update_gate_element  | C+A*B       | 15     | 15     | 30     | -      | 30     | 0    | 0    | 0    | -    | -     | 0    | 0    | 
+|gru_update_gate_element  | C+A*B       | 15     | 15     | 30     | -      | 30     | 0    | 0    | 0    | -    | -     | 0    | 0    | 
+|gru_update_gate_element  | C+A*B       | 15     | 15     | 30     | -      | 30     | 0    | 0    | 0    | -    | -     | 0    | 0    | 
+|gru_update_gate_element  | C+A*B       | 15     | 15     | 30     | -      | 30     | 0    | 0    | 0    | -    | -     | 0    | 0    | 
+|gru_update_gate_element  | C+A*B       | 15     | 15     | 30     | -      | 30     | 0    | 0    | 0    | -    | -     | 0    | 0    | 
+|gru_update_gate_element  | C+A*B       | 15     | 15     | 30     | -      | 30     | 0    | 0    | 0    | -    | -     | 0    | 0    | 
+|gru_update_gate_element  | C+A*B       | 15     | 15     | 30     | -      | 30     | 0    | 0    | 0    | -    | -     | 0    | 0    | 
+|gru_update_gate_element  | C+A*B       | 15     | 15     | 30     | -      | 30     | 0    | 0    | 0    | -    | -     | 0    | 0    | 
+|gru_update_gate_element  | C+A*B       | 15     | 15     | 30     | -      | 30     | 0    | 0    | 0    | -    | -     | 0    | 0    | 
+|gru_update_gate_element  | C+A*B       | 15     | 15     | 30     | -      | 30     | 0    | 0    | 0    | -    | -     | 0    | 0    | 
+|gru_update_gate_element  | C+A*B       | 15     | 15     | 30     | -      | 30     | 0    | 0    | 0    | -    | -     | 0    | 0    | 
+|gru_update_gate_element  | C+A*B       | 15     | 15     | 30     | -      | 30     | 0    | 0    | 0    | -    | -     | 0    | 0    | 
+|gru_update_gate_element  | C+A*B       | 15     | 15     | 30     | -      | 30     | 0    | 0    | 0    | -    | -     | 0    | 0    | 
+|gru_update_gate_element  | C+A*B       | 15     | 15     | 30     | -      | 30     | 0    | 0    | 0    | -    | -     | 0    | 0    | 
+|gru_update_gate_element  | C+A*B       | 15     | 15     | 30     | -      | 30     | 0    | 0    | 0    | -    | -     | 0    | 0    | 
+|gru_update_gate_element  | C+A*B       | 15     | 15     | 30     | -      | 30     | 0    | 0    | 0    | -    | -     | 0    | 0    | 
+|gru_hidden_state_element | A*B         | 15     | 15     | -      | -      | 30     | 0    | 0    | -    | -    | -     | 0    | 0    | 
+|gru_hidden_state_element | A*B         | 27     | 15     | -      | -      | 48     | 0    | 0    | -    | -    | -     | 0    | 0    | 
+|gru_hidden_state_element | A*B         | 15     | 15     | -      | -      | 30     | 0    | 0    | -    | -    | -     | 0    | 0    | 
+|gru_hidden_state_element | A*B         | 27     | 15     | -      | -      | 48     | 0    | 0    | -    | -    | -     | 0    | 0    | 
+|gru_hidden_state_element | A*B         | 15     | 15     | -      | -      | 30     | 0    | 0    | -    | -    | -     | 0    | 0    | 
+|gru_hidden_state_element | A*B         | 27     | 15     | -      | -      | 48     | 0    | 0    | -    | -    | -     | 0    | 0    | 
+|gru_hidden_state_element | A*B         | 15     | 15     | -      | -      | 30     | 0    | 0    | -    | -    | -     | 0    | 0    | 
+|gru_hidden_state_element | A*B         | 27     | 15     | -      | -      | 48     | 0    | 0    | -    | -    | -     | 0    | 0    | 
+|gru_hidden_state_element | A*B         | 15     | 15     | -      | -      | 30     | 0    | 0    | -    | -    | -     | 0    | 0    | 
+|gru_hidden_state_element | A*B         | 27     | 15     | -      | -      | 48     | 0    | 0    | -    | -    | -     | 0    | 0    | 
+|gru_hidden_state_element | A*B         | 15     | 15     | -      | -      | 30     | 0    | 0    | -    | -    | -     | 0    | 0    | 
+|gru_hidden_state_element | A*B         | 27     | 15     | -      | -      | 48     | 0    | 0    | -    | -    | -     | 0    | 0    | 
+|gru_hidden_state_element | A*B         | 15     | 15     | -      | -      | 30     | 0    | 0    | -    | -    | -     | 0    | 0    | 
+|gru_hidden_state_element | A*B         | 27     | 15     | -      | -      | 48     | 0    | 0    | -    | -    | -     | 0    | 0    | 
+|gru_hidden_state_element | A*B         | 15     | 15     | -      | -      | 30     | 0    | 0    | -    | -    | -     | 0    | 0    | 
+|gru_hidden_state_element | A*B         | 27     | 15     | -      | -      | 48     | 0    | 0    | -    | -    | -     | 0    | 0    | 
++-------------------------+-------------+--------+--------+--------+--------+--------+------+------+------+------+-------+------+------+
+
+Note: The table above is a preliminary report that shows the DSPs inferred at the current stage of the synthesis flow. Some DSP may be reimplemented as non DSP primitives later in the synthesis flow. Multiple instantiated DSPs are reported only once.
+---------------------------------------------------------------------------------
+Finished ROM, RAM, DSP, Shift Register and Retiming Reporting
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Applying XDC Timing Constraints
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Applying XDC Timing Constraints : Time (s): cpu = 00:01:14 ; elapsed = 00:01:34 . Memory (MB): peak = 4074.004 ; gain = 1453.918 ; free physical = 9515 ; free virtual = 14789
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Timing Optimization
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Timing Optimization : Time (s): cpu = 00:03:17 ; elapsed = 00:03:39 . Memory (MB): peak = 5604.004 ; gain = 2983.918 ; free physical = 7951 ; free virtual = 13246
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Technology Mapping
+---------------------------------------------------------------------------------
+INFO: [Synth 8-5844] Detected registers with asynchronous reset at DSP/BRAM block boundary. Consider using synchronous reset for optimal packing [/home/lex/Documents/git/gru-hardware-implementation-and-optimization/optimizedImplementation/gru_new_gate_element.sv:51]
+INFO: [Synth 8-5844] Detected registers with asynchronous reset at DSP/BRAM block boundary. Consider using synchronous reset for optimal packing [/home/lex/Documents/git/gru-hardware-implementation-and-optimization/optimizedImplementation/gru_new_gate_element.sv:51]
+INFO: [Synth 8-5844] Detected registers with asynchronous reset at DSP/BRAM block boundary. Consider using synchronous reset for optimal packing [/home/lex/Documents/git/gru-hardware-implementation-and-optimization/optimizedImplementation/gru_new_gate_element.sv:51]
+INFO: [Synth 8-5844] Detected registers with asynchronous reset at DSP/BRAM block boundary. Consider using synchronous reset for optimal packing [/home/lex/Documents/git/gru-hardware-implementation-and-optimization/optimizedImplementation/gru_new_gate_element.sv:50]
+INFO: [Synth 8-5844] Detected registers with asynchronous reset at DSP/BRAM block boundary. Consider using synchronous reset for optimal packing [/home/lex/Documents/git/gru-hardware-implementation-and-optimization/optimizedImplementation/gru_new_gate_element.sv:49]
+INFO: [Synth 8-5844] Detected registers with asynchronous reset at DSP/BRAM block boundary. Consider using synchronous reset for optimal packing [/home/lex/Documents/git/gru-hardware-implementation-and-optimization/optimizedImplementation/gru_new_gate_element.sv:50]
+INFO: [Synth 8-5844] Detected registers with asynchronous reset at DSP/BRAM block boundary. Consider using synchronous reset for optimal packing [/home/lex/Documents/git/gru-hardware-implementation-and-optimization/optimizedImplementation/gru_new_gate_element.sv:49]
+INFO: [Synth 8-5844] Detected registers with asynchronous reset at DSP/BRAM block boundary. Consider using synchronous reset for optimal packing [/home/lex/Documents/git/gru-hardware-implementation-and-optimization/optimizedImplementation/gru_new_gate_element.sv:50]
+INFO: [Synth 8-5844] Detected registers with asynchronous reset at DSP/BRAM block boundary. Consider using synchronous reset for optimal packing [/home/lex/Documents/git/gru-hardware-implementation-and-optimization/optimizedImplementation/gru_new_gate_element.sv:49]
+INFO: [Synth 8-5844] Detected registers with asynchronous reset at DSP/BRAM block boundary. Consider using synchronous reset for optimal packing [/home/lex/Documents/git/gru-hardware-implementation-and-optimization/optimizedImplementation/gru_reset_gate_element.sv:45]
+INFO: [Synth 8-5844] Detected registers with asynchronous reset at DSP/BRAM block boundary. Consider using synchronous reset for optimal packing [/home/lex/Documents/git/gru-hardware-implementation-and-optimization/optimizedImplementation/gru_reset_gate_element.sv:44]
+INFO: [Synth 8-5844] Detected registers with asynchronous reset at DSP/BRAM block boundary. Consider using synchronous reset for optimal packing [/home/lex/Documents/git/gru-hardware-implementation-and-optimization/optimizedImplementation/gru_reset_gate_element.sv:45]
+INFO: [Synth 8-5844] Detected registers with asynchronous reset at DSP/BRAM block boundary. Consider using synchronous reset for optimal packing [/home/lex/Documents/git/gru-hardware-implementation-and-optimization/optimizedImplementation/gru_reset_gate_element.sv:44]
+INFO: [Synth 8-5844] Detected registers with asynchronous reset at DSP/BRAM block boundary. Consider using synchronous reset for optimal packing [/home/lex/Documents/git/gru-hardware-implementation-and-optimization/optimizedImplementation/gru_update_gate_element.sv:47]
+INFO: [Synth 8-5844] Detected registers with asynchronous reset at DSP/BRAM block boundary. Consider using synchronous reset for optimal packing [/home/lex/Documents/git/gru-hardware-implementation-and-optimization/optimizedImplementation/gru_update_gate_element.sv:46]
+INFO: [Synth 8-5844] Detected registers with asynchronous reset at DSP/BRAM block boundary. Consider using synchronous reset for optimal packing [/home/lex/Documents/git/gru-hardware-implementation-and-optimization/optimizedImplementation/gru_update_gate_element.sv:47]
+INFO: [Synth 8-5844] Detected registers with asynchronous reset at DSP/BRAM block boundary. Consider using synchronous reset for optimal packing [/home/lex/Documents/git/gru-hardware-implementation-and-optimization/optimizedImplementation/gru_update_gate_element.sv:46]
+INFO: [Synth 8-5844] Detected registers with asynchronous reset at DSP/BRAM block boundary. Consider using synchronous reset for optimal packing [/home/lex/Documents/git/gru-hardware-implementation-and-optimization/optimizedImplementation/gru_update_gate_element.sv:47]
+INFO: [Synth 8-5844] Detected registers with asynchronous reset at DSP/BRAM block boundary. Consider using synchronous reset for optimal packing [/home/lex/Documents/git/gru-hardware-implementation-and-optimization/optimizedImplementation/gru_update_gate_element.sv:46]
+INFO: [Synth 8-5844] Detected registers with asynchronous reset at DSP/BRAM block boundary. Consider using synchronous reset for optimal packing [/home/lex/Documents/git/gru-hardware-implementation-and-optimization/optimizedImplementation/gru_update_gate_element.sv:47]
+INFO: [Synth 8-5844] Detected registers with asynchronous reset at DSP/BRAM block boundary. Consider using synchronous reset for optimal packing [/home/lex/Documents/git/gru-hardware-implementation-and-optimization/optimizedImplementation/gru_update_gate_element.sv:46]
+INFO: [Synth 8-5844] Detected registers with asynchronous reset at DSP/BRAM block boundary. Consider using synchronous reset for optimal packing [/home/lex/Documents/git/gru-hardware-implementation-and-optimization/optimizedImplementation/gru_update_gate_element.sv:47]
+INFO: [Synth 8-5844] Detected registers with asynchronous reset at DSP/BRAM block boundary. Consider using synchronous reset for optimal packing [/home/lex/Documents/git/gru-hardware-implementation-and-optimization/optimizedImplementation/gru_update_gate_element.sv:46]
+INFO: [Synth 8-5844] Detected registers with asynchronous reset at DSP/BRAM block boundary. Consider using synchronous reset for optimal packing [/home/lex/Documents/git/gru-hardware-implementation-and-optimization/optimizedImplementation/gru_update_gate_element.sv:47]
+INFO: [Synth 8-5844] Detected registers with asynchronous reset at DSP/BRAM block boundary. Consider using synchronous reset for optimal packing [/home/lex/Documents/git/gru-hardware-implementation-and-optimization/optimizedImplementation/gru_update_gate_element.sv:46]
+INFO: [Synth 8-5844] Detected registers with asynchronous reset at DSP/BRAM block boundary. Consider using synchronous reset for optimal packing [/home/lex/Documents/git/gru-hardware-implementation-and-optimization/optimizedImplementation/gru_update_gate_element.sv:47]
+INFO: [Synth 8-5844] Detected registers with asynchronous reset at DSP/BRAM block boundary. Consider using synchronous reset for optimal packing [/home/lex/Documents/git/gru-hardware-implementation-and-optimization/optimizedImplementation/gru_update_gate_element.sv:46]
+INFO: [Synth 8-5844] Detected registers with asynchronous reset at DSP/BRAM block boundary. Consider using synchronous reset for optimal packing [/home/lex/Documents/git/gru-hardware-implementation-and-optimization/optimizedImplementation/gru_update_gate_element.sv:47]
+INFO: [Synth 8-5844] Detected registers with asynchronous reset at DSP/BRAM block boundary. Consider using synchronous reset for optimal packing [/home/lex/Documents/git/gru-hardware-implementation-and-optimization/optimizedImplementation/gru_update_gate_element.sv:46]
+INFO: [Synth 8-5844] Detected registers with asynchronous reset at DSP/BRAM block boundary. Consider using synchronous reset for optimal packing [/home/lex/Documents/git/gru-hardware-implementation-and-optimization/optimizedImplementation/gru_reset_gate_element.sv:45]
+INFO: [Synth 8-5844] Detected registers with asynchronous reset at DSP/BRAM block boundary. Consider using synchronous reset for optimal packing [/home/lex/Documents/git/gru-hardware-implementation-and-optimization/optimizedImplementation/gru_reset_gate_element.sv:44]
+INFO: [Synth 8-5844] Detected registers with asynchronous reset at DSP/BRAM block boundary. Consider using synchronous reset for optimal packing [/home/lex/Documents/git/gru-hardware-implementation-and-optimization/optimizedImplementation/gru_reset_gate_element.sv:45]
+INFO: [Synth 8-5844] Detected registers with asynchronous reset at DSP/BRAM block boundary. Consider using synchronous reset for optimal packing [/home/lex/Documents/git/gru-hardware-implementation-and-optimization/optimizedImplementation/gru_reset_gate_element.sv:44]
+INFO: [Synth 8-5844] Detected registers with asynchronous reset at DSP/BRAM block boundary. Consider using synchronous reset for optimal packing [/home/lex/Documents/git/gru-hardware-implementation-and-optimization/optimizedImplementation/gru_reset_gate_element.sv:45]
+INFO: [Synth 8-5844] Detected registers with asynchronous reset at DSP/BRAM block boundary. Consider using synchronous reset for optimal packing [/home/lex/Documents/git/gru-hardware-implementation-and-optimization/optimizedImplementation/gru_reset_gate_element.sv:44]
+INFO: [Synth 8-5844] Detected registers with asynchronous reset at DSP/BRAM block boundary. Consider using synchronous reset for optimal packing [/home/lex/Documents/git/gru-hardware-implementation-and-optimization/optimizedImplementation/gru_reset_gate_element.sv:45]
+INFO: [Synth 8-5844] Detected registers with asynchronous reset at DSP/BRAM block boundary. Consider using synchronous reset for optimal packing [/home/lex/Documents/git/gru-hardware-implementation-and-optimization/optimizedImplementation/gru_reset_gate_element.sv:44]
+INFO: [Synth 8-5844] Detected registers with asynchronous reset at DSP/BRAM block boundary. Consider using synchronous reset for optimal packing [/home/lex/Documents/git/gru-hardware-implementation-and-optimization/optimizedImplementation/gru_reset_gate_element.sv:45]
+INFO: [Synth 8-5844] Detected registers with asynchronous reset at DSP/BRAM block boundary. Consider using synchronous reset for optimal packing [/home/lex/Documents/git/gru-hardware-implementation-and-optimization/optimizedImplementation/gru_reset_gate_element.sv:44]
+INFO: [Synth 8-5844] Detected registers with asynchronous reset at DSP/BRAM block boundary. Consider using synchronous reset for optimal packing [/home/lex/Documents/git/gru-hardware-implementation-and-optimization/optimizedImplementation/gru_new_gate_element.sv:51]
+INFO: [Synth 8-5844] Detected registers with asynchronous reset at DSP/BRAM block boundary. Consider using synchronous reset for optimal packing [/home/lex/Documents/git/gru-hardware-implementation-and-optimization/optimizedImplementation/gru_hidden_state_element.sv:39]
+INFO: [Synth 8-5844] Detected registers with asynchronous reset at DSP/BRAM block boundary. Consider using synchronous reset for optimal packing [/home/lex/Documents/git/gru-hardware-implementation-and-optimization/optimizedImplementation/gru_hidden_state_element.sv:38]
+INFO: [Synth 8-5844] Detected registers with asynchronous reset at DSP/BRAM block boundary. Consider using synchronous reset for optimal packing [/home/lex/Documents/git/gru-hardware-implementation-and-optimization/optimizedImplementation/gru_hidden_state_element.sv:39]
+INFO: [Synth 8-5844] Detected registers with asynchronous reset at DSP/BRAM block boundary. Consider using synchronous reset for optimal packing [/home/lex/Documents/git/gru-hardware-implementation-and-optimization/optimizedImplementation/gru_hidden_state_element.sv:38]
+INFO: [Synth 8-5844] Detected registers with asynchronous reset at DSP/BRAM block boundary. Consider using synchronous reset for optimal packing [/home/lex/Documents/git/gru-hardware-implementation-and-optimization/optimizedImplementation/gru_hidden_state_element.sv:39]
+INFO: [Synth 8-5844] Detected registers with asynchronous reset at DSP/BRAM block boundary. Consider using synchronous reset for optimal packing [/home/lex/Documents/git/gru-hardware-implementation-and-optimization/optimizedImplementation/gru_hidden_state_element.sv:38]
+INFO: [Synth 8-5844] Detected registers with asynchronous reset at DSP/BRAM block boundary. Consider using synchronous reset for optimal packing [/home/lex/Documents/git/gru-hardware-implementation-and-optimization/optimizedImplementation/gru_hidden_state_element.sv:39]
+INFO: [Synth 8-5844] Detected registers with asynchronous reset at DSP/BRAM block boundary. Consider using synchronous reset for optimal packing [/home/lex/Documents/git/gru-hardware-implementation-and-optimization/optimizedImplementation/gru_hidden_state_element.sv:38]
+INFO: [Synth 8-5844] Detected registers with asynchronous reset at DSP/BRAM block boundary. Consider using synchronous reset for optimal packing [/home/lex/Documents/git/gru-hardware-implementation-and-optimization/optimizedImplementation/gru_hidden_state_element.sv:39]
+INFO: [Synth 8-5844] Detected registers with asynchronous reset at DSP/BRAM block boundary. Consider using synchronous reset for optimal packing [/home/lex/Documents/git/gru-hardware-implementation-and-optimization/optimizedImplementation/gru_hidden_state_element.sv:38]
+INFO: [Synth 8-5844] Detected registers with asynchronous reset at DSP/BRAM block boundary. Consider using synchronous reset for optimal packing [/home/lex/Documents/git/gru-hardware-implementation-and-optimization/optimizedImplementation/gru_hidden_state_element.sv:39]
+INFO: [Synth 8-5844] Detected registers with asynchronous reset at DSP/BRAM block boundary. Consider using synchronous reset for optimal packing [/home/lex/Documents/git/gru-hardware-implementation-and-optimization/optimizedImplementation/gru_hidden_state_element.sv:38]
+INFO: [Synth 8-5844] Detected registers with asynchronous reset at DSP/BRAM block boundary. Consider using synchronous reset for optimal packing [/home/lex/Documents/git/gru-hardware-implementation-and-optimization/optimizedImplementation/gru_hidden_state_element.sv:39]
+INFO: [Synth 8-5844] Detected registers with asynchronous reset at DSP/BRAM block boundary. Consider using synchronous reset for optimal packing [/home/lex/Documents/git/gru-hardware-implementation-and-optimization/optimizedImplementation/gru_hidden_state_element.sv:38]
+INFO: [Synth 8-5844] Detected registers with asynchronous reset at DSP/BRAM block boundary. Consider using synchronous reset for optimal packing [/home/lex/Documents/git/gru-hardware-implementation-and-optimization/optimizedImplementation/gru_hidden_state_element.sv:39]
+INFO: [Synth 8-5844] Detected registers with asynchronous reset at DSP/BRAM block boundary. Consider using synchronous reset for optimal packing [/home/lex/Documents/git/gru-hardware-implementation-and-optimization/optimizedImplementation/gru_hidden_state_element.sv:38]
+INFO: [Synth 8-3886] merging instance 'gru_inst/i_0/i_4880' (FDCE) to 'gru_inst/i_0/i_4881'
+INFO: [Synth 8-3886] merging instance 'gru_inst/i_0/i_4882' (FDCE) to 'gru_inst/i_0/i_4883'
+INFO: [Synth 8-3886] merging instance 'gru_inst/i_0/i_4884' (FDCE) to 'gru_inst/i_0/i_4885'
+INFO: [Synth 8-3886] merging instance 'gru_inst/i_0/i_4886' (FDCE) to 'gru_inst/i_0/i_4887'
+INFO: [Synth 8-3886] merging instance 'gru_inst/i_0/i_4888' (FDCE) to 'gru_inst/i_0/i_4889'
+INFO: [Synth 8-3886] merging instance 'gru_inst/i_0/i_4890' (FDCE) to 'gru_inst/i_0/i_4891'
+INFO: [Synth 8-3886] merging instance 'gru_inst/i_0/i_4892' (FDCE) to 'gru_inst/i_0/i_4893'
+INFO: [Synth 8-3886] merging instance 'gru_inst/i_0/i_4894' (FDCE) to 'gru_inst/i_0/i_4895'
+INFO: [Synth 8-5844] Detected registers with asynchronous reset at DSP/BRAM block boundary. Consider using synchronous reset for optimal packing [/home/lex/Documents/git/gru-hardware-implementation-and-optimization/optimizedImplementation/gru_new_gate_element.sv:50]
+INFO: [Synth 8-5844] Detected registers with asynchronous reset at DSP/BRAM block boundary. Consider using synchronous reset for optimal packing [/home/lex/Documents/git/gru-hardware-implementation-and-optimization/optimizedImplementation/gru_new_gate_element.sv:49]
+INFO: [Synth 8-5844] Detected registers with asynchronous reset at DSP/BRAM block boundary. Consider using synchronous reset for optimal packing [/home/lex/Documents/git/gru-hardware-implementation-and-optimization/optimizedImplementation/gru_new_gate_element.sv:51]
+INFO: [Synth 8-5844] Detected registers with asynchronous reset at DSP/BRAM block boundary. Consider using synchronous reset for optimal packing [/home/lex/Documents/git/gru-hardware-implementation-and-optimization/optimizedImplementation/gru_new_gate_element.sv:51]
+INFO: [Synth 8-5844] Detected registers with asynchronous reset at DSP/BRAM block boundary. Consider using synchronous reset for optimal packing [/home/lex/Documents/git/gru-hardware-implementation-and-optimization/optimizedImplementation/gru_new_gate_element.sv:51]
+INFO: [Synth 8-5844] Detected registers with asynchronous reset at DSP/BRAM block boundary. Consider using synchronous reset for optimal packing [/home/lex/Documents/git/gru-hardware-implementation-and-optimization/optimizedImplementation/gru_new_gate_element.sv:51]
+INFO: [Synth 8-3886] merging instance 'gru_inst/i_9/element_index_reg[2][4]' (FDCE) to 'gru_inst/i_9/element_index_reg[4][4]'
+INFO: [Synth 8-3886] merging instance 'gru_inst/i_9/element_index_reg[3][4]' (FDCE) to 'gru_inst/i_9/element_index_reg[4][4]'
+INFO: [Synth 8-3886] merging instance 'gru_inst/i_9/element_index_reg[4][4]' (FDCE) to 'gru_inst/i_9/element_index_reg[5][4]'
+INFO: [Synth 8-3886] merging instance 'gru_inst/i_9/element_index_reg[5][4]' (FDCE) to 'gru_inst/i_9/element_index_reg[6][4]'
+INFO: [Synth 8-3886] merging instance 'gru_inst/i_9/element_index_reg[6][4]' (FDCE) to 'gru_inst/i_9/element_index_reg[7][4]'
+INFO: [Synth 8-5844] Detected registers with asynchronous reset at DSP/BRAM block boundary. Consider using synchronous reset for optimal packing [/home/lex/Documents/git/gru-hardware-implementation-and-optimization/optimizedImplementation/gru_new_gate_element.sv:50]
+INFO: [Synth 8-5844] Detected registers with asynchronous reset at DSP/BRAM block boundary. Consider using synchronous reset for optimal packing [/home/lex/Documents/git/gru-hardware-implementation-and-optimization/optimizedImplementation/gru_new_gate_element.sv:49]
+INFO: [Synth 8-5844] Detected registers with asynchronous reset at DSP/BRAM block boundary. Consider using synchronous reset for optimal packing [/home/lex/Documents/git/gru-hardware-implementation-and-optimization/optimizedImplementation/gru_new_gate_element.sv:50]
+INFO: [Synth 8-5844] Detected registers with asynchronous reset at DSP/BRAM block boundary. Consider using synchronous reset for optimal packing [/home/lex/Documents/git/gru-hardware-implementation-and-optimization/optimizedImplementation/gru_new_gate_element.sv:49]
+INFO: [Synth 8-5844] Detected registers with asynchronous reset at DSP/BRAM block boundary. Consider using synchronous reset for optimal packing [/home/lex/Documents/git/gru-hardware-implementation-and-optimization/optimizedImplementation/gru_new_gate_element.sv:50]
+INFO: [Synth 8-5844] Detected registers with asynchronous reset at DSP/BRAM block boundary. Consider using synchronous reset for optimal packing [/home/lex/Documents/git/gru-hardware-implementation-and-optimization/optimizedImplementation/gru_new_gate_element.sv:49]
+INFO: [Synth 8-5844] Detected registers with asynchronous reset at DSP/BRAM block boundary. Consider using synchronous reset for optimal packing [/home/lex/Documents/git/gru-hardware-implementation-and-optimization/optimizedImplementation/gru_new_gate_element.sv:50]
+INFO: [Synth 8-5844] Detected registers with asynchronous reset at DSP/BRAM block boundary. Consider using synchronous reset for optimal packing [/home/lex/Documents/git/gru-hardware-implementation-and-optimization/optimizedImplementation/gru_new_gate_element.sv:49]
+---------------------------------------------------------------------------------
+Finished Technology Mapping : Time (s): cpu = 00:03:46 ; elapsed = 00:04:10 . Memory (MB): peak = 5615.930 ; gain = 2995.844 ; free physical = 2429 ; free virtual = 7716
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start IO Insertion
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Flattening Before IO Insertion
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Flattening Before IO Insertion
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Final Netlist Cleanup
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Final Netlist Cleanup
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished IO Insertion : Time (s): cpu = 00:03:52 ; elapsed = 00:04:16 . Memory (MB): peak = 5615.930 ; gain = 2995.844 ; free physical = 2362 ; free virtual = 7721
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Renaming Generated Instances
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Renaming Generated Instances : Time (s): cpu = 00:03:52 ; elapsed = 00:04:17 . Memory (MB): peak = 5615.930 ; gain = 2995.844 ; free physical = 2362 ; free virtual = 7721
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Rebuilding User Hierarchy
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Rebuilding User Hierarchy : Time (s): cpu = 00:03:57 ; elapsed = 00:04:22 . Memory (MB): peak = 5615.930 ; gain = 2995.844 ; free physical = 2362 ; free virtual = 7721
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Renaming Generated Ports
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Renaming Generated Ports : Time (s): cpu = 00:03:57 ; elapsed = 00:04:22 . Memory (MB): peak = 5615.930 ; gain = 2995.844 ; free physical = 2362 ; free virtual = 7721
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Handling Custom Attributes
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Handling Custom Attributes : Time (s): cpu = 00:03:58 ; elapsed = 00:04:23 . Memory (MB): peak = 5615.930 ; gain = 2995.844 ; free physical = 2362 ; free virtual = 7721
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Renaming Generated Nets
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Renaming Generated Nets : Time (s): cpu = 00:03:59 ; elapsed = 00:04:23 . Memory (MB): peak = 5615.930 ; gain = 2995.844 ; free physical = 2362 ; free virtual = 7721
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Writing Synthesis Report
+---------------------------------------------------------------------------------
+
+DSP Final Report (the ' indicates corresponding REG is set)
++-------------------------+-------------+--------+--------+--------+--------+--------+------+------+------+------+-------+------+------+
+|Module Name              | DSP Mapping | A Size | B Size | C Size | D Size | P Size | AREG | BREG | CREG | DREG | ADREG | MREG | PREG | 
++-------------------------+-------------+--------+--------+--------+--------+--------+------+------+------+------+-------+------+------+
+|gru_hidden_state_element | (A*B)'      | 30     | 18     | -      | -      | 30     | 0    | 0    | -    | -    | -     | 0    | 1    | 
+|gru_hidden_state_element | (A*B)'      | 26     | 18     | -      | -      | 48     | 0    | 0    | -    | -    | -     | 0    | 1    | 
+|gru_hidden_state_element | (A*B)'      | 30     | 18     | -      | -      | 30     | 0    | 0    | -    | -    | -     | 0    | 1    | 
+|gru_hidden_state_element | (A*B)'      | 26     | 18     | -      | -      | 48     | 0    | 0    | -    | -    | -     | 0    | 1    | 
+|gru_hidden_state_element | (A*B)'      | 30     | 18     | -      | -      | 30     | 0    | 0    | -    | -    | -     | 0    | 1    | 
+|gru_hidden_state_element | (A*B)'      | 26     | 18     | -      | -      | 48     | 0    | 0    | -    | -    | -     | 0    | 1    | 
+|gru_hidden_state_element | (A*B)'      | 30     | 18     | -      | -      | 30     | 0    | 0    | -    | -    | -     | 0    | 1    | 
+|gru_hidden_state_element | (A*B)'      | 26     | 18     | -      | -      | 48     | 0    | 0    | -    | -    | -     | 0    | 1    | 
+|gru_hidden_state_element | (A*B)'      | 30     | 18     | -      | -      | 30     | 0    | 0    | -    | -    | -     | 0    | 1    | 
+|gru_hidden_state_element | (A*B)'      | 26     | 18     | -      | -      | 48     | 0    | 0    | -    | -    | -     | 0    | 1    | 
+|gru_hidden_state_element | (A*B)'      | 30     | 18     | -      | -      | 30     | 0    | 0    | -    | -    | -     | 0    | 1    | 
+|gru_hidden_state_element | (A*B)'      | 26     | 18     | -      | -      | 48     | 0    | 0    | -    | -    | -     | 0    | 1    | 
+|gru_hidden_state_element | (A*B)'      | 30     | 18     | -      | -      | 30     | 0    | 0    | -    | -    | -     | 0    | 1    | 
+|gru_hidden_state_element | (A*B)'      | 26     | 18     | -      | -      | 48     | 0    | 0    | -    | -    | -     | 0    | 1    | 
+|gru_hidden_state_element | (A*B)'      | 30     | 18     | -      | -      | 30     | 0    | 0    | -    | -    | -     | 0    | 1    | 
+|gru_hidden_state_element | (A*B)'      | 26     | 18     | -      | -      | 48     | 0    | 0    | -    | -    | -     | 0    | 1    | 
+|gru_new_gate_element     | C+A*B       | 30     | 18     | 48     | -      | 30     | 0    | 0    | 0    | -    | -     | 0    | 0    | 
+|gru_new_gate_element     | (A*B)'      | 26     | 15     | -      | -      | 48     | 0    | 0    | -    | -    | -     | 0    | 1    | 
+|gru_new_gate_element     | C+A*B       | 30     | 18     | 48     | -      | 30     | 0    | 0    | 0    | -    | -     | 0    | 0    | 
+|gru_new_gate_element     | C+A*B       | 30     | 18     | 48     | -      | 30     | 0    | 0    | 0    | -    | -     | 0    | 0    | 
+|gru_new_gate_element     | (A*B)'      | 26     | 15     | -      | -      | 48     | 0    | 0    | -    | -    | -     | 0    | 1    | 
+|gru_new_gate_element     | C+A*B       | 30     | 18     | 48     | -      | 30     | 0    | 0    | 0    | -    | -     | 0    | 0    | 
+|gru_new_gate_element     | C+A*B       | 30     | 18     | 48     | -      | 30     | 0    | 0    | 0    | -    | -     | 0    | 0    | 
+|gru_new_gate_element     | (A*B)'      | 26     | 15     | -      | -      | 48     | 0    | 0    | -    | -    | -     | 0    | 1    | 
+|gru_new_gate_element     | C+A*B       | 30     | 18     | 48     | -      | 30     | 0    | 0    | 0    | -    | -     | 0    | 0    | 
+|gru_new_gate_element     | C+A*B       | 30     | 18     | 48     | -      | 30     | 0    | 0    | 0    | -    | -     | 0    | 0    | 
+|gru_new_gate_element     | (A*B)'      | 26     | 15     | -      | -      | 48     | 0    | 0    | -    | -    | -     | 0    | 1    | 
+|gru_new_gate_element     | C+A*B       | 30     | 18     | 48     | -      | 30     | 0    | 0    | 0    | -    | -     | 0    | 0    | 
+|gru_new_gate_element     | C+A*B       | 30     | 18     | 48     | -      | 30     | 0    | 0    | 0    | -    | -     | 0    | 0    | 
+|gru_new_gate_element     | (A*B)'      | 26     | 15     | -      | -      | 48     | 0    | 0    | -    | -    | -     | 0    | 1    | 
+|gru_new_gate_element     | C+A*B       | 30     | 18     | 48     | -      | 30     | 0    | 0    | 0    | -    | -     | 0    | 0    | 
+|gru_new_gate_element     | C+A*B       | 30     | 18     | 48     | -      | 30     | 0    | 0    | 0    | -    | -     | 0    | 0    | 
+|gru_new_gate_element     | (A*B)'      | 26     | 15     | -      | -      | 48     | 0    | 0    | -    | -    | -     | 0    | 1    | 
+|gru_new_gate_element     | C+A*B       | 30     | 18     | 48     | -      | 30     | 0    | 0    | 0    | -    | -     | 0    | 0    | 
+|gru_new_gate_element     | C+A*B       | 30     | 18     | 48     | -      | 30     | 0    | 0    | 0    | -    | -     | 0    | 0    | 
+|gru_new_gate_element     | (A*B)'      | 26     | 15     | -      | -      | 48     | 0    | 0    | -    | -    | -     | 0    | 1    | 
+|gru_new_gate_element     | C+A*B       | 30     | 18     | 48     | -      | 30     | 0    | 0    | 0    | -    | -     | 0    | 0    | 
+|gru_new_gate_element     | C+A*B       | 30     | 18     | 48     | -      | 30     | 0    | 0    | 0    | -    | -     | 0    | 0    | 
+|gru_new_gate_element     | (A*B)'      | 26     | 15     | -      | -      | 48     | 0    | 0    | -    | -    | -     | 0    | 1    | 
+|gru_new_gate_element     | C+A*B       | 30     | 18     | 48     | -      | 30     | 0    | 0    | 0    | -    | -     | 0    | 0    | 
+|gru_reset_gate_element   | C+A*B       | 30     | 18     | 48     | -      | 30     | 0    | 0    | 0    | -    | -     | 0    | 0    | 
+|gru_reset_gate_element   | C+A*B       | 30     | 18     | 48     | -      | 30     | 0    | 0    | 0    | -    | -     | 0    | 0    | 
+|gru_reset_gate_element   | C+A*B       | 30     | 18     | 48     | -      | 30     | 0    | 0    | 0    | -    | -     | 0    | 0    | 
+|gru_reset_gate_element   | C+A*B       | 30     | 18     | 48     | -      | 30     | 0    | 0    | 0    | -    | -     | 0    | 0    | 
+|gru_reset_gate_element   | C+A*B       | 30     | 18     | 48     | -      | 30     | 0    | 0    | 0    | -    | -     | 0    | 0    | 
+|gru_reset_gate_element   | C+A*B       | 30     | 18     | 48     | -      | 30     | 0    | 0    | 0    | -    | -     | 0    | 0    | 
+|gru_reset_gate_element   | C+A*B       | 30     | 18     | 48     | -      | 30     | 0    | 0    | 0    | -    | -     | 0    | 0    | 
+|gru_reset_gate_element   | C+A*B       | 30     | 18     | 48     | -      | 30     | 0    | 0    | 0    | -    | -     | 0    | 0    | 
+|gru_reset_gate_element   | C+A*B       | 30     | 18     | 48     | -      | 30     | 0    | 0    | 0    | -    | -     | 0    | 0    | 
+|gru_reset_gate_element   | C+A*B       | 30     | 18     | 48     | -      | 30     | 0    | 0    | 0    | -    | -     | 0    | 0    | 
+|gru_reset_gate_element   | C+A*B       | 30     | 18     | 48     | -      | 30     | 0    | 0    | 0    | -    | -     | 0    | 0    | 
+|gru_reset_gate_element   | C+A*B       | 30     | 18     | 48     | -      | 30     | 0    | 0    | 0    | -    | -     | 0    | 0    | 
+|gru_reset_gate_element   | C+A*B       | 30     | 18     | 48     | -      | 30     | 0    | 0    | 0    | -    | -     | 0    | 0    | 
+|gru_reset_gate_element   | C+A*B       | 30     | 18     | 48     | -      | 30     | 0    | 0    | 0    | -    | -     | 0    | 0    | 
+|gru_reset_gate_element   | C+A*B       | 30     | 18     | 48     | -      | 30     | 0    | 0    | 0    | -    | -     | 0    | 0    | 
+|gru_reset_gate_element   | C+A*B       | 30     | 18     | 48     | -      | 30     | 0    | 0    | 0    | -    | -     | 0    | 0    | 
+|gru_update_gate_element  | C+A*B       | 30     | 18     | 48     | -      | 30     | 0    | 0    | 0    | -    | -     | 0    | 0    | 
+|gru_update_gate_element  | C+A*B       | 30     | 18     | 48     | -      | 30     | 0    | 0    | 0    | -    | -     | 0    | 0    | 
+|gru_update_gate_element  | C+A*B       | 30     | 18     | 48     | -      | 30     | 0    | 0    | 0    | -    | -     | 0    | 0    | 
+|gru_update_gate_element  | C+A*B       | 30     | 18     | 48     | -      | 30     | 0    | 0    | 0    | -    | -     | 0    | 0    | 
+|gru_update_gate_element  | C+A*B       | 30     | 18     | 48     | -      | 30     | 0    | 0    | 0    | -    | -     | 0    | 0    | 
+|gru_update_gate_element  | C+A*B       | 30     | 18     | 48     | -      | 30     | 0    | 0    | 0    | -    | -     | 0    | 0    | 
+|gru_update_gate_element  | C+A*B       | 30     | 18     | 48     | -      | 30     | 0    | 0    | 0    | -    | -     | 0    | 0    | 
+|gru_update_gate_element  | C+A*B       | 30     | 18     | 48     | -      | 30     | 0    | 0    | 0    | -    | -     | 0    | 0    | 
+|gru_update_gate_element  | C+A*B       | 30     | 18     | 48     | -      | 30     | 0    | 0    | 0    | -    | -     | 0    | 0    | 
+|gru_update_gate_element  | C+A*B       | 30     | 18     | 48     | -      | 30     | 0    | 0    | 0    | -    | -     | 0    | 0    | 
+|gru_update_gate_element  | C+A*B       | 30     | 18     | 48     | -      | 30     | 0    | 0    | 0    | -    | -     | 0    | 0    | 
+|gru_update_gate_element  | C+A*B       | 30     | 18     | 48     | -      | 30     | 0    | 0    | 0    | -    | -     | 0    | 0    | 
+|gru_update_gate_element  | C+A*B       | 30     | 18     | 48     | -      | 30     | 0    | 0    | 0    | -    | -     | 0    | 0    | 
+|gru_update_gate_element  | C+A*B       | 30     | 18     | 48     | -      | 30     | 0    | 0    | 0    | -    | -     | 0    | 0    | 
+|gru_update_gate_element  | C+A*B       | 30     | 18     | 48     | -      | 30     | 0    | 0    | 0    | -    | -     | 0    | 0    | 
+|gru_update_gate_element  | C+A*B       | 30     | 18     | 48     | -      | 30     | 0    | 0    | 0    | -    | -     | 0    | 0    | 
++-------------------------+-------------+--------+--------+--------+--------+--------+------+------+------+------+-------+------+------+
+
+
+Report BlackBoxes: 
++-+--------------+----------+
+| |BlackBox name |Instances |
++-+--------------+----------+
++-+--------------+----------+
+
+Report Cell Usage: 
++------+----------------+------+
+|      |Cell            |Count |
++------+----------------+------+
+|1     |BUFG            |     1|
+|2     |CARRY8          |   418|
+|3     |DSP_ALU         |    72|
+|4     |DSP_A_B_DATA    |    72|
+|5     |DSP_C_DATA      |    72|
+|7     |DSP_MULTIPLIER  |    72|
+|8     |DSP_M_DATA      |    72|
+|9     |DSP_OUTPUT      |    72|
+|11    |DSP_PREADD      |    72|
+|12    |DSP_PREADD_DATA |    72|
+|13    |LUT1            | 60317|
+|14    |LUT2            |  4215|
+|15    |LUT3            | 27865|
+|16    |LUT4            |  2682|
+|17    |LUT5            |  5927|
+|18    |LUT6            | 30622|
+|19    |MUXF7           | 14082|
+|20    |MUXF8           |  3345|
+|21    |FDCE            |  5185|
+|22    |FDPE            |     8|
+|23    |FDRE            |   360|
+|24    |IBUF            |     3|
+|25    |OBUF            |     1|
++------+----------------+------+
+---------------------------------------------------------------------------------
+Finished Writing Synthesis Report : Time (s): cpu = 00:03:59 ; elapsed = 00:04:23 . Memory (MB): peak = 5615.930 ; gain = 2995.844 ; free physical = 2362 ; free virtual = 7721
+---------------------------------------------------------------------------------
+Synthesis finished with 0 errors, 0 critical warnings and 100 warnings.
+Synthesis Optimization Runtime : Time (s): cpu = 00:03:49 ; elapsed = 00:04:15 . Memory (MB): peak = 5615.930 ; gain = 2779.238 ; free physical = 17923 ; free virtual = 23282
+Synthesis Optimization Complete : Time (s): cpu = 00:04:00 ; elapsed = 00:04:25 . Memory (MB): peak = 5615.930 ; gain = 2995.844 ; free physical = 17945 ; free virtual = 23286
+INFO: [Project 1-571] Translating synthesized netlist
+Netlist sorting complete. Time (s): cpu = 00:00:00.55 ; elapsed = 00:00:00.55 . Memory (MB): peak = 5615.930 ; gain = 0.000 ; free physical = 17949 ; free virtual = 23290
+INFO: [Netlist 29-17] Analyzing 17921 Unisim elements for replacement
+INFO: [Netlist 29-28] Unisim Transformation completed in 0 CPU seconds
+INFO: [Project 1-570] Preparing netlist for logic optimization
+Parsing XDC File [/home/lex/Documents/git/gru-hardware-implementation-and-optimization/optimizedImplementation/constraints.xdc]
+CRITICAL WARNING: [Designutils 20-1307] Command '-------------------------' is not supported in the xdc constraint file. [/home/lex/Documents/git/gru-hardware-implementation-and-optimization/optimizedImplementation/constraints.xdc:20]
+Finished Parsing XDC File [/home/lex/Documents/git/gru-hardware-implementation-and-optimization/optimizedImplementation/constraints.xdc]
+INFO: [Opt 31-138] Pushed 0 inverter(s) to 0 load pin(s).
+Netlist sorting complete. Time (s): cpu = 00:00:00.01 ; elapsed = 00:00:00 . Memory (MB): peak = 5620.453 ; gain = 0.000 ; free physical = 17953 ; free virtual = 23294
+INFO: [Project 1-111] Unisim Transformation Summary:
+  A total of 76 instances were transformed.
+  BUFG => BUFGCE: 1 instance 
+  DSP48E2 => DSP48E2 (DSP_ALU, DSP_A_B_DATA, DSP_C_DATA, DSP_MULTIPLIER, DSP_M_DATA, DSP_OUTPUT, DSP_PREADD, DSP_PREADD_DATA): 72 instances
+  IBUF => IBUF (IBUFCTRL, INBUF): 3 instances
+
+Synth Design complete | Checksum: e792e80c
+INFO: [Common 17-83] Releasing license: Synthesis
+173 Infos, 104 Warnings, 2 Critical Warnings and 0 Errors encountered.
+synth_design completed successfully
+synth_design: Time (s): cpu = 00:04:19 ; elapsed = 00:04:43 . Memory (MB): peak = 5620.453 ; gain = 4139.473 ; free physical = 17952 ; free virtual = 23293
+INFO: [Common 17-2834] synth_design peak Physical Memory [PSS] (MB): overall = 20608.732; main = 5017.490; forked = 15981.330
+INFO: [Common 17-2834] synth_design peak Virtual Memory [VSS] (MB): overall = 25981.027; main = 5620.457; forked = 20369.016
+# report_utilization -file utilization_synth.txt
+# report_timing_summary -file timing_synth.txt
+INFO: [Timing 38-35] Done setting XDC timing constraints.
+INFO: [Timing 38-91] UpdateTimingParams: Speed grade: -2L, Temperature grade: E, Delay Type: min_max.
+INFO: [Timing 38-191] Multithreading enabled for timing update using a maximum of 8 CPUs
+WARNING: [Device 21-9073] RSS factor Speedmodel not found for intent code NODE_GLOBAL_VDISTR
+WARNING: [Device 21-9073] RSS factor Speedmodel not found for intent code NODE_GLOBAL_VROUTE
+WARNING: [Device 21-9073] RSS factor Speedmodel not found for intent code NODE_GLOBAL_HDISTR
+WARNING: [Device 21-9073] RSS factor Speedmodel not found for intent code NODE_GLOBAL_HROUTE
+WARNING: [Device 21-9073] RSS factor Speedmodel not found for intent code NODE_GLOBAL_BUFG
+WARNING: [Device 21-9073] RSS factor Speedmodel not found for intent code NODE_GLOBAL_LEAF
+report_timing_summary: Time (s): cpu = 00:00:23 ; elapsed = 00:00:17 . Memory (MB): peak = 5934.852 ; gain = 314.398 ; free physical = 17669 ; free virtual = 23010
+# report_power -file power_synth.txt
+Command: report_power -file power_synth.txt
+Running Vector-less Activity Propagation...
+
+Finished Running Vector-less Activity Propagation
+0 Infos, 0 Warnings, 0 Critical Warnings and 0 Errors encountered.
+report_power completed successfully
+report_power: Time (s): cpu = 00:00:24 ; elapsed = 00:00:11 . Memory (MB): peak = 6022.895 ; gain = 88.043 ; free physical = 17661 ; free virtual = 23002
+# opt_design
+Command: opt_design
+Attempting to get a license for feature 'Implementation' and/or device 'xcu250'
+INFO: [Common 17-349] Got license for feature 'Implementation' and/or device 'xcu250'
+Running DRC as a precondition to command opt_design
+
+Starting DRC Task
+INFO: [DRC 23-27] Running DRC with 8 threads
+INFO: [Project 1-461] DRC finished with 0 Errors
+INFO: [Project 1-462] Please refer to the DRC report (report_drc) for more information.
+
+Time (s): cpu = 00:00:02 ; elapsed = 00:00:00.58 . Memory (MB): peak = 6022.895 ; gain = 0.000 ; free physical = 17661 ; free virtual = 23002
+
+Starting Cache Timing Information Task
+Ending Cache Timing Information Task | Checksum: 1d61f9ba1
+
+Time (s): cpu = 00:00:00.03 ; elapsed = 00:00:00.04 . Memory (MB): peak = 6022.895 ; gain = 0.000 ; free physical = 17661 ; free virtual = 23002
+
+Starting Logic Optimization Task
+
+Phase 1 Initialization
+
+Phase 1.1 Core Generation And Design Setup
+Phase 1.1 Core Generation And Design Setup | Checksum: 1d61f9ba1
+
+Time (s): cpu = 00:00:00.01 ; elapsed = 00:00:00.01 . Memory (MB): peak = 6022.895 ; gain = 0.000 ; free physical = 17660 ; free virtual = 23001
+
+Phase 1.2 Setup Constraints And Sort Netlist
+Phase 1.2 Setup Constraints And Sort Netlist | Checksum: 1d61f9ba1
+
+Time (s): cpu = 00:00:00.04 ; elapsed = 00:00:00.03 . Memory (MB): peak = 6022.895 ; gain = 0.000 ; free physical = 17660 ; free virtual = 23001
+Phase 1 Initialization | Checksum: 1d61f9ba1
+
+Time (s): cpu = 00:00:00.04 ; elapsed = 00:00:00.04 . Memory (MB): peak = 6022.895 ; gain = 0.000 ; free physical = 17660 ; free virtual = 23001
+
+Phase 2 Timer Update And Timing Data Collection
+
+Phase 2.1 Timer Update
+Phase 2.1 Timer Update | Checksum: 1d61f9ba1
+
+Time (s): cpu = 00:00:01 ; elapsed = 00:00:00.58 . Memory (MB): peak = 6022.895 ; gain = 0.000 ; free physical = 17660 ; free virtual = 23001
+
+Phase 2.2 Timing Data Collection
+Phase 2.2 Timing Data Collection | Checksum: 1d61f9ba1
+
+Time (s): cpu = 00:00:02 ; elapsed = 00:00:00.79 . Memory (MB): peak = 6022.895 ; gain = 0.000 ; free physical = 17660 ; free virtual = 23001
+Phase 2 Timer Update And Timing Data Collection | Checksum: 1d61f9ba1
+
+Time (s): cpu = 00:00:02 ; elapsed = 00:00:00.79 . Memory (MB): peak = 6022.895 ; gain = 0.000 ; free physical = 17660 ; free virtual = 23001
+
+Phase 3 Retarget
+INFO: [Opt 31-1834] Total Chains To Be Transformed Were: 0 AND Number of Transformed insts Created are: 0
+INFO: [Opt 31-138] Pushed 1 inverter(s) to 4953 load pin(s).
+INFO: [Opt 31-49] Retargeted 0 cell(s).
+Phase 3 Retarget | Checksum: bf03b432
+
+Time (s): cpu = 00:00:04 ; elapsed = 00:00:03 . Memory (MB): peak = 6022.895 ; gain = 0.000 ; free physical = 17660 ; free virtual = 23001
+Retarget | Checksum: bf03b432
+INFO: [Opt 31-389] Phase Retarget created 6984 cells and removed 6985 cells
+INFO: [Opt 31-1021] In phase Retarget, 60480 netlist objects are constrained preventing optimization. Please run opt_design with -debug_log to get more detail. 
+
+Phase 4 Constant propagation
+INFO: [Opt 31-138] Pushed 0 inverter(s) to 0 load pin(s).
+Phase 4 Constant propagation | Checksum: 14d6490f1
+
+Time (s): cpu = 00:00:04 ; elapsed = 00:00:03 . Memory (MB): peak = 6022.895 ; gain = 0.000 ; free physical = 17664 ; free virtual = 23005
+Constant propagation | Checksum: 14d6490f1
+INFO: [Opt 31-389] Phase Constant propagation created 0 cells and removed 0 cells
+INFO: [Opt 31-1021] In phase Constant propagation, 60480 netlist objects are constrained preventing optimization. Please run opt_design with -debug_log to get more detail. 
+
+Phase 5 Sweep
+Phase 5 Sweep | Checksum: cd3bc4cd
+
+Time (s): cpu = 00:00:06 ; elapsed = 00:00:04 . Memory (MB): peak = 6022.895 ; gain = 0.000 ; free physical = 17664 ; free virtual = 23006
+Sweep | Checksum: cd3bc4cd
+INFO: [Opt 31-389] Phase Sweep created 0 cells and removed 0 cells
+INFO: [Opt 31-1021] In phase Sweep, 60960 netlist objects are constrained preventing optimization. Please run opt_design with -debug_log to get more detail. 
+
+Phase 6 BUFG optimization
+INFO: [Opt 31-1077] Phase BUFG optimization inserted 0 global clock buffer(s) for CLOCK_LOW_FANOUT.
+Phase 6 BUFG optimization | Checksum: cd3bc4cd
+
+Time (s): cpu = 00:00:07 ; elapsed = 00:00:05 . Memory (MB): peak = 6022.895 ; gain = 0.000 ; free physical = 17668 ; free virtual = 23009
+BUFG optimization | Checksum: cd3bc4cd
+INFO: [Opt 31-662] Phase BUFG optimization created 0 cells of which 0 are BUFGs and removed 0 cells.
+
+Phase 7 Shift Register Optimization
+INFO: [Opt 31-1064] SRL Remap converted 0 SRLs to 0 registers and converted 0 registers of register chains to 0 SRLs
+Phase 7 Shift Register Optimization | Checksum: cd3bc4cd
+
+Time (s): cpu = 00:00:07 ; elapsed = 00:00:05 . Memory (MB): peak = 6022.895 ; gain = 0.000 ; free physical = 17668 ; free virtual = 23009
+Shift Register Optimization | Checksum: cd3bc4cd
+INFO: [Opt 31-389] Phase Shift Register Optimization created 0 cells and removed 0 cells
+
+Phase 8 Post Processing Netlist
+Phase 8 Post Processing Netlist | Checksum: cd3bc4cd
+
+Time (s): cpu = 00:00:07 ; elapsed = 00:00:06 . Memory (MB): peak = 6022.895 ; gain = 0.000 ; free physical = 17667 ; free virtual = 23009
+Post Processing Netlist | Checksum: cd3bc4cd
+INFO: [Opt 31-389] Phase Post Processing Netlist created 0 cells and removed 0 cells
+INFO: [Opt 31-1021] In phase Post Processing Netlist, 60720 netlist objects are constrained preventing optimization. Please run opt_design with -debug_log to get more detail. 
+
+Phase 9 Finalization
+
+Phase 9.1 Finalizing Design Cores and Updating Shapes
+Phase 9.1 Finalizing Design Cores and Updating Shapes | Checksum: 1d244e544
+
+Time (s): cpu = 00:00:08 ; elapsed = 00:00:06 . Memory (MB): peak = 6022.895 ; gain = 0.000 ; free physical = 17668 ; free virtual = 23009
+
+Phase 9.2 Verifying Netlist Connectivity
+
+Starting Connectivity Check Task
+
+Time (s): cpu = 00:00:00.16 ; elapsed = 00:00:00.15 . Memory (MB): peak = 6022.895 ; gain = 0.000 ; free physical = 17668 ; free virtual = 23009
+Phase 9.2 Verifying Netlist Connectivity | Checksum: 1d244e544
+
+Time (s): cpu = 00:00:08 ; elapsed = 00:00:06 . Memory (MB): peak = 6022.895 ; gain = 0.000 ; free physical = 17668 ; free virtual = 23009
+Phase 9 Finalization | Checksum: 1d244e544
+
+Time (s): cpu = 00:00:08 ; elapsed = 00:00:06 . Memory (MB): peak = 6022.895 ; gain = 0.000 ; free physical = 17668 ; free virtual = 23009
+Opt_design Change Summary
+=========================
+
+
+-------------------------------------------------------------------------------------------------------------------------
+|  Phase                        |  #Cells created  |  #Cells Removed  |  #Constrained objects preventing optimizations  |
+-------------------------------------------------------------------------------------------------------------------------
+|  Retarget                     |            6984  |            6985  |                                          60480  |
+|  Constant propagation         |               0  |               0  |                                          60480  |
+|  Sweep                        |               0  |               0  |                                          60960  |
+|  BUFG optimization            |               0  |               0  |                                              0  |
+|  Shift Register Optimization  |               0  |               0  |                                              0  |
+|  Post Processing Netlist      |               0  |               0  |                                          60720  |
+-------------------------------------------------------------------------------------------------------------------------
+
+
+Ending Logic Optimization Task | Checksum: 1d244e544
+
+Time (s): cpu = 00:00:08 ; elapsed = 00:00:06 . Memory (MB): peak = 6022.895 ; gain = 0.000 ; free physical = 17668 ; free virtual = 23009
+
+Starting Power Optimization Task
+INFO: [Pwropt 34-132] Skipping clock gating for clocks with a period < 2.00 ns.
+Ending Power Optimization Task | Checksum: 1d244e544
+
+Time (s): cpu = 00:00:00.05 ; elapsed = 00:00:00.05 . Memory (MB): peak = 6022.895 ; gain = 0.000 ; free physical = 17670 ; free virtual = 23012
+
+Starting Final Cleanup Task
+Ending Final Cleanup Task | Checksum: 1d244e544
+
+Time (s): cpu = 00:00:00 ; elapsed = 00:00:00 . Memory (MB): peak = 6022.895 ; gain = 0.000 ; free physical = 17670 ; free virtual = 23012
+
+Starting Netlist Obfuscation Task
+Netlist sorting complete. Time (s): cpu = 00:00:00.01 ; elapsed = 00:00:00.01 . Memory (MB): peak = 6022.895 ; gain = 0.000 ; free physical = 17670 ; free virtual = 23012
+Ending Netlist Obfuscation Task | Checksum: 1d244e544
+
+Time (s): cpu = 00:00:00.02 ; elapsed = 00:00:00.02 . Memory (MB): peak = 6022.895 ; gain = 0.000 ; free physical = 17670 ; free virtual = 23012
+INFO: [Common 17-83] Releasing license: Implementation
+22 Infos, 0 Warnings, 0 Critical Warnings and 0 Errors encountered.
+opt_design completed successfully
+opt_design: Time (s): cpu = 00:00:11 ; elapsed = 00:00:08 . Memory (MB): peak = 6022.895 ; gain = 0.000 ; free physical = 17670 ; free virtual = 23012
+# place_design
+Command: place_design
+Attempting to get a license for feature 'Implementation' and/or device 'xcu250'
+INFO: [Common 17-349] Got license for feature 'Implementation' and/or device 'xcu250'
+INFO: [Common 17-83] Releasing license: Implementation
+INFO: [DRC 23-27] Running DRC with 8 threads
+INFO: [Vivado_Tcl 4-198] DRC finished with 0 Errors
+INFO: [Vivado_Tcl 4-199] Please refer to the DRC report (report_drc) for more information.
+Running DRC as a precondition to command place_design
+INFO: [DRC 23-27] Running DRC with 8 threads
+INFO: [Vivado_Tcl 4-198] DRC finished with 0 Errors
+INFO: [Vivado_Tcl 4-199] Please refer to the DRC report (report_drc) for more information.
+INFO: [Place 30-611] Multithreading enabled for place_design using a maximum of 8 CPUs
+
+Starting Placer Task
+
+Phase 1 Placer Initialization
+
+Phase 1.1 Placer Initialization Netlist Sorting
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.01 . Memory (MB): peak = 6022.895 ; gain = 0.000 ; free physical = 17676 ; free virtual = 23017
+Phase 1.1 Placer Initialization Netlist Sorting | Checksum: 1406f48ea
+
+Time (s): cpu = 00:00:00.02 ; elapsed = 00:00:00.02 . Memory (MB): peak = 6022.895 ; gain = 0.000 ; free physical = 17676 ; free virtual = 23017
+Netlist sorting complete. Time (s): cpu = 00:00:00.01 ; elapsed = 00:00:00 . Memory (MB): peak = 6022.895 ; gain = 0.000 ; free physical = 17676 ; free virtual = 23017
+
+Phase 1.2 IO Placement/ Clock Placement/ Build Placer Device
+INFO: [Timing 38-35] Done setting XDC timing constraints.
+Phase 1.2 IO Placement/ Clock Placement/ Build Placer Device | Checksum: 20fb7d971
+
+Time (s): cpu = 00:00:10 ; elapsed = 00:00:05 . Memory (MB): peak = 6022.895 ; gain = 0.000 ; free physical = 17679 ; free virtual = 23020
+
+Phase 1.3 Build Placer Netlist Model
+Phase 1.3 Build Placer Netlist Model | Checksum: 2771e8151
+
+Time (s): cpu = 00:00:21 ; elapsed = 00:00:11 . Memory (MB): peak = 6022.895 ; gain = 0.000 ; free physical = 17677 ; free virtual = 23019
+
+Phase 1.4 Constrain Clocks/Macros
+Phase 1.4 Constrain Clocks/Macros | Checksum: 2771e8151
+
+Time (s): cpu = 00:00:21 ; elapsed = 00:00:11 . Memory (MB): peak = 6022.895 ; gain = 0.000 ; free physical = 17677 ; free virtual = 23019
+Phase 1 Placer Initialization | Checksum: 2771e8151
+
+Time (s): cpu = 00:00:22 ; elapsed = 00:00:11 . Memory (MB): peak = 6022.895 ; gain = 0.000 ; free physical = 17677 ; free virtual = 23019
+
+Phase 2 Global Placement
+
+Phase 2.1 Floorplanning
+
+Phase 2.1.1 Partition Driven Placement
+
+Phase 2.1.1.1 PBP: Partition Driven Placement
+Phase 2.1.1.1 PBP: Partition Driven Placement | Checksum: 2ff42b735
+
+Time (s): cpu = 00:00:49 ; elapsed = 00:00:23 . Memory (MB): peak = 6022.895 ; gain = 0.000 ; free physical = 17668 ; free virtual = 23009
+
+Phase 2.1.1.2 PBP: Clock Region Placement
+Phase 2.1.1.2 PBP: Clock Region Placement | Checksum: 2ff42b735
+
+Time (s): cpu = 00:00:51 ; elapsed = 00:00:25 . Memory (MB): peak = 6091.254 ; gain = 68.359 ; free physical = 17640 ; free virtual = 22982
+
+Phase 2.1.1.3 PBP: Compute Congestion
+Phase 2.1.1.3 PBP: Compute Congestion | Checksum: 2ff42b735
+
+Time (s): cpu = 00:01:10 ; elapsed = 00:00:30 . Memory (MB): peak = 6123.270 ; gain = 100.375 ; free physical = 17644 ; free virtual = 22985
+
+Phase 2.1.1.4 PBP: UpdateTiming
+Phase 2.1.1.4 PBP: UpdateTiming | Checksum: 2c91adae7
+
+Time (s): cpu = 00:01:10 ; elapsed = 00:00:30 . Memory (MB): peak = 6123.270 ; gain = 100.375 ; free physical = 17644 ; free virtual = 22985
+
+Phase 2.1.1.5 PBP: Add part constraints
+Phase 2.1.1.5 PBP: Add part constraints | Checksum: 2c91adae7
+
+Time (s): cpu = 00:01:11 ; elapsed = 00:00:31 . Memory (MB): peak = 6123.270 ; gain = 100.375 ; free physical = 17644 ; free virtual = 22985
+Phase 2.1.1 Partition Driven Placement | Checksum: 2c91adae7
+
+Time (s): cpu = 00:01:11 ; elapsed = 00:00:31 . Memory (MB): peak = 6123.270 ; gain = 100.375 ; free physical = 17644 ; free virtual = 22985
+Phase 2.1 Floorplanning | Checksum: 27ed23c9e
+
+Time (s): cpu = 00:01:11 ; elapsed = 00:00:31 . Memory (MB): peak = 6123.270 ; gain = 100.375 ; free physical = 17644 ; free virtual = 22985
+
+Phase 2.2 Physical Synthesis After Floorplan
+INFO: [Physopt 32-670] No setup violation found.  PSIP Post Floorplan SLR Replication was not performed.
+Netlist sorting complete. Time (s): cpu = 00:00:00.01 ; elapsed = 00:00:00.01 . Memory (MB): peak = 6123.270 ; gain = 0.000 ; free physical = 17644 ; free virtual = 22985
+
+Summary of Physical Synthesis Optimizations
+============================================
+
+
+-----------------------------------------------------------------------------------------------------------------------------------------------
+|  Optimization                         |  Added Cells  |  Removed Cells  |  Optimized Cells/Nets  |  Dont Touch  |  Iterations  |  Elapsed   |
+-----------------------------------------------------------------------------------------------------------------------------------------------
+|  PSIP Post Floorplan SLR Replication  |            0  |              0  |                     0  |           0  |           0  |  00:00:00  |
+|  Total                                |            0  |              0  |                     0  |           0  |           0  |  00:00:00  |
+-----------------------------------------------------------------------------------------------------------------------------------------------
+
+
+Phase 2.2 Physical Synthesis After Floorplan | Checksum: 27ed23c9e
+
+Time (s): cpu = 00:01:11 ; elapsed = 00:00:31 . Memory (MB): peak = 6123.270 ; gain = 100.375 ; free physical = 17644 ; free virtual = 22985
+
+Phase 2.3 Update Timing before SLR Path Opt
+Phase 2.3 Update Timing before SLR Path Opt | Checksum: 27ed23c9e
+
+Time (s): cpu = 00:01:11 ; elapsed = 00:00:31 . Memory (MB): peak = 6123.270 ; gain = 100.375 ; free physical = 17644 ; free virtual = 22985
+
+Phase 2.4 Post-Processing in Floorplanning
+Phase 2.4 Post-Processing in Floorplanning | Checksum: 27ed23c9e
+
+Time (s): cpu = 00:01:11 ; elapsed = 00:00:31 . Memory (MB): peak = 6123.270 ; gain = 100.375 ; free physical = 17644 ; free virtual = 22985
+
+Phase 2.5 Global Placement Core
+
+Phase 2.5.1 UpdateTiming Before Physical Synthesis
+Phase 2.5.1 UpdateTiming Before Physical Synthesis | Checksum: 2a49eacb3
+
+Time (s): cpu = 00:02:48 ; elapsed = 00:01:12 . Memory (MB): peak = 6842.426 ; gain = 819.531 ; free physical = 16898 ; free virtual = 22239
+
+Phase 2.5.2 Physical Synthesis In Placer
+INFO: [Physopt 32-1035] Found 0 LUTNM shape to break, 81562 LUT instances to create LUTNM shape
+INFO: [Physopt 32-1044] Break lutnm for timing: one critical 0, two critical 0, total 0, new lutff created 0
+INFO: [Physopt 32-1138] End 1 Pass. Optimized 40483 nets or LUTs. Breaked 0 LUT, combined 40483 existing LUTs and moved 0 existing LUT
+INFO: [Physopt 32-1030] Pass 1. Identified 38 candidate driver sets for equivalent driver rewiring.
+INFO: [Physopt 32-661] Optimized 0 net.  Re-placed 0 instance.
+INFO: [Physopt 32-775] End 1 Pass. Optimized 0 net or cell. Created 0 new cell, deleted 0 existing cell and moved 0 existing cell
+INFO: [Physopt 32-65] No nets found for high-fanout optimization.
+INFO: [Physopt 32-232] Optimized 0 net. Created 0 new instance.
+INFO: [Physopt 32-775] End 1 Pass. Optimized 0 net or cell. Created 0 new cell, deleted 0 existing cell and moved 0 existing cell
+INFO: [Physopt 32-670] No setup violation found.  DSP Register Optimization was not performed.
+INFO: [Physopt 32-670] No setup violation found.  Shift Register to Pipeline Optimization was not performed.
+INFO: [Physopt 32-670] No setup violation found.  Shift Register Optimization was not performed.
+INFO: [Physopt 32-670] No setup violation found.  BRAM Register Optimization was not performed.
+INFO: [Physopt 32-670] No setup violation found.  URAM Register Optimization was not performed.
+INFO: [Physopt 32-949] No candidate nets found for dynamic/static region interface net replication
+INFO: [Physopt 32-775] End 1 Pass. Optimized 0 net or cell. Created 0 new cell, deleted 0 existing cell and moved 0 existing cell
+Netlist sorting complete. Time (s): cpu = 00:00:00.01 ; elapsed = 00:00:00.01 . Memory (MB): peak = 6842.426 ; gain = 0.000 ; free physical = 16901 ; free virtual = 22242
+
+Summary of Physical Synthesis Optimizations
+============================================
+
+
+-----------------------------------------------------------------------------------------------------------------------------------------------------------
+|  Optimization                                     |  Added Cells  |  Removed Cells  |  Optimized Cells/Nets  |  Dont Touch  |  Iterations  |  Elapsed   |
+-----------------------------------------------------------------------------------------------------------------------------------------------------------
+|  LUT Combining                                    |            0  |          40483  |                 40483  |           0  |           1  |  00:00:18  |
+|  Retime                                           |            0  |              0  |                     0  |           0  |           1  |  00:00:00  |
+|  Equivalent Driver Rewiring                       |            0  |              0  |                     0  |           0  |           1  |  00:00:00  |
+|  Very High Fanout                                 |            0  |              0  |                     0  |           0  |           1  |  00:00:00  |
+|  DSP Register                                     |            0  |              0  |                     0  |           0  |           0  |  00:00:00  |
+|  Shift Register to Pipeline                       |            0  |              0  |                     0  |           0  |           0  |  00:00:00  |
+|  Shift Register                                   |            0  |              0  |                     0  |           0  |           0  |  00:00:00  |
+|  BRAM Register                                    |            0  |              0  |                     0  |           0  |           0  |  00:00:00  |
+|  URAM Register                                    |            0  |              0  |                     0  |           0  |           0  |  00:00:00  |
+|  Dynamic/Static Region Interface Net Replication  |            0  |              0  |                     0  |           0  |           1  |  00:00:00  |
+|  Total                                            |            0  |          40483  |                 40483  |           0  |           5  |  00:00:19  |
+-----------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+Phase 2.5.2 Physical Synthesis In Placer | Checksum: 24b17b789
+
+Time (s): cpu = 00:03:08 ; elapsed = 00:01:32 . Memory (MB): peak = 6842.426 ; gain = 819.531 ; free physical = 16900 ; free virtual = 22241
+Phase 2.5 Global Placement Core | Checksum: 1f360fb91
+
+Time (s): cpu = 00:03:48 ; elapsed = 00:01:45 . Memory (MB): peak = 6842.426 ; gain = 819.531 ; free physical = 16904 ; free virtual = 22245
+Phase 2 Global Placement | Checksum: 1f360fb91
+
+Time (s): cpu = 00:03:48 ; elapsed = 00:01:45 . Memory (MB): peak = 6842.426 ; gain = 819.531 ; free physical = 16904 ; free virtual = 22245
+
+Phase 3 Detail Placement
+
+Phase 3.1 Commit Multi Column Macros
+Phase 3.1 Commit Multi Column Macros | Checksum: 2133fc8e6
+
+Time (s): cpu = 00:04:07 ; elapsed = 00:01:51 . Memory (MB): peak = 6842.426 ; gain = 819.531 ; free physical = 16904 ; free virtual = 22246
+
+Phase 3.2 Commit Most Macros & LUTRAMs
+Phase 3.2 Commit Most Macros & LUTRAMs | Checksum: 2e565d70f
+
+Time (s): cpu = 00:04:08 ; elapsed = 00:01:52 . Memory (MB): peak = 6842.426 ; gain = 819.531 ; free physical = 16904 ; free virtual = 22246
+
+Phase 3.3 Small Shape DP
+
+Phase 3.3.1 Small Shape Clustering
+Phase 3.3.1 Small Shape Clustering | Checksum: 24eb98eaf
+
+Time (s): cpu = 00:04:29 ; elapsed = 00:01:59 . Memory (MB): peak = 6842.426 ; gain = 819.531 ; free physical = 16905 ; free virtual = 22247
+
+Phase 3.3.2 Slice Area Swap
+
+Phase 3.3.2.1 Slice Area Swap Initial
+Phase 3.3.2.1 Slice Area Swap Initial | Checksum: 2a76122bf
+
+Time (s): cpu = 00:04:32 ; elapsed = 00:02:01 . Memory (MB): peak = 6842.426 ; gain = 819.531 ; free physical = 16908 ; free virtual = 22250
+Phase 3.3.2 Slice Area Swap | Checksum: 2d0a70fc2
+
+Time (s): cpu = 00:04:34 ; elapsed = 00:02:03 . Memory (MB): peak = 6842.426 ; gain = 819.531 ; free physical = 16908 ; free virtual = 22249
+Phase 3.3 Small Shape DP | Checksum: 25546679e
+
+Time (s): cpu = 00:04:47 ; elapsed = 00:02:07 . Memory (MB): peak = 6842.426 ; gain = 819.531 ; free physical = 16908 ; free virtual = 22249
+
+Phase 3.4 Re-assign LUT pins
+Phase 3.4 Re-assign LUT pins | Checksum: 2caf0ef0d
+
+Time (s): cpu = 00:04:50 ; elapsed = 00:02:10 . Memory (MB): peak = 6842.426 ; gain = 819.531 ; free physical = 16908 ; free virtual = 22249
+
+Phase 3.5 Pipeline Register Optimization
+Phase 3.5 Pipeline Register Optimization | Checksum: 25a22f17d
+
+Time (s): cpu = 00:04:52 ; elapsed = 00:02:12 . Memory (MB): peak = 6842.426 ; gain = 819.531 ; free physical = 16908 ; free virtual = 22249
+Phase 3 Detail Placement | Checksum: 25a22f17d
+
+Time (s): cpu = 00:04:52 ; elapsed = 00:02:12 . Memory (MB): peak = 6842.426 ; gain = 819.531 ; free physical = 16908 ; free virtual = 22249
+
+Phase 4 Post Placement Optimization and Clean-Up
+
+Phase 4.1 Post Commit Optimization
+INFO: [Timing 38-35] Done setting XDC timing constraints.
+
+Phase 4.1.1 Post Placement Optimization
+Post Placement Optimization Initialization | Checksum: 24ee41807
+
+Phase 4.1.1.1 BUFG Insertion
+
+Starting Physical Synthesis Task
+
+Phase 1 Physical Synthesis Initialization
+INFO: [Physopt 32-721] Multithreading enabled for phys_opt_design using a maximum of 8 CPUs
+INFO: [Physopt 32-619] Estimated Timing Summary | WNS=991.542 | TNS=0.000 |
+Phase 1 Physical Synthesis Initialization | Checksum: 1979819ae
+
+Time (s): cpu = 00:00:00.87 ; elapsed = 00:00:00.29 . Memory (MB): peak = 6842.426 ; gain = 0.000 ; free physical = 16907 ; free virtual = 22248
+INFO: [Place 46-56] BUFG insertion identified 0 candidate nets. Inserted BUFG: 0, Replicated BUFG Driver: 0, Skipped due to Placement/Routing Conflicts: 0, Skipped due to Timing Degradation: 0, Skipped due to netlist editing failed: 0.
+Ending Physical Synthesis Task | Checksum: 1fccfa0eb
+
+Time (s): cpu = 00:00:02 ; elapsed = 00:00:00.93 . Memory (MB): peak = 6842.426 ; gain = 0.000 ; free physical = 16907 ; free virtual = 22248
+Phase 4.1.1.1 BUFG Insertion | Checksum: 24ee41807
+
+Time (s): cpu = 00:05:25 ; elapsed = 00:02:24 . Memory (MB): peak = 6842.426 ; gain = 819.531 ; free physical = 16907 ; free virtual = 22248
+
+Phase 4.1.1.2 BUFG Replication
+INFO: [Place 46-63] BUFG replication identified 0 candidate nets: Replicated nets: 0, Replicated BUFGs: 0, Replicated BUFG Driver: 0, moved BUFGs: 0, Skipped due to Placement / Routing Conflict: 0, Skipped due to Timing: 0, Skipped due to constraints: 0
+Phase 4.1.1.2 BUFG Replication | Checksum: 24ee41807
+
+Time (s): cpu = 00:05:26 ; elapsed = 00:02:25 . Memory (MB): peak = 6842.426 ; gain = 819.531 ; free physical = 16907 ; free virtual = 22248
+
+Phase 4.1.1.3 Post Placement Timing Optimization
+INFO: [Place 30-746] Post Placement Timing Summary WNS=991.542. For the most accurate timing information please run report_timing.
+Phase 4.1.1.3 Post Placement Timing Optimization | Checksum: 1b8ba788c
+
+Time (s): cpu = 00:05:26 ; elapsed = 00:02:25 . Memory (MB): peak = 6842.426 ; gain = 819.531 ; free physical = 16907 ; free virtual = 22248
+
+Phase 4.1.1.4 Replication
+INFO: [Place 46-19] Post Replication Timing Summary WNS=991.542. For the most accurate timing information please run report_timing.
+Phase 4.1.1.4 Replication | Checksum: 1b8ba788c
+
+Time (s): cpu = 00:05:27 ; elapsed = 00:02:26 . Memory (MB): peak = 6842.426 ; gain = 819.531 ; free physical = 16906 ; free virtual = 22248
+
+Time (s): cpu = 00:05:27 ; elapsed = 00:02:26 . Memory (MB): peak = 6842.426 ; gain = 819.531 ; free physical = 16906 ; free virtual = 22248
+Phase 4.1 Post Commit Optimization | Checksum: 1b8ba788c
+
+Time (s): cpu = 00:05:27 ; elapsed = 00:02:26 . Memory (MB): peak = 6842.426 ; gain = 819.531 ; free physical = 16906 ; free virtual = 22248
+Netlist sorting complete. Time (s): cpu = 00:00:00.01 ; elapsed = 00:00:00.01 . Memory (MB): peak = 6985.754 ; gain = 0.000 ; free physical = 16742 ; free virtual = 22084
+
+Phase 4.2 Post Placement Cleanup
+Phase 4.2 Post Placement Cleanup | Checksum: 16cfe2137
+
+Time (s): cpu = 00:05:59 ; elapsed = 00:02:45 . Memory (MB): peak = 6985.754 ; gain = 962.859 ; free physical = 16742 ; free virtual = 22084
+
+Phase 4.3 Placer Reporting
+
+Phase 4.3.1 Print Estimated Congestion
+INFO: [Place 30-612] Post-Placement Estimated Congestion 
+ ________________________________________________________________________
+|           | Global Congestion | Long Congestion   | Short Congestion  |
+| Direction | Region Size       | Region Size       | Region Size       |
+|___________|___________________|___________________|___________________|
+|      North|                1x1|                1x1|                1x1|
+|___________|___________________|___________________|___________________|
+|      South|                1x1|                1x1|                1x1|
+|___________|___________________|___________________|___________________|
+|       East|                1x1|                1x1|                1x1|
+|___________|___________________|___________________|___________________|
+|       West|                1x1|                1x1|                2x2|
+|___________|___________________|___________________|___________________|
+
+SLR0:
+ ________________________________________________________________________
+|           | Global Congestion | Long Congestion   | Short Congestion  |
+| Direction | Region Size       | Region Size       | Region Size       |
+|___________|___________________|___________________|___________________|
+|      North|                1x1|                1x1|                1x1|
+|___________|___________________|___________________|___________________|
+|      South|                1x1|                1x1|                1x1|
+|___________|___________________|___________________|___________________|
+|       East|                1x1|                1x1|                1x1|
+|___________|___________________|___________________|___________________|
+|       West|                1x1|                1x1|                1x1|
+|___________|___________________|___________________|___________________|
+
+SLR1:
+ ________________________________________________________________________
+|           | Global Congestion | Long Congestion   | Short Congestion  |
+| Direction | Region Size       | Region Size       | Region Size       |
+|___________|___________________|___________________|___________________|
+|      North|                1x1|                1x1|                1x1|
+|___________|___________________|___________________|___________________|
+|      South|                1x1|                1x1|                1x1|
+|___________|___________________|___________________|___________________|
+|       East|                1x1|                1x1|                1x1|
+|___________|___________________|___________________|___________________|
+|       West|                1x1|                1x1|                2x2|
+|___________|___________________|___________________|___________________|
+
+SLR2:
+ ________________________________________________________________________
+|           | Global Congestion | Long Congestion   | Short Congestion  |
+| Direction | Region Size       | Region Size       | Region Size       |
+|___________|___________________|___________________|___________________|
+|      North|                1x1|                1x1|                1x1|
+|___________|___________________|___________________|___________________|
+|      South|                1x1|                1x1|                1x1|
+|___________|___________________|___________________|___________________|
+|       East|                1x1|                1x1|                1x1|
+|___________|___________________|___________________|___________________|
+|       West|                1x1|                1x1|                1x1|
+|___________|___________________|___________________|___________________|
+
+SLR3:
+ ________________________________________________________________________
+|           | Global Congestion | Long Congestion   | Short Congestion  |
+| Direction | Region Size       | Region Size       | Region Size       |
+|___________|___________________|___________________|___________________|
+|      North|                1x1|                1x1|                1x1|
+|___________|___________________|___________________|___________________|
+|      South|                1x1|                1x1|                1x1|
+|___________|___________________|___________________|___________________|
+|       East|                1x1|                1x1|                1x1|
+|___________|___________________|___________________|___________________|
+|       West|                1x1|                1x1|                1x1|
+|___________|___________________|___________________|___________________|
+
+Phase 4.3.1 Print Estimated Congestion | Checksum: 16cfe2137
+
+Time (s): cpu = 00:05:59 ; elapsed = 00:02:45 . Memory (MB): peak = 6985.754 ; gain = 962.859 ; free physical = 16742 ; free virtual = 22084
+Phase 4.3 Placer Reporting | Checksum: 16cfe2137
+
+Time (s): cpu = 00:06:00 ; elapsed = 00:02:46 . Memory (MB): peak = 6985.754 ; gain = 962.859 ; free physical = 16742 ; free virtual = 22084
+
+Phase 4.4 Final Placement Cleanup
+Netlist sorting complete. Time (s): cpu = 00:00:00.01 ; elapsed = 00:00:00.01 . Memory (MB): peak = 6985.754 ; gain = 0.000 ; free physical = 16742 ; free virtual = 22084
+
+Time (s): cpu = 00:06:00 ; elapsed = 00:02:46 . Memory (MB): peak = 6985.754 ; gain = 962.859 ; free physical = 16742 ; free virtual = 22084
+Phase 4 Post Placement Optimization and Clean-Up | Checksum: 1ffc0f949
+
+Time (s): cpu = 00:06:00 ; elapsed = 00:02:46 . Memory (MB): peak = 6985.754 ; gain = 962.859 ; free physical = 16742 ; free virtual = 22084
+Ending Placer Task | Checksum: 1b200854e
+
+Time (s): cpu = 00:06:00 ; elapsed = 00:02:47 . Memory (MB): peak = 6985.754 ; gain = 962.859 ; free physical = 16742 ; free virtual = 22084
+35 Infos, 0 Warnings, 0 Critical Warnings and 0 Errors encountered.
+place_design completed successfully
+place_design: Time (s): cpu = 00:06:08 ; elapsed = 00:02:48 . Memory (MB): peak = 6985.754 ; gain = 962.859 ; free physical = 16742 ; free virtual = 22084
+# route_design
+Command: route_design
+Attempting to get a license for feature 'Implementation' and/or device 'xcu250'
+INFO: [Common 17-349] Got license for feature 'Implementation' and/or device 'xcu250'
+Running DRC as a precondition to command route_design
+INFO: [DRC 23-27] Running DRC with 8 threads
+INFO: [Vivado_Tcl 4-198] DRC finished with 0 Errors
+INFO: [Vivado_Tcl 4-199] Please refer to the DRC report (report_drc) for more information.
+
+
+Starting Routing Task
+INFO: [Route 35-254] Multithreading enabled for route_design using a maximum of 8 CPUs
+
+Phase 1 Build RT Design
+Checksum: PlaceDB: acacbc0e ConstDB: 0 ShapeSum: b49b41f0 RouteDB: 50b88750
+Nodegraph reading from file.  Time (s): cpu = 00:00:00.94 ; elapsed = 00:00:00.94 . Memory (MB): peak = 7017.770 ; gain = 0.000 ; free physical = 16736 ; free virtual = 22078
+Post Restoration Checksum: NetGraph: 32bf8f49 | NumContArr: f91b1a1b | Constraints: 4199a55 | Timing: c2a8fa9d
+Phase 1 Build RT Design | Checksum: 1f29d3e56
+
+Time (s): cpu = 00:00:18 ; elapsed = 00:00:07 . Memory (MB): peak = 7017.770 ; gain = 0.000 ; free physical = 16737 ; free virtual = 22078
+
+Phase 2 Router Initialization
+
+Phase 2.1 Fix Topology Constraints
+Phase 2.1 Fix Topology Constraints | Checksum: 1f29d3e56
+
+Time (s): cpu = 00:00:18 ; elapsed = 00:00:07 . Memory (MB): peak = 7017.770 ; gain = 0.000 ; free physical = 16737 ; free virtual = 22078
+
+Phase 2.2 Pre Route Cleanup
+Phase 2.2 Pre Route Cleanup | Checksum: 1f29d3e56
+
+Time (s): cpu = 00:00:18 ; elapsed = 00:00:07 . Memory (MB): peak = 7017.770 ; gain = 0.000 ; free physical = 16737 ; free virtual = 22078
+
+Phase 2.3 Global Clock Net Routing
+ Number of Nodes with overlaps = 0
+Phase 2.3 Global Clock Net Routing | Checksum: 21a28e491
+
+Time (s): cpu = 00:00:27 ; elapsed = 00:00:10 . Memory (MB): peak = 7327.816 ; gain = 310.047 ; free physical = 16401 ; free virtual = 21742
+
+Phase 2.4 Update Timing
+Phase 2.4 Update Timing | Checksum: 1beea6fcb
+
+Time (s): cpu = 00:00:33 ; elapsed = 00:00:12 . Memory (MB): peak = 7327.816 ; gain = 310.047 ; free physical = 16401 ; free virtual = 21742
+INFO: [Route 35-416] Intermediate Timing Summary | WNS=991.923| TNS=0.000  | WHS=-0.043 | THS=-0.335 |
+
+
+Router Utilization Summary
+  Global Vertical Routing Utilization    = 0 %
+  Global Horizontal Routing Utilization  = 0 %
+  Routable Net Status*
+  *Does not include unroutable nets such as driverless and loadless.
+  Run report_route_status for detailed report.
+  Number of Failed Nets               = 131212
+    (Failed Nets is the sum of unrouted and partially routed nets)
+  Number of Unrouted Nets             = 107932
+  Number of Partially Routed Nets     = 23280
+  Number of Node Overlaps             = 0
+
+Phase 2 Router Initialization | Checksum: 1c47a076b
+
+Time (s): cpu = 00:00:46 ; elapsed = 00:00:16 . Memory (MB): peak = 7369.574 ; gain = 351.805 ; free physical = 16369 ; free virtual = 21711
+
+Phase 3 Global Routing
+
+Phase 3.1 SLL Assignment
+Number SLLs per Column: 1440
+Estimated SLL Demand Per Column: 
+  SLR [2-3]        0 (  0%)     0 (  0%)     0 (  0%)     0 (  0%)     0 (  0%)     0 (  0%)     0 (  0%)     0 (  0%)     0 (  0%)     0 (  0%)     0 (  0%)     0 (  0%)     0 (  0%)     0 (  0%)     0 (  0%)     0 (  0%)  Demand:     0 Available: 23040 Utilization(%): 0.00
+  SLR [1-2]        0 (  0%)     0 (  0%)     0 (  0%)     0 (  0%)     0 (  0%)     0 (  0%)     0 (  0%)     0 (  0%)     0 (  0%)     0 (  0%)     0 (  0%)     0 (  0%)     0 (  0%)     0 (  0%)     0 (  0%)     0 (  0%)  Demand:     0 Available: 23040 Utilization(%): 0.00
+  SLR [0-1]        0 (  0%)     0 (  0%)     0 (  0%)     0 (  0%)     0 (  0%)     0 (  0%)     0 (  0%)     0 (  0%)     0 (  0%)     0 (  0%)     0 (  0%)     0 (  0%)     0 (  0%)     0 (  0%)     0 (  0%)     0 (  0%)  Demand:     0 Available: 23040 Utilization(%): 0.00
+Phase 3.1 SLL Assignment | Checksum: 1c47a076b
+
+Time (s): cpu = 00:00:47 ; elapsed = 00:00:16 . Memory (MB): peak = 7369.574 ; gain = 351.805 ; free physical = 16369 ; free virtual = 21711
+Phase 3 Global Routing | Checksum: 1c47a076b
+
+Time (s): cpu = 00:00:47 ; elapsed = 00:00:16 . Memory (MB): peak = 7369.574 ; gain = 351.805 ; free physical = 16369 ; free virtual = 21711
+
+Phase 4 Initial Routing
+
+Phase 4.1 Initial Net Routing Pass
+Phase 4.1 Initial Net Routing Pass | Checksum: 1db7aea3b
+
+Time (s): cpu = 00:01:10 ; elapsed = 00:00:25 . Memory (MB): peak = 7369.574 ; gain = 351.805 ; free physical = 16369 ; free virtual = 21711
+Phase 4 Initial Routing | Checksum: 201cb3201
+
+Time (s): cpu = 00:01:11 ; elapsed = 00:00:25 . Memory (MB): peak = 7369.574 ; gain = 351.805 ; free physical = 16369 ; free virtual = 21711
+
+Phase 5 Rip-up And Reroute
+
+Phase 5.1 Global Iteration 0
+INFO: [Route 35-443] CLB routing congestion detected. Several CLBs have high routing utilization, which can impact timing closure. Congested CLBs and Nets are dumped in: iter_2_CongestedCLBsAndNets.txt
+ Number of Nodes with overlaps = 22627
+ Number of Nodes with overlaps = 2575
+ Number of Nodes with overlaps = 740
+ Number of Nodes with overlaps = 15
+ Number of Nodes with overlaps = 2
+ Number of Nodes with overlaps = 1
+ Number of Nodes with overlaps = 0
+INFO: [Route 35-416] Intermediate Timing Summary | WNS=987.814| TNS=0.000  | WHS=0.009  | THS=0.000  |
+
+Phase 5.1 Global Iteration 0 | Checksum: 2905741e6
+
+Time (s): cpu = 00:10:15 ; elapsed = 00:07:28 . Memory (MB): peak = 7661.137 ; gain = 643.367 ; free physical = 16067 ; free virtual = 21409
+
+Phase 5.2 Additional Iteration for Hold
+Phase 5.2 Additional Iteration for Hold | Checksum: 34eea4278
+
+Time (s): cpu = 00:10:16 ; elapsed = 00:07:28 . Memory (MB): peak = 7661.137 ; gain = 643.367 ; free physical = 16067 ; free virtual = 21409
+Phase 5 Rip-up And Reroute | Checksum: 34eea4278
+
+Time (s): cpu = 00:10:16 ; elapsed = 00:07:28 . Memory (MB): peak = 7661.137 ; gain = 643.367 ; free physical = 16067 ; free virtual = 21409
+
+Phase 6 Delay and Skew Optimization
+
+Phase 6.1 Delay CleanUp
+Phase 6.1 Delay CleanUp | Checksum: 295223aba
+
+Time (s): cpu = 00:10:16 ; elapsed = 00:07:28 . Memory (MB): peak = 7661.137 ; gain = 643.367 ; free physical = 16067 ; free virtual = 21409
+
+Phase 6.2 Clock Skew Optimization
+Phase 6.2 Clock Skew Optimization | Checksum: 295223aba
+
+Time (s): cpu = 00:10:17 ; elapsed = 00:07:28 . Memory (MB): peak = 7661.137 ; gain = 643.367 ; free physical = 16067 ; free virtual = 21409
+Phase 6 Delay and Skew Optimization | Checksum: 295223aba
+
+Time (s): cpu = 00:10:17 ; elapsed = 00:07:28 . Memory (MB): peak = 7661.137 ; gain = 643.367 ; free physical = 16067 ; free virtual = 21409
+
+Phase 7 Post Hold Fix
+
+Phase 7.1 Hold Fix Iter
+INFO: [Route 35-416] Intermediate Timing Summary | WNS=987.814| TNS=0.000  | WHS=0.009  | THS=0.000  |
+
+Phase 7.1 Hold Fix Iter | Checksum: 1ef215af3
+
+Time (s): cpu = 00:10:24 ; elapsed = 00:07:30 . Memory (MB): peak = 7661.137 ; gain = 643.367 ; free physical = 16067 ; free virtual = 21409
+Phase 7 Post Hold Fix | Checksum: 1ef215af3
+
+Time (s): cpu = 00:10:25 ; elapsed = 00:07:30 . Memory (MB): peak = 7661.137 ; gain = 643.367 ; free physical = 16067 ; free virtual = 21409
+
+Phase 8 Route finalize
+
+Router Utilization Summary
+  Global Vertical Routing Utilization    = 0.879991 %
+  Global Horizontal Routing Utilization  = 1.03201 %
+  Routable Net Status*
+  *Does not include unroutable nets such as driverless and loadless.
+  Run report_route_status for detailed report.
+  Number of Failed Nets               = 0
+    (Failed Nets is the sum of unrouted and partially routed nets)
+  Number of Unrouted Nets             = 0
+  Number of Partially Routed Nets     = 0
+  Number of Node Overlaps             = 0
+
+Phase 8 Route finalize | Checksum: 1ef215af3
+
+Time (s): cpu = 00:10:27 ; elapsed = 00:07:30 . Memory (MB): peak = 7661.137 ; gain = 643.367 ; free physical = 16067 ; free virtual = 21409
+
+Phase 9 Verifying routed nets
+
+ Verification completed successfully
+Phase 9 Verifying routed nets | Checksum: 1ef215af3
+
+Time (s): cpu = 00:10:27 ; elapsed = 00:07:31 . Memory (MB): peak = 7661.137 ; gain = 643.367 ; free physical = 16067 ; free virtual = 21409
+
+Phase 10 Depositing Routes
+Phase 10 Depositing Routes | Checksum: 1ef215af3
+
+Time (s): cpu = 00:10:33 ; elapsed = 00:07:34 . Memory (MB): peak = 7661.137 ; gain = 643.367 ; free physical = 16062 ; free virtual = 21404
+
+Phase 11 Resolve XTalk
+Phase 11 Resolve XTalk | Checksum: 1ef215af3
+
+Time (s): cpu = 00:10:33 ; elapsed = 00:07:34 . Memory (MB): peak = 7661.137 ; gain = 643.367 ; free physical = 16062 ; free virtual = 21404
+
+Phase 12 Post Process Routing
+Phase 12 Post Process Routing | Checksum: 1ef215af3
+
+Time (s): cpu = 00:10:34 ; elapsed = 00:07:35 . Memory (MB): peak = 7661.137 ; gain = 643.367 ; free physical = 16063 ; free virtual = 21405
+
+Phase 13 Post Router Timing
+INFO: [Route 35-57] Estimated Timing Summary | WNS=987.814| TNS=0.000  | WHS=0.009  | THS=0.000  |
+
+INFO: [Route 35-327] The final timing numbers are based on the router estimated timing analysis. For a complete and accurate timing signoff, please run report_timing_summary.
+Phase 13 Post Router Timing | Checksum: 1ef215af3
+
+Time (s): cpu = 00:10:35 ; elapsed = 00:07:35 . Memory (MB): peak = 7661.137 ; gain = 643.367 ; free physical = 16063 ; free virtual = 21405
+Total Elapsed time in route_design: 454.62 secs
+
+Phase 14 Post-Route Event Processing
+Phase 14 Post-Route Event Processing | Checksum: fed267c2
+
+Time (s): cpu = 00:10:35 ; elapsed = 00:07:35 . Memory (MB): peak = 7661.137 ; gain = 643.367 ; free physical = 16063 ; free virtual = 21404
+INFO: [Route 35-16] Router Completed Successfully
+Ending Routing Task | Checksum: fed267c2
+
+Time (s): cpu = 00:10:36 ; elapsed = 00:07:36 . Memory (MB): peak = 7661.137 ; gain = 643.367 ; free physical = 16063 ; free virtual = 21404
+
+Routing Is Done.
+INFO: [Common 17-83] Releasing license: Implementation
+13 Infos, 0 Warnings, 0 Critical Warnings and 0 Errors encountered.
+route_design completed successfully
+route_design: Time (s): cpu = 00:10:46 ; elapsed = 00:07:39 . Memory (MB): peak = 7661.137 ; gain = 675.383 ; free physical = 16063 ; free virtual = 21404
+# report_utilization -file utilization_report.txt
+# report_timing_summary -file timing_report.txt
+INFO: [Timing 38-91] UpdateTimingParams: Speed grade: -2L, Temperature grade: E, Delay Type: min_max.
+INFO: [Timing 38-191] Multithreading enabled for timing update using a maximum of 8 CPUs
+# report_power -file power_report.txt
+Command: report_power -file power_report.txt
+Running Vector-less Activity Propagation...
+
+Finished Running Vector-less Activity Propagation
+0 Infos, 0 Warnings, 0 Critical Warnings and 0 Errors encountered.
+report_power completed successfully
+report_power: Time (s): cpu = 00:00:36 ; elapsed = 00:00:13 . Memory (MB): peak = 7757.184 ; gain = 96.047 ; free physical = 16047 ; free virtual = 21388
+# report_route_status -file route_status.txt
+# report_drc -file drc_report.txt
+Command: report_drc -file drc_report.txt
+INFO: [IP_Flow 19-234] Refreshing IP repositories
+INFO: [IP_Flow 19-1704] No user IP repositories specified
+INFO: [IP_Flow 19-2313] Loaded Vivado IP repository '/tools/Xilinx/Vivado/2024.1/data/ip'.
+INFO: [DRC 23-27] Running DRC with 8 threads
+INFO: [Vivado_Tcl 2-168] The results of DRC are in file /home/lex/Documents/git/gru-hardware-implementation-and-optimization/optimizedImplementation/drc_report.txt.
+report_drc completed successfully
+report_drc: Time (s): cpu = 00:00:15 ; elapsed = 00:00:05 . Memory (MB): peak = 7757.184 ; gain = 0.000 ; free physical = 16045 ; free virtual = 21387
+INFO: [Common 17-206] Exiting Vivado at Mon Dec 15 19:12:44 2025...

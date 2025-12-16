@@ -1,7 +1,7 @@
 Copyright 1986-2022 Xilinx, Inc. All Rights Reserved. Copyright 2022-2024 Advanced Micro Devices, Inc. All Rights Reserved.
 --------------------------------------------------------------------------------------------------------------------------------------------------
 | Tool Version      : Vivado v.2024.1 (lin64) Build 5076996 Wed May 22 18:36:09 MDT 2024
-| Date              : Fri Dec 12 02:54:01 2025
+| Date              : Mon Dec 15 20:18:08 2025
 | Host              : Toothless running 64-bit Ubuntu 20.04.6 LTS
 | Command           : report_timing_summary -file timing_report.txt
 | Design            : top_level
@@ -139,7 +139,7 @@ Table of Contents
 
     WNS(ns)      TNS(ns)  TNS Failing Endpoints  TNS Total Endpoints      WHS(ns)      THS(ns)  THS Failing Endpoints  THS Total Endpoints     WPWS(ns)     TPWS(ns)  TPWS Failing Endpoints  TPWS Total Endpoints  
     -------      -------  ---------------------  -------------------      -------      -------  ---------------------  -------------------     --------     --------  ----------------------  --------------------  
-    987.849        0.000                      0                11971        0.015        0.000                      0                11971      499.725        0.000                       0                  5578  
+    989.275        0.000                      0                11971        0.015        0.000                      0                11971      499.725        0.000                       0                  5578  
 
 
 All user specified timing constraints are met.
@@ -162,7 +162,7 @@ sys_clk  {0.000 500.000}      1000.000        1.000
 
 Clock             WNS(ns)      TNS(ns)  TNS Failing Endpoints  TNS Total Endpoints      WHS(ns)      THS(ns)  THS Failing Endpoints  THS Total Endpoints     WPWS(ns)     TPWS(ns)  TPWS Failing Endpoints  TPWS Total Endpoints  
 -----             -------      -------  ---------------------  -------------------      -------      -------  ---------------------  -------------------     --------     --------  ----------------------  --------------------  
-sys_clk           987.849        0.000                      0                11971        0.015        0.000                      0                11971      499.725        0.000                       0                  5578  
+sys_clk           989.275        0.000                      0                11971        0.015        0.000                      0                11971      499.725        0.000                       0                  5578  
 
 
 ------------------------------------------------------------------------------------------------
@@ -193,7 +193,7 @@ Path Group    From Clock    To Clock          WNS(ns)      TNS(ns)  TNS Failing 
 From Clock:  sys_clk
   To Clock:  sys_clk
 
-Setup :            0  Failing Endpoints,  Worst Slack      987.849ns,  Total Violation        0.000ns
+Setup :            0  Failing Endpoints,  Worst Slack      989.275ns,  Total Violation        0.000ns
 Hold  :            0  Failing Endpoints,  Worst Slack        0.015ns,  Total Violation        0.000ns
 PW    :            0  Failing Endpoints,  Worst Slack      499.725ns,  Total Violation        0.000ns
 ---------------------------------------------------------------------------------------------------
@@ -201,18 +201,18 @@ PW    :            0  Failing Endpoints,  Worst Slack      499.725ns,  Total Vio
 
 Max Delay Paths
 --------------------------------------------------------------------------------------
-Slack (MET) :             987.849ns  (required time - arrival time)
+Slack (MET) :             989.275ns  (required time - arrival time)
   Source:                 gru_inst/element_index_reg[3][1]/C
                             (rising edge-triggered cell FDCE clocked by sys_clk  {rise@0.000ns fall@500.000ns period=1000.000ns})
-  Destination:            gru_inst/gen_reset_gates[7].reset_gate_inst/sum_input_reg[5]/D
+  Destination:            gru_inst/gen_reset_gates[4].reset_gate_inst/sum_input_reg[26]/D
                             (rising edge-triggered cell FDCE clocked by sys_clk  {rise@0.000ns fall@500.000ns period=1000.000ns})
   Path Group:             sys_clk
   Path Type:              Setup (Max at Slow Process Corner)
   Requirement:            1000.000ns  (sys_clk rise@1000.000ns - sys_clk rise@0.000ns)
-  Data Path Delay:        11.817ns  (logic 2.052ns (17.364%)  route 9.766ns (82.636%))
+  Data Path Delay:        10.382ns  (logic 2.036ns (19.611%)  route 8.346ns (80.389%))
   Logic Levels:           12  (DSP_A_B_DATA=1 DSP_ALU=1 DSP_M_DATA=1 DSP_MULTIPLIER=1 DSP_OUTPUT=1 DSP_PREADD_DATA=1 LUT2=1 LUT5=1 LUT6=2 MUXF7=1 MUXF8=1)
-  Clock Path Skew:        -0.323ns (DCD - SCD + CPR)
-    Destination Clock Delay (DCD):    2.524ns = ( 1002.524 - 1000.000 ) 
+  Clock Path Skew:        -0.333ns (DCD - SCD + CPR)
+    Destination Clock Delay (DCD):    2.515ns = ( 1002.515 - 1000.000 ) 
     Source Clock Delay      (SCD):    3.216ns
     Clock Pessimism Removal (CPR):    0.368ns
   Clock Uncertainty:      0.035ns  ((TSJ^2 + TIJ^2)^1/2 + DJ) / 2 + PE
@@ -221,7 +221,7 @@ Slack (MET) :             987.849ns  (required time - arrival time)
     Discrete Jitter          (DJ):    0.000ns
     Phase Error              (PE):    0.000ns
   Clock Net Delay (Source):      2.205ns (routing 0.828ns, distribution 1.377ns)
-  Clock Net Delay (Destination): 1.805ns (routing 0.751ns, distribution 1.054ns)
+  Clock Net Delay (Destination): 1.796ns (routing 0.751ns, distribution 1.045ns)
 
     Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
   -------------------------------------------------------------------    -------------------
@@ -241,44 +241,44 @@ Slack (MET) :             987.849ns  (required time - arrival time)
   -------------------------------------------------------------------    -------------------
     SLICE_X160Y425       FDCE (Prop_EFF_SLICEL_C_Q)
                                                       0.079     3.295 f  gru_inst/element_index_reg[3][1]/Q
-                         net (fo=43534, routed)       6.936    10.230    gru_inst/gen_reset_gates[7].reset_gate_inst/r_t_reg[7][0]_0
-    SLICE_X61Y349        LUT5 (Prop_E6LUT_SLICEM_I0_O)
-                                                      0.124    10.354 f  gru_inst/gen_reset_gates[7].reset_gate_inst/sum_input0_i_1817__12/O
-                         net (fo=1, routed)           0.183    10.537    gru_inst/gen_reset_gates[7].reset_gate_inst/sum_input0_i_1817__12_n_0
-    SLICE_X64Y348        LUT6 (Prop_D6LUT_SLICEL_I3_O)
-                                                      0.050    10.587 f  gru_inst/gen_reset_gates[7].reset_gate_inst/sum_input0_i_867__19/O
-                         net (fo=1, routed)           0.009    10.596    gru_inst/gen_reset_gates[7].reset_gate_inst/sum_input0_i_867__19_n_0
-    SLICE_X64Y348        MUXF7 (Prop_F7MUX_CD_SLICEL_I0_O)
-                                                      0.056    10.652 f  gru_inst/gen_reset_gates[7].reset_gate_inst/sum_input0_i_389__17/O
-                         net (fo=1, routed)           0.000    10.652    gru_inst/gen_reset_gates[7].reset_gate_inst/sum_input0_i_389__17_n_0
-    SLICE_X64Y348        MUXF8 (Prop_F8MUX_BOT_SLICEL_I0_O)
-                                                      0.026    10.678 f  gru_inst/gen_reset_gates[7].reset_gate_inst/sum_input0_i_150__17/O
-                         net (fo=1, routed)           0.299    10.977    gru_inst/gen_reset_gates[7].reset_gate_inst/sum_input0_i_150__17_n_0
-    SLICE_X62Y341        LUT6 (Prop_H6LUT_SLICEL_I5_O)
-                                                      0.036    11.013 f  gru_inst/gen_reset_gates[7].reset_gate_inst/sum_input0_i_30__17/O
-                         net (fo=1, routed)           2.021    13.034    gru_inst/gen_reset_gates[7].reset_gate_inst/sum_input0/A[0]
-    DSP48E2_X18Y151      DSP_A_B_DATA (Prop_DSP_A_B_DATA_DSP48E2_A[0]_A2_DATA[0])
-                                                      0.192    13.226 r  gru_inst/gen_reset_gates[7].reset_gate_inst/sum_input0/DSP_A_B_DATA_INST/A2_DATA[0]
-                         net (fo=1, routed)           0.000    13.226    gru_inst/gen_reset_gates[7].reset_gate_inst/sum_input0/DSP_A_B_DATA.A2_DATA<0>
-    DSP48E2_X18Y151      DSP_PREADD_DATA (Prop_DSP_PREADD_DATA_DSP48E2_A2_DATA[0]_A2A1[0])
-                                                      0.076    13.302 r  gru_inst/gen_reset_gates[7].reset_gate_inst/sum_input0/DSP_PREADD_DATA_INST/A2A1[0]
-                         net (fo=1, routed)           0.000    13.302    gru_inst/gen_reset_gates[7].reset_gate_inst/sum_input0/DSP_PREADD_DATA.A2A1<0>
-    DSP48E2_X18Y151      DSP_MULTIPLIER (Prop_DSP_MULTIPLIER_DSP48E2_A2A1[0]_U[5])
-                                                      0.505    13.807 f  gru_inst/gen_reset_gates[7].reset_gate_inst/sum_input0/DSP_MULTIPLIER_INST/U[5]
-                         net (fo=1, routed)           0.000    13.807    gru_inst/gen_reset_gates[7].reset_gate_inst/sum_input0/DSP_MULTIPLIER.U<5>
-    DSP48E2_X18Y151      DSP_M_DATA (Prop_DSP_M_DATA_DSP48E2_U[5]_U_DATA[5])
-                                                      0.047    13.854 r  gru_inst/gen_reset_gates[7].reset_gate_inst/sum_input0/DSP_M_DATA_INST/U_DATA[5]
-                         net (fo=1, routed)           0.000    13.854    gru_inst/gen_reset_gates[7].reset_gate_inst/sum_input0/DSP_M_DATA.U_DATA<5>
-    DSP48E2_X18Y151      DSP_ALU (Prop_DSP_ALU_DSP48E2_U_DATA[5]_ALU_OUT[5])
-                                                      0.585    14.439 f  gru_inst/gen_reset_gates[7].reset_gate_inst/sum_input0/DSP_ALU_INST/ALU_OUT[5]
-                         net (fo=1, routed)           0.000    14.439    gru_inst/gen_reset_gates[7].reset_gate_inst/sum_input0/DSP_ALU.ALU_OUT<5>
-    DSP48E2_X18Y151      DSP_OUTPUT (Prop_DSP_OUTPUT_DSP48E2_ALU_OUT[5]_P[5])
-                                                      0.109    14.548 r  gru_inst/gen_reset_gates[7].reset_gate_inst/sum_input0/DSP_OUTPUT_INST/P[5]
-                         net (fo=1, routed)           0.292    14.840    gru_inst/gen_reset_gates[7].reset_gate_inst/sum_input0_n_100
-    SLICE_X142Y375       LUT2 (Prop_B5LUT_SLICEM_I0_O)
-                                                      0.167    15.007 r  gru_inst/gen_reset_gates[7].reset_gate_inst/sum_input[5]_i_1__17/O
-                         net (fo=1, routed)           0.026    15.033    gru_inst/gen_reset_gates[7].reset_gate_inst/sum_input[5]_i_1__17_n_0
-    SLICE_X142Y375       FDCE                                         r  gru_inst/gen_reset_gates[7].reset_gate_inst/sum_input_reg[5]/D
+                         net (fo=43534, routed)       5.259     8.553    gru_inst/gen_reset_gates[4].reset_gate_inst/r_t_reg[12][0]_0
+    SLICE_X62Y350        LUT5 (Prop_G6LUT_SLICEL_I0_O)
+                                                      0.149     8.702 f  gru_inst/gen_reset_gates[4].reset_gate_inst/sum_input0_i_1817__13/O
+                         net (fo=1, routed)           0.098     8.800    gru_inst/gen_reset_gates[4].reset_gate_inst/sum_input0_i_1817__13_n_0
+    SLICE_X64Y350        LUT6 (Prop_H6LUT_SLICEL_I3_O)
+                                                      0.051     8.851 f  gru_inst/gen_reset_gates[4].reset_gate_inst/sum_input0_i_867__16/O
+                         net (fo=1, routed)           0.010     8.861    gru_inst/gen_reset_gates[4].reset_gate_inst/sum_input0_i_867__16_n_0
+    SLICE_X64Y350        MUXF7 (Prop_F7MUX_GH_SLICEL_I0_O)
+                                                      0.057     8.918 f  gru_inst/gen_reset_gates[4].reset_gate_inst/sum_input0_i_389__14/O
+                         net (fo=1, routed)           0.000     8.918    gru_inst/gen_reset_gates[4].reset_gate_inst/sum_input0_i_389__14_n_0
+    SLICE_X64Y350        MUXF8 (Prop_F8MUX_TOP_SLICEL_I0_O)
+                                                      0.026     8.944 f  gru_inst/gen_reset_gates[4].reset_gate_inst/sum_input0_i_150__14/O
+                         net (fo=1, routed)           0.390     9.334    gru_inst/gen_reset_gates[4].reset_gate_inst/sum_input0_i_150__14_n_0
+    SLICE_X61Y343        LUT6 (Prop_E6LUT_SLICEM_I5_O)
+                                                      0.037     9.371 f  gru_inst/gen_reset_gates[4].reset_gate_inst/sum_input0_i_30__14/O
+                         net (fo=1, routed)           2.166    11.537    gru_inst/gen_reset_gates[4].reset_gate_inst/sum_input0/A[0]
+    DSP48E2_X19Y155      DSP_A_B_DATA (Prop_DSP_A_B_DATA_DSP48E2_A[0]_A2_DATA[0])
+                                                      0.192    11.729 r  gru_inst/gen_reset_gates[4].reset_gate_inst/sum_input0/DSP_A_B_DATA_INST/A2_DATA[0]
+                         net (fo=1, routed)           0.000    11.729    gru_inst/gen_reset_gates[4].reset_gate_inst/sum_input0/DSP_A_B_DATA.A2_DATA<0>
+    DSP48E2_X19Y155      DSP_PREADD_DATA (Prop_DSP_PREADD_DATA_DSP48E2_A2_DATA[0]_A2A1[0])
+                                                      0.076    11.805 r  gru_inst/gen_reset_gates[4].reset_gate_inst/sum_input0/DSP_PREADD_DATA_INST/A2A1[0]
+                         net (fo=1, routed)           0.000    11.805    gru_inst/gen_reset_gates[4].reset_gate_inst/sum_input0/DSP_PREADD_DATA.A2A1<0>
+    DSP48E2_X19Y155      DSP_MULTIPLIER (Prop_DSP_MULTIPLIER_DSP48E2_A2A1[0]_U[21])
+                                                      0.505    12.310 f  gru_inst/gen_reset_gates[4].reset_gate_inst/sum_input0/DSP_MULTIPLIER_INST/U[21]
+                         net (fo=1, routed)           0.000    12.310    gru_inst/gen_reset_gates[4].reset_gate_inst/sum_input0/DSP_MULTIPLIER.U<21>
+    DSP48E2_X19Y155      DSP_M_DATA (Prop_DSP_M_DATA_DSP48E2_U[21]_U_DATA[21])
+                                                      0.047    12.357 r  gru_inst/gen_reset_gates[4].reset_gate_inst/sum_input0/DSP_M_DATA_INST/U_DATA[21]
+                         net (fo=1, routed)           0.000    12.357    gru_inst/gen_reset_gates[4].reset_gate_inst/sum_input0/DSP_M_DATA.U_DATA<21>
+    DSP48E2_X19Y155      DSP_ALU (Prop_DSP_ALU_DSP48E2_U_DATA[21]_ALU_OUT[26])
+                                                      0.585    12.942 f  gru_inst/gen_reset_gates[4].reset_gate_inst/sum_input0/DSP_ALU_INST/ALU_OUT[26]
+                         net (fo=1, routed)           0.000    12.942    gru_inst/gen_reset_gates[4].reset_gate_inst/sum_input0/DSP_ALU.ALU_OUT<26>
+    DSP48E2_X19Y155      DSP_OUTPUT (Prop_DSP_OUTPUT_DSP48E2_ALU_OUT[26]_P[26])
+                                                      0.109    13.051 r  gru_inst/gen_reset_gates[4].reset_gate_inst/sum_input0/DSP_OUTPUT_INST/P[26]
+                         net (fo=1, routed)           0.357    13.408    gru_inst/gen_reset_gates[4].reset_gate_inst/sum_input0_n_79
+    SLICE_X145Y389       LUT2 (Prop_C6LUT_SLICEM_I0_O)
+                                                      0.123    13.531 r  gru_inst/gen_reset_gates[4].reset_gate_inst/sum_input[26]_i_1__14/O
+                         net (fo=1, routed)           0.066    13.597    gru_inst/gen_reset_gates[4].reset_gate_inst/sum_input[26]_i_1__14_n_0
+    SLICE_X145Y389       FDCE                                         r  gru_inst/gen_reset_gates[4].reset_gate_inst/sum_input_reg[26]/D
   -------------------------------------------------------------------    -------------------
 
                          (clock sys_clk rise edge) 1000.000  1000.000 r  
@@ -292,17 +292,17 @@ Slack (MET) :             987.849ns  (required time - arrival time)
                          net (fo=1, routed)           0.287  1000.695    clk_IBUF
     BUFGCE_X0Y191        BUFGCE (Prop_BUFCE_BUFGCE_I_O)
                                                       0.024  1000.719 r  clk_IBUF_BUFG_inst/O
-    X3Y6 (CLOCK_ROOT)    net (fo=5697, routed)        1.805  1002.524    gru_inst/gen_reset_gates[7].reset_gate_inst/clk
-    SLICE_X142Y375       FDCE                                         r  gru_inst/gen_reset_gates[7].reset_gate_inst/sum_input_reg[5]/C
-                         clock pessimism              0.368  1002.892    
-                         clock uncertainty           -0.035  1002.857    
-    SLICE_X142Y375       FDCE (Setup_BFF2_SLICEM_C_D)
-                                                      0.025  1002.882    gru_inst/gen_reset_gates[7].reset_gate_inst/sum_input_reg[5]
+    X3Y6 (CLOCK_ROOT)    net (fo=5697, routed)        1.796  1002.515    gru_inst/gen_reset_gates[4].reset_gate_inst/clk
+    SLICE_X145Y389       FDCE                                         r  gru_inst/gen_reset_gates[4].reset_gate_inst/sum_input_reg[26]/C
+                         clock pessimism              0.368  1002.883    
+                         clock uncertainty           -0.035  1002.848    
+    SLICE_X145Y389       FDCE (Setup_CFF_SLICEM_C_D)
+                                                      0.025  1002.873    gru_inst/gen_reset_gates[4].reset_gate_inst/sum_input_reg[26]
   -------------------------------------------------------------------
-                         required time                       1002.882    
-                         arrival time                         -15.033    
+                         required time                       1002.873    
+                         arrival time                         -13.597    
   -------------------------------------------------------------------
-                         slack                                987.849    
+                         slack                                989.275    
 
 
 
@@ -318,7 +318,7 @@ Slack (MET) :             0.015ns  (arrival time - required time)
   Path Group:             sys_clk
   Path Type:              Hold (Min at Slow Process Corner)
   Requirement:            0.000ns  (sys_clk rise@0.000ns - sys_clk rise@0.000ns)
-  Data Path Delay:        0.307ns  (logic 0.081ns (26.378%)  route 0.226ns (73.622%))
+  Data Path Delay:        0.307ns  (logic 0.081ns (26.342%)  route 0.226ns (73.658%))
   Logic Levels:           1  (LUT5=1)
   Clock Path Skew:        0.232ns (DCD - SCD - CPR)
     Destination Clock Delay (DCD):    3.188ns

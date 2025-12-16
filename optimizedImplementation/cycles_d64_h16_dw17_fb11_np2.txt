@@ -1,0 +1,123 @@
+==========================================================
+GRU Cell Parallel Cycle Count Results
+==========================================================
+Parameters:
+  D (Input Dimension):     64
+  H (Hidden Dimension):    16
+  DATA_WIDTH:              17
+  FRAC_BITS:               11
+  NUM_PARALLEL:            2
+  Total Test Vectors:      100
+==========================================================
+
+Test Vector   1: 2120 cycles (21.20 us @ 100MHz)
+Test Vector   2: 2120 cycles (21.20 us @ 100MHz)
+Test Vector   3: 2120 cycles (21.20 us @ 100MHz)
+Test Vector   4: 2120 cycles (21.20 us @ 100MHz)
+Test Vector   5: 2120 cycles (21.20 us @ 100MHz)
+Test Vector   6: 2120 cycles (21.20 us @ 100MHz)
+Test Vector   7: 2120 cycles (21.20 us @ 100MHz)
+Test Vector   8: 2120 cycles (21.20 us @ 100MHz)
+Test Vector   9: 2120 cycles (21.20 us @ 100MHz)
+Test Vector  10: 2120 cycles (21.20 us @ 100MHz)
+Test Vector  11: 2120 cycles (21.20 us @ 100MHz)
+Test Vector  12: 2120 cycles (21.20 us @ 100MHz)
+Test Vector  13: 2120 cycles (21.20 us @ 100MHz)
+Test Vector  14: 2120 cycles (21.20 us @ 100MHz)
+Test Vector  15: 2120 cycles (21.20 us @ 100MHz)
+Test Vector  16: 2120 cycles (21.20 us @ 100MHz)
+Test Vector  17: 2120 cycles (21.20 us @ 100MHz)
+Test Vector  18: 2120 cycles (21.20 us @ 100MHz)
+Test Vector  19: 2120 cycles (21.20 us @ 100MHz)
+Test Vector  20: 2120 cycles (21.20 us @ 100MHz)
+Test Vector  21: 2120 cycles (21.20 us @ 100MHz)
+Test Vector  22: 2120 cycles (21.20 us @ 100MHz)
+Test Vector  23: 2120 cycles (21.20 us @ 100MHz)
+Test Vector  24: 2120 cycles (21.20 us @ 100MHz)
+Test Vector  25: 2120 cycles (21.20 us @ 100MHz)
+Test Vector  26: 2120 cycles (21.20 us @ 100MHz)
+Test Vector  27: 2120 cycles (21.20 us @ 100MHz)
+Test Vector  28: 2120 cycles (21.20 us @ 100MHz)
+Test Vector  29: 2120 cycles (21.20 us @ 100MHz)
+Test Vector  30: 2120 cycles (21.20 us @ 100MHz)
+Test Vector  31: 2120 cycles (21.20 us @ 100MHz)
+Test Vector  32: 2120 cycles (21.20 us @ 100MHz)
+Test Vector  33: 2120 cycles (21.20 us @ 100MHz)
+Test Vector  34: 2120 cycles (21.20 us @ 100MHz)
+Test Vector  35: 2120 cycles (21.20 us @ 100MHz)
+Test Vector  36: 2120 cycles (21.20 us @ 100MHz)
+Test Vector  37: 2120 cycles (21.20 us @ 100MHz)
+Test Vector  38: 2120 cycles (21.20 us @ 100MHz)
+Test Vector  39: 2120 cycles (21.20 us @ 100MHz)
+Test Vector  40: 2120 cycles (21.20 us @ 100MHz)
+Test Vector  41: 2120 cycles (21.20 us @ 100MHz)
+Test Vector  42: 2120 cycles (21.20 us @ 100MHz)
+Test Vector  43: 2120 cycles (21.20 us @ 100MHz)
+Test Vector  44: 2120 cycles (21.20 us @ 100MHz)
+Test Vector  45: 2120 cycles (21.20 us @ 100MHz)
+Test Vector  46: 2120 cycles (21.20 us @ 100MHz)
+Test Vector  47: 2120 cycles (21.20 us @ 100MHz)
+Test Vector  48: 2120 cycles (21.20 us @ 100MHz)
+Test Vector  49: 2120 cycles (21.20 us @ 100MHz)
+Test Vector  50: 2120 cycles (21.20 us @ 100MHz)
+Test Vector  51: 2120 cycles (21.20 us @ 100MHz)
+Test Vector  52: 2120 cycles (21.20 us @ 100MHz)
+Test Vector  53: 2120 cycles (21.20 us @ 100MHz)
+Test Vector  54: 2120 cycles (21.20 us @ 100MHz)
+Test Vector  55: 2120 cycles (21.20 us @ 100MHz)
+Test Vector  56: 2120 cycles (21.20 us @ 100MHz)
+Test Vector  57: 2120 cycles (21.20 us @ 100MHz)
+Test Vector  58: 2120 cycles (21.20 us @ 100MHz)
+Test Vector  59: 2120 cycles (21.20 us @ 100MHz)
+Test Vector  60: 2120 cycles (21.20 us @ 100MHz)
+Test Vector  61: 2120 cycles (21.20 us @ 100MHz)
+Test Vector  62: 2120 cycles (21.20 us @ 100MHz)
+Test Vector  63: 2120 cycles (21.20 us @ 100MHz)
+Test Vector  64: 2120 cycles (21.20 us @ 100MHz)
+Test Vector  65: 2120 cycles (21.20 us @ 100MHz)
+Test Vector  66: 2120 cycles (21.20 us @ 100MHz)
+Test Vector  67: 2120 cycles (21.20 us @ 100MHz)
+Test Vector  68: 2120 cycles (21.20 us @ 100MHz)
+Test Vector  69: 2120 cycles (21.20 us @ 100MHz)
+Test Vector  70: 2120 cycles (21.20 us @ 100MHz)
+Test Vector  71: 2120 cycles (21.20 us @ 100MHz)
+Test Vector  72: 2120 cycles (21.20 us @ 100MHz)
+Test Vector  73: 2120 cycles (21.20 us @ 100MHz)
+Test Vector  74: 2120 cycles (21.20 us @ 100MHz)
+Test Vector  75: 2120 cycles (21.20 us @ 100MHz)
+Test Vector  76: 2120 cycles (21.20 us @ 100MHz)
+Test Vector  77: 2120 cycles (21.20 us @ 100MHz)
+Test Vector  78: 2120 cycles (21.20 us @ 100MHz)
+Test Vector  79: 2120 cycles (21.20 us @ 100MHz)
+Test Vector  80: 2120 cycles (21.20 us @ 100MHz)
+Test Vector  81: 2120 cycles (21.20 us @ 100MHz)
+Test Vector  82: 2120 cycles (21.20 us @ 100MHz)
+Test Vector  83: 2120 cycles (21.20 us @ 100MHz)
+Test Vector  84: 2120 cycles (21.20 us @ 100MHz)
+Test Vector  85: 2120 cycles (21.20 us @ 100MHz)
+Test Vector  86: 2120 cycles (21.20 us @ 100MHz)
+Test Vector  87: 2120 cycles (21.20 us @ 100MHz)
+Test Vector  88: 2120 cycles (21.20 us @ 100MHz)
+Test Vector  89: 2120 cycles (21.20 us @ 100MHz)
+Test Vector  90: 2120 cycles (21.20 us @ 100MHz)
+Test Vector  91: 2120 cycles (21.20 us @ 100MHz)
+Test Vector  92: 2120 cycles (21.20 us @ 100MHz)
+Test Vector  93: 2120 cycles (21.20 us @ 100MHz)
+Test Vector  94: 2120 cycles (21.20 us @ 100MHz)
+Test Vector  95: 2120 cycles (21.20 us @ 100MHz)
+Test Vector  96: 2120 cycles (21.20 us @ 100MHz)
+Test Vector  97: 2120 cycles (21.20 us @ 100MHz)
+Test Vector  98: 2120 cycles (21.20 us @ 100MHz)
+Test Vector  99: 2120 cycles (21.20 us @ 100MHz)
+Test Vector 100: 2120 cycles (21.20 us @ 100MHz)
+
+==========================================================
+SUMMARY
+==========================================================
+Total Test Vectors: 100
+Total Cycles:       212000
+Average Cycles:     2120.00
+Total Time:         2120.00 us @ 100MHz
+Average Time:       21.20 us @ 100MHz
+Throughput:         47.17 computations/ms @ 100MHz
+==========================================================
