@@ -1,1 +1,1 @@
-25.0	attempt = 0	num_parallel = 1	clock_period = 100
+0.25974	attempt = 0	num_parallel = 1	clock_period = 2

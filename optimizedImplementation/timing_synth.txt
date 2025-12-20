@@ -1,7 +1,7 @@
 Copyright 1986-2022 Xilinx, Inc. All Rights Reserved. Copyright 2022-2024 Advanced Micro Devices, Inc. All Rights Reserved.
 --------------------------------------------------------------------------------------------------------------------------------------------------
 | Tool Version      : Vivado v.2024.1 (lin64) Build 5076996 Wed May 22 18:36:09 MDT 2024
-| Date              : Fri Dec 19 22:47:21 2025
+| Date              : Sat Dec 20 00:55:10 2025
 | Host              : Toothless running 64-bit Ubuntu 20.04.6 LTS
 | Command           : report_timing_summary -file timing_synth.txt
 | Design            : top_level
@@ -139,7 +139,7 @@ Table of Contents
 
     WNS(ns)      TNS(ns)  TNS Failing Endpoints  TNS Total Endpoints      WHS(ns)      THS(ns)  THS Failing Endpoints  THS Total Endpoints     WPWS(ns)     TPWS(ns)  TPWS Failing Endpoints  TPWS Total Endpoints  
     -------      -------  ---------------------  -------------------      -------      -------  ---------------------  -------------------     --------     --------  ----------------------  --------------------  
-     89.867        0.000                      0                 2861       -0.060      -84.549                   1437                 2861       49.725        0.000                       0                  1910  
+     89.867        0.000                      0                 2866       -0.068      -84.656                   1441                 2866       49.725        0.000                       0                  1914  
 
 
 Timing constraints are not met.
@@ -162,7 +162,7 @@ sys_clk  {0.000 50.000}       100.000         10.000
 
 Clock             WNS(ns)      TNS(ns)  TNS Failing Endpoints  TNS Total Endpoints      WHS(ns)      THS(ns)  THS Failing Endpoints  THS Total Endpoints     WPWS(ns)     TPWS(ns)  TPWS Failing Endpoints  TPWS Total Endpoints  
 -----             -------      -------  ---------------------  -------------------      -------      -------  ---------------------  -------------------     --------     --------  ----------------------  --------------------  
-sys_clk            89.867        0.000                      0                 2861       -0.060      -84.549                   1437                 2861       49.725        0.000                       0                  1910  
+sys_clk            89.867        0.000                      0                 2866       -0.068      -84.656                   1441                 2866       49.725        0.000                       0                  1914  
 
 
 ------------------------------------------------------------------------------------------------
@@ -194,7 +194,7 @@ From Clock:  sys_clk
   To Clock:  sys_clk
 
 Setup :            0  Failing Endpoints,  Worst Slack       89.867ns,  Total Violation        0.000ns
-Hold  :         1437  Failing Endpoints,  Worst Slack       -0.060ns,  Total Violation      -84.549ns
+Hold  :         1441  Failing Endpoints,  Worst Slack       -0.068ns,  Total Violation      -84.656ns
 PW    :            0  Failing Endpoints,  Worst Slack       49.725ns,  Total Violation        0.000ns
 ---------------------------------------------------------------------------------------------------
 
@@ -232,14 +232,14 @@ Slack (MET) :             89.867ns  (required time - arrival time)
                                                       0.000     0.529 r  clk_IBUF_inst/IBUFCTRL_INST/O
                          net (fo=1, unplaced)         0.276     0.805    clk_IBUF
                          BUFGCE (Prop_BUFGCE_I_O)     0.028     0.833 r  clk_IBUF_BUFG_inst/O
-                         net (fo=1909, unplaced)      2.584     3.417    gru_inst/clk
+                         net (fo=1913, unplaced)      2.584     3.417    gru_inst/clk
                          FDCE                                         r  gru_inst/index_reg[3]/C
   -------------------------------------------------------------------    -------------------
                          FDCE (Prop_FDCE_C_Q)         0.077     3.494 r  gru_inst/index_reg[3]/Q
-                         net (fo=35, unplaced)        0.154     3.648    gru_inst/gen_parallel_elements[0].reset_elem/Q[3]
-                         LUT4 (Prop_LUT4_I0_O)        0.100     3.748 f  gru_inst/gen_parallel_elements[0].reset_elem/p_1_out__0_i_16__7/O
-                         net (fo=1006, unplaced)      0.323     4.071    gru_inst/gen_parallel_elements[0].new_elem/DSP_C_DATA_INST_0
-                         LUT4 (Prop_LUT4_I0_O)        0.038     4.109 f  gru_inst/gen_parallel_elements[0].new_elem/p_1_out__63_i_7__3/O
+                         net (fo=36, unplaced)        0.154     3.648    gru_inst/gen_parallel_elements[0].new_elem/Q[3]
+                         LUT4 (Prop_LUT4_I0_O)        0.100     3.748 f  gru_inst/gen_parallel_elements[0].new_elem/p_1_out__5_i_16/O
+                         net (fo=1006, unplaced)      0.323     4.071    gru_inst/gen_parallel_elements[0].new_elem/index_reg[3]
+                         LUT4 (Prop_LUT4_I0_O)        0.038     4.109 f  gru_inst/gen_parallel_elements[0].new_elem/p_1_out__63_i_7__1/O
                          net (fo=32, unplaced)        0.512     4.621    gru_inst/gen_parallel_elements[0].new_elem/p_1_out__68/B[8]
                          DSP_A_B_DATA (Prop_DSP_A_B_DATA_B[8]_B2_DATA[8])
                                                       0.151     4.772 r  gru_inst/gen_parallel_elements[0].new_elem/p_1_out__68/DSP_A_B_DATA_INST/B2_DATA[8]
@@ -276,24 +276,24 @@ Slack (MET) :             89.867ns  (required time - arrival time)
                          net (fo=1, unplaced)         0.000     7.784    gru_inst/gen_parallel_elements[0].new_elem/p_1_out__84/DSP_ALU.ALU_OUT<8>
                          DSP_OUTPUT (Prop_DSP_OUTPUT_ALU_OUT[8]_P[8])
                                                       0.109     7.893 r  gru_inst/gen_parallel_elements[0].new_elem/p_1_out__84/DSP_OUTPUT_INST/P[8]
-                         net (fo=2, unplaced)         0.162     8.055    gru_inst/gen_parallel_elements[0].new_elem/tanh_inst/sig_inst/i__carry__0_i_348_2[0]
-                         LUT3 (Prop_LUT3_I0_O)        0.112     8.167 r  gru_inst/gen_parallel_elements[0].new_elem/tanh_inst/sig_inst/i__carry__0_i_741/O
-                         net (fo=2, unplaced)         0.217     8.384    gru_inst/gen_parallel_elements[0].new_elem/tanh_inst/sig_inst/i__carry__0_i_741_n_0
-                         LUT4 (Prop_LUT4_I3_O)        0.037     8.421 r  gru_inst/gen_parallel_elements[0].new_elem/tanh_inst/sig_inst/i__carry__0_i_748/O
-                         net (fo=1, unplaced)         0.023     8.444    gru_inst/gen_parallel_elements[0].new_elem/tanh_inst/sig_inst/i__carry__0_i_748_n_0
+                         net (fo=2, unplaced)         0.162     8.055    gru_inst/gen_parallel_elements[0].new_elem/tanh_inst/sig_inst/i__carry__0_i_357_2[0]
+                         LUT3 (Prop_LUT3_I0_O)        0.112     8.167 r  gru_inst/gen_parallel_elements[0].new_elem/tanh_inst/sig_inst/i__carry__0_i_700/O
+                         net (fo=2, unplaced)         0.217     8.384    gru_inst/gen_parallel_elements[0].new_elem/tanh_inst/sig_inst/i__carry__0_i_700_n_0
+                         LUT4 (Prop_LUT4_I3_O)        0.037     8.421 r  gru_inst/gen_parallel_elements[0].new_elem/tanh_inst/sig_inst/i__carry__0_i_707/O
+                         net (fo=1, unplaced)         0.023     8.444    gru_inst/gen_parallel_elements[0].new_elem/tanh_inst/sig_inst/i__carry__0_i_707_n_0
                          CARRY8 (Prop_CARRY8_S[1]_CO[7])
-                                                      0.197     8.641 r  gru_inst/gen_parallel_elements[0].new_elem/tanh_inst/sig_inst/i__carry__0_i_351/CO[7]
-                         net (fo=1, unplaced)         0.005     8.646    gru_inst/gen_parallel_elements[0].new_elem/tanh_inst/sig_inst/i__carry__0_i_351_n_0
+                                                      0.197     8.641 r  gru_inst/gen_parallel_elements[0].new_elem/tanh_inst/sig_inst/i__carry__0_i_360/CO[7]
+                         net (fo=1, unplaced)         0.005     8.646    gru_inst/gen_parallel_elements[0].new_elem/tanh_inst/sig_inst/i__carry__0_i_360_n_0
                          CARRY8 (Prop_CARRY8_CI_O[2])
-                                                      0.067     8.713 r  gru_inst/gen_parallel_elements[0].new_elem/tanh_inst/sig_inst/i__carry__0_i_348/O[2]
-                         net (fo=2, unplaced)         0.185     8.898    gru_inst/gen_parallel_elements[0].new_elem/tanh_inst/sig_inst/i__carry__0_i_348_n_13
-                         LUT3 (Prop_LUT3_I0_O)        0.111     9.009 r  gru_inst/gen_parallel_elements[0].new_elem/tanh_inst/sig_inst/i__carry__0_i_235/O
-                         net (fo=2, unplaced)         0.212     9.221    gru_inst/gen_parallel_elements[0].new_elem/tanh_inst/sig_inst/i__carry__0_i_235_n_0
-                         LUT4 (Prop_LUT4_I3_O)        0.037     9.258 r  gru_inst/gen_parallel_elements[0].new_elem/tanh_inst/sig_inst/i__carry__0_i_243/O
-                         net (fo=1, unplaced)         0.032     9.290    gru_inst/gen_parallel_elements[0].new_elem/tanh_inst/sig_inst/i__carry__0_i_243_n_0
+                                                      0.067     8.713 r  gru_inst/gen_parallel_elements[0].new_elem/tanh_inst/sig_inst/i__carry__0_i_357/O[2]
+                         net (fo=2, unplaced)         0.185     8.898    gru_inst/gen_parallel_elements[0].new_elem/tanh_inst/sig_inst/i__carry__0_i_357_n_13
+                         LUT3 (Prop_LUT3_I0_O)        0.111     9.009 r  gru_inst/gen_parallel_elements[0].new_elem/tanh_inst/sig_inst/i__carry__0_i_218/O
+                         net (fo=2, unplaced)         0.212     9.221    gru_inst/gen_parallel_elements[0].new_elem/tanh_inst/sig_inst/i__carry__0_i_218_n_0
+                         LUT4 (Prop_LUT4_I3_O)        0.037     9.258 r  gru_inst/gen_parallel_elements[0].new_elem/tanh_inst/sig_inst/i__carry__0_i_226/O
+                         net (fo=1, unplaced)         0.032     9.290    gru_inst/gen_parallel_elements[0].new_elem/tanh_inst/sig_inst/i__carry__0_i_226_n_0
                          CARRY8 (Prop_CARRY8_S[3]_O[5])
-                                                      0.184     9.474 r  gru_inst/gen_parallel_elements[0].new_elem/tanh_inst/sig_inst/i__carry__0_i_102/O[5]
-                         net (fo=2, unplaced)         0.141     9.615    gru_inst/gen_parallel_elements[0].new_elem/tanh_inst/sig_inst/i__carry__0_i_102_n_10
+                                                      0.184     9.474 r  gru_inst/gen_parallel_elements[0].new_elem/tanh_inst/sig_inst/i__carry__0_i_101/O[5]
+                         net (fo=2, unplaced)         0.141     9.615    gru_inst/gen_parallel_elements[0].new_elem/tanh_inst/sig_inst/i__carry__0_i_101_n_10
                          LUT3 (Prop_LUT3_I0_O)        0.105     9.720 r  gru_inst/gen_parallel_elements[0].new_elem/tanh_inst/sig_inst/i__carry__0_i_79/O
                          net (fo=2, unplaced)         0.216     9.936    gru_inst/gen_parallel_elements[0].new_elem/tanh_inst/sig_inst/i__carry__0_i_79_n_0
                          LUT4 (Prop_LUT4_I3_O)        0.037     9.973 r  gru_inst/gen_parallel_elements[0].new_elem/tanh_inst/sig_inst/i__carry__0_i_87/O
@@ -302,8 +302,8 @@ Slack (MET) :             89.867ns  (required time - arrival time)
                                                       0.124    10.120 r  gru_inst/gen_parallel_elements[0].new_elem/tanh_inst/sig_inst/i__carry__0_i_21/CO[7]
                          net (fo=1, unplaced)         0.005    10.125    gru_inst/gen_parallel_elements[0].new_elem/tanh_inst/sig_inst/i__carry__0_i_21_n_0
                          CARRY8 (Prop_CARRY8_CI_O[1])
-                                                      0.076    10.201 f  gru_inst/gen_parallel_elements[0].new_elem/tanh_inst/sig_inst/i__carry__0_i_101/O[1]
-                         net (fo=4, unplaced)         0.195    10.396    gru_inst/gen_parallel_elements[0].new_elem/tanh_inst/sig_inst/i__carry__0_i_101_n_14
+                                                      0.076    10.201 f  gru_inst/gen_parallel_elements[0].new_elem/tanh_inst/sig_inst/i__carry__0_i_100/O[1]
+                         net (fo=4, unplaced)         0.195    10.396    gru_inst/gen_parallel_elements[0].new_elem/tanh_inst/sig_inst/i__carry__0_i_100_n_14
                          LUT2 (Prop_LUT2_I1_O)        0.072    10.468 r  gru_inst/gen_parallel_elements[0].new_elem/tanh_inst/sig_inst/i__carry__0_i_71/O
                          net (fo=1, unplaced)         0.218    10.686    gru_inst/gen_parallel_elements[0].new_elem/tanh_inst/sig_inst/i__carry__0_i_71_n_0
                          CARRY8 (Prop_CARRY8_DI[1]_CO[4])
@@ -348,7 +348,7 @@ Slack (MET) :             89.867ns  (required time - arrival time)
                                                       0.000   100.279 r  clk_IBUF_inst/IBUFCTRL_INST/O
                          net (fo=1, unplaced)         0.247   100.526    clk_IBUF
                          BUFGCE (Prop_BUFGCE_I_O)     0.024   100.550 r  clk_IBUF_BUFG_inst/O
-                         net (fo=1909, unplaced)      2.439   102.989    gru_inst/gen_parallel_elements[0].new_elem/clk
+                         net (fo=1913, unplaced)      2.439   102.989    gru_inst/gen_parallel_elements[0].new_elem/clk
                          FDCE                                         r  gru_inst/gen_parallel_elements[0].new_elem/n_t_n_reg[12]/C
                          clock pessimism              0.283   103.272    
                          clock uncertainty           -0.035   103.237    
@@ -365,16 +365,16 @@ Slack (MET) :             89.867ns  (required time - arrival time)
 
 Min Delay Paths
 --------------------------------------------------------------------------------------
-Slack (VIOLATED) :        -0.060ns  (arrival time - required time)
-  Source:                 gru_inst/gen_parallel_elements[0].hidden_elem/h_t_n_reg[13]/C
+Slack (VIOLATED) :        -0.068ns  (arrival time - required time)
+  Source:                 gru_inst/wait_count_reg[2]/C
                             (rising edge-triggered cell FDCE clocked by sys_clk  {rise@0.000ns fall@50.000ns period=100.000ns})
-  Destination:            gru_inst/h_t_storage_reg[0][13]/D
+  Destination:            gru_inst/wait_count_reg[2]/D
                             (rising edge-triggered cell FDCE clocked by sys_clk  {rise@0.000ns fall@50.000ns period=100.000ns})
   Path Group:             sys_clk
   Path Type:              Hold (Min at Fast Process Corner)
   Requirement:            0.000ns  (sys_clk rise@0.000ns - sys_clk rise@0.000ns)
-  Data Path Delay:        0.131ns  (logic 0.037ns (28.244%)  route 0.094ns (71.756%))
-  Logic Levels:           0  
+  Data Path Delay:        0.123ns  (logic 0.061ns (49.593%)  route 0.062ns (50.406%))
+  Logic Levels:           1  (LUT5=1)
   Clock Path Skew:        0.145ns (DCD - SCD - CPR)
     Destination Clock Delay (DCD):    1.774ns
     Source Clock Delay      (SCD):    1.411ns
@@ -391,12 +391,14 @@ Slack (VIOLATED) :        -0.060ns  (arrival time - required time)
                                                       0.000     0.164 r  clk_IBUF_inst/IBUFCTRL_INST/O
                          net (fo=1, unplaced)         0.116     0.280    clk_IBUF
                          BUFGCE (Prop_BUFGCE_I_O)     0.017     0.297 r  clk_IBUF_BUFG_inst/O
-                         net (fo=1909, unplaced)      1.114     1.411    gru_inst/gen_parallel_elements[0].hidden_elem/clk
-                         FDCE                                         r  gru_inst/gen_parallel_elements[0].hidden_elem/h_t_n_reg[13]/C
+                         net (fo=1913, unplaced)      1.114     1.411    gru_inst/clk
+                         FDCE                                         r  gru_inst/wait_count_reg[2]/C
   -------------------------------------------------------------------    -------------------
-                         FDCE (Prop_FDCE_C_Q)         0.037     1.448 r  gru_inst/gen_parallel_elements[0].hidden_elem/h_t_n_reg[13]/Q
-                         net (fo=2, unplaced)         0.094     1.542    gru_inst/h_t_elem[0][13]
-                         FDCE                                         r  gru_inst/h_t_storage_reg[0][13]/D
+                         FDCE (Prop_FDCE_C_Q)         0.038     1.449 r  gru_inst/wait_count_reg[2]/Q
+                         net (fo=2, unplaced)         0.046     1.495    gru_inst/wait_count[2]
+                         LUT5 (Prop_LUT5_I3_O)        0.023     1.518 r  gru_inst/wait_count[2]_i_1/O
+                         net (fo=1, unplaced)         0.016     1.534    gru_inst/wait_count[2]_i_1_n_0
+                         FDCE                                         r  gru_inst/wait_count_reg[2]/D
   -------------------------------------------------------------------    -------------------
 
                          (clock sys_clk rise edge)    0.000     0.000 r  
@@ -408,15 +410,15 @@ Slack (VIOLATED) :        -0.060ns  (arrival time - required time)
                                                       0.000     0.349 r  clk_IBUF_inst/IBUFCTRL_INST/O
                          net (fo=1, unplaced)         0.147     0.496    clk_IBUF
                          BUFGCE (Prop_BUFGCE_I_O)     0.019     0.515 r  clk_IBUF_BUFG_inst/O
-                         net (fo=1909, unplaced)      1.259     1.774    gru_inst/clk
-                         FDCE                                         r  gru_inst/h_t_storage_reg[0][13]/C
+                         net (fo=1913, unplaced)      1.259     1.774    gru_inst/clk
+                         FDCE                                         r  gru_inst/wait_count_reg[2]/C
                          clock pessimism             -0.218     1.556    
-                         FDCE (Hold_FDCE_C_D)         0.046     1.602    gru_inst/h_t_storage_reg[0][13]
+                         FDCE (Hold_FDCE_C_D)         0.046     1.602    gru_inst/wait_count_reg[2]
   -------------------------------------------------------------------
                          required time                         -1.602    
-                         arrival time                           1.542    
+                         arrival time                           1.534    
   -------------------------------------------------------------------
-                         slack                                 -0.060    
+                         slack                                 -0.068    
 
 
 

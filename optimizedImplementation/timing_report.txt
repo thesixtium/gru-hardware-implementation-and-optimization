@@ -1,7 +1,7 @@
 Copyright 1986-2022 Xilinx, Inc. All Rights Reserved. Copyright 2022-2024 Advanced Micro Devices, Inc. All Rights Reserved.
 --------------------------------------------------------------------------------------------------------------------------------------------------
 | Tool Version      : Vivado v.2024.1 (lin64) Build 5076996 Wed May 22 18:36:09 MDT 2024
-| Date              : Fri Dec 19 22:55:22 2025
+| Date              : Sat Dec 20 01:03:10 2025
 | Host              : Toothless running 64-bit Ubuntu 20.04.6 LTS
 | Command           : report_timing_summary -file timing_report.txt
 | Design            : top_level
@@ -139,7 +139,7 @@ Table of Contents
 
     WNS(ns)      TNS(ns)  TNS Failing Endpoints  TNS Total Endpoints      WHS(ns)      THS(ns)  THS Failing Endpoints  THS Total Endpoints     WPWS(ns)     TPWS(ns)  TPWS Failing Endpoints  TPWS Total Endpoints  
     -------      -------  ---------------------  -------------------      -------      -------  ---------------------  -------------------     --------     --------  ----------------------  --------------------  
-     74.949        0.000                      0                 2861        0.012        0.000                      0                 2861       49.725        0.000                       0                  1910  
+     81.816        0.000                      0                 2866        0.011        0.000                      0                 2866       49.725        0.000                       0                  1914  
 
 
 All user specified timing constraints are met.
@@ -162,7 +162,7 @@ sys_clk  {0.000 50.000}       100.000         10.000
 
 Clock             WNS(ns)      TNS(ns)  TNS Failing Endpoints  TNS Total Endpoints      WHS(ns)      THS(ns)  THS Failing Endpoints  THS Total Endpoints     WPWS(ns)     TPWS(ns)  TPWS Failing Endpoints  TPWS Total Endpoints  
 -----             -------      -------  ---------------------  -------------------      -------      -------  ---------------------  -------------------     --------     --------  ----------------------  --------------------  
-sys_clk            74.949        0.000                      0                 2861        0.012        0.000                      0                 2861       49.725        0.000                       0                  1910  
+sys_clk            81.816        0.000                      0                 2866        0.011        0.000                      0                 2866       49.725        0.000                       0                  1914  
 
 
 ------------------------------------------------------------------------------------------------
@@ -193,35 +193,35 @@ Path Group    From Clock    To Clock          WNS(ns)      TNS(ns)  TNS Failing 
 From Clock:  sys_clk
   To Clock:  sys_clk
 
-Setup :            0  Failing Endpoints,  Worst Slack       74.949ns,  Total Violation        0.000ns
-Hold  :            0  Failing Endpoints,  Worst Slack        0.012ns,  Total Violation        0.000ns
+Setup :            0  Failing Endpoints,  Worst Slack       81.816ns,  Total Violation        0.000ns
+Hold  :            0  Failing Endpoints,  Worst Slack        0.011ns,  Total Violation        0.000ns
 PW    :            0  Failing Endpoints,  Worst Slack       49.725ns,  Total Violation        0.000ns
 ---------------------------------------------------------------------------------------------------
 
 
 Max Delay Paths
 --------------------------------------------------------------------------------------
-Slack (MET) :             74.949ns  (required time - arrival time)
+Slack (MET) :             81.816ns  (required time - arrival time)
   Source:                 gru_inst/index_reg[2]/C
                             (rising edge-triggered cell FDCE clocked by sys_clk  {rise@0.000ns fall@50.000ns period=100.000ns})
-  Destination:            gru_inst/gen_parallel_elements[4].new_elem/n_t_n_reg[13]/D
+  Destination:            gru_inst/gen_parallel_elements[2].new_elem/n_t_n_reg[13]/D
                             (rising edge-triggered cell FDCE clocked by sys_clk  {rise@0.000ns fall@50.000ns period=100.000ns})
   Path Group:             sys_clk
   Path Type:              Setup (Max at Slow Process Corner)
   Requirement:            100.000ns  (sys_clk rise@100.000ns - sys_clk rise@0.000ns)
-  Data Path Delay:        24.929ns  (logic 6.026ns (24.173%)  route 18.903ns (75.827%))
-  Logic Levels:           36  (CARRY8=11 DSP_A_B_DATA=2 DSP_ALU=2 DSP_M_DATA=2 DSP_MULTIPLIER=2 DSP_OUTPUT=2 DSP_PREADD_DATA=2 LUT2=2 LUT3=3 LUT4=5 LUT6=3)
-  Clock Path Skew:        -0.112ns (DCD - SCD + CPR)
-    Destination Clock Delay (DCD):    2.657ns = ( 102.657 - 100.000 ) 
-    Source Clock Delay      (SCD):    3.157ns
-    Clock Pessimism Removal (CPR):    0.388ns
+  Data Path Delay:        18.068ns  (logic 5.952ns (32.942%)  route 12.116ns (67.058%))
+  Logic Levels:           36  (CARRY8=9 DSP_A_B_DATA=2 DSP_ALU=2 DSP_M_DATA=2 DSP_MULTIPLIER=2 DSP_OUTPUT=2 DSP_PREADD_DATA=2 LUT2=2 LUT3=3 LUT4=6 LUT6=4)
+  Clock Path Skew:        -0.105ns (DCD - SCD + CPR)
+    Destination Clock Delay (DCD):    2.422ns = ( 102.422 - 100.000 ) 
+    Source Clock Delay      (SCD):    2.950ns
+    Clock Pessimism Removal (CPR):    0.424ns
   Clock Uncertainty:      0.035ns  ((TSJ^2 + TIJ^2)^1/2 + DJ) / 2 + PE
     Total System Jitter     (TSJ):    0.071ns
     Total Input Jitter      (TIJ):    0.000ns
     Discrete Jitter          (DJ):    0.000ns
     Phase Error              (PE):    0.000ns
-  Clock Net Delay (Source):      2.147ns (routing 1.037ns, distribution 1.110ns)
-  Clock Net Delay (Destination): 1.938ns (routing 0.940ns, distribution 0.998ns)
+  Clock Net Delay (Source):      1.940ns (routing 1.079ns, distribution 0.861ns)
+  Clock Net Delay (Destination): 1.703ns (routing 0.982ns, distribution 0.721ns)
 
     Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
   -------------------------------------------------------------------    -------------------
@@ -236,121 +236,121 @@ Slack (MET) :             74.949ns  (required time - arrival time)
                          net (fo=1, routed)           0.323     0.982    clk_IBUF
     BUFGCE_X0Y191        BUFGCE (Prop_BUFCE_BUFGCE_I_O)
                                                       0.028     1.010 r  clk_IBUF_BUFG_inst/O
-    X3Y5 (CLOCK_ROOT)    net (fo=1909, routed)        2.147     3.157    gru_inst/clk
-    SLICE_X117Y357       FDCE                                         r  gru_inst/index_reg[2]/C
+    X2Y6 (CLOCK_ROOT)    net (fo=1913, routed)        1.940     2.950    gru_inst/clk
+    SLICE_X83Y415        FDCE                                         r  gru_inst/index_reg[2]/C
   -------------------------------------------------------------------    -------------------
-    SLICE_X117Y357       FDCE (Prop_BFF_SLICEL_C_Q)
-                                                      0.079     3.236 r  gru_inst/index_reg[2]/Q
-                         net (fo=36, routed)          0.240     3.477    gru_inst/gen_parallel_elements[0].new_elem/tanh_inst/sig_inst/Q[2]
-    SLICE_X118Y357       LUT4 (Prop_C6LUT_SLICEM_I2_O)
-                                                      0.098     3.575 f  gru_inst/gen_parallel_elements[0].new_elem/tanh_inst/sig_inst/p_1_out__4_i_16/O
-                         net (fo=1031, routed)        8.772    12.347    gru_inst/gen_parallel_elements[4].new_elem/p_50_in
-    SLICE_X38Y415        LUT4 (Prop_G5LUT_SLICEL_I0_O)
-                                                      0.099    12.446 f  gru_inst/gen_parallel_elements[4].new_elem/p_1_out__74_i_1__22/O
-                         net (fo=117, routed)         1.978    14.424    gru_inst/gen_parallel_elements[4].new_elem/p_1_out__74/B[14]
-    DSP48E2_X2Y151       DSP_A_B_DATA (Prop_DSP_A_B_DATA_DSP48E2_B[14]_B2_DATA[14])
-                                                      0.151    14.575 r  gru_inst/gen_parallel_elements[4].new_elem/p_1_out__74/DSP_A_B_DATA_INST/B2_DATA[14]
-                         net (fo=1, routed)           0.000    14.575    gru_inst/gen_parallel_elements[4].new_elem/p_1_out__74/DSP_A_B_DATA.B2_DATA<14>
-    DSP48E2_X2Y151       DSP_PREADD_DATA (Prop_DSP_PREADD_DATA_DSP48E2_B2_DATA[14]_B2B1[14])
-                                                      0.073    14.648 r  gru_inst/gen_parallel_elements[4].new_elem/p_1_out__74/DSP_PREADD_DATA_INST/B2B1[14]
-                         net (fo=1, routed)           0.000    14.648    gru_inst/gen_parallel_elements[4].new_elem/p_1_out__74/DSP_PREADD_DATA.B2B1<14>
-    DSP48E2_X2Y151       DSP_MULTIPLIER (Prop_DSP_MULTIPLIER_DSP48E2_B2B1[14]_V[17])
-                                                      0.609    15.257 f  gru_inst/gen_parallel_elements[4].new_elem/p_1_out__74/DSP_MULTIPLIER_INST/V[17]
-                         net (fo=1, routed)           0.000    15.257    gru_inst/gen_parallel_elements[4].new_elem/p_1_out__74/DSP_MULTIPLIER.V<17>
-    DSP48E2_X2Y151       DSP_M_DATA (Prop_DSP_M_DATA_DSP48E2_V[17]_V_DATA[17])
-                                                      0.046    15.303 r  gru_inst/gen_parallel_elements[4].new_elem/p_1_out__74/DSP_M_DATA_INST/V_DATA[17]
-                         net (fo=1, routed)           0.000    15.303    gru_inst/gen_parallel_elements[4].new_elem/p_1_out__74/DSP_M_DATA.V_DATA<17>
-    DSP48E2_X2Y151       DSP_ALU (Prop_DSP_ALU_DSP48E2_V_DATA[17]_ALU_OUT[17])
-                                                      0.571    15.874 r  gru_inst/gen_parallel_elements[4].new_elem/p_1_out__74/DSP_ALU_INST/ALU_OUT[17]
-                         net (fo=1, routed)           0.000    15.874    gru_inst/gen_parallel_elements[4].new_elem/p_1_out__74/DSP_ALU.ALU_OUT<17>
-    DSP48E2_X2Y151       DSP_OUTPUT (Prop_DSP_OUTPUT_DSP48E2_ALU_OUT[17]_P[17])
-                                                      0.109    15.983 f  gru_inst/gen_parallel_elements[4].new_elem/p_1_out__74/DSP_OUTPUT_INST/P[17]
-                         net (fo=1, routed)           0.471    16.454    gru_inst/gen_parallel_elements[4].new_elem/p_1_out__90/A[8]
-    DSP48E2_X3Y151       DSP_A_B_DATA (Prop_DSP_A_B_DATA_DSP48E2_A[8]_A2_DATA[8])
-                                                      0.192    16.646 r  gru_inst/gen_parallel_elements[4].new_elem/p_1_out__90/DSP_A_B_DATA_INST/A2_DATA[8]
-                         net (fo=1, routed)           0.000    16.646    gru_inst/gen_parallel_elements[4].new_elem/p_1_out__90/DSP_A_B_DATA.A2_DATA<8>
-    DSP48E2_X3Y151       DSP_PREADD_DATA (Prop_DSP_PREADD_DATA_DSP48E2_A2_DATA[8]_A2A1[8])
-                                                      0.076    16.722 r  gru_inst/gen_parallel_elements[4].new_elem/p_1_out__90/DSP_PREADD_DATA_INST/A2A1[8]
-                         net (fo=1, routed)           0.000    16.722    gru_inst/gen_parallel_elements[4].new_elem/p_1_out__90/DSP_PREADD_DATA.A2A1<8>
-    DSP48E2_X3Y151       DSP_MULTIPLIER (Prop_DSP_MULTIPLIER_DSP48E2_A2A1[8]_V[8])
-                                                      0.507    17.229 f  gru_inst/gen_parallel_elements[4].new_elem/p_1_out__90/DSP_MULTIPLIER_INST/V[8]
-                         net (fo=1, routed)           0.000    17.229    gru_inst/gen_parallel_elements[4].new_elem/p_1_out__90/DSP_MULTIPLIER.V<8>
-    DSP48E2_X3Y151       DSP_M_DATA (Prop_DSP_M_DATA_DSP48E2_V[8]_V_DATA[8])
-                                                      0.046    17.275 r  gru_inst/gen_parallel_elements[4].new_elem/p_1_out__90/DSP_M_DATA_INST/V_DATA[8]
-                         net (fo=1, routed)           0.000    17.275    gru_inst/gen_parallel_elements[4].new_elem/p_1_out__90/DSP_M_DATA.V_DATA<8>
-    DSP48E2_X3Y151       DSP_ALU (Prop_DSP_ALU_DSP48E2_V_DATA[8]_ALU_OUT[8])
-                                                      0.571    17.846 f  gru_inst/gen_parallel_elements[4].new_elem/p_1_out__90/DSP_ALU_INST/ALU_OUT[8]
-                         net (fo=1, routed)           0.000    17.846    gru_inst/gen_parallel_elements[4].new_elem/p_1_out__90/DSP_ALU.ALU_OUT<8>
-    DSP48E2_X3Y151       DSP_OUTPUT (Prop_DSP_OUTPUT_DSP48E2_ALU_OUT[8]_P[8])
-                                                      0.109    17.955 r  gru_inst/gen_parallel_elements[4].new_elem/p_1_out__90/DSP_OUTPUT_INST/P[8]
-                         net (fo=2, routed)           0.291    18.246    gru_inst/gen_parallel_elements[4].new_elem/tanh_inst/sig_inst/i__carry__0_i_350__3_2[0]
-    SLICE_X30Y371        LUT3 (Prop_A5LUT_SLICEM_I0_O)
-                                                      0.163    18.409 r  gru_inst/gen_parallel_elements[4].new_elem/tanh_inst/sig_inst/i__carry__0_i_771__3/O
-                         net (fo=2, routed)           0.609    19.018    gru_inst/gen_parallel_elements[4].new_elem/tanh_inst/sig_inst/i__carry__0_i_771__3_n_0
-    SLICE_X30Y371        CARRY8 (Prop_CARRY8_SLICEM_DI[1]_CO[7])
-                                                      0.120    19.138 r  gru_inst/gen_parallel_elements[4].new_elem/tanh_inst/sig_inst/i__carry__0_i_353__3/CO[7]
-                         net (fo=1, routed)           0.026    19.164    gru_inst/gen_parallel_elements[4].new_elem/tanh_inst/sig_inst/i__carry__0_i_353__3_n_0
-    SLICE_X30Y372        CARRY8 (Prop_CARRY8_SLICEM_CI_O[2])
-                                                      0.067    19.231 r  gru_inst/gen_parallel_elements[4].new_elem/tanh_inst/sig_inst/i__carry__0_i_350__3/O[2]
-                         net (fo=2, routed)           0.794    20.025    gru_inst/gen_parallel_elements[4].new_elem/tanh_inst/sig_inst/i__carry__0_i_350__3_n_13
-    SLICE_X30Y414        LUT3 (Prop_C5LUT_SLICEM_I2_O)
-                                                      0.099    20.124 r  gru_inst/gen_parallel_elements[4].new_elem/tanh_inst/sig_inst/i__carry__0_i_235__3/O
-                         net (fo=2, routed)           0.244    20.368    gru_inst/gen_parallel_elements[4].new_elem/tanh_inst/sig_inst/i__carry__0_i_235__3_n_0
-    SLICE_X30Y414        LUT4 (Prop_D6LUT_SLICEM_I3_O)
-                                                      0.145    20.513 r  gru_inst/gen_parallel_elements[4].new_elem/tanh_inst/sig_inst/i__carry__0_i_243__3/O
-                         net (fo=1, routed)           0.025    20.538    gru_inst/gen_parallel_elements[4].new_elem/tanh_inst/sig_inst/i__carry__0_i_243__3_n_0
-    SLICE_X30Y414        CARRY8 (Prop_CARRY8_SLICEM_S[3]_CO[7])
-                                                      0.163    20.701 r  gru_inst/gen_parallel_elements[4].new_elem/tanh_inst/sig_inst/i__carry__0_i_102__3/CO[7]
-                         net (fo=1, routed)           0.026    20.727    gru_inst/gen_parallel_elements[4].new_elem/tanh_inst/sig_inst/i__carry__0_i_102__3_n_0
-    SLICE_X30Y415        CARRY8 (Prop_CARRY8_SLICEM_CI_O[0])
-                                                      0.056    20.783 r  gru_inst/gen_parallel_elements[4].new_elem/tanh_inst/sig_inst/i__carry__0_i_346__3/O[0]
-                         net (fo=2, routed)           0.714    21.497    gru_inst/gen_parallel_elements[4].new_elem/tanh_inst/sig_inst/i__carry__0_i_346__3_n_15
-    SLICE_X55Y415        LUT3 (Prop_A5LUT_SLICEL_I0_O)
-                                                      0.138    21.635 r  gru_inst/gen_parallel_elements[4].new_elem/tanh_inst/sig_inst/i__carry__0_i_221__3/O
-                         net (fo=2, routed)           0.509    22.144    gru_inst/gen_parallel_elements[4].new_elem/tanh_inst/sig_inst/i__carry__0_i_221__3_n_0
-    SLICE_X55Y415        LUT4 (Prop_B6LUT_SLICEL_I3_O)
-                                                      0.098    22.242 r  gru_inst/gen_parallel_elements[4].new_elem/tanh_inst/sig_inst/i__carry__0_i_229__3/O
-                         net (fo=1, routed)           0.009    22.251    gru_inst/gen_parallel_elements[4].new_elem/tanh_inst/sig_inst/i__carry__0_i_229__3_n_0
-    SLICE_X55Y415        CARRY8 (Prop_CARRY8_SLICEL_S[1]_O[4])
-                                                      0.200    22.451 f  gru_inst/gen_parallel_elements[4].new_elem/tanh_inst/sig_inst/i__carry__0_i_101__3/O[4]
-                         net (fo=4, routed)           0.352    22.803    gru_inst/gen_parallel_elements[4].new_elem/tanh_inst/sig_inst/i__carry__0_i_101__3_n_11
-    SLICE_X57Y415        LUT2 (Prop_D6LUT_SLICEM_I0_O)
-                                                      0.122    22.925 r  gru_inst/gen_parallel_elements[4].new_elem/tanh_inst/sig_inst/i__carry__0_i_64__3/O
-                         net (fo=1, routed)           0.025    22.950    gru_inst/gen_parallel_elements[4].new_elem/tanh_inst/sig_inst/i__carry__0_i_64__3_n_0
-    SLICE_X57Y415        CARRY8 (Prop_CARRY8_SLICEM_S[3]_CO[4])
-                                                      0.159    23.109 r  gru_inst/gen_parallel_elements[4].new_elem/tanh_inst/sig_inst/i__carry__0_i_19__3/CO[4]
-                         net (fo=15, routed)          1.576    24.685    gru_inst/gen_parallel_elements[4].new_elem/tanh_inst/sig_inst/acc_h_sat10_in
-    SLICE_X117Y413       LUT6 (Prop_A6LUT_SLICEL_I5_O)
-                                                      0.149    24.834 r  gru_inst/gen_parallel_elements[4].new_elem/tanh_inst/sig_inst/i__carry_i_28__3/O
-                         net (fo=1, routed)           0.009    24.843    gru_inst/gen_parallel_elements[4].new_elem/tanh_inst/sig_inst/i__carry_i_28__3_n_0
-    SLICE_X117Y413       CARRY8 (Prop_CARRY8_SLICEL_S[0]_CO[7])
-                                                      0.190    25.033 r  gru_inst/gen_parallel_elements[4].new_elem/tanh_inst/sig_inst/i__carry_i_12__3/CO[7]
-                         net (fo=1, routed)           0.026    25.059    gru_inst/gen_parallel_elements[4].new_elem/tanh_inst/sig_inst/i__carry_i_12__3_n_0
-    SLICE_X117Y414       CARRY8 (Prop_CARRY8_SLICEL_CI_O[6])
-                                                      0.103    25.162 r  gru_inst/gen_parallel_elements[4].new_elem/tanh_inst/sig_inst/i__carry__0_i_1__3/O[6]
-                         net (fo=46, routed)          1.034    26.195    gru_inst/gen_parallel_elements[4].new_elem/tanh_inst/sig_inst/pre_act[14]
-    SLICE_X117Y390       LUT2 (Prop_G6LUT_SLICEL_I1_O)
-                                                      0.123    26.318 r  gru_inst/gen_parallel_elements[4].new_elem/tanh_inst/sig_inst/i__carry_i_7__8/O
-                         net (fo=1, routed)           0.008    26.326    gru_inst/gen_parallel_elements[4].new_elem/tanh_inst/sig_inst/i__carry_i_7__8_n_0
-    SLICE_X117Y390       CARRY8 (Prop_CARRY8_SLICEL_S[6]_CO[7])
-                                                      0.115    26.441 r  gru_inst/gen_parallel_elements[4].new_elem/tanh_inst/sig_inst/y1_inferred__3/i__carry/CO[7]
-                         net (fo=1, routed)           0.026    26.467    gru_inst/gen_parallel_elements[4].new_elem/tanh_inst/sig_inst/y1_inferred__3/i__carry_n_0
-    SLICE_X117Y391       CARRY8 (Prop_CARRY8_SLICEL_CI_CO[0])
-                                                      0.052    26.519 r  gru_inst/gen_parallel_elements[4].new_elem/tanh_inst/sig_inst/y1_inferred__3/i__carry__0/CO[0]
-                         net (fo=18, routed)          0.685    27.205    gru_inst/gen_parallel_elements[4].new_elem/tanh_inst/sig_inst/y1_inferred__3/i__carry__0_n_7
-    SLICE_X118Y385       LUT6 (Prop_G6LUT_SLICEM_I5_O)
-                                                      0.052    27.257 f  gru_inst/gen_parallel_elements[4].new_elem/tanh_inst/sig_inst/n_t_n[14]_i_28__3/O
-                         net (fo=1, routed)           0.199    27.456    gru_inst/gen_parallel_elements[4].new_elem/tanh_inst/sig_inst/n_t_n[14]_i_28__3_n_0
-    SLICE_X119Y386       LUT6 (Prop_D6LUT_SLICEL_I5_O)
-                                                      0.050    27.506 r  gru_inst/gen_parallel_elements[4].new_elem/tanh_inst/sig_inst/n_t_n[14]_i_8__3/O
-                         net (fo=1, routed)           0.009    27.515    gru_inst/gen_parallel_elements[4].new_elem/tanh_inst/sig_inst/n_t_n[14]_i_8__3_n_0
-    SLICE_X119Y386       CARRY8 (Prop_CARRY8_SLICEL_S[3]_O[5])
-                                                      0.180    27.695 r  gru_inst/gen_parallel_elements[4].new_elem/tanh_inst/sig_inst/n_t_n_reg[14]_i_2__3/O[5]
-                         net (fo=1, routed)           0.196    27.891    gru_inst/gen_parallel_elements[4].new_elem/tanh_inst/sig_inst/tanh_result[13]
-    SLICE_X119Y384       LUT4 (Prop_D6LUT_SLICEL_I0_O)
-                                                      0.146    28.037 r  gru_inst/gen_parallel_elements[4].new_elem/tanh_inst/sig_inst/n_t_n[13]_i_1__3/O
-                         net (fo=1, routed)           0.049    28.086    gru_inst/gen_parallel_elements[4].new_elem/tanh_inst_n_17
-    SLICE_X119Y384       FDCE                                         r  gru_inst/gen_parallel_elements[4].new_elem/n_t_n_reg[13]/D
+    SLICE_X83Y415        FDCE (Prop_DFF_SLICEL_C_Q)
+                                                      0.079     3.029 r  gru_inst/index_reg[2]/Q
+                         net (fo=37, routed)          0.446     3.476    gru_inst/gen_parallel_elements[4].new_elem/Q[2]
+    SLICE_X83Y413        LUT4 (Prop_E6LUT_SLICEL_I2_O)
+                                                      0.051     3.527 f  gru_inst/gen_parallel_elements[4].new_elem/p_1_out__6_i_16/O
+                         net (fo=1006, routed)        0.573     4.100    gru_inst/gen_parallel_elements[2].new_elem/DSP_A_B_DATA_INST
+    SLICE_X77Y400        LUT4 (Prop_F6LUT_SLICEM_I0_O)
+                                                      0.148     4.248 f  gru_inst/gen_parallel_elements[2].new_elem/p_1_out__63_i_15__3/O
+                         net (fo=16, routed)          3.572     7.820    gru_inst/gen_parallel_elements[2].new_elem/p_1_out__74/B[0]
+    DSP48E2_X15Y184      DSP_A_B_DATA (Prop_DSP_A_B_DATA_DSP48E2_B[0]_B2_DATA[0])
+                                                      0.151     7.971 r  gru_inst/gen_parallel_elements[2].new_elem/p_1_out__74/DSP_A_B_DATA_INST/B2_DATA[0]
+                         net (fo=1, routed)           0.000     7.971    gru_inst/gen_parallel_elements[2].new_elem/p_1_out__74/DSP_A_B_DATA.B2_DATA<0>
+    DSP48E2_X15Y184      DSP_PREADD_DATA (Prop_DSP_PREADD_DATA_DSP48E2_B2_DATA[0]_B2B1[0])
+                                                      0.073     8.044 r  gru_inst/gen_parallel_elements[2].new_elem/p_1_out__74/DSP_PREADD_DATA_INST/B2B1[0]
+                         net (fo=1, routed)           0.000     8.044    gru_inst/gen_parallel_elements[2].new_elem/p_1_out__74/DSP_PREADD_DATA.B2B1<0>
+    DSP48E2_X15Y184      DSP_MULTIPLIER (Prop_DSP_MULTIPLIER_DSP48E2_B2B1[0]_V[22])
+                                                      0.609     8.653 f  gru_inst/gen_parallel_elements[2].new_elem/p_1_out__74/DSP_MULTIPLIER_INST/V[22]
+                         net (fo=1, routed)           0.000     8.653    gru_inst/gen_parallel_elements[2].new_elem/p_1_out__74/DSP_MULTIPLIER.V<22>
+    DSP48E2_X15Y184      DSP_M_DATA (Prop_DSP_M_DATA_DSP48E2_V[22]_V_DATA[22])
+                                                      0.046     8.699 r  gru_inst/gen_parallel_elements[2].new_elem/p_1_out__74/DSP_M_DATA_INST/V_DATA[22]
+                         net (fo=1, routed)           0.000     8.699    gru_inst/gen_parallel_elements[2].new_elem/p_1_out__74/DSP_M_DATA.V_DATA<22>
+    DSP48E2_X15Y184      DSP_ALU (Prop_DSP_ALU_DSP48E2_V_DATA[22]_ALU_OUT[22])
+                                                      0.571     9.270 r  gru_inst/gen_parallel_elements[2].new_elem/p_1_out__74/DSP_ALU_INST/ALU_OUT[22]
+                         net (fo=1, routed)           0.000     9.270    gru_inst/gen_parallel_elements[2].new_elem/p_1_out__74/DSP_ALU.ALU_OUT<22>
+    DSP48E2_X15Y184      DSP_OUTPUT (Prop_DSP_OUTPUT_DSP48E2_ALU_OUT[22]_P[22])
+                                                      0.109     9.379 f  gru_inst/gen_parallel_elements[2].new_elem/p_1_out__74/DSP_OUTPUT_INST/P[22]
+                         net (fo=17, routed)          1.438    10.817    gru_inst/gen_parallel_elements[2].new_elem/p_1_out__90/A[14]
+    DSP48E2_X16Y184      DSP_A_B_DATA (Prop_DSP_A_B_DATA_DSP48E2_A[14]_A2_DATA[14])
+                                                      0.192    11.009 r  gru_inst/gen_parallel_elements[2].new_elem/p_1_out__90/DSP_A_B_DATA_INST/A2_DATA[14]
+                         net (fo=1, routed)           0.000    11.009    gru_inst/gen_parallel_elements[2].new_elem/p_1_out__90/DSP_A_B_DATA.A2_DATA<14>
+    DSP48E2_X16Y184      DSP_PREADD_DATA (Prop_DSP_PREADD_DATA_DSP48E2_A2_DATA[14]_A2A1[14])
+                                                      0.076    11.085 r  gru_inst/gen_parallel_elements[2].new_elem/p_1_out__90/DSP_PREADD_DATA_INST/A2A1[14]
+                         net (fo=1, routed)           0.000    11.085    gru_inst/gen_parallel_elements[2].new_elem/p_1_out__90/DSP_PREADD_DATA.A2A1<14>
+    DSP48E2_X16Y184      DSP_MULTIPLIER (Prop_DSP_MULTIPLIER_DSP48E2_A2A1[14]_U[19])
+                                                      0.505    11.590 f  gru_inst/gen_parallel_elements[2].new_elem/p_1_out__90/DSP_MULTIPLIER_INST/U[19]
+                         net (fo=1, routed)           0.000    11.590    gru_inst/gen_parallel_elements[2].new_elem/p_1_out__90/DSP_MULTIPLIER.U<19>
+    DSP48E2_X16Y184      DSP_M_DATA (Prop_DSP_M_DATA_DSP48E2_U[19]_U_DATA[19])
+                                                      0.047    11.637 r  gru_inst/gen_parallel_elements[2].new_elem/p_1_out__90/DSP_M_DATA_INST/U_DATA[19]
+                         net (fo=1, routed)           0.000    11.637    gru_inst/gen_parallel_elements[2].new_elem/p_1_out__90/DSP_M_DATA.U_DATA<19>
+    DSP48E2_X16Y184      DSP_ALU (Prop_DSP_ALU_DSP48E2_U_DATA[19]_ALU_OUT[19])
+                                                      0.585    12.222 f  gru_inst/gen_parallel_elements[2].new_elem/p_1_out__90/DSP_ALU_INST/ALU_OUT[19]
+                         net (fo=1, routed)           0.000    12.222    gru_inst/gen_parallel_elements[2].new_elem/p_1_out__90/DSP_ALU.ALU_OUT<19>
+    DSP48E2_X16Y184      DSP_OUTPUT (Prop_DSP_OUTPUT_DSP48E2_ALU_OUT[19]_P[19])
+                                                      0.109    12.331 r  gru_inst/gen_parallel_elements[2].new_elem/p_1_out__90/DSP_OUTPUT_INST/P[19]
+                         net (fo=2, routed)           0.776    13.107    gru_inst/gen_parallel_elements[2].new_elem/tanh_inst/sig_inst/i__carry__0_i_350__1_2[11]
+    SLICE_X116Y460       LUT3 (Prop_D5LUT_SLICEL_I0_O)
+                                                      0.096    13.203 r  gru_inst/gen_parallel_elements[2].new_elem/tanh_inst/sig_inst/i__carry__0_i_722__1/O
+                         net (fo=2, routed)           0.236    13.439    gru_inst/gen_parallel_elements[2].new_elem/tanh_inst/sig_inst/i__carry__0_i_722__1_n_0
+    SLICE_X116Y460       LUT4 (Prop_E6LUT_SLICEL_I3_O)
+                                                      0.123    13.562 r  gru_inst/gen_parallel_elements[2].new_elem/tanh_inst/sig_inst/i__carry__0_i_730__1/O
+                         net (fo=1, routed)           0.007    13.569    gru_inst/gen_parallel_elements[2].new_elem/tanh_inst/sig_inst/i__carry__0_i_730__1_n_0
+    SLICE_X116Y460       CARRY8 (Prop_CARRY8_SLICEL_S[4]_CO[7])
+                                                      0.153    13.722 f  gru_inst/gen_parallel_elements[2].new_elem/tanh_inst/sig_inst/i__carry__0_i_350__1/CO[7]
+                         net (fo=1, routed)           0.026    13.748    gru_inst/gen_parallel_elements[2].new_elem/tanh_inst/sig_inst/i__carry__0_i_350__1_n_0
+    SLICE_X116Y461       CARRY8 (Prop_CARRY8_SLICEL_CI_CO[0])
+                                                      0.052    13.800 f  gru_inst/gen_parallel_elements[2].new_elem/tanh_inst/sig_inst/i__carry__0_i_861__1/CO[0]
+                         net (fo=9, routed)           1.564    15.363    gru_inst/gen_parallel_elements[2].new_elem/tanh_inst/sig_inst/i__carry__0_i_861__1_n_7
+    SLICE_X89Y429        LUT3 (Prop_F5LUT_SLICEL_I2_O)
+                                                      0.143    15.506 r  gru_inst/gen_parallel_elements[2].new_elem/tanh_inst/sig_inst/i__carry__0_i_677__1/O
+                         net (fo=13, routed)          0.235    15.741    gru_inst/gen_parallel_elements[2].new_elem/tanh_inst/sig_inst/i__carry__0_i_677__1_n_0
+    SLICE_X89Y429        LUT4 (Prop_B6LUT_SLICEL_I0_O)
+                                                      0.036    15.777 r  gru_inst/gen_parallel_elements[2].new_elem/tanh_inst/sig_inst/i__carry__0_i_685__1/O
+                         net (fo=1, routed)           0.009    15.786    gru_inst/gen_parallel_elements[2].new_elem/tanh_inst/sig_inst/i__carry__0_i_685__1_n_0
+    SLICE_X89Y429        CARRY8 (Prop_CARRY8_SLICEL_S[1]_O[1])
+                                                      0.053    15.839 r  gru_inst/gen_parallel_elements[2].new_elem/tanh_inst/sig_inst/i__carry__0_i_346__1/O[1]
+                         net (fo=2, routed)           0.638    16.477    gru_inst/gen_parallel_elements[2].new_elem/tanh_inst/sig_inst/i__carry__0_i_346__1_n_14
+    SLICE_X94Y408        LUT3 (Prop_B5LUT_SLICEM_I1_O)
+                                                      0.167    16.644 r  gru_inst/gen_parallel_elements[2].new_elem/tanh_inst/sig_inst/i__carry__0_i_220__1/O
+                         net (fo=2, routed)           0.237    16.881    gru_inst/gen_parallel_elements[2].new_elem/tanh_inst/sig_inst/i__carry__0_i_220__1_n_0
+    SLICE_X94Y408        LUT4 (Prop_C6LUT_SLICEM_I3_O)
+                                                      0.051    16.932 r  gru_inst/gen_parallel_elements[2].new_elem/tanh_inst/sig_inst/i__carry__0_i_228__1/O
+                         net (fo=1, routed)           0.021    16.953    gru_inst/gen_parallel_elements[2].new_elem/tanh_inst/sig_inst/i__carry__0_i_228__1_n_0
+    SLICE_X94Y408        CARRY8 (Prop_CARRY8_SLICEM_S[2]_O[4])
+                                                      0.167    17.120 f  gru_inst/gen_parallel_elements[2].new_elem/tanh_inst/sig_inst/i__carry__0_i_101__1/O[4]
+                         net (fo=4, routed)           0.312    17.431    gru_inst/gen_parallel_elements[2].new_elem/tanh_inst/sig_inst/i__carry__0_i_101__1_n_11
+    SLICE_X95Y406        LUT2 (Prop_D6LUT_SLICEM_I0_O)
+                                                      0.122    17.553 r  gru_inst/gen_parallel_elements[2].new_elem/tanh_inst/sig_inst/i__carry__0_i_64__1/O
+                         net (fo=1, routed)           0.025    17.578    gru_inst/gen_parallel_elements[2].new_elem/tanh_inst/sig_inst/i__carry__0_i_64__1_n_0
+    SLICE_X95Y406        CARRY8 (Prop_CARRY8_SLICEM_S[3]_CO[4])
+                                                      0.159    17.737 r  gru_inst/gen_parallel_elements[2].new_elem/tanh_inst/sig_inst/i__carry__0_i_19__1/CO[4]
+                         net (fo=15, routed)          0.352    18.090    gru_inst/gen_parallel_elements[2].new_elem/tanh_inst/sig_inst/acc_h_sat10_in
+    SLICE_X94Y404        LUT6 (Prop_A6LUT_SLICEM_I5_O)
+                                                      0.150    18.240 r  gru_inst/gen_parallel_elements[2].new_elem/tanh_inst/sig_inst/i__carry_i_28__1/O
+                         net (fo=1, routed)           0.013    18.253    gru_inst/gen_parallel_elements[2].new_elem/tanh_inst/sig_inst/i__carry_i_28__1_n_0
+    SLICE_X94Y404        CARRY8 (Prop_CARRY8_SLICEM_S[0]_O[4])
+                                                      0.206    18.459 f  gru_inst/gen_parallel_elements[2].new_elem/tanh_inst/sig_inst/i__carry_i_12__1/O[4]
+                         net (fo=14, routed)          0.664    19.122    gru_inst/gen_parallel_elements[2].new_elem/pre_act[4]
+    SLICE_X85Y404        LUT2 (Prop_B6LUT_SLICEM_I1_O)
+                                                      0.149    19.271 r  gru_inst/gen_parallel_elements[2].new_elem/n_t_n[7]_i_43__1/O
+                         net (fo=1, routed)           0.016    19.287    gru_inst/gen_parallel_elements[2].new_elem/n_t_n[7]_i_43__1_n_0
+    SLICE_X85Y404        CARRY8 (Prop_CARRY8_SLICEM_S[1]_CO[7])
+                                                      0.190    19.477 f  gru_inst/gen_parallel_elements[2].new_elem/n_t_n_reg[7]_i_12__1/CO[7]
+                         net (fo=1, routed)           0.026    19.503    gru_inst/gen_parallel_elements[2].new_elem/n_t_n_reg[7]_i_12__1_n_0
+    SLICE_X85Y405        CARRY8 (Prop_CARRY8_SLICEM_CI_CO[0])
+                                                      0.052    19.555 f  gru_inst/gen_parallel_elements[2].new_elem/n_t_n_reg[7]_i_8__1/CO[0]
+                         net (fo=16, routed)          0.368    19.924    gru_inst/gen_parallel_elements[2].new_elem/n_t_n_reg[7]_i_8__1_n_7
+    SLICE_X84Y409        LUT6 (Prop_H6LUT_SLICEL_I0_O)
+                                                      0.090    20.014 f  gru_inst/gen_parallel_elements[2].new_elem/n_t_n[14]_i_71__1/O
+                         net (fo=1, routed)           0.038    20.052    gru_inst/gen_parallel_elements[2].new_elem/tanh_inst/sig_inst/n_t_n[14]_i_10__1_0
+    SLICE_X84Y409        LUT6 (Prop_G6LUT_SLICEL_I1_O)
+                                                      0.050    20.102 f  gru_inst/gen_parallel_elements[2].new_elem/tanh_inst/sig_inst/n_t_n[14]_i_31__1/O
+                         net (fo=1, routed)           0.285    20.387    gru_inst/gen_parallel_elements[2].new_elem/tanh_inst/sig_inst/n_t_n[14]_i_31__1_n_0
+    SLICE_X83Y409        LUT6 (Prop_B6LUT_SLICEL_I1_O)
+                                                      0.036    20.423 r  gru_inst/gen_parallel_elements[2].new_elem/tanh_inst/sig_inst/n_t_n[14]_i_10__1/O
+                         net (fo=1, routed)           0.009    20.432    gru_inst/gen_parallel_elements[2].new_elem/tanh_inst/sig_inst/n_t_n[14]_i_10__1_n_0
+    SLICE_X83Y409        CARRY8 (Prop_CARRY8_SLICEL_S[1]_O[5])
+                                                      0.233    20.665 r  gru_inst/gen_parallel_elements[2].new_elem/tanh_inst/sig_inst/n_t_n_reg[14]_i_2__1/O[5]
+                         net (fo=1, routed)           0.181    20.846    gru_inst/gen_parallel_elements[2].new_elem/tanh_inst/sig_inst/tanh_result[13]
+    SLICE_X82Y408        LUT4 (Prop_C6LUT_SLICEL_I0_O)
+                                                      0.123    20.969 r  gru_inst/gen_parallel_elements[2].new_elem/tanh_inst/sig_inst/n_t_n[13]_i_1__1/O
+                         net (fo=1, routed)           0.050    21.019    gru_inst/gen_parallel_elements[2].new_elem/tanh_inst_n_17
+    SLICE_X82Y408        FDCE                                         r  gru_inst/gen_parallel_elements[2].new_elem/n_t_n_reg[13]/D
   -------------------------------------------------------------------    -------------------
 
                          (clock sys_clk rise edge)  100.000   100.000 r  
@@ -364,17 +364,17 @@ Slack (MET) :             74.949ns  (required time - arrival time)
                          net (fo=1, routed)           0.287   100.695    clk_IBUF
     BUFGCE_X0Y191        BUFGCE (Prop_BUFCE_BUFGCE_I_O)
                                                       0.024   100.719 r  clk_IBUF_BUFG_inst/O
-    X3Y5 (CLOCK_ROOT)    net (fo=1909, routed)        1.938   102.657    gru_inst/gen_parallel_elements[4].new_elem/clk
-    SLICE_X119Y384       FDCE                                         r  gru_inst/gen_parallel_elements[4].new_elem/n_t_n_reg[13]/C
-                         clock pessimism              0.388   103.045    
-                         clock uncertainty           -0.035   103.010    
-    SLICE_X119Y384       FDCE (Setup_DFF_SLICEL_C_D)
-                                                      0.025   103.035    gru_inst/gen_parallel_elements[4].new_elem/n_t_n_reg[13]
+    X2Y6 (CLOCK_ROOT)    net (fo=1913, routed)        1.703   102.422    gru_inst/gen_parallel_elements[2].new_elem/clk
+    SLICE_X82Y408        FDCE                                         r  gru_inst/gen_parallel_elements[2].new_elem/n_t_n_reg[13]/C
+                         clock pessimism              0.424   102.845    
+                         clock uncertainty           -0.035   102.810    
+    SLICE_X82Y408        FDCE (Setup_CFF_SLICEL_C_D)
+                                                      0.025   102.835    gru_inst/gen_parallel_elements[2].new_elem/n_t_n_reg[13]
   -------------------------------------------------------------------
-                         required time                        103.035    
-                         arrival time                         -28.086    
+                         required time                        102.835    
+                         arrival time                         -21.019    
   -------------------------------------------------------------------
-                         slack                                 74.949    
+                         slack                                 81.816    
 
 
 
@@ -382,22 +382,22 @@ Slack (MET) :             74.949ns  (required time - arrival time)
 
 Min Delay Paths
 --------------------------------------------------------------------------------------
-Slack (MET) :             0.012ns  (arrival time - required time)
-  Source:                 gru_inst/gen_parallel_elements[3].update_elem/z_t_n_reg[10]/C
+Slack (MET) :             0.011ns  (arrival time - required time)
+  Source:                 gru_inst/h_t_reg[0][5]/C
                             (rising edge-triggered cell FDCE clocked by sys_clk  {rise@0.000ns fall@50.000ns period=100.000ns})
-  Destination:            gru_inst/z_t_storage_reg[11][10]/D
+  Destination:            preserved_h_t_reg[0][5]/D
                             (rising edge-triggered cell FDCE clocked by sys_clk  {rise@0.000ns fall@50.000ns period=100.000ns})
   Path Group:             sys_clk
   Path Type:              Hold (Min at Slow Process Corner)
   Requirement:            0.000ns  (sys_clk rise@0.000ns - sys_clk rise@0.000ns)
-  Data Path Delay:        0.127ns  (logic 0.058ns (45.578%)  route 0.069ns (54.422%))
+  Data Path Delay:        0.127ns  (logic 0.059ns (46.457%)  route 0.068ns (53.543%))
   Logic Levels:           0  
-  Clock Path Skew:        0.053ns (DCD - SCD - CPR)
-    Destination Clock Delay (DCD):    3.267ns
-    Source Clock Delay      (SCD):    2.710ns
-    Clock Pessimism Removal (CPR):    0.503ns
-  Clock Net Delay (Source):      1.992ns (routing 0.940ns, distribution 1.052ns)
-  Clock Net Delay (Destination): 2.257ns (routing 1.037ns, distribution 1.220ns)
+  Clock Path Skew:        0.054ns (DCD - SCD - CPR)
+    Destination Clock Delay (DCD):    2.954ns
+    Source Clock Delay      (SCD):    2.426ns
+    Clock Pessimism Removal (CPR):    0.475ns
+  Clock Net Delay (Source):      1.707ns (routing 0.982ns, distribution 0.725ns)
+  Clock Net Delay (Destination): 1.944ns (routing 1.079ns, distribution 0.865ns)
 
     Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
   -------------------------------------------------------------------    -------------------
@@ -412,13 +412,13 @@ Slack (MET) :             0.012ns  (arrival time - required time)
                          net (fo=1, routed)           0.287     0.695    clk_IBUF
     BUFGCE_X0Y191        BUFGCE (Prop_BUFCE_BUFGCE_I_O)
                                                       0.024     0.719 r  clk_IBUF_BUFG_inst/O
-    X3Y5 (CLOCK_ROOT)    net (fo=1909, routed)        1.992     2.710    gru_inst/gen_parallel_elements[3].update_elem/clk
-    SLICE_X132Y304       FDCE                                         r  gru_inst/gen_parallel_elements[3].update_elem/z_t_n_reg[10]/C
+    X2Y6 (CLOCK_ROOT)    net (fo=1913, routed)        1.707     2.426    gru_inst/clk
+    SLICE_X73Y396        FDCE                                         r  gru_inst/h_t_reg[0][5]/C
   -------------------------------------------------------------------    -------------------
-    SLICE_X132Y304       FDCE (Prop_HFF_SLICEL_C_Q)
-                                                      0.058     2.768 r  gru_inst/gen_parallel_elements[3].update_elem/z_t_n_reg[10]/Q
-                         net (fo=2, routed)           0.069     2.838    gru_inst/z_t_elem[3][10]
-    SLICE_X132Y303       FDCE                                         r  gru_inst/z_t_storage_reg[11][10]/D
+    SLICE_X73Y396        FDCE (Prop_HFF2_SLICEL_C_Q)
+                                                      0.059     2.485 r  gru_inst/h_t_reg[0][5]/Q
+                         net (fo=1, routed)           0.068     2.553    h_t[0][5]
+    SLICE_X73Y397        FDCE                                         r  preserved_h_t_reg[0][5]/D
   -------------------------------------------------------------------    -------------------
 
                          (clock sys_clk rise edge)    0.000     0.000 r  
@@ -432,16 +432,16 @@ Slack (MET) :             0.012ns  (arrival time - required time)
                          net (fo=1, routed)           0.323     0.982    clk_IBUF
     BUFGCE_X0Y191        BUFGCE (Prop_BUFCE_BUFGCE_I_O)
                                                       0.028     1.010 r  clk_IBUF_BUFG_inst/O
-    X3Y5 (CLOCK_ROOT)    net (fo=1909, routed)        2.257     3.267    gru_inst/clk
-    SLICE_X132Y303       FDCE                                         r  gru_inst/z_t_storage_reg[11][10]/C
-                         clock pessimism             -0.503     2.764    
-    SLICE_X132Y303       FDCE (Hold_HFF2_SLICEL_C_D)
-                                                      0.062     2.826    gru_inst/z_t_storage_reg[11][10]
+    X2Y6 (CLOCK_ROOT)    net (fo=1913, routed)        1.944     2.954    clk_IBUF_BUFG
+    SLICE_X73Y397        FDCE                                         r  preserved_h_t_reg[0][5]/C
+                         clock pessimism             -0.475     2.479    
+    SLICE_X73Y397        FDCE (Hold_AFF2_SLICEL_C_D)
+                                                      0.062     2.541    preserved_h_t_reg[0][5]
   -------------------------------------------------------------------
-                         required time                         -2.826    
-                         arrival time                           2.838    
+                         required time                         -2.541    
+                         arrival time                           2.553    
   -------------------------------------------------------------------
-                         slack                                  0.012    
+                         slack                                  0.011    
 
 
 
@@ -454,10 +454,10 @@ Waveform(ns):       { 0.000 50.000 }
 Period(ns):         100.000
 Sources:            { clk }
 
-Check Type        Corner  Lib Pin   Reference Pin  Required(ns)  Actual(ns)  Slack(ns)  Location        Pin
-Min Period        n/a     BUFGCE/I  n/a            1.290         100.000     98.710     BUFGCE_X0Y191   clk_IBUF_BUFG_inst/I
-Low Pulse Width   Slow    FDCE/C    n/a            0.275         50.000      49.725     SLICE_X128Y347  preserved_h_t_reg[0][0]/C
-High Pulse Width  Slow    FDCE/C    n/a            0.275         50.000      49.725     SLICE_X128Y347  preserved_h_t_reg[0][0]/C
+Check Type        Corner  Lib Pin   Reference Pin  Required(ns)  Actual(ns)  Slack(ns)  Location       Pin
+Min Period        n/a     BUFGCE/I  n/a            1.290         100.000     98.710     BUFGCE_X0Y191  clk_IBUF_BUFG_inst/I
+Low Pulse Width   Slow    FDCE/C    n/a            0.275         50.000      49.725     SLICE_X74Y393  preserved_h_t_reg[0][0]/C
+High Pulse Width  Slow    FDCE/C    n/a            0.275         50.000      49.725     SLICE_X74Y393  preserved_h_t_reg[0][0]/C
 
 
 

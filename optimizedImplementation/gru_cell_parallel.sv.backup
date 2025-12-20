@@ -38,13 +38,17 @@ module gru_cell_parallel #(
 );
 
     // FSM states
-    typedef enum logic [2:0] {
-        IDLE,
-        COMPUTE_RESET,
-        COMPUTE_UPDATE,
-        COMPUTE_NEW,
-        COMPUTE_HIDDEN,
-        DONE
+    typedef enum logic [3:0] {
+        IDLE           = 4'd0,
+        COMPUTE_RESET  = 4'd1,
+        WAIT_RESET     = 4'd2,
+        COMPUTE_UPDATE = 4'd3,
+        WAIT_UPDATE    = 4'd4,
+        COMPUTE_NEW    = 4'd5,
+        WAIT_NEW       = 4'd6,
+        COMPUTE_HIDDEN = 4'd7,
+        WAIT_HIDDEN    = 4'd8,
+        DONE_STATE     = 4'd9
     } state_t;
 
     state_t state, next_state;
@@ -52,6 +56,9 @@ module gru_cell_parallel #(
     // Index counter for time multiplexing
     logic [$clog2(H+1)-1:0] index;
     logic [$clog2(H+1)-1:0] total_iters;
+
+    // Wait counter for pipeline delays
+    logic [2:0] wait_count;
 
     // Valid signals for element modules
     logic valid_reset, valid_update, valid_new, valid_hidden;
@@ -195,29 +202,53 @@ module gru_cell_parallel #(
 
             COMPUTE_RESET: begin
                 if (index >= total_iters) begin
+                    next_state = WAIT_RESET;
+                end
+            end
+
+            WAIT_RESET: begin
+                if (wait_count >= 3'd2) begin  // Wait for pipeline
                     next_state = COMPUTE_UPDATE;
                 end
             end
 
             COMPUTE_UPDATE: begin
                 if (index >= total_iters) begin
+                    next_state = WAIT_UPDATE;
+                end
+            end
+
+            WAIT_UPDATE: begin
+                if (wait_count >= 3'd2) begin
                     next_state = COMPUTE_NEW;
                 end
             end
 
             COMPUTE_NEW: begin
                 if (index >= total_iters) begin
+                    next_state = WAIT_NEW;
+                end
+            end
+
+            WAIT_NEW: begin
+                if (wait_count >= 3'd2) begin
                     next_state = COMPUTE_HIDDEN;
                 end
             end
 
             COMPUTE_HIDDEN: begin
                 if (index >= total_iters) begin
-                    next_state = DONE;
+                    next_state = WAIT_HIDDEN;
                 end
             end
 
-            DONE: begin
+            WAIT_HIDDEN: begin
+                if (wait_count >= 3'd2) begin
+                    next_state = DONE_STATE;
+                end
+            end
+
+            DONE_STATE: begin
                 next_state = IDLE;
             end
 
@@ -260,16 +291,33 @@ module gru_cell_parallel #(
                 end
 
                 COMPUTE_RESET, COMPUTE_UPDATE, COMPUTE_NEW, COMPUTE_HIDDEN: begin
-                    if (index < total_iters) begin
-                        index <= index + 1;
-                    end
+                    index <= index + 1;
                 end
 
-                DONE: begin
-                    index <= '0;
+                WAIT_RESET, WAIT_UPDATE, WAIT_NEW, WAIT_HIDDEN: begin
+                    index <= '0;  // Reset for next phase
                 end
 
                 default: ;
+            endcase
+        end
+    end
+
+    // ========================================================================
+    // Wait counter for pipeline delays
+    // ========================================================================
+
+    always_ff @(posedge clk or negedge rst_n) begin
+        if (!rst_n) begin
+            wait_count <= '0;
+        end else begin
+            case (state)
+                WAIT_RESET, WAIT_UPDATE, WAIT_NEW, WAIT_HIDDEN: begin
+                    wait_count <= wait_count + 1;
+                end
+                default: begin
+                    wait_count <= '0;
+                end
             endcase
         end
     end
@@ -289,28 +337,32 @@ module gru_cell_parallel #(
         end else begin
             // Store reset gate results
             for (int p = 0; p < NUM_PARALLEL; p++) begin
-                if (valid_out_r[p] && ((index - 1) * NUM_PARALLEL + p < H)) begin
+                if (valid_out_r[p] && ((index - 1) * NUM_PARALLEL + p < H) &&
+                    (state == COMPUTE_RESET || state == WAIT_RESET)) begin
                     r_t_storage[(index - 1) * NUM_PARALLEL + p] <= r_t_elem[p];
                 end
             end
 
             // Store update gate results
             for (int p = 0; p < NUM_PARALLEL; p++) begin
-                if (valid_out_z[p] && ((index - 1) * NUM_PARALLEL + p < H)) begin
+                if (valid_out_z[p] && ((index - 1) * NUM_PARALLEL + p < H) &&
+                    (state == COMPUTE_UPDATE || state == WAIT_UPDATE)) begin
                     z_t_storage[(index - 1) * NUM_PARALLEL + p] <= z_t_elem[p];
                 end
             end
 
             // Store new gate results
             for (int p = 0; p < NUM_PARALLEL; p++) begin
-                if (valid_out_n[p] && ((index - 1) * NUM_PARALLEL + p < H)) begin
+                if (valid_out_n[p] && ((index - 1) * NUM_PARALLEL + p < H) &&
+                    (state == COMPUTE_NEW || state == WAIT_NEW)) begin
                     n_t_storage[(index - 1) * NUM_PARALLEL + p] <= n_t_elem[p];
                 end
             end
 
             // Store hidden state results
             for (int p = 0; p < NUM_PARALLEL; p++) begin
-                if (valid_out_h[p] && ((index - 1) * NUM_PARALLEL + p < H)) begin
+                if (valid_out_h[p] && ((index - 1) * NUM_PARALLEL + p < H) &&
+                    (state == COMPUTE_HIDDEN || state == WAIT_HIDDEN)) begin
                     h_t_storage[(index - 1) * NUM_PARALLEL + p] <= h_t_elem[p];
                 end
             end
@@ -328,7 +380,7 @@ module gru_cell_parallel #(
                 h_t[i] <= '0;
             end
         end else begin
-            if (state == DONE) begin
+            if (state == DONE_STATE) begin
                 done <= 1'b1;
                 h_t <= h_t_storage;
             end else begin
