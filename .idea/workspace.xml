@@ -6,13 +6,117 @@
   <component name="ChangeListManager">
     <list default="true" id="bc78fd11-c455-41b4-8284-3743fd03d946" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/optimizedImplementation/clockInfo.txt" beforeDir="false" afterPath="$PROJECT_DIR$/optimizedImplementation/clockInfo.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/optimizedImplementation/constraints.xdc" beforeDir="false" afterPath="$PROJECT_DIR$/optimizedImplementation/constraints.xdc" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/optimizedImplementation/constraints.xdc.backup" beforeDir="false" afterPath="$PROJECT_DIR$/optimizedImplementation/constraints.xdc.backup" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/optimizedImplementation/cycles_d64_h16_dw11_fb5_np1.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/optimizedImplementation/cycles_d64_h16_dw11_fb5_np16.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/optimizedImplementation/cycles_d64_h16_dw11_fb5_np2.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/optimizedImplementation/cycles_d64_h16_dw11_fb5_np4.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/optimizedImplementation/cycles_d64_h16_dw11_fb5_np8.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/optimizedImplementation/cycles_d64_h16_dw12_fb6_np1.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/optimizedImplementation/cycles_d64_h16_dw12_fb6_np16.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/optimizedImplementation/cycles_d64_h16_dw12_fb6_np2.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/optimizedImplementation/cycles_d64_h16_dw12_fb6_np4.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/optimizedImplementation/cycles_d64_h16_dw12_fb6_np8.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/optimizedImplementation/cycles_d64_h16_dw13_fb7_np1.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/optimizedImplementation/cycles_d64_h16_dw13_fb7_np16.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/optimizedImplementation/cycles_d64_h16_dw13_fb7_np2.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/optimizedImplementation/cycles_d64_h16_dw13_fb7_np4.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/optimizedImplementation/cycles_d64_h16_dw13_fb7_np8.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/optimizedImplementation/cycles_d64_h16_dw14_fb8_np1.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/optimizedImplementation/cycles_d64_h16_dw14_fb8_np16.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/optimizedImplementation/cycles_d64_h16_dw14_fb8_np2.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/optimizedImplementation/cycles_d64_h16_dw14_fb8_np4.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/optimizedImplementation/cycles_d64_h16_dw14_fb8_np8.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/optimizedImplementation/cycles_d64_h16_dw15_fb9_np1.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/optimizedImplementation/cycles_d64_h16_dw15_fb9_np16.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/optimizedImplementation/cycles_d64_h16_dw15_fb9_np2.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/optimizedImplementation/cycles_d64_h16_dw15_fb9_np4.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/optimizedImplementation/cycles_d64_h16_dw15_fb9_np8.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/optimizedImplementation/cycles_d64_h16_dw16_fb10_np1.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/optimizedImplementation/cycles_d64_h16_dw16_fb10_np16.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/optimizedImplementation/cycles_d64_h16_dw16_fb10_np2.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/optimizedImplementation/cycles_d64_h16_dw16_fb10_np4.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/optimizedImplementation/cycles_d64_h16_dw16_fb10_np8.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/optimizedImplementation/cycles_d64_h16_dw17_fb11_np1.txt" beforeDir="false" afterPath="$PROJECT_DIR$/optimizedImplementation/cycles_d64_h16_dw17_fb11_np1.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/optimizedImplementation/cycles_d64_h16_dw17_fb11_np16.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/optimizedImplementation/cycles_d64_h16_dw17_fb11_np2.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/optimizedImplementation/cycles_d64_h16_dw17_fb11_np4.txt" beforeDir="false" afterPath="$PROJECT_DIR$/optimizedImplementation/cycles_d64_h16_dw17_fb11_np4.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/optimizedImplementation/cycles_d64_h16_dw17_fb11_np8.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/optimizedImplementation/drc_report.txt" beforeDir="false" afterPath="$PROJECT_DIR$/optimizedImplementation/drc_report.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/optimizedImplementation/gru_cell_parallel.sv" beforeDir="false" afterPath="$PROJECT_DIR$/optimizedImplementation/gru_cell_parallel.sv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/optimizedImplementation/gru_cell_parallel.sv.backup" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/optimizedImplementation/gru_hidden_state_element.sv" beforeDir="false" afterPath="$PROJECT_DIR$/optimizedImplementation/gru_hidden_state_element.sv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/optimizedImplementation/gru_new_gate_element.sv" beforeDir="false" afterPath="$PROJECT_DIR$/optimizedImplementation/gru_new_gate_element.sv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/optimizedImplementation/gru_reset_gate_element.sv" beforeDir="false" afterPath="$PROJECT_DIR$/optimizedImplementation/gru_reset_gate_element.sv" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/optimizedImplementation/gru_tb.sv" beforeDir="false" afterPath="$PROJECT_DIR$/optimizedImplementation/gru_tb.sv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/optimizedImplementation/gru_update_gate_element.sv" beforeDir="false" afterPath="$PROJECT_DIR$/optimizedImplementation/gru_update_gate_element.sv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/optimizedImplementation/iter_22_CongestedCLBsAndNets.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/optimizedImplementation/iter_23_CongestedCLBsAndNets.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/optimizedImplementation/iter_2_CongestedCLBsAndNets.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/optimizedImplementation/iter_3_CongestedCLBsAndNets.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/optimizedImplementation/iter_42_CongestedCLBsAndNets.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/optimizedImplementation/iter_62_CongestedCLBsAndNets.txt" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/optimizedImplementation/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/optimizedImplementation/main.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/optimizedImplementation/modify_num_parallel.py" beforeDir="false" afterPath="$PROJECT_DIR$/optimizedImplementation/modify_num_parallel.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/optimizedImplementation/optimized_data.csv" beforeDir="false" afterPath="$PROJECT_DIR$/optimizedImplementation/optimized_data.csv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/optimizedImplementation/output_d64_h16_dw11_fb5_np1.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/optimizedImplementation/output_d64_h16_dw11_fb5_np16.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/optimizedImplementation/output_d64_h16_dw11_fb5_np2.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/optimizedImplementation/output_d64_h16_dw11_fb5_np4.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/optimizedImplementation/output_d64_h16_dw11_fb5_np8.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/optimizedImplementation/output_d64_h16_dw12_fb6_np1.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/optimizedImplementation/output_d64_h16_dw12_fb6_np16.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/optimizedImplementation/output_d64_h16_dw12_fb6_np2.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/optimizedImplementation/output_d64_h16_dw12_fb6_np4.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/optimizedImplementation/output_d64_h16_dw12_fb6_np8.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/optimizedImplementation/output_d64_h16_dw13_fb7_np1.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/optimizedImplementation/output_d64_h16_dw13_fb7_np16.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/optimizedImplementation/output_d64_h16_dw13_fb7_np2.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/optimizedImplementation/output_d64_h16_dw13_fb7_np4.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/optimizedImplementation/output_d64_h16_dw13_fb7_np8.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/optimizedImplementation/output_d64_h16_dw14_fb8_np1.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/optimizedImplementation/output_d64_h16_dw14_fb8_np16.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/optimizedImplementation/output_d64_h16_dw14_fb8_np2.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/optimizedImplementation/output_d64_h16_dw14_fb8_np4.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/optimizedImplementation/output_d64_h16_dw14_fb8_np8.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/optimizedImplementation/output_d64_h16_dw15_fb9_np1.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/optimizedImplementation/output_d64_h16_dw15_fb9_np16.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/optimizedImplementation/output_d64_h16_dw15_fb9_np2.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/optimizedImplementation/output_d64_h16_dw15_fb9_np4.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/optimizedImplementation/output_d64_h16_dw15_fb9_np8.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/optimizedImplementation/output_d64_h16_dw16_fb10_np1.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/optimizedImplementation/output_d64_h16_dw16_fb10_np16.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/optimizedImplementation/output_d64_h16_dw16_fb10_np2.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/optimizedImplementation/output_d64_h16_dw16_fb10_np4.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/optimizedImplementation/output_d64_h16_dw16_fb10_np8.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/optimizedImplementation/output_d64_h16_dw17_fb11_np1.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/optimizedImplementation/output_d64_h16_dw17_fb11_np16.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/optimizedImplementation/output_d64_h16_dw17_fb11_np2.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/optimizedImplementation/output_d64_h16_dw17_fb11_np4.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/optimizedImplementation/output_d64_h16_dw17_fb11_np8.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/optimizedImplementation/power_report.txt" beforeDir="false" afterPath="$PROJECT_DIR$/optimizedImplementation/power_report.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/optimizedImplementation/power_synth.txt" beforeDir="false" afterPath="$PROJECT_DIR$/optimizedImplementation/power_synth.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/optimizedImplementation/route_status.txt" beforeDir="false" afterPath="$PROJECT_DIR$/optimizedImplementation/route_status.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/optimizedImplementation/run_vivado.tcl" beforeDir="false" afterPath="$PROJECT_DIR$/optimizedImplementation/run_vivado.tcl" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/optimizedImplementation/status.txt" beforeDir="false" afterPath="$PROJECT_DIR$/optimizedImplementation/status.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/optimizedImplementation/timing_report.txt" beforeDir="false" afterPath="$PROJECT_DIR$/optimizedImplementation/timing_report.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/optimizedImplementation/timing_synth.txt" beforeDir="false" afterPath="$PROJECT_DIR$/optimizedImplementation/timing_synth.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/optimizedImplementation/utilization_report.txt" beforeDir="false" afterPath="$PROJECT_DIR$/optimizedImplementation/utilization_report.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/optimizedImplementation/utilization_synth.txt" beforeDir="false" afterPath="$PROJECT_DIR$/optimizedImplementation/utilization_synth.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/optimizedImplementation/vivado.jou" beforeDir="false" afterPath="$PROJECT_DIR$/optimizedImplementation/vivado.jou" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/optimizedImplementation/vivado.log" beforeDir="false" afterPath="$PROJECT_DIR$/optimizedImplementation/vivado.log" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/optimizedImplementation/vivado_159501.backup.jou" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/optimizedImplementation/vivado_159501.backup.log" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/optimizedImplementation/vivado_247481.backup.jou" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/optimizedImplementation/vivado_247481.backup.log" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/optimizedImplementation/vivado_335513.backup.jou" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/optimizedImplementation/vivado_335513.backup.log" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/optimizedImplementation/vivado_4177075.backup.jou" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/optimizedImplementation/vivado_4177075.backup.log" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/optimizedImplementation/vivado_71491.backup.jou" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/optimizedImplementation/vivado_71491.backup.log" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -30,24 +134,24 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "Python.main.executor": "Run",
-    "Python.modify_num_parallel.executor": "Run",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252": "true",
-    "RunOnceActivity.git.unshallow": "true",
-    "git-widget-placeholder": "main",
-    "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "/home/lex/Documents/git/masked-autoencoder-foundation-model-for-oil-and-gas-drilling",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Python.main.executor&quot;: &quot;Run&quot;,
+    &quot;Python.modify_num_parallel.executor&quot;: &quot;Run&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/home/lex/Documents/git/masked-autoencoder-foundation-model-for-oil-and-gas-drilling&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/optimizedImplementation" />
@@ -63,8 +167,9 @@
         <env name="PYTHONUNBUFFERED" value="1" />
       </envs>
       <option name="SDK_HOME" value="" />
+      <option name="SDK_NAME" value="Python 3.8 (masked-autoencoder-foundation-model-for-oil-and-gas-drilling)" />
       <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/optimizedImplementation" />
-      <option name="IS_MODULE_SDK" value="true" />
+      <option name="IS_MODULE_SDK" value="false" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
@@ -104,6 +209,7 @@
       <workItem from="1765255887730" duration="8000" />
       <workItem from="1765309786930" duration="330000" />
       <workItem from="1765314176026" duration="48309000" />
+      <workItem from="1766197629712" duration="8639000" />
     </task>
     <servers />
   </component>
@@ -128,6 +234,6 @@
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/gru_hardware_implementation_and_optimization$modify_num_parallel.coverage" NAME="modify_num_parallel Coverage Results" MODIFIED="1765315311905" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/optimizedImplementation" />
-    <SUITE FILE_PATH="coverage/gru_hardware_implementation_and_optimization$main.coverage" NAME="main Coverage Results" MODIFIED="1765604028623" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/optimizedImplementation" />
+    <SUITE FILE_PATH="coverage/gru_hardware_implementation_and_optimization$main.coverage" NAME="main Coverage Results" MODIFIED="1766211516777" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/optimizedImplementation" />
   </component>
 </project>

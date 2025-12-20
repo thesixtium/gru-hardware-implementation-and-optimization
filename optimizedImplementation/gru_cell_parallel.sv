@@ -1,395 +1,340 @@
 // ============================================================================
-// Complete GRU Cell - Parallel Implementation (FIXED)
+// Complete GRU Cell - Parallel Implementation
+// Time-multiplexed computation with configurable parallelism
 // ============================================================================
 module gru_cell_parallel #(
     parameter int D = 64,
     parameter int H = 16,
-    parameter int DATA_WIDTH = 17,
+    parameter int INT_BITS = 10,
     parameter int FRAC_BITS = 11,
-    parameter int NUM_PARALLEL = 16
+    parameter int DATA_WIDTH = INT_BITS + FRAC_BITS,
+    parameter int NUM_PARALLEL = 1
 ) (
     input  logic                     clk,
     input  logic                     rst_n,
     input  logic                     start,
-    
+
     input  logic signed [DATA_WIDTH-1:0] x_t [D-1:0],
     input  logic signed [DATA_WIDTH-1:0] h_t_prev [H-1:0],
-    
+
     // Weight matrices
     input  logic signed [DATA_WIDTH-1:0] W_ir [H-1:0][D-1:0],
     input  logic signed [DATA_WIDTH-1:0] W_hr [H-1:0][H-1:0],
     input  logic signed [DATA_WIDTH-1:0] b_ir [H-1:0],
     input  logic signed [DATA_WIDTH-1:0] b_hr [H-1:0],
-    
+
     input  logic signed [DATA_WIDTH-1:0] W_iz [H-1:0][D-1:0],
     input  logic signed [DATA_WIDTH-1:0] W_hz [H-1:0][H-1:0],
     input  logic signed [DATA_WIDTH-1:0] b_iz [H-1:0],
     input  logic signed [DATA_WIDTH-1:0] b_hz [H-1:0],
-    
+
     input  logic signed [DATA_WIDTH-1:0] W_in [H-1:0][D-1:0],
     input  logic signed [DATA_WIDTH-1:0] W_hn [H-1:0][H-1:0],
     input  logic signed [DATA_WIDTH-1:0] b_in [H-1:0],
     input  logic signed [DATA_WIDTH-1:0] b_hn [H-1:0],
-    
+
     output logic signed [DATA_WIDTH-1:0] h_t [H-1:0],
     output logic                          done
 );
 
-    // Intermediate gate values
-    logic signed [DATA_WIDTH-1:0] r_t [H-1:0];
-    logic signed [DATA_WIDTH-1:0] z_t [H-1:0];
-    logic signed [DATA_WIDTH-1:0] n_t [H-1:0];
-    
-    // Control signals for parallel units
-    logic [NUM_PARALLEL-1:0] valid_in_r, valid_out_r;
-    logic [NUM_PARALLEL-1:0] valid_in_z, valid_out_z;
-    logic [NUM_PARALLEL-1:0] valid_in_n, valid_out_n;
-    logic [NUM_PARALLEL-1:0] valid_in_h, valid_out_h;
-    
-    int element_index [NUM_PARALLEL-1:0];
-    int current_element;
-    
-    // Temporary outputs from parallel units
-    logic signed [DATA_WIDTH-1:0] r_t_n_temp [NUM_PARALLEL-1:0];
-    logic signed [DATA_WIDTH-1:0] z_t_n_temp [NUM_PARALLEL-1:0];
-    logic signed [DATA_WIDTH-1:0] n_t_n_temp [NUM_PARALLEL-1:0];
-    logic signed [DATA_WIDTH-1:0] h_t_n_temp [NUM_PARALLEL-1:0];
-    
-    // State machine
-    typedef enum logic [3:0] {
+    // FSM states
+    typedef enum logic [2:0] {
         IDLE,
-        INIT_RESET,
         COMPUTE_RESET,
-        WAIT_RESET,
-        INIT_UPDATE,
         COMPUTE_UPDATE,
-        WAIT_UPDATE,
-        INIT_NEW,
         COMPUTE_NEW,
-        WAIT_NEW,
-        INIT_HIDDEN,
         COMPUTE_HIDDEN,
-        WAIT_HIDDEN,
-        FINISHED
+        DONE
     } state_t;
-    
+
     state_t state, next_state;
-    
-    // Instantiate parallel reset gate elements
-    genvar i;
+
+    // Index counter for time multiplexing
+    logic [$clog2(H+1)-1:0] index;
+    logic [$clog2(H+1)-1:0] total_iters;
+
+    // Valid signals for element modules
+    logic valid_reset, valid_update, valid_new, valid_hidden;
+
+    // Storage for intermediate gate values
+    logic signed [DATA_WIDTH-1:0] r_t_storage [H-1:0];
+    logic signed [DATA_WIDTH-1:0] z_t_storage [H-1:0];
+    logic signed [DATA_WIDTH-1:0] n_t_storage [H-1:0];
+    logic signed [DATA_WIDTH-1:0] h_t_storage [H-1:0];
+
+    // Element module outputs
+    logic signed [DATA_WIDTH-1:0] r_t_elem [NUM_PARALLEL-1:0];
+    logic signed [DATA_WIDTH-1:0] z_t_elem [NUM_PARALLEL-1:0];
+    logic signed [DATA_WIDTH-1:0] n_t_elem [NUM_PARALLEL-1:0];
+    logic signed [DATA_WIDTH-1:0] h_t_elem [NUM_PARALLEL-1:0];
+
+    logic valid_out_r [NUM_PARALLEL-1:0];
+    logic valid_out_z [NUM_PARALLEL-1:0];
+    logic valid_out_n [NUM_PARALLEL-1:0];
+    logic valid_out_h [NUM_PARALLEL-1:0];
+
+    // Calculate total iterations needed
+    assign total_iters = (H + NUM_PARALLEL - 1) / NUM_PARALLEL;
+
+    // ========================================================================
+    // Instantiate parallel element modules
+    // ========================================================================
+
+    genvar p;
     generate
-        for (i = 0; i < NUM_PARALLEL; i++) begin : gen_reset_gates
-            gru_reset_gate_element #(.D(D), .H(H), .DATA_WIDTH(DATA_WIDTH), .FRAC_BITS(FRAC_BITS))
-            reset_gate_inst (
+        for (p = 0; p < NUM_PARALLEL; p++) begin : gen_parallel_elements
+
+            // Reset gate element
+            gru_reset_gate_element #(
+                .D(D),
+                .H(H),
+                .INT_BITS(INT_BITS),
+                .FRAC_BITS(FRAC_BITS),
+                .DATA_WIDTH(DATA_WIDTH)
+            ) reset_elem (
                 .clk(clk),
                 .rst_n(rst_n),
-                .valid_in(valid_in_r[i]),
+                .valid_in(valid_reset && ((index * NUM_PARALLEL + p) < H)),
                 .x_t(x_t),
                 .h_t_prev(h_t_prev),
-                .W_ir_row(W_ir[element_index[i]]),
-                .W_hr_row(W_hr[element_index[i]]),
-                .b_ir_n(b_ir[element_index[i]]),
-                .b_hr_n(b_hr[element_index[i]]),
-                .r_t_n(r_t_n_temp[i]),
-                .valid_out(valid_out_r[i])
+                .W_ir_row((index * NUM_PARALLEL + p < H) ? W_ir[index * NUM_PARALLEL + p] : W_ir[0]),
+                .W_hr_row((index * NUM_PARALLEL + p < H) ? W_hr[index * NUM_PARALLEL + p] : W_hr[0]),
+                .b_ir_n((index * NUM_PARALLEL + p < H) ? b_ir[index * NUM_PARALLEL + p] : b_ir[0]),
+                .b_hr_n((index * NUM_PARALLEL + p < H) ? b_hr[index * NUM_PARALLEL + p] : b_hr[0]),
+                .r_t_n(r_t_elem[p]),
+                .valid_out(valid_out_r[p])
             );
-        end
-    endgenerate
-    
-    // Instantiate parallel update gate elements
-    generate
-        for (i = 0; i < NUM_PARALLEL; i++) begin : gen_update_gates
-            gru_update_gate_element #(.D(D), .H(H), .DATA_WIDTH(DATA_WIDTH), .FRAC_BITS(FRAC_BITS))
-            update_gate_inst (
+
+            // Update gate element
+            gru_update_gate_element #(
+                .D(D),
+                .H(H),
+                .INT_BITS(INT_BITS),
+                .FRAC_BITS(FRAC_BITS),
+                .DATA_WIDTH(DATA_WIDTH)
+            ) update_elem (
                 .clk(clk),
                 .rst_n(rst_n),
-                .valid_in(valid_in_z[i]),
+                .valid_in(valid_update && ((index * NUM_PARALLEL + p) < H)),
                 .x_t(x_t),
                 .h_t_prev(h_t_prev),
-                .W_iz_row(W_iz[element_index[i]]),
-                .W_hz_row(W_hz[element_index[i]]),
-                .b_iz_n(b_iz[element_index[i]]),
-                .b_hz_n(b_hz[element_index[i]]),
-                .z_t_n(z_t_n_temp[i]),
-                .valid_out(valid_out_z[i])
+                .W_iz_row((index * NUM_PARALLEL + p < H) ? W_iz[index * NUM_PARALLEL + p] : W_iz[0]),
+                .W_hz_row((index * NUM_PARALLEL + p < H) ? W_hz[index * NUM_PARALLEL + p] : W_hz[0]),
+                .b_iz_n((index * NUM_PARALLEL + p < H) ? b_iz[index * NUM_PARALLEL + p] : b_iz[0]),
+                .b_hz_n((index * NUM_PARALLEL + p < H) ? b_hz[index * NUM_PARALLEL + p] : b_hz[0]),
+                .z_t_n(z_t_elem[p]),
+                .valid_out(valid_out_z[p])
             );
-        end
-    endgenerate
-    
-    // Instantiate parallel new gate elements
-    generate
-        for (i = 0; i < NUM_PARALLEL; i++) begin : gen_new_gates
-            gru_new_gate_element #(.D(D), .H(H), .DATA_WIDTH(DATA_WIDTH), .FRAC_BITS(FRAC_BITS))
-            new_gate_inst (
+
+            // New gate element
+            gru_new_gate_element #(
+                .D(D),
+                .H(H),
+                .INT_BITS(INT_BITS),
+                .FRAC_BITS(FRAC_BITS),
+                .DATA_WIDTH(DATA_WIDTH)
+            ) new_elem (
                 .clk(clk),
                 .rst_n(rst_n),
-                .valid_in(valid_in_n[i]),
+                .valid_in(valid_new && ((index * NUM_PARALLEL + p) < H)),
                 .x_t(x_t),
                 .h_t_prev(h_t_prev),
-                .r_t_n(r_t[element_index[i]]),
-                .W_in_row(W_in[element_index[i]]),
-                .W_hn_row(W_hn[element_index[i]]),
-                .b_in_n(b_in[element_index[i]]),
-                .b_hn_n(b_hn[element_index[i]]),
-                .n_t_n(n_t_n_temp[i]),
-                .valid_out(valid_out_n[i])
+                .r_t_n((index * NUM_PARALLEL + p < H) ? r_t_storage[index * NUM_PARALLEL + p] : '0),
+                .W_in_row((index * NUM_PARALLEL + p < H) ? W_in[index * NUM_PARALLEL + p] : W_in[0]),
+                .W_hn_row((index * NUM_PARALLEL + p < H) ? W_hn[index * NUM_PARALLEL + p] : W_hn[0]),
+                .b_in_n((index * NUM_PARALLEL + p < H) ? b_in[index * NUM_PARALLEL + p] : b_in[0]),
+                .b_hn_n((index * NUM_PARALLEL + p < H) ? b_hn[index * NUM_PARALLEL + p] : b_hn[0]),
+                .n_t_n(n_t_elem[p]),
+                .valid_out(valid_out_n[p])
             );
-        end
-    endgenerate
-    
-    // Instantiate parallel hidden state elements
-    generate
-        for (i = 0; i < NUM_PARALLEL; i++) begin : gen_hidden_states
-            gru_hidden_state_element #(.DATA_WIDTH(DATA_WIDTH), .FRAC_BITS(FRAC_BITS))
-            hidden_state_inst (
+
+            // Hidden state element
+            gru_hidden_state_element #(
+                .INT_BITS(INT_BITS),
+                .FRAC_BITS(FRAC_BITS),
+                .DATA_WIDTH(DATA_WIDTH)
+            ) hidden_elem (
                 .clk(clk),
                 .rst_n(rst_n),
-                .valid_in(valid_in_h[i]),
-                .z_t_n(z_t[element_index[i]]),
-                .n_t_n(n_t[element_index[i]]),
-                .h_t_prev_n(h_t_prev[element_index[i]]),
-                .h_t_n(h_t_n_temp[i]),
-                .valid_out(valid_out_h[i])
+                .valid_in(valid_hidden && ((index * NUM_PARALLEL + p) < H)),
+                .z_t_n((index * NUM_PARALLEL + p < H) ? z_t_storage[index * NUM_PARALLEL + p] : '0),
+                .n_t_n((index * NUM_PARALLEL + p < H) ? n_t_storage[index * NUM_PARALLEL + p] : '0),
+                .h_t_prev_n((index * NUM_PARALLEL + p < H) ? h_t_prev[index * NUM_PARALLEL + p] : '0),
+                .h_t_n(h_t_elem[p]),
+                .valid_out(valid_out_h[p])
             );
+
         end
     endgenerate
-    
-    // Control FSM
+
+    // ========================================================================
+    // FSM - State register
+    // ========================================================================
+
     always_ff @(posedge clk or negedge rst_n) begin
         if (!rst_n) begin
             state <= IDLE;
-            current_element <= 0;
-            done <= 1'b0;
-            valid_in_r <= '0;
-            valid_in_z <= '0;
-            valid_in_n <= '0;
-            valid_in_h <= '0;
-            
-            // Initialize all output arrays to zero
-            for (int j = 0; j < H; j++) begin
-                r_t[j] <= '0;
-                z_t[j] <= '0;
-                n_t[j] <= '0;
-                h_t[j] <= '0;
-            end
-            
-            for (int j = 0; j < NUM_PARALLEL; j++) begin
-                element_index[j] <= 0;
-            end
         end else begin
             state <= next_state;
-            
+        end
+    end
+
+    // ========================================================================
+    // FSM - Next state logic
+    // ========================================================================
+
+    always_comb begin
+        next_state = state;
+
+        case (state)
+            IDLE: begin
+                if (start) begin
+                    next_state = COMPUTE_RESET;
+                end
+            end
+
+            COMPUTE_RESET: begin
+                if (index >= total_iters) begin
+                    next_state = COMPUTE_UPDATE;
+                end
+            end
+
+            COMPUTE_UPDATE: begin
+                if (index >= total_iters) begin
+                    next_state = COMPUTE_NEW;
+                end
+            end
+
+            COMPUTE_NEW: begin
+                if (index >= total_iters) begin
+                    next_state = COMPUTE_HIDDEN;
+                end
+            end
+
+            COMPUTE_HIDDEN: begin
+                if (index >= total_iters) begin
+                    next_state = DONE;
+                end
+            end
+
+            DONE: begin
+                next_state = IDLE;
+            end
+
+            default: next_state = IDLE;
+        endcase
+    end
+
+    // ========================================================================
+    // FSM - Output logic and control signals
+    // ========================================================================
+
+    always_comb begin
+        valid_reset = 1'b0;
+        valid_update = 1'b0;
+        valid_new = 1'b0;
+        valid_hidden = 1'b0;
+
+        case (state)
+            COMPUTE_RESET:  valid_reset = 1'b1;
+            COMPUTE_UPDATE: valid_update = 1'b1;
+            COMPUTE_NEW:    valid_new = 1'b1;
+            COMPUTE_HIDDEN: valid_hidden = 1'b1;
+            default: ;
+        endcase
+    end
+
+    // ========================================================================
+    // Index counter
+    // ========================================================================
+
+    always_ff @(posedge clk or negedge rst_n) begin
+        if (!rst_n) begin
+            index <= '0;
+        end else begin
             case (state)
                 IDLE: begin
                     if (start) begin
-                        current_element <= 0;
-                        done <= 1'b0;
+                        index <= '0;
                     end
                 end
-                
-                // ===== RESET GATE =====
-                INIT_RESET: begin
-                    current_element <= 0;
-                    // Set up first batch of indices
-                    for (int j = 0; j < NUM_PARALLEL; j++) begin
-                        if (j < H) begin
-                            element_index[j] <= j;
-                        end
+
+                COMPUTE_RESET, COMPUTE_UPDATE, COMPUTE_NEW, COMPUTE_HIDDEN: begin
+                    if (index < total_iters) begin
+                        index <= index + 1;
                     end
                 end
-                
-                COMPUTE_RESET: begin
-                    // Start computation for all valid units
-                    for (int j = 0; j < NUM_PARALLEL; j++) begin
-                        if (element_index[j] < H) begin
-                            valid_in_r[j] <= 1'b1;
-                        end
-                    end
+
+                DONE: begin
+                    index <= '0;
                 end
-                
-                WAIT_RESET: begin
-                    // Process completions and store results
-                    for (int j = 0; j < NUM_PARALLEL; j++) begin
-                        if (element_index[j] < H && valid_out_r[j] && valid_in_r[j]) begin
-                            // Store result
-                            r_t[element_index[j]] <= r_t_n_temp[j];
-                            // Clear valid_in for this unit
-                            valid_in_r[j] <= 1'b0;
-                        end
-                    end
-                    
-                    // Check if all active units are done
-                    if ((valid_in_r & ((1 << NUM_PARALLEL) - 1)) == '0) begin
-                        // Move to next batch
-                        current_element <= current_element + NUM_PARALLEL;
-                        for (int j = 0; j < NUM_PARALLEL; j++) begin
-                            element_index[j] <= current_element + NUM_PARALLEL + j;
-                        end
-                    end
-                end
-                
-                // ===== UPDATE GATE =====
-                INIT_UPDATE: begin
-                    current_element <= 0;
-                    for (int j = 0; j < NUM_PARALLEL; j++) begin
-                        if (j < H) begin
-                            element_index[j] <= j;
-                        end
-                    end
-                end
-                
-                COMPUTE_UPDATE: begin
-                    for (int j = 0; j < NUM_PARALLEL; j++) begin
-                        if (element_index[j] < H) begin
-                            valid_in_z[j] <= 1'b1;
-                        end
-                    end
-                end
-                
-                WAIT_UPDATE: begin
-                    for (int j = 0; j < NUM_PARALLEL; j++) begin
-                        if (element_index[j] < H && valid_out_z[j] && valid_in_z[j]) begin
-                            z_t[element_index[j]] <= z_t_n_temp[j];
-                            valid_in_z[j] <= 1'b0;
-                        end
-                    end
-                    
-                    if ((valid_in_z & ((1 << NUM_PARALLEL) - 1)) == '0) begin
-                        current_element <= current_element + NUM_PARALLEL;
-                        for (int j = 0; j < NUM_PARALLEL; j++) begin
-                            element_index[j] <= current_element + NUM_PARALLEL + j;
-                        end
-                    end
-                end
-                
-                // ===== NEW GATE =====
-                INIT_NEW: begin
-                    current_element <= 0;
-                    for (int j = 0; j < NUM_PARALLEL; j++) begin
-                        if (j < H) begin
-                            element_index[j] <= j;
-                        end
-                    end
-                end
-                
-                COMPUTE_NEW: begin
-                    for (int j = 0; j < NUM_PARALLEL; j++) begin
-                        if (element_index[j] < H) begin
-                            valid_in_n[j] <= 1'b1;
-                        end
-                    end
-                end
-                
-                WAIT_NEW: begin
-                    for (int j = 0; j < NUM_PARALLEL; j++) begin
-                        if (element_index[j] < H && valid_out_n[j] && valid_in_n[j]) begin
-                            n_t[element_index[j]] <= n_t_n_temp[j];
-                            valid_in_n[j] <= 1'b0;
-                        end
-                    end
-                    
-                    if ((valid_in_n & ((1 << NUM_PARALLEL) - 1)) == '0) begin
-                        current_element <= current_element + NUM_PARALLEL;
-                        for (int j = 0; j < NUM_PARALLEL; j++) begin
-                            element_index[j] <= current_element + NUM_PARALLEL + j;
-                        end
-                    end
-                end
-                
-                // ===== HIDDEN STATE =====
-                INIT_HIDDEN: begin
-                    current_element <= 0;
-                    for (int j = 0; j < NUM_PARALLEL; j++) begin
-                        if (j < H) begin
-                            element_index[j] <= j;
-                        end
-                    end
-                end
-                
-                COMPUTE_HIDDEN: begin
-                    for (int j = 0; j < NUM_PARALLEL; j++) begin
-                        if (element_index[j] < H) begin
-                            valid_in_h[j] <= 1'b1;
-                        end
-                    end
-                end
-                
-                WAIT_HIDDEN: begin
-                    for (int j = 0; j < NUM_PARALLEL; j++) begin
-                        if (element_index[j] < H && valid_out_h[j] && valid_in_h[j]) begin
-                            h_t[element_index[j]] <= h_t_n_temp[j];
-                            valid_in_h[j] <= 1'b0;
-                        end
-                    end
-                    
-                    if ((valid_in_h & ((1 << NUM_PARALLEL) - 1)) == '0) begin
-                        current_element <= current_element + NUM_PARALLEL;
-                        for (int j = 0; j < NUM_PARALLEL; j++) begin
-                            element_index[j] <= current_element + NUM_PARALLEL + j;
-                        end
-                    end
-                end
-                
-                FINISHED: begin
-                    done <= 1'b1;
-                end
+
+                default: ;
             endcase
         end
     end
-    
-    // Next state logic
-    always_comb begin
-        next_state = state;
-        
-        case (state)
-            IDLE: if (start) next_state = INIT_RESET;
-            
-            INIT_RESET: next_state = COMPUTE_RESET;
-            COMPUTE_RESET: next_state = WAIT_RESET;
-            WAIT_RESET: begin
-                if ((valid_in_r & ((1 << NUM_PARALLEL) - 1)) == '0) begin
-                    if (current_element + NUM_PARALLEL >= H)
-                        next_state = INIT_UPDATE;
-                    else
-                        next_state = COMPUTE_RESET;
+
+    // ========================================================================
+    // Store intermediate results
+    // ========================================================================
+
+    always_ff @(posedge clk or negedge rst_n) begin
+        if (!rst_n) begin
+            for (int i = 0; i < H; i++) begin
+                r_t_storage[i] <= '0;
+                z_t_storage[i] <= '0;
+                n_t_storage[i] <= '0;
+                h_t_storage[i] <= '0;
+            end
+        end else begin
+            // Store reset gate results
+            for (int p = 0; p < NUM_PARALLEL; p++) begin
+                if (valid_out_r[p] && ((index - 1) * NUM_PARALLEL + p < H)) begin
+                    r_t_storage[(index - 1) * NUM_PARALLEL + p] <= r_t_elem[p];
                 end
             end
-            
-            INIT_UPDATE: next_state = COMPUTE_UPDATE;
-            COMPUTE_UPDATE: next_state = WAIT_UPDATE;
-            WAIT_UPDATE: begin
-                if ((valid_in_z & ((1 << NUM_PARALLEL) - 1)) == '0) begin
-                    if (current_element + NUM_PARALLEL >= H)
-                        next_state = INIT_NEW;
-                    else
-                        next_state = COMPUTE_UPDATE;
+
+            // Store update gate results
+            for (int p = 0; p < NUM_PARALLEL; p++) begin
+                if (valid_out_z[p] && ((index - 1) * NUM_PARALLEL + p < H)) begin
+                    z_t_storage[(index - 1) * NUM_PARALLEL + p] <= z_t_elem[p];
                 end
             end
-            
-            INIT_NEW: next_state = COMPUTE_NEW;
-            COMPUTE_NEW: next_state = WAIT_NEW;
-            WAIT_NEW: begin
-                if ((valid_in_n & ((1 << NUM_PARALLEL) - 1)) == '0) begin
-                    if (current_element + NUM_PARALLEL >= H)
-                        next_state = INIT_HIDDEN;
-                    else
-                        next_state = COMPUTE_NEW;
+
+            // Store new gate results
+            for (int p = 0; p < NUM_PARALLEL; p++) begin
+                if (valid_out_n[p] && ((index - 1) * NUM_PARALLEL + p < H)) begin
+                    n_t_storage[(index - 1) * NUM_PARALLEL + p] <= n_t_elem[p];
                 end
             end
-            
-            INIT_HIDDEN: next_state = COMPUTE_HIDDEN;
-            COMPUTE_HIDDEN: next_state = WAIT_HIDDEN;
-            WAIT_HIDDEN: begin
-                if ((valid_in_h & ((1 << NUM_PARALLEL) - 1)) == '0) begin
-                    if (current_element + NUM_PARALLEL >= H)
-                        next_state = FINISHED;
-                    else
-                        next_state = COMPUTE_HIDDEN;
+
+            // Store hidden state results
+            for (int p = 0; p < NUM_PARALLEL; p++) begin
+                if (valid_out_h[p] && ((index - 1) * NUM_PARALLEL + p < H)) begin
+                    h_t_storage[(index - 1) * NUM_PARALLEL + p] <= h_t_elem[p];
                 end
             end
-            
-            FINISHED: next_state = IDLE;
-        endcase
+        end
+    end
+
+    // ========================================================================
+    // Output assignment
+    // ========================================================================
+
+    always_ff @(posedge clk or negedge rst_n) begin
+        if (!rst_n) begin
+            done <= 1'b0;
+            for (int i = 0; i < H; i++) begin
+                h_t[i] <= '0;
+            end
+        end else begin
+            if (state == DONE) begin
+                done <= 1'b1;
+                h_t <= h_t_storage;
+            end else begin
+                done <= 1'b0;
+            end
+        end
     end
 
 endmodule

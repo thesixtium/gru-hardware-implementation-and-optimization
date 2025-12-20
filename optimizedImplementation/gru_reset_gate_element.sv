@@ -1,8 +1,13 @@
+// ============================================================================
+// Reset Gate Element Module (r_t)
+// Computes: r_t[n] = sigmoid(W_ir[n,:] @ x_t + W_hr[n,:] @ h_t_prev + b_ir[n] + b_hr[n])
+// ============================================================================
 module gru_reset_gate_element #(
     parameter int D = 128,
     parameter int H = 256,
-    parameter int DATA_WIDTH = 16,
-    parameter int FRAC_BITS = 8
+    parameter int INT_BITS = 16,
+    parameter int FRAC_BITS = 8,
+    parameter int DATA_WIDTH = INT_BITS + FRAC_BITS
 ) (
     input  logic                     clk,
     input  logic                     rst_n,
@@ -19,105 +24,121 @@ module gru_reset_gate_element #(
     output logic                          valid_out
 );
 
-    logic signed [2*DATA_WIDTH-1:0] sum_input;
-    logic signed [2*DATA_WIDTH-1:0] sum_hidden;
-    logic signed [2*DATA_WIDTH-1:0] mac_result;
-    logic signed [DATA_WIDTH-1:0]   pre_activation;
+    // Calculate accumulator width with extra bits to prevent overflow
+    localparam int ACC_EXTRA_BITS = $clog2(D > H ? D : H) + 3;  // +3 for safety margin
+    localparam int ACC_WIDTH = DATA_WIDTH + ACC_EXTRA_BITS;
+
+    // Wide accumulators for preventing overflow
+    logic signed [ACC_WIDTH-1:0] acc_x;
+    logic signed [ACC_WIDTH-1:0] acc_h;
+
+    // Product arrays (standard width)
+    logic signed [DATA_WIDTH-1:0] prod_x [D-1:0];
+    logic signed [DATA_WIDTH-1:0] prod_h [H-1:0];
+
+    // Truncated/saturated accumulator outputs
+    logic signed [DATA_WIDTH-1:0] acc_x_sat;
+    logic signed [DATA_WIDTH-1:0] acc_h_sat;
+
+    // Pre-activation sum
+    logic signed [DATA_WIDTH-1:0] pre_act;
+
+    // Sigmoid output
+    logic signed [DATA_WIDTH-1:0] sigmoid_out;
+
+    // Saturation limits
+    localparam signed [DATA_WIDTH-1:0] MAX_VAL = {1'b0, {(DATA_WIDTH-1){1'b1}}};  // Maximum positive value
+    localparam signed [DATA_WIDTH-1:0] MIN_VAL = {1'b1, {(DATA_WIDTH-1){1'b0}}};  // Minimum negative value
+
+    // Generate multipliers for input projection
+    genvar i;
+    generate
+        for (i = 0; i < D; i++) begin : gen_mult_x
+            mult #(
+                .INT_WIDTH(INT_BITS),
+                .FRAC_WIDTH(FRAC_BITS)
+            ) mult_x_inst (
+                .a(W_ir_row[i]),
+                .b(x_t[i]),
+                .y(prod_x[i])
+            );
+        end
+    endgenerate
+
+    // Generate multipliers for recurrent projection
+    generate
+        for (i = 0; i < H; i++) begin : gen_mult_h
+            mult #(
+                .INT_WIDTH(INT_BITS),
+                .FRAC_WIDTH(FRAC_BITS)
+            ) mult_h_inst (
+                .a(W_hr_row[i]),
+                .b(h_t_prev[i]),
+                .y(prod_h[i])
+            );
+        end
+    endgenerate
+
+    // Accumulate input projection with wide accumulator
+    always_comb begin
+        acc_x = $signed({{ACC_EXTRA_BITS{b_ir_n[DATA_WIDTH-1]}}, b_ir_n});  // Sign-extend bias
+        for (int j = 0; j < D; j++) begin
+            acc_x = acc_x + $signed({{ACC_EXTRA_BITS{prod_x[j][DATA_WIDTH-1]}}, prod_x[j]});
+        end
+    end
+
+    // Accumulate recurrent projection with wide accumulator
+    always_comb begin
+        acc_h = $signed({{ACC_EXTRA_BITS{b_hr_n[DATA_WIDTH-1]}}, b_hr_n});  // Sign-extend bias
+        for (int j = 0; j < H; j++) begin
+            acc_h = acc_h + $signed({{ACC_EXTRA_BITS{prod_h[j][DATA_WIDTH-1]}}, prod_h[j]});
+        end
+    end
+
+    // Saturate acc_x to DATA_WIDTH
+    always_comb begin
+        if (acc_x > $signed({{ACC_EXTRA_BITS{1'b0}}, MAX_VAL})) begin
+            acc_x_sat = MAX_VAL;  // Saturate to max positive
+        end else if (acc_x < $signed({{ACC_EXTRA_BITS{1'b1}}, MIN_VAL})) begin
+            acc_x_sat = MIN_VAL;  // Saturate to max negative
+        end else begin
+            acc_x_sat = acc_x[DATA_WIDTH-1:0];  // Truncate to DATA_WIDTH
+        end
+    end
+
+    // Saturate acc_h to DATA_WIDTH
+    always_comb begin
+        if (acc_h > $signed({{ACC_EXTRA_BITS{1'b0}}, MAX_VAL})) begin
+            acc_h_sat = MAX_VAL;  // Saturate to max positive
+        end else if (acc_h < $signed({{ACC_EXTRA_BITS{1'b1}}, MIN_VAL})) begin
+            acc_h_sat = MIN_VAL;  // Saturate to max negative
+        end else begin
+            acc_h_sat = acc_h[DATA_WIDTH-1:0];  // Truncate to DATA_WIDTH
+        end
+    end
+
+    // Sum both projections
+    assign pre_act = acc_x_sat + acc_h_sat;
     
-    int input_mac_count;
-    int hidden_mac_count;
+    // Apply sigmoid activation
+    sigmoid #(
+        .INT_WIDTH(INT_BITS),
+        .FRAC_WIDTH(FRAC_BITS)
+    ) sigmoid_inst (
+        .reset(~rst_n),
+        .x(pre_act),
+        .y(sigmoid_out)
+    );
     
-    typedef enum logic [2:0] {
-        IDLE,
-        MAC_INPUT,
-        MAC_HIDDEN,
-        ADD_BIAS,
-        SIGMOID,
-        DONE
-    } state_t;
-    
-    state_t state, next_state;
-    
+    // Register output
     always_ff @(posedge clk or negedge rst_n) begin
         if (!rst_n) begin
-            state <= IDLE;
-            sum_input <= '0;
-            sum_hidden <= '0;
-            input_mac_count <= 0;
-            hidden_mac_count <= 0;
             r_t_n <= '0;
             valid_out <= 1'b0;
         end else begin
-            state <= next_state;
-            
-            case (state)
-                IDLE: begin
-                    if (valid_in) begin
-                        sum_input <= '0;
-                        sum_hidden <= '0;
-                        input_mac_count <= 0;
-                        hidden_mac_count <= 0;
-                        valid_out <= 1'b0;
-                    end
-                end
-                
-                MAC_INPUT: begin
-                    sum_input <= sum_input + (W_ir_row[input_mac_count] * x_t[input_mac_count]);
-                    input_mac_count <= input_mac_count + 1;
-                end
-                
-                MAC_HIDDEN: begin
-                    sum_hidden <= sum_hidden + (W_hr_row[hidden_mac_count] * h_t_prev[hidden_mac_count]);
-                    hidden_mac_count <= hidden_mac_count + 1;
-                end
-                
-                ADD_BIAS: begin
-                    mac_result <= (sum_input >>> FRAC_BITS) + (sum_hidden >>> FRAC_BITS) + 
-                                  {{DATA_WIDTH{b_ir_n[DATA_WIDTH-1]}}, b_ir_n} + 
-                                  {{DATA_WIDTH{b_hr_n[DATA_WIDTH-1]}}, b_hr_n};
-                end
-                
-                SIGMOID: begin
-                    pre_activation <= mac_result[DATA_WIDTH-1:0];
-                    r_t_n <= sigmoid_approx(mac_result[DATA_WIDTH-1:0]);
-                    valid_out <= 1'b1;
-                end
-                
-                DONE: begin
-                    valid_out <= 1'b0;
-                end
-            endcase
+            r_t_n <= sigmoid_out;
+            valid_out <= valid_in;
         end
     end
-    
-    always_comb begin
-        next_state = state;
-        
-        case (state)
-            IDLE: if (valid_in) next_state = MAC_INPUT;
-            MAC_INPUT: if (input_mac_count == D-1) next_state = MAC_HIDDEN;
-            MAC_HIDDEN: if (hidden_mac_count == H-1) next_state = ADD_BIAS;
-            ADD_BIAS: next_state = SIGMOID;
-            SIGMOID: next_state = DONE;
-            DONE: next_state = IDLE;
-        endcase
-    end
-    
-    function automatic logic signed [DATA_WIDTH-1:0] sigmoid_approx(
-        input logic signed [DATA_WIDTH-1:0] x
-    );
-        logic signed [DATA_WIDTH-1:0] result;
-        logic signed [DATA_WIDTH-1:0] one = (1 << FRAC_BITS);
-        logic signed [DATA_WIDTH-1:0] half = (1 << (FRAC_BITS-1));
-        
-        if (x < -(5*half))
-            result = 0;
-        else if (x > (5*half))
-            result = one;
-        else
-            result = ((x >>> 2) + (x >>> 3)) + half;
-        
-        return result;
-    endfunction
 
 endmodule

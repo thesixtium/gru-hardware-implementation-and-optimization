@@ -12,6 +12,9 @@ create_project $proj_name $proj_dir -part $part_name
 
 # Add files
 add_files /home/lex/Documents/git/gru-hardware-implementation-and-optimization/optimizedImplementation/top_level.sv
+add_files /home/lex/Documents/git/gru-hardware-implementation-and-optimization/optimizedImplementation/tanh.sv
+add_files /home/lex/Documents/git/gru-hardware-implementation-and-optimization/optimizedImplementation/mult.sv
+add_files /home/lex/Documents/git/gru-hardware-implementation-and-optimization/optimizedImplementation/sigmoid.sv
 add_files /home/lex/Documents/git/gru-hardware-implementation-and-optimization/optimizedImplementation/gru_cell_parallel.sv
 add_files /home/lex/Documents/git/gru-hardware-implementation-and-optimization/optimizedImplementation/gru_hidden_state_element.sv
 add_files /home/lex/Documents/git/gru-hardware-implementation-and-optimization/optimizedImplementation/gru_new_gate_element.sv

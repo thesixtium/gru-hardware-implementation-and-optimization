@@ -1,7 +1,7 @@
 Copyright 1986-2022 Xilinx, Inc. All Rights Reserved. Copyright 2022-2024 Advanced Micro Devices, Inc. All Rights Reserved.
 -------------------------------------------------------------------------------------------------------------------------------------------------
 | Tool Version     : Vivado v.2024.1 (lin64) Build 5076996 Wed May 22 18:36:09 MDT 2024
-| Date             : Mon Dec 15 20:18:20 2025
+| Date             : Fri Dec 19 22:55:35 2025
 | Host             : Toothless running 64-bit Ubuntu 20.04.6 LTS
 | Command          : report_power -file power_report.txt
 | Design           : top_level
@@ -30,14 +30,14 @@ Table of Contents
 ----------
 
 +--------------------------+--------------+
-| Total On-Chip Power (W)  | 2.946        |
+| Total On-Chip Power (W)  | 2.984        |
 | Design Power Budget (W)  | Unspecified* |
 | Power Budget Margin (W)  | NA           |
-| Dynamic (W)              | 0.002        |
-| Device Static (W)        | 2.944        |
+| Dynamic (W)              | 0.039        |
+| Device Static (W)        | 2.945        |
 | Effective TJA (C/W)      | 0.5          |
-| Max Ambient (C)          | 98.5         |
-| Junction Temperature (C) | 26.5         |
+| Max Ambient (C)          | 98.4         |
+| Junction Temperature (C) | 26.6         |
 | Confidence Level         | Medium       |
 | Setting File             | ---          |
 | Simulation Activity File | ---          |
@@ -52,18 +52,17 @@ Table of Contents
 +----------------+-----------+----------+-----------+-----------------+
 | On-Chip        | Power (W) | Used     | Available | Utilization (%) |
 +----------------+-----------+----------+-----------+-----------------+
-| Clocks         |    <0.001 |        3 |       --- |             --- |
-| CLB Logic      |    <0.001 |   155127 |       --- |             --- |
-|   LUT as Logic |    <0.001 |    88720 |   1728000 |            5.13 |
-|   Register     |    <0.001 |     5553 |   3456000 |            0.16 |
-|   CARRY8       |    <0.001 |      418 |    216000 |            0.19 |
-|   Others       |     0.000 |      102 |       --- |             --- |
-|   F7/F8 Muxes  |     0.000 |    10635 |   1728000 |            0.62 |
-| Signals        |    <0.001 |   131210 |       --- |             --- |
-| DSPs           |    <0.001 |       72 |     12288 |            0.59 |
+| Clocks         |     0.001 |        3 |       --- |             --- |
+| CLB Logic      |     0.009 |   134284 |       --- |             --- |
+|   LUT as Logic |     0.009 |    83154 |   1728000 |            4.81 |
+|   Register     |    <0.001 |     1909 |   3456000 |            0.06 |
+|   Others       |     0.000 |      124 |       --- |             --- |
+|   CARRY8       |     0.000 |     3392 |    216000 |            1.57 |
+| Signals        |     0.008 |   160906 |       --- |             --- |
+| DSPs           |     0.021 |     2064 |     12288 |           16.80 |
 | I/O            |    <0.001 |        4 |       676 |            0.59 |
-| Static Power   |     2.944 |          |           |                 |
-| Total          |     2.946 |          |           |                 |
+| Static Power   |     2.945 |          |           |                 |
+| Total          |     2.984 |          |           |                 |
 +----------------+-----------+----------+-----------+-----------------+
 
 
@@ -73,7 +72,7 @@ Table of Contents
 +------------+-------------+-----------+-------------+------------+-------------+-------------+------------+
 | Source     | Voltage (V) | Total (A) | Dynamic (A) | Static (A) | Powerup (A) | Budget (A)  | Margin (A) |
 +------------+-------------+-----------+-------------+------------+-------------+-------------+------------+
-| Vccint     |       0.850 |     1.136 |       0.001 |      1.135 |       NA    | Unspecified | NA         |
+| Vccint     |       0.850 |     1.182 |       0.046 |      1.136 |       NA    | Unspecified | NA         |
 | Vccint_io  |       0.850 |     0.142 |       0.000 |      0.142 |       NA    | Unspecified | NA         |
 | Vccbram    |       0.850 |     0.020 |       0.000 |      0.020 |       NA    | Unspecified | NA         |
 | Vccaux     |       1.800 |     0.887 |       0.000 |      0.887 |       NA    | Unspecified | NA         |
@@ -132,7 +131,7 @@ Table of Contents
 +---------+--------+-----------------+
 | Clock   | Domain | Constraint (ns) |
 +---------+--------+-----------------+
-| sys_clk | clk    |          1000.0 |
+| sys_clk | clk    |           100.0 |
 +---------+--------+-----------------+
 
 
@@ -142,11 +141,35 @@ Table of Contents
 3.1 By Hierarchy
 ----------------
 
-+------------+-----------+
-| Name       | Power (W) |
-+------------+-----------+
-| top_level  |     0.002 |
-|   gru_inst |     0.001 |
-+------------+-----------+
++------------------------------------------+-----------+
+| Name                                     | Power (W) |
++------------------------------------------+-----------+
+| top_level                                |     0.039 |
+|   gru_inst                               |     0.039 |
+|     gen_parallel_elements[0].new_elem    |     0.002 |
+|     gen_parallel_elements[0].reset_elem  |     0.001 |
+|     gen_parallel_elements[0].update_elem |     0.001 |
+|     gen_parallel_elements[1].new_elem    |     0.002 |
+|     gen_parallel_elements[1].reset_elem  |     0.001 |
+|     gen_parallel_elements[1].update_elem |     0.001 |
+|     gen_parallel_elements[2].new_elem    |     0.001 |
+|     gen_parallel_elements[2].reset_elem  |     0.001 |
+|     gen_parallel_elements[2].update_elem |     0.001 |
+|     gen_parallel_elements[3].new_elem    |     0.001 |
+|     gen_parallel_elements[3].reset_elem  |     0.001 |
+|     gen_parallel_elements[3].update_elem |     0.002 |
+|     gen_parallel_elements[4].new_elem    |     0.002 |
+|     gen_parallel_elements[4].reset_elem  |     0.001 |
+|     gen_parallel_elements[4].update_elem |     0.001 |
+|     gen_parallel_elements[5].new_elem    |     0.002 |
+|     gen_parallel_elements[5].reset_elem  |     0.001 |
+|     gen_parallel_elements[5].update_elem |     0.001 |
+|     gen_parallel_elements[6].new_elem    |     0.002 |
+|     gen_parallel_elements[6].reset_elem  |     0.001 |
+|     gen_parallel_elements[6].update_elem |     0.001 |
+|     gen_parallel_elements[7].new_elem    |     0.001 |
+|     gen_parallel_elements[7].reset_elem  |     0.001 |
+|     gen_parallel_elements[7].update_elem |     0.002 |
++------------------------------------------+-----------+
 
 

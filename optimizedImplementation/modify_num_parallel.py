@@ -4,7 +4,7 @@ import os
 from pathlib import Path
 
 
-def modify_num_parallel(sv_file, num_parallel=None, data_width=None, frac_bits=None, d=None, h=None):
+def modify_num_parallel(sv_file, num_parallel=None, int_bits=None, frac_bits=None, d=None, h=None):
     """
     Modify parameters in a SystemVerilog file.
 
@@ -32,12 +32,12 @@ def modify_num_parallel(sv_file, num_parallel=None, data_width=None, frac_bits=N
                 changes_made.append(f"NUM_PARALLEL = {num_parallel}")
                 content = new_content
 
-        # Update DATA_WIDTH if provided
-        if data_width is not None:
-            pattern = r'(parameter\s+int\s+DATA_WIDTH\s*=\s*)\d+'
-            new_content = re.sub(pattern, rf'\g<1>{data_width}', content)
+        # Update INT_BITS if provided
+        if int_bits is not None:
+            pattern = r'(parameter\s+int\s+INT_BITS\s*=\s*)\d+'
+            new_content = re.sub(pattern, rf'\g<1>{int_bits}', content)
             if new_content != content:
-                changes_made.append(f"DATA_WIDTH = {data_width}")
+                changes_made.append(f"INT_BITS = {int_bits}")
                 content = new_content
 
         # Update FRAC_BITS if provided
