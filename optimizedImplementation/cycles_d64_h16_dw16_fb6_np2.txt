@@ -1,0 +1,123 @@
+==========================================================
+GRU Cell Parallel Cycle Count Results
+==========================================================
+Parameters:
+  D (Input Dimension):     64
+  H (Hidden Dimension):    16
+  DATA_WIDTH:              16
+  FRAC_BITS:               6
+  NUM_PARALLEL:            2
+  Total Test Vectors:      100
+==========================================================
+
+Test Vector   1: 52 cycles (0.52 us @ 100MHz)
+Test Vector   2: 52 cycles (0.52 us @ 100MHz)
+Test Vector   3: 52 cycles (0.52 us @ 100MHz)
+Test Vector   4: 52 cycles (0.52 us @ 100MHz)
+Test Vector   5: 52 cycles (0.52 us @ 100MHz)
+Test Vector   6: 52 cycles (0.52 us @ 100MHz)
+Test Vector   7: 52 cycles (0.52 us @ 100MHz)
+Test Vector   8: 52 cycles (0.52 us @ 100MHz)
+Test Vector   9: 52 cycles (0.52 us @ 100MHz)
+Test Vector  10: 52 cycles (0.52 us @ 100MHz)
+Test Vector  11: 52 cycles (0.52 us @ 100MHz)
+Test Vector  12: 52 cycles (0.52 us @ 100MHz)
+Test Vector  13: 52 cycles (0.52 us @ 100MHz)
+Test Vector  14: 52 cycles (0.52 us @ 100MHz)
+Test Vector  15: 52 cycles (0.52 us @ 100MHz)
+Test Vector  16: 52 cycles (0.52 us @ 100MHz)
+Test Vector  17: 52 cycles (0.52 us @ 100MHz)
+Test Vector  18: 52 cycles (0.52 us @ 100MHz)
+Test Vector  19: 52 cycles (0.52 us @ 100MHz)
+Test Vector  20: 52 cycles (0.52 us @ 100MHz)
+Test Vector  21: 52 cycles (0.52 us @ 100MHz)
+Test Vector  22: 52 cycles (0.52 us @ 100MHz)
+Test Vector  23: 52 cycles (0.52 us @ 100MHz)
+Test Vector  24: 52 cycles (0.52 us @ 100MHz)
+Test Vector  25: 52 cycles (0.52 us @ 100MHz)
+Test Vector  26: 52 cycles (0.52 us @ 100MHz)
+Test Vector  27: 52 cycles (0.52 us @ 100MHz)
+Test Vector  28: 52 cycles (0.52 us @ 100MHz)
+Test Vector  29: 52 cycles (0.52 us @ 100MHz)
+Test Vector  30: 52 cycles (0.52 us @ 100MHz)
+Test Vector  31: 52 cycles (0.52 us @ 100MHz)
+Test Vector  32: 52 cycles (0.52 us @ 100MHz)
+Test Vector  33: 52 cycles (0.52 us @ 100MHz)
+Test Vector  34: 52 cycles (0.52 us @ 100MHz)
+Test Vector  35: 52 cycles (0.52 us @ 100MHz)
+Test Vector  36: 52 cycles (0.52 us @ 100MHz)
+Test Vector  37: 52 cycles (0.52 us @ 100MHz)
+Test Vector  38: 52 cycles (0.52 us @ 100MHz)
+Test Vector  39: 52 cycles (0.52 us @ 100MHz)
+Test Vector  40: 52 cycles (0.52 us @ 100MHz)
+Test Vector  41: 52 cycles (0.52 us @ 100MHz)
+Test Vector  42: 52 cycles (0.52 us @ 100MHz)
+Test Vector  43: 52 cycles (0.52 us @ 100MHz)
+Test Vector  44: 52 cycles (0.52 us @ 100MHz)
+Test Vector  45: 52 cycles (0.52 us @ 100MHz)
+Test Vector  46: 52 cycles (0.52 us @ 100MHz)
+Test Vector  47: 52 cycles (0.52 us @ 100MHz)
+Test Vector  48: 52 cycles (0.52 us @ 100MHz)
+Test Vector  49: 52 cycles (0.52 us @ 100MHz)
+Test Vector  50: 52 cycles (0.52 us @ 100MHz)
+Test Vector  51: 52 cycles (0.52 us @ 100MHz)
+Test Vector  52: 52 cycles (0.52 us @ 100MHz)
+Test Vector  53: 52 cycles (0.52 us @ 100MHz)
+Test Vector  54: 52 cycles (0.52 us @ 100MHz)
+Test Vector  55: 52 cycles (0.52 us @ 100MHz)
+Test Vector  56: 52 cycles (0.52 us @ 100MHz)
+Test Vector  57: 52 cycles (0.52 us @ 100MHz)
+Test Vector  58: 52 cycles (0.52 us @ 100MHz)
+Test Vector  59: 52 cycles (0.52 us @ 100MHz)
+Test Vector  60: 52 cycles (0.52 us @ 100MHz)
+Test Vector  61: 52 cycles (0.52 us @ 100MHz)
+Test Vector  62: 52 cycles (0.52 us @ 100MHz)
+Test Vector  63: 52 cycles (0.52 us @ 100MHz)
+Test Vector  64: 52 cycles (0.52 us @ 100MHz)
+Test Vector  65: 52 cycles (0.52 us @ 100MHz)
+Test Vector  66: 52 cycles (0.52 us @ 100MHz)
+Test Vector  67: 52 cycles (0.52 us @ 100MHz)
+Test Vector  68: 52 cycles (0.52 us @ 100MHz)
+Test Vector  69: 52 cycles (0.52 us @ 100MHz)
+Test Vector  70: 52 cycles (0.52 us @ 100MHz)
+Test Vector  71: 52 cycles (0.52 us @ 100MHz)
+Test Vector  72: 52 cycles (0.52 us @ 100MHz)
+Test Vector  73: 52 cycles (0.52 us @ 100MHz)
+Test Vector  74: 52 cycles (0.52 us @ 100MHz)
+Test Vector  75: 52 cycles (0.52 us @ 100MHz)
+Test Vector  76: 52 cycles (0.52 us @ 100MHz)
+Test Vector  77: 52 cycles (0.52 us @ 100MHz)
+Test Vector  78: 52 cycles (0.52 us @ 100MHz)
+Test Vector  79: 52 cycles (0.52 us @ 100MHz)
+Test Vector  80: 52 cycles (0.52 us @ 100MHz)
+Test Vector  81: 52 cycles (0.52 us @ 100MHz)
+Test Vector  82: 52 cycles (0.52 us @ 100MHz)
+Test Vector  83: 52 cycles (0.52 us @ 100MHz)
+Test Vector  84: 52 cycles (0.52 us @ 100MHz)
+Test Vector  85: 52 cycles (0.52 us @ 100MHz)
+Test Vector  86: 52 cycles (0.52 us @ 100MHz)
+Test Vector  87: 52 cycles (0.52 us @ 100MHz)
+Test Vector  88: 52 cycles (0.52 us @ 100MHz)
+Test Vector  89: 52 cycles (0.52 us @ 100MHz)
+Test Vector  90: 52 cycles (0.52 us @ 100MHz)
+Test Vector  91: 52 cycles (0.52 us @ 100MHz)
+Test Vector  92: 52 cycles (0.52 us @ 100MHz)
+Test Vector  93: 52 cycles (0.52 us @ 100MHz)
+Test Vector  94: 52 cycles (0.52 us @ 100MHz)
+Test Vector  95: 52 cycles (0.52 us @ 100MHz)
+Test Vector  96: 52 cycles (0.52 us @ 100MHz)
+Test Vector  97: 52 cycles (0.52 us @ 100MHz)
+Test Vector  98: 52 cycles (0.52 us @ 100MHz)
+Test Vector  99: 52 cycles (0.52 us @ 100MHz)
+Test Vector 100: 52 cycles (0.52 us @ 100MHz)
+
+==========================================================
+SUMMARY
+==========================================================
+Total Test Vectors: 100
+Total Cycles:       5200
+Average Cycles:     52.00
+Total Time:         52.00 us @ 100MHz
+Average Time:       0.52 us @ 100MHz
+Throughput:         1923.08 computations/ms @ 100MHz
+==========================================================

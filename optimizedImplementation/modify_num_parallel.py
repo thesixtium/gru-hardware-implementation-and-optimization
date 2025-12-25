@@ -69,8 +69,8 @@ def modify_num_parallel(sv_file, num_parallel=None, int_bits=None, frac_bits=Non
             print(f"Warning: No parameters were modified in {sv_file}")
             if num_parallel is not None:
                 print("  - NUM_PARALLEL parameter not found")
-            if data_width is not None:
-                print("  - DATA_WIDTH parameter not found")
+            if int_bits is not None:
+                print("  - INT_BITS parameter not found")
             if frac_bits is not None:
                 print("  - FRAC_BITS parameter not found")
             if d is not None:
@@ -109,7 +109,7 @@ if __name__ == "__main__":
     modify_num_parallel(
         r"/home/lex/Documents/git/gru-hardware-implementation-and-optimization/optimizedImplementation/gru_cell_parallel.sv",
         num_parallel=2,
-        data_width=15,
+        int_bits=15,
         frac_bits=9,
         d=60,
         h=16

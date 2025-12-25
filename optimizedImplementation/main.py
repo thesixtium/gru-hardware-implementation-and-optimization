@@ -223,8 +223,8 @@ def main():
 
     for attempt in range(1):
         for int_bits in int_width_range:
-            for clock_period in clock_period_range:
-                for num_parallel in num_parallel_range:
+            for num_parallel in num_parallel_range:
+                for clock_period in clock_period_range:
                     for frac_bits in frac_width_range:
 
                         start_time = time.time()
