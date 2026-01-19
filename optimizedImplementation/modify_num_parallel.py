@@ -26,7 +26,7 @@ def modify_num_parallel(sv_file, num_parallel=None, int_bits=None, frac_bits=Non
 
         # Update NUM_PARALLEL if provided
         if num_parallel is not None:
-            pattern = r'(parameter\s+int\s+NUM_PARALLEL\s*=\s*)\d+'
+            pattern = r'((?:parameter|localparam)\s+int\s+NUM_PARALLEL\s*=\s*)\d+'
             new_content = re.sub(pattern, rf'\g<1>{num_parallel}', content)
             if new_content != content:
                 changes_made.append(f"NUM_PARALLEL = {num_parallel}")
@@ -34,7 +34,7 @@ def modify_num_parallel(sv_file, num_parallel=None, int_bits=None, frac_bits=Non
 
         # Update INT_BITS if provided
         if int_bits is not None:
-            pattern = r'(parameter\s+int\s+INT_BITS\s*=\s*)\d+'
+            pattern = r'((?:parameter|localparam)\s+int\s+INT_BITS\s*=\s*)\d+'
             new_content = re.sub(pattern, rf'\g<1>{int_bits}', content)
             if new_content != content:
                 changes_made.append(f"INT_BITS = {int_bits}")
@@ -42,7 +42,7 @@ def modify_num_parallel(sv_file, num_parallel=None, int_bits=None, frac_bits=Non
 
         # Update FRAC_BITS if provided
         if frac_bits is not None:
-            pattern = r'(parameter\s+int\s+FRAC_BITS\s*=\s*)\d+'
+            pattern = r'((?:parameter|localparam)\s+int\s+FRAC_BITS\s*=\s*)\d+'
             new_content = re.sub(pattern, rf'\g<1>{frac_bits}', content)
             if new_content != content:
                 changes_made.append(f"FRAC_BITS = {frac_bits}")
@@ -50,7 +50,7 @@ def modify_num_parallel(sv_file, num_parallel=None, int_bits=None, frac_bits=Non
 
         # Update D if provided
         if d is not None:
-            pattern = r'(parameter\s+int\s+D\s*=\s*)\d+'
+            pattern = r'((?:parameter|localparam)\s+int\s+D\s*=\s*)\d+'
             new_content = re.sub(pattern, rf'\g<1>{d}', content)
             if new_content != content:
                 changes_made.append(f"D = {d}")
@@ -58,7 +58,7 @@ def modify_num_parallel(sv_file, num_parallel=None, int_bits=None, frac_bits=Non
 
         # Update H if provided
         if h is not None:
-            pattern = r'(parameter\s+int\s+H\s*=\s*)\d+'
+            pattern = r'((?:parameter|localparam)\s+int\s+H\s*=\s*)\d+'
             new_content = re.sub(pattern, rf'\g<1>{h}', content)
             if new_content != content:
                 changes_made.append(f"H = {h}")
@@ -107,10 +107,18 @@ def modify_num_parallel(sv_file, num_parallel=None, int_bits=None, frac_bits=Non
 if __name__ == "__main__":
     # Example usage
     modify_num_parallel(
-        r"/home/lex/Documents/git/gru-hardware-implementation-and-optimization/optimizedImplementation/gru_cell_parallel.sv",
-        num_parallel=2,
+        r"/home/lex/Documents/git/gru-hardware-implementation-and-optimization/optimizedImplementation/top_level.sv",
+        num_parallel=15,
         int_bits=15,
-        frac_bits=9,
-        d=60,
-        h=16
+        frac_bits=15,
+        d=15,
+        h=15
+    )
+    modify_num_parallel(
+        r"/home/lex/Documents/git/gru-hardware-implementation-and-optimization/optimizedImplementation/gru_cell_parallel.sv",
+        num_parallel=15,
+        int_bits=15,
+        frac_bits=15,
+        d=15,
+        h=15
     )

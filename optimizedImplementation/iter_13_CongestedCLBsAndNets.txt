@@ -1,0 +1,35 @@
+List of CLB Tiles
+CLEM_X60Y191
+CLEM_X20Y418
+CLEL_R_X20Y418
+CLEM_X11Y461
+CLEM_X62Y323
+CLEM_X62Y361
+CLEL_L_X50Y331
+CLEL_R_X50Y331
+CLEL_R_X41Y282
+CLEM_X22Y421
+CLEL_R_X21Y107
+CLEM_X20Y419
+CLEL_R_X20Y419
+
+List of Congested Nets
+gru_inst/gen_parallel_elements[9].new_elem/gen_mult_h[8].mult_h_inst/n_t_n[11]_i_729__7_n_0
+gru_inst/gen_parallel_elements[9].new_elem/gen_mult_h[8].mult_h_inst/n_t_n[11]_i_730__7_n_0
+gru_inst/gen_parallel_elements[9].new_elem/gen_mult_h[14].mult_h_inst/n_t_n[11]_i_295__8_n_0
+gru_inst/gen_parallel_elements[9].new_elem/gen_mult_h[14].mult_h_inst/n_t_n[11]_i_296__8_n_0
+gru_inst/gen_parallel_elements[15].new_elem/gen_mult_h[5].mult_h_inst/n_t_n[11]_i_124__14_n_0
+gru_inst/gen_parallel_elements[15].new_elem/gen_mult_h[5].mult_h_inst/n_t_n[11]_i_125__14_n_0
+gru_inst/gen_parallel_elements[15].new_elem/gen_mult_h[2].mult_h_inst/n_t_n[11]_i_321__14_n_0
+gru_inst/gen_parallel_elements[15].new_elem/gen_mult_h[4].mult_h_inst/full_product/P[12]
+W_hr[0][14][2]
+W_hr[0][14][3]
+gru_inst/gen_parallel_elements[12].reset_elem/gen_mult_x[8].mult_x_inst/acc_x_sat10_in
+gru_inst/gen_parallel_elements[12].reset_elem/gen_mult_x[8].mult_x_inst/acc_x_sat1
+gru_inst/gen_parallel_elements[12].reset_elem/gen_mult_h[5].mult_h_inst/CO[0]
+gru_inst/gen_parallel_elements[12].reset_elem/gen_mult_h[5].mult_h_inst/r_t_n[11]_i_88__11_0[0]
+W_in[0][48][3]
+W_in[0][48][0]
+b_in[0][0]
+gru_inst/gen_parallel_elements[5].new_elem/gen_mult_x[63].mult_x_inst/full_product/P[2]
+

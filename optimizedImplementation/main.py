@@ -223,8 +223,8 @@ def main():
 
     for attempt in range(1):
         for int_bits in int_width_range:
-            for num_parallel in num_parallel_range:
-                for clock_period in clock_period_range:
+            for clock_period in clock_period_range:
+                for num_parallel in num_parallel_range:
                     for frac_bits in frac_width_range:
 
                         start_time = time.time()
@@ -244,6 +244,15 @@ def main():
 
                             modify_num_parallel(
                                 r"/home/lex/Documents/git/gru-hardware-implementation-and-optimization/optimizedImplementation/gru_cell_parallel.sv",
+                                num_parallel=num_parallel,
+                                int_bits=int_bits,
+                                frac_bits=frac_bits,
+                                d=d,
+                                h=h
+                            )
+
+                            modify_num_parallel(
+                                r"/home/lex/Documents/git/gru-hardware-implementation-and-optimization/optimizedImplementation/top_level.sv",
                                 num_parallel=num_parallel,
                                 int_bits=int_bits,
                                 frac_bits=frac_bits,

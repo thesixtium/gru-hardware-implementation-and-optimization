@@ -12,9 +12,10 @@ module top_level(
     // Parameters matching the GRU cell
     localparam int D = 64;
     localparam int H = 16;
-    localparam int DATA_WIDTH = 15;
-    localparam int FRAC_BITS = 9;
-    localparam int NUM_PARALLEL = 7;
+    localparam int INT_BITS = 10;
+    localparam int FRAC_BITS = 10;
+    localparam int DATA_WIDTH = INT_BITS + FRAC_BITS;
+    localparam int NUM_PARALLEL = 16;
 
     // ========================================================================
     // All signals with keep and dont_touch attributes

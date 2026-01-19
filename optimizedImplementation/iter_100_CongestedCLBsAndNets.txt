@@ -1,0 +1,8 @@
+List of CLB Tiles
+CLEM_X98Y375
+CLEM_X98Y376
+
+List of Congested Nets
+gru_inst/gen_parallel_elements[11].new_elem/gen_mult_h[14].mult_h_inst/i__carry_i_964__12_n_0
+gru_inst/gen_parallel_elements[11].new_elem/gen_mult_h[14].mult_h_inst/full_product_inferred__0/i__carry__0_n_14
+

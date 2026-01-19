@@ -1,0 +1,16 @@
+#
+# An unexpected error has occurred (11)
+#
+Stack:
+/lib/x86_64-linux-gnu/libc.so.6(+0x43090) [0x7f291c528090]
+/tools/Xilinx/Vivado/2024.1/lib/lnx64.o/librdi_designutils.so(+0x15e6959) [0x7f290748d959]
+/tools/Xilinx/Vivado/2024.1/lib/lnx64.o/librdi_designutils.so(+0x15e7813) [0x7f290748e813]
+/tools/Xilinx/Vivado/2024.1/lib/lnx64.o/librdi_designutils.so(HDMetricDB::addMetric(HDMetricDBGroup*, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, bool)+0x46) [0x7f290747fa06]
+/tools/Xilinx/Vivado/2024.1/lib/lnx64.o/librdi_place.so(HAPLClusterCommiterBase<HAPLHalfLegalFullSliceClusterV8CommiterTypes, HAPLHalfLegalFullSliceClusterV8Commiter>::commit(HSTPolymorphicContainerInterface const&)+0xed1) [0x7f28fbf59bc1]
+/tools/Xilinx/Vivado/2024.1/lib/lnx64.o/librdi_place.so(HAPLFSmallShapeDetailPlacer::commitSlices(HAPLClusterBase::ClusterType, bool)+0x2bf) [0x7f28fbc4015f]
+/tools/Xilinx/Vivado/2024.1/lib/lnx64.o/librdi_place.so(HAPLFSmallShapeDetailPlacer::commit(HAPLClusterBase::ClusterType, bool)+0x24e) [0x7f28fbc4072e]
+/tools/Xilinx/Vivado/2024.1/lib/lnx64.o/librdi_place.so(HAPLFSmallShapeDetailPlacer::runNextGen(bool)+0x48d) [0x7f28fbc436ad]
+/tools/Xilinx/Vivado/2024.1/lib/lnx64.o/librdi_implflow.so(HAPLFDPMMTManager::dpMTSLRSmallShapeThreadWorker(boost::ptr_vector<HAPLFSmallShapeDetailPlacer, boost::heap_clone_allocator, void>&, HCTMutex&, unsigned int&, int)+0x633) [0x7f2902a4f7d3]
+/tools/Xilinx/Vivado/2024.1/lib/lnx64.o/librdi_common.so(HCTWorkingThread::threadStart(void*)+0xf8) [0x7f291d8b3d48]
+/lib/x86_64-linux-gnu/libpthread.so.0(+0x8609) [0x7f291c4ca609]
+/lib/x86_64-linux-gnu/libc.so.6(clone+0x43) [0x7f291c604353]

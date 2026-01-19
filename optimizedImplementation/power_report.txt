@@ -1,7 +1,7 @@
 Copyright 1986-2022 Xilinx, Inc. All Rights Reserved. Copyright 2022-2024 Advanced Micro Devices, Inc. All Rights Reserved.
 -------------------------------------------------------------------------------------------------------------------------------------------------
 | Tool Version     : Vivado v.2024.1 (lin64) Build 5076996 Wed May 22 18:36:09 MDT 2024
-| Date             : Thu Dec 25 03:12:26 2025
+| Date             : Mon Jan 19 10:22:02 2026
 | Host             : Toothless running 64-bit Ubuntu 20.04.6 LTS
 | Command          : report_power -file power_report.txt
 | Design           : top_level
@@ -30,10 +30,10 @@ Table of Contents
 ----------
 
 +--------------------------+--------------+
-| Total On-Chip Power (W)  | 2.949        |
+| Total On-Chip Power (W)  | 2.953        |
 | Design Power Budget (W)  | Unspecified* |
 | Power Budget Margin (W)  | NA           |
-| Dynamic (W)              | 0.005        |
+| Dynamic (W)              | 0.008        |
 | Device Static (W)        | 2.944        |
 | Effective TJA (C/W)      | 0.5          |
 | Max Ambient (C)          | 98.5         |
@@ -53,16 +53,16 @@ Table of Contents
 | On-Chip        | Power (W) | Used     | Available | Utilization (%) |
 +----------------+-----------+----------+-----------+-----------------+
 | Clocks         |    <0.001 |        3 |       --- |             --- |
-| CLB Logic      |     0.001 |   134299 |       --- |             --- |
-|   LUT as Logic |     0.001 |    83158 |   1728000 |            4.81 |
-|   Register     |    <0.001 |     1913 |   3456000 |            0.06 |
-|   Others       |     0.000 |      124 |       --- |             --- |
-|   CARRY8       |     0.000 |     3392 |    216000 |            1.57 |
-| Signals        |     0.001 |   160918 |       --- |             --- |
-| DSPs           |     0.002 |     2064 |     12288 |           16.80 |
+| CLB Logic      |     0.002 |   633408 |       --- |             --- |
+|   LUT as Logic |     0.002 |   416078 |   1728000 |           24.08 |
+|   CARRY8       |    <0.001 |    32496 |    216000 |           15.04 |
+|   Register     |    <0.001 |     3287 |   3456000 |            0.10 |
+|   Others       |     0.000 |    12500 |       --- |             --- |
+| Signals        |     0.001 |   641503 |       --- |             --- |
+| DSPs           |     0.004 |     4128 |     12288 |           33.59 |
 | I/O            |    <0.001 |        4 |       676 |            0.59 |
 | Static Power   |     2.944 |          |           |                 |
-| Total          |     2.949 |          |           |                 |
+| Total          |     2.953 |          |           |                 |
 +----------------+-----------+----------+-----------+-----------------+
 
 
@@ -72,7 +72,7 @@ Table of Contents
 +------------+-------------+-----------+-------------+------------+-------------+-------------+------------+
 | Source     | Voltage (V) | Total (A) | Dynamic (A) | Static (A) | Powerup (A) | Budget (A)  | Margin (A) |
 +------------+-------------+-----------+-------------+------------+-------------+-------------+------------+
-| Vccint     |       0.850 |     1.140 |       0.005 |      1.135 |       NA    | Unspecified | NA         |
+| Vccint     |       0.850 |     1.144 |       0.010 |      1.135 |       NA    | Unspecified | NA         |
 | Vccint_io  |       0.850 |     0.142 |       0.000 |      0.142 |       NA    | Unspecified | NA         |
 | Vccbram    |       0.850 |     0.020 |       0.000 |      0.020 |       NA    | Unspecified | NA         |
 | Vccaux     |       1.800 |     0.887 |       0.000 |      0.887 |       NA    | Unspecified | NA         |
@@ -144,8 +144,8 @@ Table of Contents
 +------------+-----------+
 | Name       | Power (W) |
 +------------+-----------+
-| top_level  |     0.005 |
-|   gru_inst |     0.004 |
+| top_level  |     0.008 |
+|   gru_inst |     0.008 |
 +------------+-----------+
 
 

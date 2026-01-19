@@ -1,0 +1,7 @@
+List of CLB Tiles
+CLEM_X103Y420
+
+List of Congested Nets
+gru_inst/gen_parallel_elements[1].new_elem/gen_mult_h[8].mult_h_inst/full_product/P[12]
+gru_inst/gen_parallel_elements[1].new_elem/gen_mult_h[10].mult_h_inst/full_product/P[13]
+
