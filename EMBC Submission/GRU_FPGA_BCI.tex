@@ -45,86 +45,78 @@
 
 \section{Introduction}
 
-Brain-Computer Interfaces (BCIs) enable communication between the human brain and external devices by processing neural 
-signals through machine learning algorithms. These systems follow a structured pipeline encompassing signal acquisition, 
-preprocessing, feature extraction, classification, and device control \cite{Nicolas-Alonso_Gomez-Gil_2012}. Due to the temporal and sequential nature of 
-brain signals, machine learning algorithms capable of capturing dependencies over time are required. Gated Recurrent 
-Units (GRUs) offer a computationally efficient solution for modeling these time-series signals, achieving performance 
-comparable to commonly used Long Short-Term Memory (LSTM) networks while requiring significantly fewer computational 
-resources due to their simplified architecture \cite{Cho_van, chung2014empiricalevaluationgatedrecurrent}.
+BCI systems are predominantly deployed on Central Processing Units (CPUs) and Graphics Processing Units (GPUs) []. 
+While these platforms offer programming flexibility and ease of development, they present significant limitations for 
+practical BCI applications. CPUs execute instructions sequentially with limited parallelism, resulting in higher 
+latency for real-time neural signal processing. GPUs, while providing substantial parallel processing capabilities, 
+consume considerable power, making them unsuitable for portable, wearable, or 
+implantable BCI devices. Both platforms face fundamental trade-offs between computational performance and power 
+efficiency that constrain their viability for BCI systems requiring continuous operation, immediate 
+responsiveness, and extended battery life.
 
-The deployment platform for BCI systems critically impacts their practical viability, particularly for real-time, 
-low-power applications. Field-Programmable Gate Arrays (FPGAs) provide significant advantages over traditional Central 
-Processing Unit (CPU) and Graphics Processing Unit (GPU) implementations due to their reconfigurable hardware, high 
-parallelism, and superior power efficiency \cite{Schneider_2025, fpgaGpu, Pacini_Pacini_Lai_Zocco_Fanucci_2024}. Despite these benefits, the first hardware implementation of a GRU 
-was not presented until 2021 by Zaghloul et al. \cite{Zaghloul_Elsayed_2021}.
+Field-Programmable Gate Arrays (FPGAs) offer a compelling alternative deployment platform that addresses these 
+limitations through fundamentally different architectural characteristics. FPGAs provide reconfigurable hardware that 
+enables flexible deployment and updating of different BCI machine learning models while maintaining the performance 
+benefits of custom hardware implementations. Their architecture supports massive parallelism through spatially 
+distributed logic resources, enabling simultaneous execution of multiple operations that would require sequential 
+processing on CPUs. This parallelism translates directly to superior power efficiency, with FPGA implementations 
+often consuming orders of magnitude less power than equivalent GPU solutions while maintaining comparable or superior 
+throughput. The low-latency characteristics of FPGA implementations are particularly valuable for closed-loop BCI 
+applications where milliseconds of delay can significantly impact system usability and user experience. Cai et al. 
+demonstrated these advantages in practice by implementing an epilepsy detection algorithm on an FPGA, showing that 
+FPGA-based BCI systems achieve higher accuracy than software-based implementations while simultaneously reducing power 
+consumption.
 
-This research explores how fundamental design parameters affect the trade-offs between resource utilization, inference 
-speed, power consumption, and accuracy in FPGA-based GRU implementations for BCI applications. Specifically, we 
-investigate the following research question: "How does input size, hidden state size, and word size
-affect resource usage, inference time, power consumption, and accuracy of brain-computer 
-interface gated recurrent unit machine learning models deployed on field-programmable gate arrays?"
+The potential of GRU implementations on FPGAs for BCI applications has begun to be explored, though fundamental 
+questions about their design remain unresolved. Zaghloul et al. presented the first hardware implementation of a GRU 
+in 2021, demonstrating substantial resource efficiency advantages over LSTM implementations. Their GRU hardware 
+implementation used 50\% fewer Buffers, 42\% fewer Digital Signal Processors (DSPs), 39\% less Block RAM (BRAM), 
+and 35\% fewer Slice Look-Up Tables (LUTs) compared to an LSTM implementation, while also achieving higher inference 
+performance per Watt and lower execution time. This work established that GRUs are more resource-efficient than LSTMs 
+when implemented in hardware, confirming the computational advantages suggested by algorithmic analysis. Rizwan et al. 
+subsequently refined this implementation in 2025, advancing the hardware architecture. However, while these studies 
+demonstrated that hardware GRU implementations are viable and efficient compared to LSTMs, they did not systematically 
+investigate how specific design parameters within GRU implementations affect the complex trade-offs between resource 
+utilization, timing performance, power consumption, and computational accuracy.
 
-The primary objective of this research is to systematically characterize how different design parameters affect the 
-performance metrics of hardware-implemented GRUs. By quantifying the trade-offs between competing design goals, this 
-work aims to provide actionable guidance for designing optimal FPGA-based GRUs for BCI systems. Understanding the 
-relationships between parameters is crucial for determining the best GRU design for specific application 
-constraints.
+A critical gap remains in understanding the relationships between fundamental design parameters and system performance 
+in FPGA-based GRU implementations. When designing hardware for BCI applications, engineers must make decisions about 
+input dimensionality (corresponding to the number of neural signal channels), hidden state size (determining the 
+network's representational capacity), and numerical precision (affecting both accuracy and hardware cost). Each of 
+these parameters influences multiple performance metrics simultaneously, creating a complex design space with 
+non-obvious trade-offs. For instance, increasing numerical precision improves computational accuracy but may degrade 
+timing performance and increase power consumption. Similarly, larger hidden states enhance model capacity but consume 
+more hardware resources and may impact inference latency. Without systematic characterization of these relationships, 
+designers must rely on intuition or exhaustive trial-and-error approaches, potentially resulting in suboptimal 
+implementations that either over-provision resources or fail to meet performance requirements.
+
+This research addresses this gap by systematically investigating the question: "How does input size, hidden state size, 
+and word size affect resource usage, inference time, power consumption, and accuracy of brain-computer interface gated 
+recurrent unit machine learning models deployed on field-programmable gate arrays?" The primary objective is to 
+quantitatively characterize how different design parameters affect the trade-offs between competing performance 
+metrics in FPGA-based GRU implementations. By establishing these relationships through comprehensive design space 
+exploration, this work provides actionable guidance for designing optimal FPGA-based GRUs for specific BCI application 
+constraints. Understanding these trade-offs is crucial for determining the best GRU design for scenarios with different 
+priorities—whether minimizing power consumption for wearable devices, maximizing accuracy for clinical applications, 
+or balancing multiple objectives for general-purpose BCI systems.
+
+The hardware implementation architecture investigated in this work builds upon the foundation established by Zaghloul 
+et al. The architecture consists of two primary modules: the gate module and the output module. The gate module 
+implements the reset gate, update gate, and activation functions using two Multiply-and-Accumulate (MAC) units that 
+are summed and passed through sigmoid or tanh activation functions. The output module performs Hadamard products and 
+summation to generate the final hidden state. In modern implementations, GRUs are calculated using the following 
+equations:
 
 
-\section{Background and Related Work}
+By providing the first systematic quantification of how input dimensionality, hidden state size, and numerical 
+precision affect the multidimensional performance space of FPGA-based GRU implementations, this research establishes 
+a foundation for principled hardware design decisions in BCI applications. The insights derived from this 
+characterization enable engineers to navigate the complex trade-offs inherent in hardware neural network 
+implementations, ultimately advancing the development of efficient, accurate, and practical FPGA-based BCI systems 
+suitable for clinical deployment and assistive technology applications.
 
-\subsection{Gated Recurrent Units for BCI Applications}
 
-EEG signals used in BCI are often lengthy, one-dimensional, complicated, and nonlinear time sequence signals. Due to 
-these signal characteristics, Recurrent Neural Networks (RNNs) are commonly used to model this data. However, simple 
-RNNs suffer from vanishing and exploding gradient problems, making them struggle to learn long-term dependencies \cite{Bengio_Simard_Frasconi_1994}. 
-To address this, Hochreiter et al. proposed Long Short-Term Memory (LSTM) units, which use gates to selectively retain, 
-update, and output information \cite{Hochreiter_Schmidhuber_1997}.
 
-GRUs, proposed by Cho et al., are a type of hidden unit similar to LSTM units but 
-computationally simpler and more efficient. GRUs use only two gates, compared to LSTMs using four gates, to control 
-information flow through the hidden state allowing them to capture dependencies over multiple time scales \cite{Cho_van}. 
-Chung et al. demonstrated that GRUs and LSTMs achieve comparable performance on multiple datasets \cite{chung2014empiricalevaluationgatedrecurrent}. Rivas et 
-al. found GRU's and LSTM's performance comparable over several evaluation metrics including Root Mean Square Error (RMSE), 
-Mean Square Error (MSE), and Mean Average Error (MAE) \cite{Garcia_Camara_2025}.
-
-In modern implementations, GRUs are calculated using Equations~\eqref{eq:reset_gate}--\eqref{eq:hidden_state} \cite{zhang2023dive, PyTorch_2023}.
-
-\begin{align}
-r_t &= \sigma(W_{ir} x_t + b_{ir} + W_{hr} h_{t-1} + b_{hr}) \label{eq:reset_gate} \\
-n_t &= \tanh(W_{in} x_t + b_{in} + r_t \odot (W_{hn} h_{t-1} + b_{hn})) \label{eq:candidate} \\
-z_t &= \sigma(W_{iz} x_t + b_{iz} + W_{hz} h_{t-1} + b_{hz}) \label{eq:update_gate} \\
-h_t &= (1-z_t) \odot n_t + z_t \odot h_{t-1} \label{eq:hidden_state}
-\end{align}
-
-$r_t$ (defined by Equation~\eqref{eq:reset_gate}) is the reset gate, $n_t$ (defined by Equation~\eqref{eq:candidate}) 
-is the candidate hidden state, $z_t$ (defined by Equation~\eqref{eq:update_gate}) is the update gate, and $h_t$ (defined 
-by Equation~\eqref{eq:hidden_state}) is the final hidden state. The variables are defined as follows: $d$ is the input 
-feature dimension, $h$ is the number of hidden units, $x_t \in \mathbb{R}^d$ is the input vector at timestep $t$, 
-$h_{t-1} \in \mathbb{R}^h$ is the previous hidden state, $W_{ir}, W_{iz}, W_{in} \in \mathbb{R}^{h \times d}$ are 
-input-to-hidden weight matrices, $W_{hr}, W_{hz}, W_{hn} \in \mathbb{R}^{h \times h}$ are hidden-to-hidden weight 
-matrices, $b_{ir}, b_{iz}, b_{in}, b_{hr}, b_{hz}, b_{hn} \in \mathbb{R}^h$ are bias vectors, $\sigma$ denotes the 
-sigmoid activation function, $\tanh$ denotes the hyperbolic tangent function, and $\odot$ denotes the Hadamard (element-wise) 
-product.
-
-\subsection{FPGA-Based Neural Network Implementations}
-
-FPGAs are well-suited for BCI systems because their reconfigurability allows for flexible deployment and updating of 
-different BCI machine learning models, while their high performance and low power consumption make them ideal for edge 
-deployment close to users \cite{Schneider_2025, fpgaGpu, Pacini_Pacini_Lai_Zocco_Fanucci_2024}. In 2021, Cai et al. implemented an epilepsy detection algorithm on an FPGA, 
-demonstrating that FPGA-based BCI systems tend to have higher accuracy than software-based implementations while 
-achieving improved classification performance and reduced power consumption \cite{Cai_Li_Cheng_Yuan_Li_Li_2024}.
-
-As shown by Zaghoul et al., the GRU hardware implementation used 50\% fewer Buffers, 42\% fewer Digital Signal Processors 
-(DSPs), 39\% less Block RAM (BRAM), and 35\% fewer Slice Look-Up Tables (LUTs) compared to an LSTM implementation \cite{Zaghloul_Elsayed_2021}. 
-Additionally, the GRU had higher inference performance per Watt and lower execution time \cite{Zaghloul_Elsayed_2021}. This implementation was later 
-refined by Rizwan et al. in 2025 \cite{Rizwan}.
-
-The hardware implementation architecture consists of two primary modules: the gate module and the output module. The 
-gate module implements the reset gate, update gate, and activation functions using two Multiply-and-Accumulate (MAC) 
-units that are summed and passed through sigmoid or tanh activation functions. The output module performs Hadamard 
-products and summation to generate the final hidden state \cite{Zaghloul_Elsayed_2021}.
 
 
 \section{Methodology}

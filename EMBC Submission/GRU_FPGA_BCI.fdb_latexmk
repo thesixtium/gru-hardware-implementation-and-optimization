@@ -1,13 +1,13 @@
 # Fdb version 4
-["bibtex GRU_FPGA_BCI"] 1764958290.91837 "GRU_FPGA_BCI.aux" "GRU_FPGA_BCI.bbl" "GRU_FPGA_BCI" 1764958862.07508 0
+["bibtex GRU_FPGA_BCI"] 1767915591.47458 "GRU_FPGA_BCI.aux" "GRU_FPGA_BCI.bbl" "GRU_FPGA_BCI" 1767915596.56367 0
   "./references.bib" 1764956825 7153 0e2896c17e36d302f88f868096ba8278 ""
   "C:/Users/ajrbe/AppData/Local/Programs/MiKTeX/bibtex/bst/ieeetran/IEEEtran.bst" 1440622569 57748 7c8250ecf02814ce6ddc0cdbb63df1dd ""
-  "GRU_FPGA_BCI.aux" 1764958860 5984 4c357cd4a29fe292618b7c451519a44d "pdflatex"
+  "GRU_FPGA_BCI.aux" 1767915594 4237 0e2f8e32eb8af385210e90b9c84add8e "pdflatex"
   (generated)
   "GRU_FPGA_BCI.bbl"
   "GRU_FPGA_BCI.blg"
   (rewritten before read)
-["pdflatex"] 1764958859.7081 "c:/Users/ajrbe/Documents/School/Thesis/BCI/gru-hardware-implementation-and-optimization/EMBC Submission/GRU_FPGA_BCI.tex" "GRU_FPGA_BCI.pdf" "GRU_FPGA_BCI" 1764958862.07728 0
+["pdflatex"] 1767915592.33635 "c:/Users/ajrbe/Documents/School/Thesis/BCI/gru-hardware-implementation-and-optimization/EMBC Submission/GRU_FPGA_BCI.tex" "GRU_FPGA_BCI.pdf" "GRU_FPGA_BCI" 1767915596.56542 0
   "C:/Users/ajrbe/AppData/Local/MiKTeX/fonts/map/pdftex/pdftex.map" 1761268182 82507 a9eef8696c92627b87e9975edea03b2a ""
   "C:/Users/ajrbe/AppData/Local/MiKTeX/miktex/data/le/pdftex/pdflatex.fmt" 1761086364 13321623 f81ef0e0f696d6e51926e6645b452cf8 ""
   "C:/Users/ajrbe/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/base/8r.enc" 1458473887 4993 80dc9bab7f31fb78a000ccfed0e27cab ""
@@ -78,16 +78,16 @@
   "C:/Users/ajrbe/AppData/Local/Programs/MiKTeX/tex/latex/l3backend/l3backend-pdftex.def" 1751005717 30351 a2b09edc6c93a742566b222c33d0278e ""
   "C:/Users/ajrbe/AppData/Local/Programs/MiKTeX/tex/latex/psnfss/ot1ptm.fd" 1585253778 1007 15056f4a61917ceed3a44e4ac11fcc52 ""
   "C:/Users/ajrbe/AppData/Local/Programs/MiKTeX/tex/latex/xcolor/xcolor.sty" 1729265222 55384 b454dec21c2d9f45ec0b793f0995b992 ""
-  "GRU_FPGA_BCI.aux" 1764958860 5984 4c357cd4a29fe292618b7c451519a44d "pdflatex"
-  "GRU_FPGA_BCI.bbl" 1764958291 6629 73b924f28a82df6ea649e6c49f73eca1 "bibtex GRU_FPGA_BCI"
-  "GRU_FPGA_BCI.tex" 1764958859 32539 4dbdc22ecdced1d27770e2c7c4041270 ""
+  "GRU_FPGA_BCI.aux" 1767915594 4237 0e2f8e32eb8af385210e90b9c84add8e "pdflatex"
+  "GRU_FPGA_BCI.bbl" 1767915592 3136 c5784e0297a06636454c4987062a8791 "bibtex GRU_FPGA_BCI"
+  "GRU_FPGA_BCI.tex" 1767915576 32356 ac898f1b230563e79a13a50a4478e149 ""
   "IEEEtran.cls" 1761085484 288304 5b2e4fa15b0f7eabb840ebf67df4c0f7 ""
   "boxplot_colored_MAE.png" 1764951865 150355 320f6b865f7acb393b98b092add41908 ""
   "boxplot_colored_RMSE.png" 1764951866 156749 27079bff6069020e609b7d48b6a33b1a ""
-  "c:/Users/ajrbe/Documents/School/Thesis/BCI/gru-hardware-implementation-and-optimization/EMBC Submission/GRU_FPGA_BCI.tex" 1764958859 32539 4dbdc22ecdced1d27770e2c7c4041270 ""
+  "c:/Users/ajrbe/Documents/School/Thesis/BCI/gru-hardware-implementation-and-optimization/EMBC Submission/GRU_FPGA_BCI.tex" 1767915576 32356 ac898f1b230563e79a13a50a4478e149 ""
   "describe_output.png" 1764951617 17308 3bb4b0faf804db029c6adea5dae81f3a ""
   "df_fail.png" 1764906189 7269 71f14ef6a2f5bcd1c9b4658101852867 ""
-  "reduced_corr_matrix.png" 1764951618 208981 ba3156dbcee1d764a66b7cc29e44b19f ""
+  "reduced_corr_matrix.png" 1767915576 220279 62d568cb1d1ef8bd27f0a8990740b7ad ""
   (generated)
   "GRU_FPGA_BCI.aux"
   "GRU_FPGA_BCI.log"
