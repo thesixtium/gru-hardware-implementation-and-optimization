@@ -1,7 +1,0 @@
-List of CLB Tiles
-CLEL_R_X81Y292
-
-List of Congested Nets
-b_iz[0][11]
-gru_inst/gen_parallel_elements[0].update_elem/gen_mult_x[62].mult_x_inst/full_product/P[16]
-

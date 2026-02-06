@@ -1,8 +1,0 @@
-List of CLB Tiles
-CLEM_X18Y336
-CLEL_R_X18Y336
-
-List of Congested Nets
-gru_inst/gen_parallel_elements[13].new_elem/p_1_out__85/P[18]
-gru_inst/gen_parallel_elements[13].new_elem/p_1_out__85/P[19]
-

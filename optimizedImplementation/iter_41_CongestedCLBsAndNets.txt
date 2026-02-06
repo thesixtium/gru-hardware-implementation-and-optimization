@@ -1,6 +1,0 @@
-List of CLB Tiles
-CLEM_X63Y356
-CLEL_R_X63Y356
-
-List of Congested Nets
-

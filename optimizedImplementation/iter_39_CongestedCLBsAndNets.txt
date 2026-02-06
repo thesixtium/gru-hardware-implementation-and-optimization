@@ -1,9 +1,0 @@
-List of CLB Tiles
-CLEM_X83Y296
-CLEL_R_X83Y296
-CLEL_R_X74Y305
-
-List of Congested Nets
-gru_inst/r_t_storage_reg[7][4]
-gru_inst/r_t_storage_reg[5][4]
-

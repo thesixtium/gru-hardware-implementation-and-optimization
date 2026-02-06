@@ -200,7 +200,7 @@ def main():
         f.write("")
 
     count = 0
-    clock_period_range = [ 2, 2.5, 4, 20, 100, 500, 1000 ]
+    clock_period_range = [ 10 ]
     """
     https://docs.amd.com/v/u/en-US/ds181_Artix_7_Data_Sheet
     500 MHz: -period 2.000
@@ -212,7 +212,7 @@ def main():
 
     num_parallel_range = [ 1, 2, 4, 8, 16 ]
     int_width_range = [ 10 ]
-    frac_width_range = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11]
+    frac_width_range = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16]
 
     total = len(clock_period_range) * len(num_parallel_range) * len(int_width_range) * len(frac_width_range)
 

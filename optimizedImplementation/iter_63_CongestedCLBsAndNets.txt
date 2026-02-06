@@ -1,5 +1,0 @@
-List of CLB Tiles
-CLEL_R_X91Y310
-
-List of Congested Nets
-
