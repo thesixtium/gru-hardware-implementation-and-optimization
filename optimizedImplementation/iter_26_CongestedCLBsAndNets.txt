@@ -1,0 +1,21 @@
+List of CLB Tiles
+CLEM_X114Y335
+CLEL_R_X113Y333
+CLEL_R_X110Y319
+CLEM_X107Y337
+CLEL_R_X107Y337
+CLEM_X92Y706
+CLEM_X90Y746
+CLEL_R_X90Y746
+CLEL_R_X86Y678
+CLEM_X85Y533
+CLEL_R_X85Y533
+CLEM_X55Y751
+CLEL_R_X55Y751
+
+List of Congested Nets
+gru_inst/gen_parallel_elements[7].reset_elem/gen_mult_x[1].mult_x_inst/full_product__0/P[5]
+gru_inst/gen_parallel_elements[7].reset_elem/gen_mult_x[0].mult_x_inst/full_product__0/P[5]
+gru_inst/gen_parallel_elements[4].new_elem/gen_mult_h[10].mult_h_inst/full_product__0/P[3]
+gru_inst/gen_parallel_elements[4].new_elem/gen_mult_h[9].mult_h_inst/full_product__0/P[4]
+

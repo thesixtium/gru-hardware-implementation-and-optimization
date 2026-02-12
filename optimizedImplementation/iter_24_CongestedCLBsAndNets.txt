@@ -1,0 +1,28 @@
+List of CLB Tiles
+CLEM_X112Y409
+CLEL_R_X112Y409
+CLEL_L_X129Y265
+CLEL_R_X129Y265
+CLEL_R_X113Y415
+CLEL_R_X124Y293
+CLEM_X120Y436
+CLEL_R_X120Y436
+CLEM_X120Y437
+CLEL_R_X120Y437
+CLEM_X114Y415
+CLEM_X114Y416
+CLEL_R_X113Y414
+CLEM_X112Y424
+CLEL_R_X112Y424
+
+List of Congested Nets
+gru_inst/gen_parallel_elements[3].new_elem/gen_mult_h[12].mult_h_inst/i__carry__0_i_8__952_0[1]
+gru_inst/gen_parallel_elements[3].new_elem/gen_mult_h[11].mult_h_inst/O[2]
+gru_inst/gen_parallel_elements[1].new_elem/gen_mult_h[2].mult_h_inst/y0_carry_i_523__0_1[0]
+gru_inst/gen_parallel_elements[1].new_elem/gen_mult_h[5].mult_h_inst/y0_carry_i_97__0_n_0
+gru_inst/gen_parallel_elements[1].new_elem/gen_mult_h[5].mult_h_inst/y0_carry_i_98__0_n_0
+gru_inst/gen_parallel_elements[0].new_elem/gen_mult_h[5].mult_h_inst/O[1]
+gru_inst/gen_parallel_elements[0].new_elem/gen_mult_h[6].mult_h_inst/i__carry__0_i_8__172_0[1]
+gru_inst/gen_parallel_elements[0].new_elem/gen_mult_h[6].mult_h_inst/i__carry_i_8__172_0[3]
+gru_inst/gen_parallel_elements[0].new_elem/gen_mult_h[7].mult_h_inst/i__carry_i_8__174_0[3]
+

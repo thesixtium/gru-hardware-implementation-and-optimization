@@ -1,0 +1,36 @@
+List of CLB Tiles
+CLEM_X105Y318
+CLEL_R_X105Y318
+CLEM_X105Y323
+CLEL_R_X105Y323
+CLEM_X106Y318
+CLEM_X106Y330
+CLEM_X105Y306
+CLEL_R_X105Y306
+CLEM_X105Y319
+CLEL_R_X105Y319
+CLEM_X105Y320
+CLEL_R_X105Y320
+CLEM_X105Y321
+CLEL_R_X105Y321
+CLEL_L_X102Y305
+CLEL_R_X102Y305
+CLEL_L_X102Y335
+CLEL_R_X102Y335
+
+List of Congested Nets
+gru_inst/gen_parallel_elements[0].new_elem/tanh_inst/sig_inst/pre_act[17]
+gru_inst/gen_parallel_elements[0].new_elem/n_t_n[15]_i_22_n_0
+gru_inst/gen_parallel_elements[0].new_elem/p_1_out__92/P[19]
+gru_inst/gen_parallel_elements[0].new_elem/p_1_out__91/P[19]
+gru_inst/r_t_storage_reg_n_0_[15][18]
+gru_inst/r_t_storage_reg_n_0_[14][18]
+gru_inst/r_t_storage_reg_n_0_[9][2]
+gru_inst/r_t_storage_reg_n_0_[8][2]
+gru_inst/gen_parallel_elements[0].new_elem/p_1_out__63_i_46_n_0
+gru_inst/gen_parallel_elements[0].new_elem/p_1_out__63_i_47_n_0
+gru_inst/r_t_storage_reg_n_0_[1][2]
+gru_inst/r_t_storage_reg_n_0_[3][2]
+gru_inst/gen_parallel_elements[0].new_elem/i__carry_i_873_n_10
+gru_inst/gen_parallel_elements[0].new_elem/i__carry_i_874_n_10
+

@@ -1,0 +1,10 @@
+List of CLB Tiles
+CLEM_X40Y362
+CLEL_R_X40Y362
+CLEM_X24Y379
+CLEL_R_X24Y379
+
+List of Congested Nets
+gru_inst/gen_parallel_elements[6].new_elem/gen_mult_h[10].mult_h_inst/n_t_n[11]_i_743__5_0[0]
+gru_inst/gen_parallel_elements[6].new_elem/gen_mult_h[7].mult_h_inst/n_t_n[11]_i_733__5_1[0]
+

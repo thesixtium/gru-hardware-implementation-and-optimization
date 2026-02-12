@@ -13,7 +13,7 @@ module top_level(
     localparam int D = 64;
     localparam int H = 16;
     localparam int INT_BITS = 10;
-    localparam int FRAC_BITS = 11;
+    localparam int FRAC_BITS = 16;
     localparam int DATA_WIDTH = INT_BITS + FRAC_BITS;
     localparam int NUM_PARALLEL = 16;
 

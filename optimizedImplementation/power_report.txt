@@ -1,7 +1,7 @@
 Copyright 1986-2022 Xilinx, Inc. All Rights Reserved. Copyright 2022-2024 Advanced Micro Devices, Inc. All Rights Reserved.
 -------------------------------------------------------------------------------------------------------------------------------------------------
 | Tool Version     : Vivado v.2024.1 (lin64) Build 5076996 Wed May 22 18:36:09 MDT 2024
-| Date             : Mon Jan 19 10:22:02 2026
+| Date             : Thu Feb 12 04:05:59 2026
 | Host             : Toothless running 64-bit Ubuntu 20.04.6 LTS
 | Command          : report_power -file power_report.txt
 | Design           : top_level
@@ -30,14 +30,14 @@ Table of Contents
 ----------
 
 +--------------------------+--------------+
-| Total On-Chip Power (W)  | 2.953        |
+| Total On-Chip Power (W)  | 4.227        |
 | Design Power Budget (W)  | Unspecified* |
 | Power Budget Margin (W)  | NA           |
-| Dynamic (W)              | 0.008        |
-| Device Static (W)        | 2.944        |
+| Dynamic (W)              | 1.259        |
+| Device Static (W)        | 2.968        |
 | Effective TJA (C/W)      | 0.5          |
-| Max Ambient (C)          | 98.5         |
-| Junction Temperature (C) | 26.5         |
+| Max Ambient (C)          | 97.8         |
+| Junction Temperature (C) | 27.2         |
 | Confidence Level         | Medium       |
 | Setting File             | ---          |
 | Simulation Activity File | ---          |
@@ -52,17 +52,17 @@ Table of Contents
 +----------------+-----------+----------+-----------+-----------------+
 | On-Chip        | Power (W) | Used     | Available | Utilization (%) |
 +----------------+-----------+----------+-----------+-----------------+
-| Clocks         |    <0.001 |        3 |       --- |             --- |
-| CLB Logic      |     0.002 |   633408 |       --- |             --- |
-|   LUT as Logic |     0.002 |   416078 |   1728000 |           24.08 |
-|   CARRY8       |    <0.001 |    32496 |    216000 |           15.04 |
-|   Register     |    <0.001 |     3287 |   3456000 |            0.10 |
-|   Others       |     0.000 |    12500 |       --- |             --- |
-| Signals        |     0.001 |   641503 |       --- |             --- |
-| DSPs           |     0.004 |     4128 |     12288 |           33.59 |
+| Clocks         |     0.025 |        3 |       --- |             --- |
+| CLB Logic      |     0.278 |   347784 |       --- |             --- |
+|   LUT as Logic |     0.278 |   179832 |   1728000 |           10.41 |
+|   CARRY8       |    <0.001 |     9920 |    216000 |            4.59 |
+|   Register     |    <0.001 |     4082 |   3456000 |            0.12 |
+|   Others       |     0.000 |     9740 |       --- |             --- |
+| Signals        |     0.118 |   633841 |       --- |             --- |
+| DSPs           |     0.837 |     8256 |     12288 |           67.19 |
 | I/O            |    <0.001 |        4 |       676 |            0.59 |
-| Static Power   |     2.944 |          |           |                 |
-| Total          |     2.953 |          |           |                 |
+| Static Power   |     2.968 |          |           |                 |
+| Total          |     4.227 |          |           |                 |
 +----------------+-----------+----------+-----------+-----------------+
 
 
@@ -72,10 +72,10 @@ Table of Contents
 +------------+-------------+-----------+-------------+------------+-------------+-------------+------------+
 | Source     | Voltage (V) | Total (A) | Dynamic (A) | Static (A) | Powerup (A) | Budget (A)  | Margin (A) |
 +------------+-------------+-----------+-------------+------------+-------------+-------------+------------+
-| Vccint     |       0.850 |     1.144 |       0.010 |      1.135 |       NA    | Unspecified | NA         |
+| Vccint     |       0.850 |     2.647 |       1.480 |      1.167 |       NA    | Unspecified | NA         |
 | Vccint_io  |       0.850 |     0.142 |       0.000 |      0.142 |       NA    | Unspecified | NA         |
 | Vccbram    |       0.850 |     0.020 |       0.000 |      0.020 |       NA    | Unspecified | NA         |
-| Vccaux     |       1.800 |     0.887 |       0.000 |      0.887 |       NA    | Unspecified | NA         |
+| Vccaux     |       1.800 |     0.885 |       0.000 |      0.885 |       NA    | Unspecified | NA         |
 | Vccaux_io  |       1.800 |     0.104 |       0.000 |      0.104 |       NA    | Unspecified | NA         |
 | Vcco33     |       3.300 |     0.000 |       0.000 |      0.000 |       NA    | Unspecified | NA         |
 | Vcco25     |       2.500 |     0.000 |       0.000 |      0.000 |       NA    | Unspecified | NA         |
@@ -131,7 +131,7 @@ Table of Contents
 +---------+--------+-----------------+
 | Clock   | Domain | Constraint (ns) |
 +---------+--------+-----------------+
-| sys_clk | clk    |          1000.0 |
+| sys_clk | clk    |            10.0 |
 +---------+--------+-----------------+
 
 
@@ -141,11 +141,150 @@ Table of Contents
 3.1 By Hierarchy
 ----------------
 
-+------------+-----------+
-| Name       | Power (W) |
-+------------+-----------+
-| top_level  |     0.008 |
-|   gru_inst |     0.008 |
-+------------+-----------+
++-------------------------------------------+-----------+
+| Name                                      | Power (W) |
++-------------------------------------------+-----------+
+| top_level                                 |     1.259 |
+|   gru_inst                                |     1.256 |
+|     gen_parallel_elements[0].new_elem     |     0.020 |
+|     gen_parallel_elements[0].reset_elem   |     0.016 |
+|     gen_parallel_elements[0].update_elem  |     0.016 |
+|     gen_parallel_elements[10].new_elem    |     0.033 |
+|       gen_mult_x[10].mult_x_inst          |     0.001 |
+|       gen_mult_x[47].mult_x_inst          |     0.002 |
+|       gen_mult_x[52].mult_x_inst          |     0.002 |
+|       tanh_inst                           |     0.002 |
+|     gen_parallel_elements[10].reset_elem  |     0.022 |
+|     gen_parallel_elements[10].update_elem |     0.026 |
+|       gen_mult_h[13].mult_h_inst          |     0.002 |
+|       gen_mult_x[23].mult_x_inst          |     0.001 |
+|       gen_mult_x[40].mult_x_inst          |     0.001 |
+|     gen_parallel_elements[11].hidden_elem |     0.002 |
+|       mult_term2                          |     0.001 |
+|     gen_parallel_elements[11].new_elem    |     0.026 |
+|     gen_parallel_elements[11].reset_elem  |     0.027 |
+|       gen_mult_x[31].mult_x_inst          |     0.001 |
+|       gen_mult_x[33].mult_x_inst          |     0.002 |
+|       gen_mult_x[49].mult_x_inst          |     0.002 |
+|       gen_mult_x[56].mult_x_inst          |     0.001 |
+|     gen_parallel_elements[11].update_elem |     0.024 |
+|       gen_mult_x[43].mult_x_inst          |     0.002 |
+|     gen_parallel_elements[12].new_elem    |     0.029 |
+|       gen_mult_x[25].mult_x_inst          |     0.002 |
+|       gen_mult_x[32].mult_x_inst          |     0.002 |
+|     gen_parallel_elements[12].reset_elem  |     0.022 |
+|     gen_parallel_elements[12].update_elem |     0.024 |
+|       gen_mult_h[2].mult_h_inst           |     0.002 |
+|     gen_parallel_elements[13].new_elem    |     0.027 |
+|       gen_mult_x[29].mult_x_inst          |     0.001 |
+|     gen_parallel_elements[13].reset_elem  |     0.024 |
+|       gen_mult_x[63].mult_x_inst          |     0.002 |
+|     gen_parallel_elements[13].update_elem |     0.024 |
+|       gen_mult_h[5].mult_h_inst           |     0.002 |
+|     gen_parallel_elements[14].hidden_elem |     0.001 |
+|     gen_parallel_elements[14].new_elem    |     0.031 |
+|       gen_mult_x[11].mult_x_inst          |     0.002 |
+|       gen_mult_x[34].mult_x_inst          |     0.002 |
+|       gen_mult_x[61].mult_x_inst          |     0.002 |
+|     gen_parallel_elements[14].reset_elem  |     0.027 |
+|       gen_mult_x[27].mult_x_inst          |     0.001 |
+|       gen_mult_x[43].mult_x_inst          |     0.002 |
+|       gen_mult_x[53].mult_x_inst          |     0.001 |
+|       gen_mult_x[62].mult_x_inst          |     0.002 |
+|     gen_parallel_elements[14].update_elem |     0.022 |
+|     gen_parallel_elements[15].hidden_elem |     0.001 |
+|     gen_parallel_elements[15].new_elem    |     0.026 |
+|     gen_parallel_elements[15].reset_elem  |     0.023 |
+|       gen_mult_x[1].mult_x_inst           |     0.001 |
+|     gen_parallel_elements[15].update_elem |     0.024 |
+|       gen_mult_x[35].mult_x_inst          |     0.002 |
+|     gen_parallel_elements[1].new_elem     |     0.027 |
+|       gen_mult_x[62].mult_x_inst          |     0.001 |
+|     gen_parallel_elements[1].reset_elem   |     0.024 |
+|       gen_mult_h[1].mult_h_inst           |     0.001 |
+|       gen_mult_x[35].mult_x_inst          |     0.001 |
+|     gen_parallel_elements[1].update_elem  |     0.026 |
+|       gen_mult_h[3].mult_h_inst           |     0.002 |
+|       gen_mult_x[61].mult_x_inst          |     0.002 |
+|       gen_mult_x[63].mult_x_inst          |     0.001 |
+|     gen_parallel_elements[2].new_elem     |     0.027 |
+|       gen_mult_x[4].mult_x_inst           |     0.001 |
+|     gen_parallel_elements[2].reset_elem   |     0.024 |
+|       gen_mult_x[57].mult_x_inst          |     0.001 |
+|       gen_mult_x[62].mult_x_inst          |     0.001 |
+|     gen_parallel_elements[2].update_elem  |     0.026 |
+|       gen_mult_x[18].mult_x_inst          |     0.001 |
+|       gen_mult_x[45].mult_x_inst          |     0.002 |
+|       gen_mult_x[47].mult_x_inst          |     0.001 |
+|     gen_parallel_elements[3].hidden_elem  |     0.002 |
+|       mult_term1                          |     0.002 |
+|     gen_parallel_elements[3].new_elem     |     0.028 |
+|       gen_mult_x[4].mult_x_inst           |     0.002 |
+|     gen_parallel_elements[3].reset_elem   |     0.025 |
+|       gen_mult_x[50].mult_x_inst          |     0.001 |
+|       gen_mult_x[61].mult_x_inst          |     0.001 |
+|     gen_parallel_elements[3].update_elem  |     0.026 |
+|       gen_mult_h[4].mult_h_inst           |     0.001 |
+|       gen_mult_h[5].mult_h_inst           |     0.002 |
+|       gen_mult_x[4].mult_x_inst           |     0.001 |
+|     gen_parallel_elements[4].new_elem     |     0.026 |
+|     gen_parallel_elements[4].reset_elem   |     0.023 |
+|       gen_mult_h[8].mult_h_inst           |     0.001 |
+|     gen_parallel_elements[4].update_elem  |     0.023 |
+|       gen_mult_x[22].mult_x_inst          |     0.001 |
+|     gen_parallel_elements[5].new_elem     |     0.031 |
+|       gen_mult_h[0].mult_h_inst           |     0.001 |
+|       gen_mult_h[3].mult_h_inst           |     0.001 |
+|       gen_mult_x[20].mult_x_inst          |     0.001 |
+|       gen_mult_x[47].mult_x_inst          |     0.002 |
+|     gen_parallel_elements[5].reset_elem   |     0.025 |
+|       gen_mult_x[37].mult_x_inst          |     0.001 |
+|       gen_mult_x[4].mult_x_inst           |     0.001 |
+|     gen_parallel_elements[5].update_elem  |     0.023 |
+|     gen_parallel_elements[6].new_elem     |     0.029 |
+|       gen_mult_h[0].mult_h_inst           |     0.001 |
+|       gen_mult_x[30].mult_x_inst          |     0.002 |
+|     gen_parallel_elements[6].reset_elem   |     0.028 |
+|       gen_mult_x[18].mult_x_inst          |     0.001 |
+|       gen_mult_x[51].mult_x_inst          |     0.002 |
+|       gen_mult_x[9].mult_x_inst           |     0.001 |
+|     gen_parallel_elements[6].update_elem  |     0.022 |
+|     gen_parallel_elements[7].new_elem     |     0.032 |
+|       gen_mult_x[17].mult_x_inst          |     0.002 |
+|       gen_mult_x[22].mult_x_inst          |     0.002 |
+|       gen_mult_x[43].mult_x_inst          |     0.001 |
+|       gen_mult_x[44].mult_x_inst          |     0.001 |
+|     gen_parallel_elements[7].reset_elem   |     0.023 |
+|       gen_mult_h[11].mult_h_inst          |     0.002 |
+|     gen_parallel_elements[7].update_elem  |     0.034 |
+|       gen_mult_h[5].mult_h_inst           |     0.001 |
+|       gen_mult_h[7].mult_h_inst           |     0.001 |
+|       gen_mult_x[12].mult_x_inst          |     0.002 |
+|       gen_mult_x[20].mult_x_inst          |     0.001 |
+|       gen_mult_x[32].mult_x_inst          |     0.001 |
+|       gen_mult_x[38].mult_x_inst          |     0.001 |
+|       gen_mult_x[3].mult_x_inst           |     0.002 |
+|       gen_mult_x[50].mult_x_inst          |     0.002 |
+|       gen_mult_x[52].mult_x_inst          |     0.001 |
+|     gen_parallel_elements[8].new_elem     |     0.029 |
+|       gen_mult_x[0].mult_x_inst           |     0.001 |
+|       gen_mult_x[36].mult_x_inst          |     0.002 |
+|       gen_mult_x[8].mult_x_inst           |     0.001 |
+|     gen_parallel_elements[8].reset_elem   |     0.023 |
+|       gen_mult_x[41].mult_x_inst          |     0.001 |
+|     gen_parallel_elements[8].update_elem  |     0.024 |
+|       gen_mult_x[60].mult_x_inst          |     0.001 |
+|     gen_parallel_elements[9].new_elem     |     0.028 |
+|       gen_mult_x[39].mult_x_inst          |     0.002 |
+|     gen_parallel_elements[9].reset_elem   |     0.027 |
+|       gen_mult_h[3].mult_h_inst           |     0.002 |
+|       gen_mult_h[7].mult_h_inst           |     0.002 |
+|       gen_mult_x[5].mult_x_inst           |     0.002 |
+|     gen_parallel_elements[9].update_elem  |     0.028 |
+|       gen_mult_h[11].mult_h_inst          |     0.002 |
+|       gen_mult_h[15].mult_h_inst          |     0.002 |
+|       gen_mult_x[28].mult_x_inst          |     0.002 |
+|       gen_mult_x[41].mult_x_inst          |     0.001 |
++-------------------------------------------+-----------+
 
 
