@@ -4,7 +4,25 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="bc78fd11-c455-41b4-8284-3743fd03d946" name="Changes" comment="" />
+    <list default="true" id="bc78fd11-c455-41b4-8284-3743fd03d946" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/optimizedImplementation/boxplot_Average Utilization.png" beforeDir="false" afterPath="$PROJECT_DIR$/optimizedImplementation/boxplot_Average Utilization.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/optimizedImplementation/boxplot_Clock Period Utilization.png" beforeDir="false" afterPath="$PROJECT_DIR$/optimizedImplementation/boxplot_Clock Period Utilization.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/optimizedImplementation/boxplot_Cycle Utilization.png" beforeDir="false" afterPath="$PROJECT_DIR$/optimizedImplementation/boxplot_Cycle Utilization.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/optimizedImplementation/boxplot_Cycles.png" beforeDir="false" afterPath="$PROJECT_DIR$/optimizedImplementation/boxplot_Cycles.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/optimizedImplementation/boxplot_DSPs.png" beforeDir="false" afterPath="$PROJECT_DIR$/optimizedImplementation/boxplot_DSPs.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/optimizedImplementation/boxplot_LUTs.png" beforeDir="false" afterPath="$PROJECT_DIR$/optimizedImplementation/boxplot_LUTs.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/optimizedImplementation/boxplot_MAE.png" beforeDir="false" afterPath="$PROJECT_DIR$/optimizedImplementation/boxplot_MAE.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/optimizedImplementation/boxplot_RMSE.png" beforeDir="false" afterPath="$PROJECT_DIR$/optimizedImplementation/boxplot_RMSE.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/optimizedImplementation/boxplot_Registers.png" beforeDir="false" afterPath="$PROJECT_DIR$/optimizedImplementation/boxplot_Registers.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/optimizedImplementation/boxplot_Time Utilization.png" beforeDir="false" afterPath="$PROJECT_DIR$/optimizedImplementation/boxplot_Time Utilization.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/optimizedImplementation/boxplot_WNS (ns).png" beforeDir="false" afterPath="$PROJECT_DIR$/optimizedImplementation/boxplot_WNS (ns).png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/optimizedImplementation/df_chunk_0.png" beforeDir="false" afterPath="$PROJECT_DIR$/optimizedImplementation/df_chunk_0.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/optimizedImplementation/df_chunk_20.png" beforeDir="false" afterPath="$PROJECT_DIR$/optimizedImplementation/df_chunk_20.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/optimizedImplementation/df_chunk_40.png" beforeDir="false" afterPath="$PROJECT_DIR$/optimizedImplementation/df_chunk_40.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/optimizedImplementation/df_chunk_60.png" beforeDir="false" afterPath="$PROJECT_DIR$/optimizedImplementation/df_chunk_60.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/optimizedImplementation/stats.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/optimizedImplementation/stats.ipynb" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />

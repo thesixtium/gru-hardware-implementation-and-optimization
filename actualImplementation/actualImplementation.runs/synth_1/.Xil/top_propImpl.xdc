@@ -1,0 +1,11 @@
+set_property SRC_FILE_INFO {cfile:C:/Users/ajrbe/Documents/School/Thesis/BCI/gru-hardware-implementation-and-optimization/actualImplementation/actualImplementation.srcs/constrs_1/new/constraints.xdc rfile:../../../actualImplementation.srcs/constrs_1/new/constraints.xdc id:1} [current_design]
+set_property src_info {type:XDC file:1 line:13 export:INPUT save:INPUT read:READ} [current_design]
+set_property -dict { PACKAGE_PIN E3  IOSTANDARD LVCMOS33 } [get_ports clk]
+set_property src_info {type:XDC file:1 line:17 export:INPUT save:INPUT read:READ} [current_design]
+set_input_jitter sys_clk 0.100
+set_property src_info {type:XDC file:1 line:23 export:INPUT save:INPUT read:READ} [current_design]
+set_property -dict { PACKAGE_PIN C2  IOSTANDARD LVCMOS33 } [get_ports rst_n]
+set_property src_info {type:XDC file:1 line:29 export:INPUT save:INPUT read:READ} [current_design]
+set_property -dict { PACKAGE_PIN A9  IOSTANDARD LVCMOS33 } [get_ports uart_rxd]
+set_property src_info {type:XDC file:1 line:30 export:INPUT save:INPUT read:READ} [current_design]
+set_property -dict { PACKAGE_PIN D10 IOSTANDARD LVCMOS33 } [get_ports uart_txd]
