@@ -1,86 +1,99 @@
-// ============================================================
-// uart_tx.sv
-// Baud: 2,000,000 | Clock: 100 MHz
-// Divider = 100,000,000 / 2,000,000 = 50
-// ============================================================
-module uart_tx (
-    input  logic       clk,
-    input  logic       rst_n,
-    input  logic       tx_start,
-    input  logic [7:0] tx_data,
-    output logic       tx,
-    output logic       tx_busy
+// File info:
+// - Verilog copied from: https://www.instructables.com/UART-Communication-on-Basys-3-FPGA-Dev-Board-Power/
+// - Comments added to show understanding
+// - Transmits one packet worth of data over UART transmit line
+
+module uart_tx(
+    input clk,         // 10 MHz clock
+    input rst_n,       // Active low reset
+    input transmit,    // Whether or not to transmit
+    input [7:0] data,  // Data to transmit
+    output reg TxD     // UART transmit line
 );
-    localparam int DIVIDER = 50;
-
-    typedef enum logic [1:0] {
-        IDLE  = 2'd0,
-        START = 2'd1,
-        DATA  = 2'd2,
-        STOP  = 2'd3
-    } state_t;
-
-    state_t state;
-    logic [$clog2(DIVIDER)-1:0] baud_cnt;
-    logic [2:0] bit_idx;
-    logic [7:0] shift_reg;
-
-    always_ff @(posedge clk or negedge rst_n) begin
+    
+    reg [3:0] bitcounter;
+    reg [13:0] counter;
+    reg state,nextstate;
+    reg [9:0] rightshiftreg; 
+    reg shift;
+    reg load;
+    reg clear;
+    
+    // Does stuff based on flags changed by the FSM
+    always @ (posedge clk) begin 
         if (!rst_n) begin
-            state    <= IDLE;
-            tx       <= 1'b1;
-            tx_busy  <= 1'b0;
-            baud_cnt <= '0;
-            bit_idx  <= '0;
-            shift_reg<= '0;
+            state <=0;
+            counter <=0; 
+            bitcounter <=0;
         end else begin
-            case (state)
-                IDLE: begin
-                    tx      <= 1'b1;
-                    tx_busy <= 1'b0;
-                    if (tx_start) begin
-                        shift_reg <= tx_data;
-                        tx_busy   <= 1'b1;
-                        tx        <= 1'b0; // start bit
-                        baud_cnt  <= '0;
-                        state     <= START;
-                    end
+            counter <= counter + 1; 
+            
+            // 10415 = master clock frequency / baud rate of 9600
+            // Bayas3 is going WAY too fast to be at 9600 baud, so need
+            //     to do stuff only on 9600 Hz
+            if (counter >= 10415) begin 
+                state <= nextstate;
+                counter <=0; 
+                
+                // Load data with needed UART start/stop bits
+                if (load) begin
+                    rightshiftreg <= {1'b1,data,1'b0};
                 end
-                START: begin
-                    if (baud_cnt == DIVIDER - 1) begin
-                        baud_cnt <= '0;
-                        tx       <= shift_reg[0];
-                        bit_idx  <= '0;
-                        state    <= DATA;
-                    end else begin
-                        baud_cnt <= baud_cnt + 1;
-                    end
+                
+                if (clear) begin 
+                    bitcounter <=0;
                 end
-                DATA: begin
-                    if (baud_cnt == DIVIDER - 1) begin
-                        baud_cnt <= '0;
-                        if (bit_idx == 3'd7) begin
-                            tx    <= 1'b1; // stop bit
-                            state <= STOP;
-                        end else begin
-                            bit_idx <= bit_idx + 1;
-                            tx      <= shift_reg[bit_idx + 1];
-                        end
-                    end else begin
-                        baud_cnt <= baud_cnt + 1;
-                    end
+                
+                if (shift) begin
+                    rightshiftreg <= rightshiftreg >> 1;
+                    bitcounter <= bitcounter + 1;
                 end
-                STOP: begin
-                    if (baud_cnt == DIVIDER - 1) begin
-                        baud_cnt <= '0;
-                        state    <= IDLE;
-                        tx_busy  <= 1'b0;
-                    end else begin
-                        baud_cnt <= baud_cnt + 1;
-                    end
-                end
-                default: state <= IDLE;
-            endcase
+            end
         end
+    end 
+    
+    // Finite state machine!
+    always @ (posedge clk) begin
+        load <=0; 
+        shift <=0;
+        clear <=0;
+        TxD <=1;  // Default held high because when UART is idle, the line is high
+         
+        case (state)
+            // Idle
+            0: begin
+                if (transmit) begin
+                    nextstate <= 1; 
+                    load <=1; 
+                    shift <=0;
+                    clear <=0;
+                end else begin 
+                    nextstate <= 0;
+                    TxD <= 1; 
+                end
+            end
+            
+            // Transmitting
+            1: begin
+                // UART is a 10 bit protocol, so if 10 bits have been
+                //     sent then go back to idle
+                if (bitcounter >=10) begin 
+                    nextstate <= 0; 
+                    clear <=1; 
+                end else begin
+                    // Send the next bit in the shift register and shift it
+                    // Shift register works like a queue for this
+                    nextstate <= 1;
+                    TxD <= rightshiftreg[0];
+                    shift <=1; 
+                end
+            end
+        
+            default: nextstate <= 0;                      
+        
+        endcase
     end
+
+    
 endmodule
+
