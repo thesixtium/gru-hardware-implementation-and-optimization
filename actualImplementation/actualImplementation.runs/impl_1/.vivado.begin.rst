@@ -28,3 +28,18 @@
     <Process Command="vivado.bat" Owner="ajrbe" Host="HICCUP" Pid="33652" HostCore="20" HostMemory="033947570176">
     </Process>
 </ProcessHandle>
+<?xml version="1.0"?>
+<ProcessHandle Version="1" Minor="0">
+    <Process Command="vivado.bat" Owner="ajrbe" Host="HICCUP" Pid="36352" HostCore="20" HostMemory="033947570176">
+    </Process>
+</ProcessHandle>
+<?xml version="1.0"?>
+<ProcessHandle Version="1" Minor="0">
+    <Process Command="vivado.bat" Owner="ajrbe" Host="HICCUP" Pid="24252" HostCore="20" HostMemory="033947570176">
+    </Process>
+</ProcessHandle>
+<?xml version="1.0"?>
+<ProcessHandle Version="1" Minor="0">
+    <Process Command="vivado.bat" Owner="ajrbe" Host="HICCUP" Pid="26416" HostCore="20" HostMemory="033947570176">
+    </Process>
+</ProcessHandle>

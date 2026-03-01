@@ -2,8 +2,7 @@
 // Update Gate Element Module (z_t)
 // Computes: z_t[n] = sigmoid(W_iz[n,:] @ x_t + W_hz[n,:] @ h_t_prev + b_iz[n] + b_hz[n])
 //
-// See gru_reset_gate_element.sv for pipeline explanation.
-// Latency: 3*(D+H) + 2 cycles from valid_in to valid_out.
+// pre_act registered before sigmoid - see gru_reset_gate_element.sv.
 // ============================================================================
 module gru_update_gate_element #(
     parameter int D = 128,
@@ -39,7 +38,8 @@ module gru_update_gate_element #(
         S_ACC_X = 3'd2,
         S_SEL_H = 3'd3,
         S_ACC_H = 3'd4,
-        S_DONE  = 3'd5
+        S_WAIT  = 3'd5,
+        S_DONE  = 3'd6
     } state_t;
 
     state_t                            state;
@@ -60,22 +60,29 @@ module gru_update_gate_element #(
         else return val[DATA_WIDTH-1:0];
     endfunction
 
-    logic signed [DATA_WIDTH-1:0] pre_act, sigmoid_out;
-    assign pre_act = saturate(acc_x) + saturate(acc_h);
+    logic signed [DATA_WIDTH-1:0] pre_act_comb;
+    logic signed [DATA_WIDTH-1:0] pre_act_reg;
+    assign pre_act_comb = saturate(acc_x) + saturate(acc_h);
 
+    logic signed [DATA_WIDTH-1:0] sigmoid_out;
     sigmoid #(.INT_WIDTH(INT_BITS), .FRAC_WIDTH(FRAC_BITS))
-        sigmoid_inst (.clk(clk), .rst_n(rst_n), .reset(~rst_n), .x(pre_act), .y(sigmoid_out));
+        sigmoid_inst (.clk(clk), .rst_n(rst_n), .reset(~rst_n),
+                      .x(pre_act_reg), .y(sigmoid_out));
+
+    logic [1:0] wait_cnt;
 
     always_ff @(posedge clk or negedge rst_n) begin
         if (!rst_n) begin
-            state     <= S_IDLE;
-            idx       <= '0;
-            op_a      <= '0;
-            op_b      <= '0;
-            acc_x     <= '0;
-            acc_h     <= '0;
-            z_t_n     <= '0;
-            valid_out <= 1'b0;
+            state       <= S_IDLE;
+            idx         <= '0;
+            op_a        <= '0;
+            op_b        <= '0;
+            acc_x       <= '0;
+            acc_h       <= '0;
+            pre_act_reg <= '0;
+            wait_cnt    <= '0;
+            z_t_n       <= '0;
+            valid_out   <= 1'b0;
         end else begin
             valid_out <= 1'b0;
 
@@ -116,11 +123,19 @@ module gru_update_gate_element #(
                 S_ACC_H: begin
                     acc_h <= acc_h + {{ACC_EXTRA_BITS{product[DATA_WIDTH-1]}}, product};
                     if (idx == H - 1) begin
-                        state <= S_DONE;
+                        pre_act_reg <= pre_act_comb;
+                        wait_cnt    <= '0;
+                        state       <= S_WAIT;
                     end else begin
                         idx   <= idx + 1;
                         state <= S_SEL_H;
                     end
+                end
+
+                S_WAIT: begin
+                    wait_cnt <= wait_cnt + 1;
+                    if (wait_cnt == 2'd2)
+                        state <= S_DONE;
                 end
 
                 S_DONE: begin

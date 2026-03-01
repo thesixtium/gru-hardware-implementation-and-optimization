@@ -3,8 +3,8 @@
 # SW Build 5076996 on Wed May 22 18:37:14 MDT 2024
 # IP Build 5075265 on Wed May 22 21:45:21 MDT 2024
 # SharedData Build 5076995 on Wed May 22 18:29:18 MDT 2024
-# Start of session at: Sun Mar  1 11:06:14 2026
-# Process ID: 14080
+# Start of session at: Sun Mar  1 11:32:03 2026
+# Process ID: 36800
 # Current directory: C:/Users/ajrbe/Documents/School/Thesis/BCI/gru-hardware-implementation-and-optimization/actualImplementation/actualImplementation.runs/synth_1
 # Command line: vivado.exe -log top.vds -product Vivado -mode batch -messageDb vivado.pb -notrace -source top.tcl
 # Log file: C:/Users/ajrbe/Documents/School/Thesis/BCI/gru-hardware-implementation-and-optimization/actualImplementation/actualImplementation.runs/synth_1/top.vds
@@ -19,6 +19,6 @@
 # Host memory       :33947 MB
 # Swap memory       :2147 MB
 # Total Virtual     :36095 MB
-# Available Virtual :10921 MB
+# Available Virtual :10522 MB
 #-----------------------------------------------------------
 source top.tcl -notrace
