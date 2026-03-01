@@ -1,7 +1,7 @@
 Copyright 1986-2022 Xilinx, Inc. All Rights Reserved. Copyright 2022-2024 Advanced Micro Devices, Inc. All Rights Reserved.
 -------------------------------------------------------------------------------------------------------------------------------------------------
 | Tool Version     : Vivado v.2024.1 (win64) Build 5076996 Wed May 22 18:37:14 MDT 2024
-| Date             : Sun Mar  1 10:30:08 2026
+| Date             : Sun Mar  1 11:09:23 2026
 | Host             : hiccup running 64-bit major release  (build 9200)
 | Command          : report_power -file top_power_routed.rpt -pb top_power_summary_routed.pb -rpx top_power_routed.rpx
 | Design           : top
@@ -30,14 +30,14 @@ Table of Contents
 ----------
 
 +--------------------------+--------------+
-| Total On-Chip Power (W)  | 0.171        |
+| Total On-Chip Power (W)  | 0.131        |
 | Design Power Budget (W)  | Unspecified* |
 | Power Budget Margin (W)  | NA           |
-| Dynamic (W)              | 0.073        |
+| Dynamic (W)              | 0.034        |
 | Device Static (W)        | 0.097        |
 | Effective TJA (C/W)      | 4.6          |
-| Max Ambient (C)          | 84.2         |
-| Junction Temperature (C) | 25.8         |
+| Max Ambient (C)          | 84.4         |
+| Junction Temperature (C) | 25.6         |
 | Confidence Level         | Medium       |
 | Setting File             | ---          |
 | Simulation Activity File | ---          |
@@ -52,18 +52,18 @@ Table of Contents
 +----------------+-----------+----------+-----------+-----------------+
 | On-Chip        | Power (W) | Used     | Available | Utilization (%) |
 +----------------+-----------+----------+-----------+-----------------+
-| Clocks         |     0.014 |        3 |       --- |             --- |
-| Slice Logic    |     0.017 |     9174 |       --- |             --- |
-|   LUT as Logic |     0.016 |     3190 |     63400 |            5.03 |
-|   CARRY4       |     0.001 |      467 |     15850 |            2.95 |
-|   Register     |    <0.001 |     3195 |    126800 |            2.52 |
-|   F7/F8 Muxes  |    <0.001 |      604 |     63400 |            0.95 |
-|   Others       |     0.000 |     1203 |       --- |             --- |
-| Signals        |     0.025 |    10216 |       --- |             --- |
-| DSPs           |     0.017 |      240 |       240 |          100.00 |
+| Clocks         |     0.010 |        3 |       --- |             --- |
+| Slice Logic    |     0.008 |     6988 |       --- |             --- |
+|   LUT as Logic |     0.007 |     2361 |     63400 |            3.72 |
+|   CARRY4       |    <0.001 |      152 |     15850 |            0.96 |
+|   Register     |    <0.001 |     3296 |    126800 |            2.60 |
+|   F7/F8 Muxes  |    <0.001 |      768 |     63400 |            1.21 |
+|   Others       |     0.000 |       51 |       --- |             --- |
+| Signals        |     0.010 |     4723 |       --- |             --- |
+| DSPs           |     0.006 |        9 |       240 |            3.75 |
 | I/O            |    <0.001 |        4 |       210 |            1.90 |
 | Static Power   |     0.097 |          |           |                 |
-| Total          |     0.171 |          |           |                 |
+| Total          |     0.131 |          |           |                 |
 +----------------+-----------+----------+-----------+-----------------+
 
 
@@ -73,7 +73,7 @@ Table of Contents
 +-----------+-------------+-----------+-------------+------------+-------------+-------------+------------+
 | Source    | Voltage (V) | Total (A) | Dynamic (A) | Static (A) | Powerup (A) | Budget (A)  | Margin (A) |
 +-----------+-------------+-----------+-------------+------------+-------------+-------------+------------+
-| Vccint    |       1.000 |     0.088 |       0.073 |      0.015 |       NA    | Unspecified | NA         |
+| Vccint    |       1.000 |     0.049 |       0.034 |      0.015 |       NA    | Unspecified | NA         |
 | Vccaux    |       1.800 |     0.018 |       0.000 |      0.018 |       NA    | Unspecified | NA         |
 | Vcco33    |       3.300 |     0.004 |       0.000 |      0.004 |       NA    | Unspecified | NA         |
 | Vcco25    |       2.500 |     0.000 |       0.000 |      0.000 |       NA    | Unspecified | NA         |
@@ -142,33 +142,18 @@ Table of Contents
 +------------------------------------------+-----------+
 | Name                                     | Power (W) |
 +------------------------------------------+-----------+
-| top                                      |     0.073 |
-|   u_gru                                  |     0.063 |
-|     gen_parallel_elements[0].hidden_elem |     0.015 |
-|       mult_term1                         |     0.006 |
-|       mult_term2                         |     0.007 |
-|     gen_parallel_elements[0].new_elem    |     0.029 |
-|       gen_gate[0].mult_gate_inst         |     0.003 |
-|       gen_gate[10].mult_gate_inst        |     0.001 |
-|       gen_gate[11].mult_gate_inst        |     0.001 |
-|       gen_gate[12].mult_gate_inst        |     0.001 |
-|       gen_gate[13].mult_gate_inst        |     0.001 |
-|       gen_gate[14].mult_gate_inst        |     0.001 |
-|       gen_gate[15].mult_gate_inst        |     0.001 |
-|       gen_gate[1].mult_gate_inst         |     0.001 |
-|       gen_gate[2].mult_gate_inst         |     0.001 |
-|       gen_gate[3].mult_gate_inst         |     0.001 |
-|       gen_gate[4].mult_gate_inst         |     0.001 |
-|       gen_gate[5].mult_gate_inst         |     0.001 |
-|       gen_gate[6].mult_gate_inst         |     0.001 |
-|       gen_gate[7].mult_gate_inst         |     0.001 |
-|       gen_gate[8].mult_gate_inst         |     0.001 |
-|       gen_gate[9].mult_gate_inst         |     0.001 |
+| top                                      |     0.034 |
+|   u_gru                                  |     0.028 |
+|     gen_parallel_elements[0].hidden_elem |     0.006 |
+|       mult_term1                         |     0.003 |
+|       mult_term2                         |     0.002 |
+|     gen_parallel_elements[0].new_elem    |     0.008 |
+|       mult_gate                          |     0.001 |
 |       tanh_inst                          |     0.003 |
-|     gen_parallel_elements[0].reset_elem  |     0.006 |
-|       sigmoid_inst                       |     0.002 |
-|     gen_parallel_elements[0].update_elem |     0.006 |
-|       sigmoid_inst                       |     0.002 |
+|     gen_parallel_elements[0].reset_elem  |     0.004 |
+|       sigmoid_inst                       |     0.003 |
+|     gen_parallel_elements[0].update_elem |     0.004 |
+|       sigmoid_inst                       |     0.003 |
 +------------------------------------------+-----------+
 
 
