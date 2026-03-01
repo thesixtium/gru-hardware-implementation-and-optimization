@@ -1,6 +1,10 @@
 // ============================================================================
 // New/Candidate Gate Element Module (n_t)
 // Computes: n_t[n] = tanh(W_in[n,:] @ x_t + W_hn[n,:] @ (r_t[n] * h_t_prev) + b_in[n] + b_hn[n])
+//
+// Accumulation is now registered (one addition per clock) to break the
+// combinational adder chain that was causing the large negative WNS.
+// valid_out pulses one cycle after accumulation + tanh complete.
 // ============================================================================
 module gru_new_gate_element #(
     parameter int D = 128,
@@ -15,7 +19,7 @@ module gru_new_gate_element #(
 
     input  logic signed [DATA_WIDTH-1:0] x_t [D-1:0],
     input  logic signed [DATA_WIDTH-1:0] h_t_prev [H-1:0],
-    input  logic signed [DATA_WIDTH-1:0] r_t_n,      // Reset gate value for this element
+    input  logic signed [DATA_WIDTH-1:0] r_t_n,
     input  logic signed [DATA_WIDTH-1:0] W_in_row [D-1:0],
     input  logic signed [DATA_WIDTH-1:0] W_hn_row [H-1:0],
     input  logic signed [DATA_WIDTH-1:0] b_in_n,
@@ -25,135 +29,117 @@ module gru_new_gate_element #(
     output logic                          valid_out
 );
 
-    // Calculate accumulator width with extra bits to prevent overflow
-    localparam int ACC_EXTRA_BITS = $clog2(D > H ? D : H) + 3;  // +3 for safety margin
-    localparam int ACC_WIDTH = DATA_WIDTH + ACC_EXTRA_BITS;
+    localparam int ACC_EXTRA_BITS = $clog2(D > H ? D : H) + 3;
+    localparam int ACC_WIDTH      = DATA_WIDTH + ACC_EXTRA_BITS;
+    localparam int TOTAL_ITERS    = D > H ? D : H;
 
-    // Wide accumulators for preventing overflow
-    logic signed [ACC_WIDTH-1:0] acc_x;
-    logic signed [ACC_WIDTH-1:0] acc_h;
+    localparam signed [DATA_WIDTH-1:0] MAX_VAL = {1'b0, {(DATA_WIDTH-1){1'b1}}};
+    localparam signed [DATA_WIDTH-1:0] MIN_VAL = {1'b1, {(DATA_WIDTH-1){1'b0}}};
 
-    // Product arrays (standard width)
+    // Input projection products
     logic signed [DATA_WIDTH-1:0] prod_x [D-1:0];
+
+    // Gated hidden state: r_t * h_t_prev[i], then weighted by W_hn
     logic signed [DATA_WIDTH-1:0] h_gated [H-1:0];
-    logic signed [DATA_WIDTH-1:0] prod_h [H-1:0];
+    logic signed [DATA_WIDTH-1:0] prod_h  [H-1:0];
 
-    // Truncated/saturated accumulator outputs
-    logic signed [DATA_WIDTH-1:0] acc_x_sat;
-    logic signed [DATA_WIDTH-1:0] acc_h_sat;
-
-    // Pre-activation sum
-    logic signed [DATA_WIDTH-1:0] pre_act;
-
-    // Tanh output
-    logic signed [DATA_WIDTH-1:0] tanh_out;
-
-    // Saturation limits
-    localparam signed [DATA_WIDTH-1:0] MAX_VAL = {1'b0, {(DATA_WIDTH-1){1'b1}}};  // Maximum positive value
-    localparam signed [DATA_WIDTH-1:0] MIN_VAL = {1'b1, {(DATA_WIDTH-1){1'b0}}};  // Minimum negative value
-
-    // Generate multipliers for input projection
     genvar i;
     generate
         for (i = 0; i < D; i++) begin : gen_mult_x
-            mult #(
-                .INT_WIDTH(INT_BITS),
-                .FRAC_WIDTH(FRAC_BITS)
-            ) mult_x_inst (
-                .a(W_in_row[i]),
-                .b(x_t[i]),
-                .y(prod_x[i])
-            );
+            mult #(.INT_WIDTH(INT_BITS), .FRAC_WIDTH(FRAC_BITS))
+                mult_x_inst (.a(W_in_row[i]), .b(x_t[i]), .y(prod_x[i]));
         end
-    endgenerate
-
-    // Generate multipliers for gating operation (r_t * h_t_prev)
-    generate
         for (i = 0; i < H; i++) begin : gen_gate
-            mult #(
-                .INT_WIDTH(INT_BITS),
-                .FRAC_WIDTH(FRAC_BITS)
-            ) mult_gate_inst (
-                .a(r_t_n),
-                .b(h_t_prev[i]),
-                .y(h_gated[i])
-            );
+            mult #(.INT_WIDTH(INT_BITS), .FRAC_WIDTH(FRAC_BITS))
+                mult_gate_inst (.a(r_t_n), .b(h_t_prev[i]), .y(h_gated[i]));
         end
-    endgenerate
-
-    // Generate multipliers for recurrent projection
-    generate
         for (i = 0; i < H; i++) begin : gen_mult_h
-            mult #(
-                .INT_WIDTH(INT_BITS),
-                .FRAC_WIDTH(FRAC_BITS)
-            ) mult_h_inst (
-                .a(W_hn_row[i]),
-                .b(h_gated[i]),
-                .y(prod_h[i])
-            );
+            mult #(.INT_WIDTH(INT_BITS), .FRAC_WIDTH(FRAC_BITS))
+                mult_h_inst (.a(W_hn_row[i]), .b(h_gated[i]), .y(prod_h[i]));
         end
     endgenerate
 
-    // Accumulate input projection with wide accumulator
-    always_comb begin
-        acc_x = $signed({{ACC_EXTRA_BITS{b_in_n[DATA_WIDTH-1]}}, b_in_n});  // Sign-extend bias
-        for (int j = 0; j < D; j++) begin
-            acc_x = acc_x + $signed({{ACC_EXTRA_BITS{prod_x[j][DATA_WIDTH-1]}}, prod_x[j]});
-        end
-    end
+    typedef enum logic [1:0] {
+        ACC_IDLE  = 2'd0,
+        ACC_X     = 2'd1,
+        ACC_H     = 2'd2,
+        ACC_DONE  = 2'd3
+    } acc_state_t;
 
-    // Accumulate recurrent projection with wide accumulator
-    always_comb begin
-        acc_h = $signed({{ACC_EXTRA_BITS{b_hn_n[DATA_WIDTH-1]}}, b_hn_n});  // Sign-extend bias
-        for (int j = 0; j < H; j++) begin
-            acc_h = acc_h + $signed({{ACC_EXTRA_BITS{prod_h[j][DATA_WIDTH-1]}}, prod_h[j]});
-        end
-    end
+    acc_state_t                        acc_state;
+    logic [$clog2(TOTAL_ITERS+1)-1:0]  acc_idx;
+    logic signed [ACC_WIDTH-1:0]       acc_x;
+    logic signed [ACC_WIDTH-1:0]       acc_h;
 
-    // Saturate acc_x to DATA_WIDTH
-    always_comb begin
-        if (acc_x > $signed({{ACC_EXTRA_BITS{1'b0}}, MAX_VAL})) begin
-            acc_x_sat = MAX_VAL;  // Saturate to max positive
-        end else if (acc_x < $signed({{ACC_EXTRA_BITS{1'b1}}, MIN_VAL})) begin
-            acc_x_sat = MIN_VAL;  // Saturate to max negative
-        end else begin
-            acc_x_sat = acc_x[DATA_WIDTH-1:0];  // Truncate to DATA_WIDTH
-        end
-    end
-
-    // Saturate acc_h to DATA_WIDTH
-    always_comb begin
-        if (acc_h > $signed({{ACC_EXTRA_BITS{1'b0}}, MAX_VAL})) begin
-            acc_h_sat = MAX_VAL;  // Saturate to max positive
-        end else if (acc_h < $signed({{ACC_EXTRA_BITS{1'b1}}, MIN_VAL})) begin
-            acc_h_sat = MIN_VAL;  // Saturate to max negative
-        end else begin
-            acc_h_sat = acc_h[DATA_WIDTH-1:0];  // Truncate to DATA_WIDTH
-        end
-    end
-
-    // Sum both projections
-    assign pre_act = acc_x_sat + acc_h_sat;
-
-    // Apply tanh activation
-    tanh #(
-        .INT_WIDTH(INT_BITS),
-        .FRAC_WIDTH(FRAC_BITS)
-    ) tanh_inst (
-        .reset(~rst_n),
-        .x(pre_act),
-        .y(tanh_out)
+    function automatic logic signed [DATA_WIDTH-1:0] saturate(
+        input logic signed [ACC_WIDTH-1:0] val
     );
+        if (val > $signed({{ACC_EXTRA_BITS{1'b0}}, MAX_VAL}))
+            return MAX_VAL;
+        else if (val < $signed({{ACC_EXTRA_BITS{1'b1}}, MIN_VAL}))
+            return MIN_VAL;
+        else
+            return val[DATA_WIDTH-1:0];
+    endfunction
 
-    // Register output
+    logic signed [DATA_WIDTH-1:0] acc_x_sat;
+    logic signed [DATA_WIDTH-1:0] acc_h_sat;
+    logic signed [DATA_WIDTH-1:0] pre_act;
+    logic signed [DATA_WIDTH-1:0] tanh_out;
+
+    assign acc_x_sat = saturate(acc_x);
+    assign acc_h_sat = saturate(acc_h);
+    assign pre_act   = acc_x_sat + acc_h_sat;
+
+    tanh #(.INT_WIDTH(INT_BITS), .FRAC_WIDTH(FRAC_BITS))
+        tanh_inst (.reset(~rst_n), .x(pre_act), .y(tanh_out));
+
     always_ff @(posedge clk or negedge rst_n) begin
         if (!rst_n) begin
-            n_t_n <= '0;
+            acc_state <= ACC_IDLE;
+            acc_idx   <= '0;
+            acc_x     <= '0;
+            acc_h     <= '0;
+            n_t_n     <= '0;
             valid_out <= 1'b0;
         end else begin
-            n_t_n <= tanh_out;
-            valid_out <= valid_in;
+            valid_out <= 1'b0;
+
+            case (acc_state)
+
+                ACC_IDLE: begin
+                    if (valid_in) begin
+                        acc_x     <= {{ACC_EXTRA_BITS{b_in_n[DATA_WIDTH-1]}}, b_in_n};
+                        acc_idx   <= '0;
+                        acc_state <= ACC_X;
+                    end
+                end
+
+                ACC_X: begin
+                    acc_x   <= acc_x + {{ACC_EXTRA_BITS{prod_x[acc_idx][DATA_WIDTH-1]}}, prod_x[acc_idx]};
+                    acc_idx <= acc_idx + 1;
+                    if (acc_idx == D - 1) begin
+                        acc_h     <= {{ACC_EXTRA_BITS{b_hn_n[DATA_WIDTH-1]}}, b_hn_n};
+                        acc_idx   <= '0;
+                        acc_state <= ACC_H;
+                    end
+                end
+
+                ACC_H: begin
+                    acc_h   <= acc_h + {{ACC_EXTRA_BITS{prod_h[acc_idx][DATA_WIDTH-1]}}, prod_h[acc_idx]};
+                    acc_idx <= acc_idx + 1;
+                    if (acc_idx == H - 1) begin
+                        acc_state <= ACC_DONE;
+                    end
+                end
+
+                ACC_DONE: begin
+                    n_t_n     <= tanh_out;
+                    valid_out <= 1'b1;
+                    acc_state <= ACC_IDLE;
+                end
+
+            endcase
         end
     end
 
